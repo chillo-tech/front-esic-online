@@ -1,6 +1,43 @@
 import Image from "next/image";
 import { useEffect, useState } from 'react';
 
+const header = {
+    menu : [
+        {
+            text: "Home",
+            link: "/"
+        },
+        {
+            text: "Formations",
+            link: "/formations"
+        },
+        {
+            text: "Certifications",
+            link: "/certifications"
+        },
+        {
+            text: "Competence assessment",
+            link: "/bilan-competences"
+        },
+        {
+            text: "POE",
+            link: "/poe"
+        },
+        {
+            text: "VAE",
+            link: "/vae"
+        },
+        {
+            text: "ESIC",
+            link: "/nous-connaitre"
+        }
+    ],
+    contact : {
+        text: "Contact us",
+        link : "/contact"
+    }
+}
+
 export default function Header(){
 
     const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -20,22 +57,19 @@ export default function Header(){
     },[])
 
     return <>
-       
         <nav className="py-4 bg-white z-30 hidden md:block" id="navbar">
             <div className="max-w-7xl mx-auto flex items-center justify-between md:text-lg">
                 <div>
                     <Image src={"/images/logo.png"} width={150} height={50} alt="Logo Esic"/>
                 </div>
                 <div className="flex items-center space-x-8 text-gray-700 font-medium">
-                    <a href="" className="text-primary font-semibold">Accueil</a>
-                    <a  href="#" > Formations </a>
-                    <a href="#" > Certifications </a>
-                    <a href="#" > Bilan de competences  </a>
-                    <a href="#" >POE </a>
-                    <a href="#" > VAE  </a>
+                    {
+                        header.menu.map ( item => <a href={item.link} className="transition-colors hover:text-primary hover:font-bold ">{item.text}</a>
+                        )
+                    }
                 </div>
                 <div className="text-lg">
-                    <a href="#" className="px-4 py-1.5 inline-block  text-white bg-primary rounded-md hover:bg-primary/50 transition-colors"> Contactez-nous </a>
+                    <a href={header.contact.link} className="px-4 py-1.5 inline-block  text-white bg-primary rounded-md hover:bg-primary/50 transition-colors">{header.contact.text}</a>
                 </div>
             </div>
         </nav>
@@ -58,14 +92,12 @@ export default function Header(){
                     </button>
                 </div>
                 <ul className="space-y-4 mt-8">
-                    <li> <a href="#" > Formations </a> </li>
-                    <li> <a href="#" > Certifications </a> </li>
-                    <li> <a href="#" > Bilan de competences  </a> </li>
-                    <li> <a href="#" >POE </a> </li>
-                    <li> <a href="#" > VAE  </a> </li>              
+                    {
+                        header.menu.map( item => <li> <a href={item.link} >{item.text}</a> </li> )
+                    }                    
                 </ul>
                 <div className="text-lg mt-8 space-y-2">
-                    <a href="#" className="px-4 py-1.5 block text-center  text-white bg-orange-500 rounded-md hover:bg-orange/50 transition-colors"> Contactez-nous </a>
+                    <a href={header.contact.link} className="px-4 py-1.5 block text-center  text-white bg-green-500 rounded-md hover:bg-orange/50 transition-colors">{header.contact.text}</a>
                 </div>
             </div>
         </nav>

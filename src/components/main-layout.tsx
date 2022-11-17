@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import Header from "../components/header";
 import Footer from "../components/footer";
+import Newsletter from '../components/sections/newsletter';
+
 
 type LayoutProps = {
     children: React.ReactNode,
@@ -18,9 +20,11 @@ export default function MainLayout( {children} : LayoutProps ) {
       </Head>
 
       <Header />
-        <main className="bg-gray-200">
-                {children}
-        </main>
+      
+      {children}
+      
+      <Newsletter />
+      
       <Footer />
 
     </section>
