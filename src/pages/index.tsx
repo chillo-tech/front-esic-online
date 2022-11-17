@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import Header from "../components/header";
+import Footer from "../components/footer";
 
 export default function Home() {
   return (
@@ -9,9 +11,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Header />
       <main className="bg-gray-200">
-        site web
+        
       </main>
+      <Footer />
+
     </section>
   )
 }
