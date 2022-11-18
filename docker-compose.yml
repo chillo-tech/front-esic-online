@@ -8,7 +8,7 @@ services:
     restart: always
     ports:
       # The HTTP port
-      - "83:3000"
+      - "85:3000"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.front-esic-online.rule=Headers(`X-Host`, `esic-online.chillo.fr`)"
