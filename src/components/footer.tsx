@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function createRange(n: number){
     let tab: number[] = [];
@@ -60,9 +61,9 @@ export default function Footer(){
         <footer id="footer" className="bg-gray-100 text-gray-700">
             <div className="max-w-7xl mx-auto  py-8 md:py-16">
                 <div>
-                    <a href="/" className="w-48 block mx-auto"> 
+                    <Link href="/" className="w-48 block mx-auto"> 
                         <Image src={"/images/logo.png"} width={200} height={150} alt="Logo Esic"/>
-                    </a>
+                    </Link>
                     <div className="flex space-x-2 mt-8  justify-center">
                         <a href="https://facebook.com/" className="flex space-x-2">
                             <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><rect fill="currentColor" /><path d="M22,12c0-5.52-4.48-10-10-10S2,6.48,2,12c0,4.84,3.44,8.87,8,9.8V15H8v-3h2V9.5C10,7.57,11.57,6,13.5,6H16v3h-2 c-0.55,0-1,0.45-1,1v2h3v3h-3v6.95C18.05,21.45,22,17.19,22,12z"/></svg> 
@@ -106,8 +107,8 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl "> {usefull_links.title} </h1>
                         <ul className="mt-4">
                             {
-                                usefull_links.links.map( link => 
-                                    <li className="flex space-x-2 items-center">
+                                usefull_links.links.map( (link, index) => 
+                                    <li className="flex space-x-2 items-center" key={`link-${index}`}>
                                         <i className="">
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                         </i>
@@ -122,8 +123,8 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl"> {agencies.title} </h1>
                         <ul className="mt-4">
                             {
-                                agencies.links.map( link => 
-                                    <li className="flex space-x-2 items-center">
+                                agencies.links.map( (link, index) => 
+                                    <li className="flex space-x-2 items-center"  key={`link-${index}`}>
                                         <i className="">
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                         </i>
@@ -138,13 +139,13 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl"> {formations.title} </h1>
                         <div className="flex flex-wrap mt-6">
                             {
-                                formations.categories.map( categorie => 
-                                    <div className="w-full md:w-1/3 px-4 mb-8">
+                                formations.categories.map( (categorie, index) => 
+                                    <div className="w-full md:w-1/3 px-4 mb-8" key={`link-${index}`}>
                                          <h3 className="font-semibold">{categorie.title}</h3>
                                          <ul className="mt-3">
                                             {
-                                                categorie.courses.map( course =>  <li className="flex space-x-2 items-center">
-                                                        <i className="">
+                                                categorie.courses.map( (course, index) =>  <li className="flex space-x-2 items-center" key={`link-${index}`}>
+                                                        <i className=""  key={`link-${course}`}>
                                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                                         </i>
                                                         <a href={course.link}>{course.title}</a>
