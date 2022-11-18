@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function createRange(n: number){
     let tab: number[] = [];
@@ -11,22 +12,22 @@ function createRange(n: number){
 const usefull_links = {
     title : "More informations",
     links : [
-        { target: "#", text: "Link 1"},
-        { taget: "#", text: "Link 2"},
-        { target: "#", text: "Link 3"},
-        { taget: "#", text: "Link 4"},
-        { taget: "#", text: "Link 5"}
+        { target: "/#", text: "Link 1"},
+        { target: "/#", text: "Link 2"},
+        { target: "/#", text: "Link 3"},
+        { target: "/#", text: "Link 4"},
+        { target: "/#", text: "Link 5"}
     ]
 }
 
 const agencies = {
     title : "Our agencies",
     links : [
-        { target: "#", text: "Link 1"},
-        { taget: "#", text: "Link 2"},
-        { target: "#", text: "Link 3"},
-        { taget: "#", text: "Link 4"},
-        { taget: "#", text: "Link 5"}
+        { target: "/#", text: "Link 1"},
+        { target: "/#", text: "Link 2"},
+        { target: "/#", text: "Link 3"},
+        { target: "/#", text: "Link 4"},
+        { target: "/#", text: "Link 5"}
     ]
 }
 
@@ -60,20 +61,20 @@ export default function Footer(){
         <footer id="footer" className="bg-gray-100 text-gray-700">
             <div className="max-w-7xl mx-auto  py-8 md:py-16">
                 <div>
-                    <a href="/" className="w-48 block mx-auto"> 
+                    <Link href="/" className="w-48 block mx-auto"> 
                         <Image src={"/images/logo.png"} width={200} height={150} alt="Logo Esic"/>
-                    </a>
+                    </Link>
                     <div className="flex space-x-2 mt-8  justify-center">
-                        <a href="https://facebook.com/" className="flex space-x-2">
+                        <Link href="https://facebook.com/" className="flex space-x-2">
                             <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><rect fill="currentColor" /><path d="M22,12c0-5.52-4.48-10-10-10S2,6.48,2,12c0,4.84,3.44,8.87,8,9.8V15H8v-3h2V9.5C10,7.57,11.57,6,13.5,6H16v3h-2 c-0.55,0-1,0.45-1,1v2h3v3h-3v6.95C18.05,21.45,22,17.19,22,12z"/></svg> 
-                        </a>                   
-                        <a href="https://instagram.com/" className="flex space-x-2 items-center"> 
+                        </Link>                   
+                        <Link href="https://instagram.com/" className="flex space-x-2 items-center"> 
                             <svg className="w-8 h-8" aria-hidden="true" focusable="false"  role="img" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M224,202.66A53.34,53.34,0,1,0,277.36,256,53.38,53.38,0,0,0,224,202.66Zm124.71-41a54,54,0,0,0-30.41-30.41c-21-8.29-71-6.43-94.3-6.43s-73.25-1.93-94.31,6.43a54,54,0,0,0-30.41,30.41c-8.28,21-6.43,71.05-6.43,94.33S91,329.26,99.32,350.33a54,54,0,0,0,30.41,30.41c21,8.29,71,6.43,94.31,6.43s73.24,1.93,94.3-6.43a54,54,0,0,0,30.41-30.41c8.35-21,6.43-71.05,6.43-94.33S357.1,182.74,348.75,161.67ZM224,338a82,82,0,1,1,82-82A81.9,81.9,0,0,1,224,338Zm85.38-148.3a19.14,19.14,0,1,1,19.13-19.14A19.1,19.1,0,0,1,309.42,189.74ZM400,32H48A48,48,0,0,0,0,80V432a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V80A48,48,0,0,0,400,32ZM382.88,322c-1.29,25.63-7.14,48.34-25.85,67s-41.4,24.63-67,25.85c-26.41,1.49-105.59,1.49-132,0-25.63-1.29-48.26-7.15-67-25.85s-24.63-41.42-25.85-67c-1.49-26.42-1.49-105.61,0-132,1.29-25.63,7.07-48.34,25.85-67s41.47-24.56,67-25.78c26.41-1.49,105.59-1.49,132,0,25.63,1.29,48.33,7.15,67,25.85s24.63,41.42,25.85,67.05C384.37,216.44,384.37,295.56,382.88,322Z"></path>
                             </svg>
-                        </a>
-                        <a href="https://www.youtube.com/" className="flex space-x-2 items-center"> 
+                        </Link>
+                        <Link href="https://www.youtube.com/" className="flex space-x-2 items-center"> 
                             <svg className="w-8 h-8" aria-hidden="true" focusable="false"  role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg>
-                        </a>
+                        </Link>
                     </div>             
                 </div>
 
@@ -106,12 +107,12 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl "> {usefull_links.title} </h1>
                         <ul className="mt-4">
                             {
-                                usefull_links.links.map( link => 
-                                    <li className="flex space-x-2 items-center">
+                                usefull_links.links.map( (link,ind) => 
+                                    <li key={`ul${ind}`} className="flex space-x-2 items-center">
                                         <i className="">
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                         </i>
-                                        <a href={link.target}>{link.text}</a>
+                                        <Link href={link.target}>{link.text}</Link>
                                     </li> 
                                 )
                             }                               
@@ -122,12 +123,12 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl"> {agencies.title} </h1>
                         <ul className="mt-4">
                             {
-                                agencies.links.map( link => 
-                                    <li className="flex space-x-2 items-center">
+                                agencies.links.map( (link,ind) => 
+                                    <li  key={`agency${ind}`}className="flex space-x-2 items-center">
                                         <i className="">
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                         </i>
-                                        <a href={link.target}>{link.text}</a>
+                                        <Link href={link.target}>{link.text}</Link>
                                     </li> 
                                 )
                             }                               
@@ -138,16 +139,16 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl"> {formations.title} </h1>
                         <div className="flex flex-wrap mt-6">
                             {
-                                formations.categories.map( categorie => 
-                                    <div className="w-full md:w-1/3 px-4 mb-8">
+                                formations.categories.map( (categorie,ind) => 
+                                    <div key={`cat${ind}`} className="w-full md:w-1/3 px-4 mb-8">
                                          <h3 className="font-semibold">{categorie.title}</h3>
                                          <ul className="mt-3">
                                             {
-                                                categorie.courses.map( course =>  <li className="flex space-x-2 items-center">
+                                                categorie.courses.map( (course,ind1) =>  <li key={`course${ind}${ind1}`} className="flex space-x-2 items-center">
                                                         <i className="">
                                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                                         </i>
-                                                        <a href={course.link}>{course.title}</a>
+                                                        <Link href={course.link}>{course.title}</Link>
                                                 </li> )
                                             }
                                         </ul>

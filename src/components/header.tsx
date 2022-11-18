@@ -64,7 +64,7 @@ export default function Header(){
                 </div>
                 <div className="flex items-center space-x-8 text-gray-700 font-medium">
                     {
-                        header.menu.map ( item => <a href={item.link} className="transition-colors hover:text-primary hover:font-bold ">{item.text}</a>
+                        header.menu.map ( (item,ind) => <a  key={`menu${ind}`} href={item.link} className="transition-colors hover:text-primary hover:font-bold ">{item.text}</a>
                         )
                     }
                 </div>
@@ -93,7 +93,7 @@ export default function Header(){
                 </div>
                 <ul className="space-y-4 mt-8">
                     {
-                        header.menu.map( item => <li> <a href={item.link} >{item.text}</a> </li> )
+                        header.menu.map( (item,ind) => <li key={`menu${ind}`}> <a href={item.link} >{item.text}</a> </li> )
                     }                    
                 </ul>
                 <div className="text-lg mt-8 space-y-2">

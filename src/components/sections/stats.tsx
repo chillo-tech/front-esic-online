@@ -38,8 +38,8 @@ export default function Stats(){
           <div className="max-w-4xl mx-auto">
             <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4">
               {
-                stats.items.map( item =>  
-                <div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
+                stats.items.map( (item,ind) =>  
+                <div key={`stat${ind}`} className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
                     <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">{item.label}</dt>
                     <dd className="order-1 text-5xl font-extrabold text-indigo-600">{item.value}</dd>
                 </div>
