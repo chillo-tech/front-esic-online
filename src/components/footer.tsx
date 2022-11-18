@@ -107,13 +107,8 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl "> {usefull_links.title} </h1>
                         <ul className="mt-4">
                             {
-<<<<<<< HEAD
                                 usefull_links.links.map( (link,ind) => 
                                     <li key={`ul${ind}`} className="flex space-x-2 items-center">
-=======
-                                usefull_links.links.map( (link, index) => 
-                                    <li className="flex space-x-2 items-center" key={`link-${index}`}>
->>>>>>> 66beb6c962fc1c58aa695cc812817a365298e949
                                         <i className="">
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                         </i>
@@ -128,13 +123,8 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl"> {agencies.title} </h1>
                         <ul className="mt-4">
                             {
-<<<<<<< HEAD
                                 agencies.links.map( (link,ind) => 
                                     <li  key={`agency${ind}`}className="flex space-x-2 items-center">
-=======
-                                agencies.links.map( (link, index) => 
-                                    <li className="flex space-x-2 items-center"  key={`link-${index}`}>
->>>>>>> 66beb6c962fc1c58aa695cc812817a365298e949
                                         <i className="">
                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                         </i>
@@ -149,7 +139,6 @@ export default function Footer(){
                         <h1 className="font-bold text-2xl"> {formations.title} </h1>
                         <div className="flex flex-wrap mt-6">
                             {
-<<<<<<< HEAD
                                 formations.categories.map( (categorie,ind) => 
                                     <div key={`cat${ind}`} className="w-full md:w-1/3 px-4 mb-8">
                                          <h3 className="font-semibold">{categorie.title}</h3>
@@ -157,15 +146,6 @@ export default function Footer(){
                                             {
                                                 categorie.courses.map( (course,ind1) =>  <li key={`course${ind}${ind1}`} className="flex space-x-2 items-center">
                                                         <i className="">
-=======
-                                formations.categories.map( (categorie, index) => 
-                                    <div className="w-full md:w-1/3 px-4 mb-8" key={`link-${index}`}>
-                                         <h3 className="font-semibold">{categorie.title}</h3>
-                                         <ul className="mt-3">
-                                            {
-                                                categorie.courses.map( (course, index) =>  <li className="flex space-x-2 items-center" key={`link-${index}`}>
-                                                        <i className=""  key={`link-${course}`}>
->>>>>>> 66beb6c962fc1c58aa695cc812817a365298e949
                                                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 5l7 7-7 7"></path></svg>
                                                         </i>
                                                         <Link href={course.link}>{course.title}</Link>
