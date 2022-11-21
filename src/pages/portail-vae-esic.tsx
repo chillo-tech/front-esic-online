@@ -1,12 +1,12 @@
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
-import { about_us } from "../utils/data/pages-list";
+import { vae_portal } from "../utils/data/pages-list";
 
-export default function NousConnaitre() {
+export default function PortalVAE() {
   return (
     <MainLayout>
       <Head>
-        <title> {about_us.title} </title>
+        <title> {vae_portal.title} </title>
       </Head>
     </MainLayout>
   );

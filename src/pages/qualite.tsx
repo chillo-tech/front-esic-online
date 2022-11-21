@@ -1,12 +1,12 @@
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
-import { about_us } from "../utils/data/pages-list";
+import { quality } from "../utils/data/pages-list";
 
-export default function NousConnaitre() {
+export default function Qaulity() {
   return (
     <MainLayout>
       <Head>
-        <title> {about_us.title} </title>
+        <title> {quality.title} </title>
       </Head>
     </MainLayout>
   );

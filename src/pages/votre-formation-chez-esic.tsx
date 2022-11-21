@@ -1,12 +1,12 @@
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
-import { about_us } from "../utils/data/pages-list";
+import { training_at_esic } from "../utils/data/pages-list";
 
-export default function NousConnaitre() {
+export default function VotreFormation() {
   return (
     <MainLayout>
       <Head>
-        <title> {about_us.title} </title>
+        <title> {training_at_esic.title} </title>
       </Head>
     </MainLayout>
   );

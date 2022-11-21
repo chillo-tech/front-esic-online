@@ -1,12 +1,12 @@
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
-import { about_us } from "../utils/data/pages-list";
+import { book_course } from "../utils/data/pages-list";
 
-export default function NousConnaitre() {
+export default function ReserverFormation() {
   return (
     <MainLayout>
       <Head>
-        <title> {about_us.title} </title>
+        <title> {book_course.title} </title>
       </Head>
     </MainLayout>
   );

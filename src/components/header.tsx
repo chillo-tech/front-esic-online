@@ -1,105 +1,176 @@
 import Image from "next/image";
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { header } from "../utils/data";
+import {
+  AiOutlineCaretUp,
+  AiOutlineCaretDown,
+  AiOutlineMenu,
+  AiOutlineRight,
+  AiOutlineClose,
+} from "react-icons/ai";
 
-const header = {
-    menu : [
-        {
-            text: "Home",
-            link: "/"
-        },
-        {
-            text: "Formations",
-            link: "/formations"
-        },
-        {
-            text: "Certifications",
-            link: "/certifications"
-        },
-        {
-            text: "Competence assessment",
-            link: "/bilan-competences"
-        },
-        {
-            text: "POE",
-            link: "/poe"
-        },
-        {
-            text: "VAE",
-            link: "/vae"
-        },
-        {
-            text: "ESIC",
-            link: "/nous-connaitre"
+export default function Header() {
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  useEffect(() => {
+    window.onscroll = function () {
+      let navbar = document.getElementById("navbar");
+      if (navbar != null) {
+        if (window.scrollY > navbar.offsetHeight) {
+          navbar.classList.add("fixed");
+          navbar.classList.add("w-full");
+        } else {
+          navbar.classList.remove("fixed");
         }
-    ],
-    contact : {
-        text: "Contact us",
-        link : "/contact"
-    }
-}
+      }
+    };
+  }, []);
 
-export default function Header(){
+  return (
+    <>
+      <nav className="py-4 bg-white z-50 hidden md:block" id="navbar">
+        <div className="max-w-7xl mx-auto flex items-center justify-between md:text-lg">
+          <div>
+            <Image
+              src={"/images/logo.png"}
+              width={150}
+              height={50}
+              alt="Logo Esic"
+            />
+          </div>
+          <ul className="flex items-center space-x-2 text-gray-700 font-medium">
+            {header.menu.map((item, ind) => (
+              <li key={`menu${ind}`} className="relative menu-item">
+                <Link href={item.link}>
+                  <button className="px-6 flex space-x-2 justify-center items-center font-medium transition-colors hover:text-primary">
+                    <span>{item.label}</span>
+                    {item.submenu.length > 0 ? (
+                      <>
+                        <AiOutlineCaretDown
+                          className={`w-4 h-4 menu-item-down`}
+                        />
+                        <AiOutlineCaretUp
+                          className={`w-4 h-4 hidden menu-item-up`}
+                        />
+                      </>
+                    ) : null}
+                  </button>
+                </Link>
 
-    const [showMobileMenu, setShowMobileMenu] = useState(false);
+                {item.submenu.length > 0 ? (
+                  <div className="menu-item-sub hidden absolute left-0 top-6 pt-6 sm:w-[330px] z-40 shadow-xl">
+                    <ul className="bg-white border-t-8 border-primary px-2 py-4 rounded-">
+                      {item.submenu.map((subItem) => (
+                        <li
+                          key={`leaf${subItem.label}`}
+                          className="menu-item-sub-item px-4"
+                        >
+                          <Link href={subItem.link} className="">
+                            <button className="flex w-full items-center py-2  transition-colors hover:text-primary ">
+                              <AiOutlineRight className="w-3 h-3 text-primary mr-2" />
+                              <span>{subItem.label} </span>
+                            </button>
+                          </Link>
 
-    useEffect(() => {
-        window.onscroll = function(){
-            let navbar = document.getElementById("navbar");
-            if( navbar != null){
-                if(window.scrollY > navbar.offsetHeight){
-                    navbar.classList.add("fixed");
-                    navbar.classList.add("w-full");
-                }else{
-                    navbar.classList.remove("fixed");
-                }
-            }
-        }
-    },[])
+                          {subItem.submenu.length > 0 ? (
+                            <div className="menu-item-sub-item-sub hidden absolute h-full pt-6 top-0 left-[300px] w-[600px]">
+                              <ul className="h-full border-t-8 border-primary  overflow-auto bg-white px-4 py-5 border-l  ml-4">
+                                {subItem.submenu.map((leaf) => (
+                                  <li key={`leaf${leaf.label}`}>
+                                    <Link href={leaf.link} className="">
+                                      <button className="inline-flex space-x-2 items-center py-2 transition-colors hover:text-primary ">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                                        <span>{leaf.label} </span>
+                                      </button>
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+          <div className="text-lg">
+            <Link href={header.contact.link}>
+              <button className="px-8 py-1.5 inline-block  text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors">
+                {header.contact.label}
+              </button>
+            </Link>
+          </div>
+        </div>
+      </nav>
 
-    return <>
-        <nav className="py-4 bg-white z-30 hidden md:block" id="navbar">
-            <div className="max-w-7xl mx-auto flex items-center justify-between md:text-lg">
-                <div>
-                    <Image src={"/images/logo.png"} width={150} height={50} alt="Logo Esic"/>
-                </div>
-                <div className="flex items-center space-x-8 text-gray-700 font-medium">
-                    {
-                        header.menu.map ( (item,ind) => <a  key={`menu${ind}`} href={item.link} className="transition-colors hover:text-primary hover:font-bold ">{item.text}</a>
-                        )
-                    }
-                </div>
-                <div className="text-lg">
-                    <a href={header.contact.link} className="px-4 py-1.5 inline-block  text-white bg-primary rounded-md hover:bg-primary/50 transition-colors">{header.contact.text}</a>
-                </div>
+      <nav className="bg-white md:hidden border-b p-4 text-gray-700">
+        <div className="flex justify-between">
+          <div>
+            <Image
+              src={"/images/logo.png"}
+              width={150}
+              height={50}
+              alt="Logo Esic"
+            />
+          </div>
+          <button onClick={() => setShowMobileMenu(true)}>
+            <AiOutlineMenu className="w-6 h-6" />
+          </button>
+        </div>
+
+        <div
+          className={`${
+            showMobileMenu ? "" : "hidden"
+          } transition-display fixed h-screen w-full bg-white border-b top-0 left-0 z-50 p-6 `}
+        >
+          <div className="flex justify-between">
+            <div>
+              <Image
+                src={"/images/logo.png"}
+                width={200}
+                height={150}
+                alt="Logo Esic"
+              />
             </div>
-        </nav>
-        <nav className="bg-primary md:hidden p-4 text-white">
-            <div className="flex justify-between">
-                <div>
-                    <Image src={"/images/logo.png"} width={150} height={50} alt="Logo Esic"/>
-                </div>
-                <button  onClick={ () => setShowMobileMenu(true)}>
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" /></svg>
-                </button>
-            </div>
-            <div className={`${showMobileMenu ? "" :"hidden"} transition-display fixed h-screen w-full bg-primary top-0 left-0 z-50 p-6 `}>
-                <div className="flex justify-between">
-                    <div>
-                        <Image src={"/images/logo.png"} width={200} height={150} alt="Logo Esic"/>
-                    </div>
-                    <button  onClick={ () => setShowMobileMenu(false)}>
-                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
-                    </button>
-                </div>
-                <ul className="space-y-4 mt-8">
-                    {
-                        header.menu.map( (item,ind) => <li key={`menu${ind}`}> <a href={item.link} >{item.text}</a> </li> )
-                    }                    
-                </ul>
-                <div className="text-lg mt-8 space-y-2">
-                    <a href={header.contact.link} className="px-4 py-1.5 block text-center  text-white bg-green-500 rounded-md hover:bg-orange/50 transition-colors">{header.contact.text}</a>
-                </div>
-            </div>
-        </nav>
+            <button onClick={() => setShowMobileMenu(false)}>
+              <AiOutlineClose className="w-6 h-6" />
+            </button>
+          </div>
+          <ul className="space-y-4 mt-8">
+            {header.menu.map((item, ind) => (
+              <li key={`menu${ind}`}>
+                <Link href={item.link}>
+                  <button className="px-6 flex space-x-2 justify-center items-center font-medium transition-colors hover:text-primary">
+                    <span>{item.label}</span>
+                    {item.submenu.length > 0 ? (
+                      <>
+                        <AiOutlineCaretDown
+                          className={`w-4 h-4 menu-item-down`}
+                        />
+                        <AiOutlineCaretUp
+                          className={`w-4 h-4 hidden menu-item-up`}
+                        />
+                      </>
+                    ) : null}
+                  </button>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="text-lg mt-8 space-y-2">
+            <a
+              href={header.contact.link}
+              className="px-4 py-1.5 block text-center  text-white bg-secondary rounded-md hover:bg-orange/50 transition-colors"
+            >
+              {header.contact.label}
+            </a>
+          </div>
+        </div>
+      </nav>
     </>
+  );
 }
