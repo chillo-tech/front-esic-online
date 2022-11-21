@@ -31,14 +31,14 @@ export default function Header() {
     <>
       <nav className="py-4 bg-white z-50 hidden md:block" id="navbar">
         <div className="max-w-7xl mx-auto flex items-center justify-between md:text-lg">
-          <div>
+          <Link href={"/"}>
             <Image
               src={"/images/logo.png"}
               width={150}
               height={50}
               alt="Logo Esic"
             />
-          </div>
+          </Link>
           <ul className="flex items-center space-x-2 text-gray-700 font-medium">
             {header.menu.map((item, ind) => (
               <li key={`menu${ind}`} className="relative menu-item">
@@ -109,14 +109,14 @@ export default function Header() {
 
       <nav className="bg-white md:hidden border-b p-4 text-gray-700">
         <div className="flex justify-between">
-          <div>
+          <Link href={"/"}>
             <Image
               src={"/images/logo.png"}
               width={150}
               height={50}
               alt="Logo Esic"
             />
-          </div>
+          </Link>
           <button onClick={() => setShowMobileMenu(true)}>
             <AiOutlineMenu className="w-6 h-6" />
           </button>
@@ -128,14 +128,14 @@ export default function Header() {
           } transition-display fixed h-screen w-full bg-white border-b top-0 left-0 z-50 p-6 `}
         >
           <div className="flex justify-between">
-            <div>
+            <Link href={"/"}>
               <Image
                 src={"/images/logo.png"}
                 width={200}
                 height={150}
                 alt="Logo Esic"
               />
-            </div>
+            </Link>
             <button onClick={() => setShowMobileMenu(false)}>
               <AiOutlineClose className="w-6 h-6" />
             </button>

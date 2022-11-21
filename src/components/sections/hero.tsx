@@ -16,27 +16,30 @@ export default function Hero() {
     );
   }
 
+  const first_part = hero.title[0];
+  const second_part = hero.title[1];
+
   return (
     <section className="flex flex-wrap items-center relative">
       <aside className="w-full sm:max-w-xl  2xl:max-w-2xl mx-auto flex py-16 sm:py-20">
-        <div>
-          <h1 className="text-4xl sm:text-6xl font-extrabold text-center sm:text-left">
-            <span className="text-primary">{hero.title[0]}</span>{" "}
-            {hero.title[1]}
-          </h1>
-
+        <article>
+          <div className="text-4xl sm:text-6xl font-extrabold text-center sm:text-left">
+            <h1 className="text-primary inline">{first_part}</h1>
+            <h1 className="ml-4 inline">{second_part}</h1>
+          </div>
           <h3 className="text-xl sm:text-xl text-gray-700 mt-8 text-center sm:text-left">
             {hero.subtitle}
           </h3>
 
           <div className="sm:absolute mt-8 py-2 w-full sm:w-[650px] bg-white ">
-            <div className="flex flex-wrap sm:flex-nowrap space-x-2 sm:border-2 px-3 md:px-0 sm:rounded-full relative">
+            <div className="flex flex-wrap sm:flex-nowrap space-x-2 sm:border-2 border-secondary px-3 md:px-0 sm:rounded-full relative">
               <input
                 id="search-input"
-                className="w-full px-2 sm:px-6 py-4 md:py-2 sm:rounded-full border-2  outline-secondary focus:border-secondary sm:border-transparent text-base sm:text-xl"
+                onChange={handleInput}
+                className="w-full px-2 sm:px-6 py-4 sm:py-2.5 sm:rounded-full border-2  outline-secondary focus:border-secondary sm:border-transparent text-base sm:text-xl"
                 placeholder={hero.form.input.placeholder}
               ></input>
-              <button className="mt-4 sm:mt-0 sm:absolute w-full md:w-[25%] right-0 top-0 px-6 sm:px-8 py-3 sm:text-lg bg-secondary hover:bg-secondary/90 transitions-colors text-white sm:rounded-full border-transparent placeholder-gray-900">
+              <button className="mt-4 sm:mt-0 sm:absolute w-full md:w-[25%] -right-1 top-0 px-6 sm:px-8 py-3 sm:text-lg bg-secondary hover:bg-secondary/90 transitions-colors text-white sm:rounded-full border-secondary border-1.5 placeholder-gray-900">
                 {hero.form.submit.label}
               </button>
             </div>
@@ -64,7 +67,7 @@ export default function Hero() {
               </ul>
             </div>
           </div>
-        </div>
+        </article>
       </aside>
       <aside className="w-full md:w-1/2">
         <img
