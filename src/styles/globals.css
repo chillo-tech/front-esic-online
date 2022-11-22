@@ -2,9 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
+  font-family: "Source Sans Pro", sans-serif;
+} */
+
+/*==== FIN Testing des polices ===*/
+#home-police-1 {
   font-family: "Source Sans Pro", sans-serif;
 }
+
+#home-police-2 {
+  font-family: "Open Sans", sans-serif;
+}
+
+#home-police-3 {
+  font-family: "Fredoka", sans-serif;
+}
+
+#home-police-4 h2 {
+  font-family: "Source Sans Pro", sans-serif;
+}
+#home-police-4 h1 {
+  font-family: "Source Sans Pro", sans-serif;
+}
+#home-police-4 {
+  font-family: "Open Sans", sans-serif;
+}
+#home-police-4 header p {
+  font-family: "Open Sans", sans-serif;
+  @apply text-xl;
+}
+
+#home-police-5 {
+  font-family: "Roboto", sans-serif;
+}
+#home-police-6 {
+  font-family: "Raleway", sans-serif;
+}
+#home-police-7 {
+  font-family: "Rubik", sans-serif;
+}
+/*==== FIN Testing des polices ===*/
 
 .big-input {
   @apply block w-full border rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-600;
