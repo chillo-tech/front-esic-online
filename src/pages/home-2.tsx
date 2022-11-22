@@ -19,8 +19,6 @@ export default function Home2() {
 
       <Hero2 />
 
-      <Stats />
-
       <FormationsOverview />
 
       <CertificationsOverview />

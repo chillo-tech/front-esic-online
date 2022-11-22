@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
+body {
   font-family: "Source Sans Pro", sans-serif;
-} */
+}
 
 /*==== FIN Testing des polices ===*/
 #home-police-1 {
