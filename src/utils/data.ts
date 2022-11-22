@@ -237,12 +237,17 @@ export const usefull_links = {
   ],
 };
 
+export const formations_links = {
+  title: "Our trainings",
+};
+
 export const about_us = {
   title: "About",
   links: [
     { target: "/#", label: "ESIC" },
     { target: "/#", label: "Training" },
     { target: "/#", label: "Certifications" },
+    { target: "/#", label: "Contact us" },
     { target: "/#", label: "Terms and conditions" },
     { target: "/#", label: "Legales mentions" },
     { target: "/#", label: "Site map" },

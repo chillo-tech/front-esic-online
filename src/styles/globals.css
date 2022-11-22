@@ -27,7 +27,7 @@ h3 {
 }
 
 #footer li {
-  @apply text-gray-300;
+  @apply text-gray-100;
 }
 
 header h2 {

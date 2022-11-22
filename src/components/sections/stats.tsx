@@ -2,16 +2,12 @@ import { stats } from "../../utils/data";
 
 export default function Stats() {
   return (
-    <section className="py-12 sm:py-32">
-      <header className="max-w-4xl mx-auto text-center">
-        <h2 className="">{stats.title}</h2>
-        <p className="">{stats.subtitle}</p>
-      </header>
+    <section className="">
       <div className="max-w-5xl mx-auto rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4 mt-4 md:mt-12">
         {stats.items.map((item, ind) => (
           <article
             key={`stat${ind}`}
-            className="p-6 text-center sm:border-0 sm:border-r"
+            className="p-6 sm:py-10 text-center sm:border-0 sm:border-r"
           >
             <div className="text-6xl font-extrabold text-secondary">
               {item.value}

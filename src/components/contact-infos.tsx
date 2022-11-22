@@ -1,9 +1,9 @@
 import {
-  AiOutlineRight,
   AiOutlineEnvironment,
   AiOutlineIdcard,
   AiOutlinePhone,
 } from "react-icons/ai";
+import { BsFacebook, BsLinkedin, BsTwitter } from "react-icons/bs";
 import { contacts } from "../utils/data";
 export default function ContactInfos() {
   return (
@@ -19,6 +19,11 @@ export default function ContactInfos() {
       <li className=" flex space-x-2 items-center">
         <AiOutlineIdcard className="w-6 h-6" />
         <span>{contacts.siret}</span>
+      </li>
+      <li className="flex space-x-6">
+        <BsFacebook className="w-6 h-6" />
+        <BsLinkedin className="w-6 h-6" />
+        <BsTwitter className="w-6 h-6" />
       </li>
     </ul>
   );

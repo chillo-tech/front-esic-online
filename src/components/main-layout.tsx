@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import Newsletter from "../components/sections/newsletter";

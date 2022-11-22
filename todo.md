@@ -1,0 +1,14 @@
+- Extend menu with justify between (ok)
+- Text lg on menu (ok)
+- Remove stats text (ok)
+- strech image up to down (ok)
+- Rajouter des icons le button
+- Modifier la structure des categories.
+- Mettre une image pour chaque categorie
+- Tester un bleu pour le footer (ok)
+- Ajouter les reseaux sociaux auniveau des informations de contact. (ok)
+- Changer la police du site et faire propositions.
+- reduce formatin list.
+
+- Une page de details pour chaque formation.
+- Une page de details pour chaque cours.

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { header } from "../utils/data";
 import {
@@ -29,8 +29,8 @@ export default function Header() {
 
   return (
     <>
-      <nav className="py-4 bg-white z-50 hidden md:block" id="navbar">
-        <div className="max-w-7xl mx-auto flex items-center justify-between md:text-lg">
+      <nav className="bg-white top-0 py-4 z-50 hidden md:block" id="navbar">
+        <div className="px-8 md:px-12 flex items-center justify-between md:text-lg">
           <Link href={"/"}>
             <Image
               src={"/images/logo.png"}
@@ -43,7 +43,7 @@ export default function Header() {
             {header.menu.map((item, ind) => (
               <li key={`menu${ind}`} className="relative menu-item">
                 <Link href={item.link}>
-                  <button className="px-6 flex space-x-2 justify-center items-center font-medium transition-colors hover:text-primary">
+                  <button className="px-6 flex space-x-2 justify-center xl:text-lg items-center font-medium transition-colors hover:text-primary">
                     <span>{item.label}</span>
                     {item.submenu.length > 0 ? (
                       <>

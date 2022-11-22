@@ -1,7 +1,8 @@
 import formations from "../../utils/data/formations-list";
-import { use, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { hero } from "../../utils/data";
 import Link from "next/link";
+
 export default function Hero() {
   const [result, setResult] = useState<any>([]);
   const [showResult, setShowResult] = useState(false);
