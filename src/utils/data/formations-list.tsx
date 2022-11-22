@@ -2,6 +2,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "Cybersécurité",
+    subtitle: "short description here",
+    image: "/images/cyber-security.svg",
     description:
       "To ensure the cybersecurity of your sites, all the players are mobilised, from the user to the IT specialist. Several professions contribute to the protection of data and processing systems: DPO, business continuity manager, CISO, auditor and pentester. To help them, ESIC offers a complete range of training courses based on the best practices recommended in the reference systems.",
     courses: [
@@ -159,6 +161,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "Développement logiciel et tests",
+    image: "/images/developpement-logiciel.svg",
+    subtitle: "short description here",
     description:
       "Engage in the development of your computer programming skills through recognised development languages, methods and testing.",
     courses: [
@@ -319,6 +323,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "Langues",
+    subtitle: "short description here",
+    image: "/images/developpement-logiciel.svg",
     description:
       "Follow a programme of 5 to 40 hours of language training to gain mastery and ease in all situations of your personal and professional life. Your personal language trainer, who is the real guarantor of your progress, will give you activities to carry out each week to overcome, one by one, your blocks, whether they are psychological (self-confidence, letting go, etc.) or linguistic (grammar, pronunciation, etc.). Your trainer is a native speaker with whom you can practice the language without limits, both in writing and speaking!",
     courses: [
@@ -375,6 +381,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "Bureautique",
+    subtitle: "short description here",
+    image: "/images/developpement-logiciel.svg",
     description: "Devenez performant sur les outils bureautique",
     courses: [
       {
@@ -454,6 +462,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "Photoshop, InDesign et Illustrator",
+    subtitle: "short description here",
+    image: "/images/developpement-logiciel.svg",
     description:
       "Follow a programme of 5 to 40 hours of training to gain mastery and ease in the use of Photoshop, InDesign and Illustrator in your personal and professional life. Your personal trainer, who is the real guarantor of your progress, will give you activities to carry out each week to overcome your blockages one by one.",
     courses: [
@@ -502,6 +512,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "CAO, Architecture, BIM",
+    subtitle: "short description here",
+    image: "/images/developpement-logiciel.svg",
     description:
       "Suivez un programme de 5 à 40h de formation pour gagner en maîtrise et en aisance dans l’utilisation de Autocad, SketchUp, AllPlan dans les situations de votre vie personnelle et professionnelle. Votre formateur personnel, véritable garant de votre progression, vous donnera des activités à réaliser chaque semaine pour dépasser uns à uns vos blocages.",
     courses: [
@@ -550,6 +562,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "Vidéo et animation 3D",
+    subtitle: "short description here",
+    image: "/images/video-edition.svg",
     description:
       "Suivez un programme de 5 à 40h de formation pour gagner en maîtrise et en aisance dans l’utilisation Adode Première Pro, Unreal, After Effects ou 3ds Max dans les situations de votre vie personnelle et professionnelle. Votre formateur personnel, véritable garant de votre progression, vous donnera des activités à réaliser chaque semaine pour dépasser uns à uns vos blocages.",
     courses: [
@@ -590,6 +604,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "Webmarketing",
+    subtitle: "short description here",
+    image: "/images/webmarketing.svg",
     description:
       "Nous proposons des cours de web-marketing pour vous aider à développer votre E-commerce et votre E-réputation. Nos formations Web-marketing couvrent la création de sites vitrines avec WordPress, le référencement naturel, les campagnes Ads, l’e-mailing ainsi qu’une série d’outils Google comme Google Analytics ou la Google Search Console. Nos formations en web-marketing ont pour but de vous aider à acquérir de nouveaux clients via un site internet, à les fidéliser ainsi qu’a augmenter votre ROI (Return On Investment).",
     courses: [
@@ -646,6 +662,8 @@ const formations_list = [
   {
     link: "/contact",
     name: "Méthodes Agiles",
+    subtitle: "short description here",
+    image: "/images/developpement-logiciel.svg",
     description:
       "Les méthodes Agiles permettent de mieux maîtriser les projets informatiques sous les angles délais, coûts et résultats. Elles préconisent le travail itératif, une bonne communication entre les acteurs. Cela permet d’augmenter la crédibilité de la conduite de projet par une plus grande prévisibilité et une plus grande satisfaction des utilisateurs. Le but est d’apporter le plus de valeur possible aux projets.",
     courses: [],

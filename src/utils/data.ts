@@ -1,3 +1,4 @@
+import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 import { domainToASCII } from "url";
 import formations_list from "./data/formations-list";
 
@@ -8,17 +9,20 @@ export const header = {
       label: "Formations",
       link: "/formations",
       submenu: [
-        {
-          label: "Training at ESIC",
-          link: "/votre-formation-chez-esic",
-          submenu: [],
-        },
+        // {
+        //   label: "Training at ESIC",
+        //   link: "/votre-formation-chez-esic",
+        //   submenu: [],
+        // },
         ...formations_list.map((item) => ({
           label: item.name,
           link: item.link,
+          subtitle: item.subtitle,
+          image: item.image,
           submenu: item.courses.map((course) => ({
             label: course.name,
             link: course.link,
+            subtitle: "",
           })),
         })),
       ],
@@ -46,11 +50,15 @@ export const header = {
           link: "/comprendre-la-vae",
           label: "Understand VAE",
           submenu: [],
+          subtitle: "",
+          image: "",
         },
         {
           link: "/portal-vae-esic",
           label: "VAE portal of ESIC",
           submenu: [],
+          subtitle: "",
+          image: "",
         },
       ],
     },
@@ -62,26 +70,36 @@ export const header = {
           link: "/mediateur",
           label: "Mediator",
           submenu: [],
+          subtitle: "",
+          image: "",
         },
         {
           link: "/qualite",
           label: "Quality",
           submenu: [],
+          subtitle: "",
+          image: "",
         },
         {
           link: "/compte-personnel-formation",
           label: "CPF",
           submenu: [],
+          subtitle: "",
+          image: "",
         },
         {
           link: "/plan-developpement-competences",
           label: "Competences development plan",
           submenu: [],
+          subtitle: "",
+          image: "",
         },
         {
           link: "/reserver-formation",
           label: "Book a course",
           submenu: [],
+          subtitle: "",
+          image: "",
         },
       ],
     },

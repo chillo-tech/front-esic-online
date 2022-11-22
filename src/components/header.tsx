@@ -27,10 +27,14 @@ export default function Header() {
     };
   }, []);
 
+  function displaySubmenuFull(item: any) {
+    return item.label == "Formations";
+  }
+
   return (
     <>
       <nav className="bg-white top-0 py-4 z-50 hidden md:block" id="navbar">
-        <div className="px-8 md:px-12 flex items-center justify-between md:text-lg">
+        <div className="px-8 flex items-center justify-between md:text-lg relative">
           <Link href={"/"}>
             <Image
               src={"/images/logo.png"}
@@ -39,9 +43,15 @@ export default function Header() {
               alt="Logo Esic"
             />
           </Link>
+
           <ul className="flex items-center space-x-2 text-gray-700 font-medium">
             {header.menu.map((item, ind) => (
-              <li key={`menu${ind}`} className="relative menu-item">
+              <li
+                key={`menu${ind}`}
+                className={`menu-item ${
+                  displaySubmenuFull(item) ? "" : "relative"
+                }`}
+              >
                 <Link href={item.link}>
                   <button className="px-6 flex space-x-2 justify-center xl:text-lg items-center font-medium transition-colors hover:text-primary">
                     <span>{item.label}</span>
@@ -57,46 +67,64 @@ export default function Header() {
                     ) : null}
                   </button>
                 </Link>
-
                 {item.submenu.length > 0 ? (
-                  <div className="menu-item-sub hidden absolute left-0 top-6 pt-6 sm:w-[330px] z-40 shadow-xl">
-                    <ul className="bg-white border-t-8 border-primary px-2 py-4 rounded-">
-                      {item.submenu.map((subItem) => (
-                        <li
-                          key={`leaf${subItem.label}`}
-                          className="menu-item-sub-item px-4"
-                        >
-                          <Link href={subItem.link} className="">
-                            <button className="flex w-full items-center py-2  transition-colors hover:text-primary ">
-                              <AiOutlineRight className="w-3 h-3 text-primary mr-2" />
-                              <span>{subItem.label} </span>
-                            </button>
-                          </Link>
-
-                          {subItem.submenu.length > 0 ? (
-                            <div className="menu-item-sub-item-sub hidden absolute h-full pt-6 top-0 left-[300px] w-[600px]">
-                              <ul className="h-full border-t-8 border-primary  overflow-auto bg-white px-4 py-5 border-l  ml-4">
-                                {subItem.submenu.map((leaf) => (
-                                  <li key={`leaf${leaf.label}`}>
-                                    <Link href={leaf.link} className="">
-                                      <button className="inline-flex space-x-2 items-center py-2 transition-colors hover:text-primary ">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                                        <span>{leaf.label} </span>
-                                      </button>
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
+                  <div
+                    className={`menu-item-sub hidden absolute left-0 top-6 pt-6 z-40 ${
+                      displaySubmenuFull(item) ? "w-full " : "w-[300px]"
+                    }`}
+                  >
+                    {item.label == "Formations" ? (
+                      <ul className="bg-white w-full border-t-8 border-primary px-8 pb-8 flex flex-wrap">
+                        {item.submenu.map((subItem) => (
+                          <li
+                            key={`leaf${subItem.label}`}
+                            className="w-1/3 mt-4"
+                          >
+                            <div className="flex justify-start items-center space-x-2">
+                              <div className="w-20 h-20  relative">
+                                <Image
+                                  src={subItem.image}
+                                  fill={true}
+                                  alt={subItem.label}
+                                />
+                              </div>
+                              <div>
+                                <Link href={subItem.link}>
+                                  <button className="flex w-full items-center uppercase text-lg transition-colors hover:text-primary">
+                                    {subItem.label}
+                                  </button>
+                                </Link>
+                                <p className="text-sm text-gray-700">
+                                  {subItem.subtitle}
+                                </p>
+                              </div>
                             </div>
-                          ) : null}
-                        </li>
-                      ))}
-                    </ul>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <ul className="bg-white border-t-8 pb-4 shadow-xl border-primary px-4">
+                        {item.submenu.map((subItem) => (
+                          <li key={`leaf${subItem.label}`} className="mt-3">
+                            <div className="flex justify-start items-center space-x-2">
+                              <div>
+                                <Link href={subItem.link}>
+                                  <button className="flex w-full items-center transition-colors hover:text-primary">
+                                    {subItem.label}
+                                  </button>
+                                </Link>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 ) : null}
               </li>
             ))}
           </ul>
+
           <div className="text-lg">
             <Link href={header.contact.link}>
               <button className="px-8 py-1.5 inline-block  text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors">

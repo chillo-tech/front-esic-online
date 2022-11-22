@@ -36,26 +36,28 @@ export default function FormationsOverview() {
           <p className="p-4 sm:p-8 text-gray-700">{selected.description}</p>
           {selected.courses.length > 0 ? (
             <div className="px-4 sm:px-8">
-              {selected.courses.map((course: any, index: number) => (
-                <article
-                  key={`leaf${index}`}
-                  className="border-t py-4 flex items-center justify-between"
-                >
-                  <div>
-                    <h5 className="text-lg font-semibold"> {course.name}</h5>
-                    <h6>
-                      {["string", "number"].includes(typeof course.hours)
-                        ? `${course.hours} Heures`
-                        : `${course.hours[0]} - ${course.hours[1]}Heures`}
-                    </h6>
-                  </div>
-                  <div>
-                    <button className="px-4 py-2 text-sm rounded-full text-white bg-secondary shadow">
-                      {formations_overview.cta.label}
-                    </button>
-                  </div>
-                </article>
-              ))}
+              {selected.courses
+                .filter((item: any, i: number) => i < 6)
+                .map((course: any, index: number) => (
+                  <article
+                    key={`leaf${index}`}
+                    className="border-t py-4 flex items-center justify-between"
+                  >
+                    <div>
+                      <h5 className="text-lg font-semibold"> {course.name}</h5>
+                      <h6>
+                        {["string", "number"].includes(typeof course.hours)
+                          ? `${course.hours} Heures`
+                          : `${course.hours[0]} - ${course.hours[1]}Heures`}
+                      </h6>
+                    </div>
+                    <div>
+                      <button className="px-4 py-2 text-sm rounded-full text-white bg-secondary shadow">
+                        {formations_overview.cta.label}
+                      </button>
+                    </div>
+                  </article>
+                ))}
             </div>
           ) : (
             <div className="px-8">
