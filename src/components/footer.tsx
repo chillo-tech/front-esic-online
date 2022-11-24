@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   contacts,
   about_us,
@@ -42,12 +43,16 @@ export default function Footer() {
             </ul>
           </article>
 
-          <article className="w-full sm:w-2/5 mt-8 sm:mt-0">
+          <article className="relative w-full sm:w-2/5 mt-8 sm:mt-0">
             <h2 className="font-bold text-2xl">{quality_label.title}</h2>
-            <p className="mt-2  sm:mt-6 text-gray-100">
+            <p className="mt-2  sm:mt-6 text-gray-100 relative">
               {quality_label.description}
             </p>
-            <img src={quality_label.image} className="mt-8 rounded-xl" />
+            <img
+              alt="Qualiopi"
+              src={quality_label.image}
+              className="mt-8 rounded-xl"
+            />
           </article>
         </section>
 

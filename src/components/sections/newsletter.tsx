@@ -28,8 +28,9 @@ export default function Newsletter() {
             </div>
           </form>
         </aside>
-        <aside className="w-full sm:w-1/2">
+        <aside className="w-full  sm:w-1/2 relative">
           <img
+            alt="esic formations"
             src={"/images/newsletter.svg"}
             className="hidden sm:block w-3/4 mx-auto"
           />

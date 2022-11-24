@@ -1,6 +1,7 @@
 import { certifications_overview } from "../../utils/data";
 import DottedLayer from "../ui//dotted-layer";
 import Link from "next/link";
+import Image from "next/image";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
 export default function Certifications() {
@@ -8,10 +9,11 @@ export default function Certifications() {
     <section className="">
       <div className="max-w-7xl flex flex-wrap mx-auto pt-8 pb-0 sm:py-20">
         <aside className="relative w-full sm:w-2/5 px-3 sm:px-0">
-          <img
+          <Image
+            fill={true}
             className="relative z-20 h-full w-full sm:w-[80%]   object-cover rounded-lg"
             src={certifications_overview.image}
-            alt=""
+            alt="Certification"
           />
           <DottedLayer
             width={500}

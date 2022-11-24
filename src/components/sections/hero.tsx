@@ -2,6 +2,7 @@ import formations from "../../utils/data/formations-list";
 import { useState } from "react";
 import { hero } from "../../utils/data";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
   const [result, setResult] = useState<any>([]);
@@ -70,8 +71,10 @@ export default function Hero() {
           </div>
         </article>
       </aside>
-      <aside className="w-full md:w-1/2">
-        <img
+      <aside className="w-full md:w-1/2 relative">
+        <Image
+          fill={true}
+          alt="esic formations"
           src={"/images/students.jpg"}
           className="rounded-full rounded-r-none"
         />

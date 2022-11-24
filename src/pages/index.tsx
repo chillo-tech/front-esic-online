@@ -1,7 +1,7 @@
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
 
-import Hero from "../components/sections/hero";
+import Hero2 from "../components/sections/hero-2";
 import Stats from "../components/sections/stats";
 import Testimonials from "../components/sections/testimonials";
 import Location from "../components/sections/location";
@@ -17,7 +17,7 @@ export default function Home() {
         <title> {home.title} </title>
       </Head>
 
-      <Hero />
+      <Hero2 />
 
       <Stats />
 

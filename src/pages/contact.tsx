@@ -2,6 +2,7 @@ import Head from "next/head";
 import ContactInfos from "../components/contact-infos";
 import MainLayout from "../components/main-layout";
 import { contact } from "../utils/data/pages-list";
+import Image from "next/image";
 
 export default function Contact() {
   return (
@@ -9,15 +10,16 @@ export default function Contact() {
       <Head>
         <title> {contact.title} </title>
       </Head>
-      <header className="max-w-7xl items-center mx-auto flex flex-wrap px-3 md:px-0 py-12 md:py-0">
+      <header className="max-w-7xl items-center mx-auto flex flex-wrap px-3 md:px-0 py-12 pt-16 md:pt-20 md:py-0">
         <aside className="w-full sm:w-1/2">
           <h1 className="text-4xl sm:text-7xl font-bold text-gray-900">
             {contact.header.title}
           </h1>
           <p className="sm:max-w-xl">{contact.header.subtitle}</p>
         </aside>
-        <aside className="hidden sm:block w-1/2">
+        <aside className="hidden sm:block w-1/2 relative">
           <img
+            alt="Esic formations"
             src={"/images/esic-elearning.svg"}
             className="hidden sm:block w-3/5 mx-auto"
           />

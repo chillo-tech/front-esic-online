@@ -13,27 +13,16 @@ import {
 export default function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  useEffect(() => {
-    window.onscroll = function () {
-      let navbar = document.getElementById("navbar");
-      if (navbar != null) {
-        if (window.scrollY > navbar.offsetHeight) {
-          navbar.classList.add("fixed");
-          navbar.classList.add("w-full");
-        } else {
-          navbar.classList.remove("fixed");
-        }
-      }
-    };
-  }, []);
-
   function displaySubmenuFull(item: any) {
     return item.label == "Formations";
   }
 
   return (
     <>
-      <nav className="bg-white top-0 py-4 z-50 hidden md:block" id="navbar">
+      <nav
+        className="bg-white fixed w-full shadow-xl top-0 py-4 z-40 hidden md:block"
+        id="navbar"
+      >
         <div className="px-8 flex items-center justify-between md:text-lg relative">
           <Link href={"/"}>
             <Image

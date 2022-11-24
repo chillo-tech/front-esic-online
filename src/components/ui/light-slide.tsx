@@ -34,7 +34,7 @@ function LightSlide({ slideSpeed, slideStep, className, children }: Props) {
         slideWrapper.style.height = `${max}px`;
       }
     }, 50);
-  }, []);
+  }, [changePositions]);
 
   function changePositions(
     priorities: number[] = [2, 1],

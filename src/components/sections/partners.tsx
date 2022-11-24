@@ -13,9 +13,9 @@ export default function Newsletter() {
           {partners.items.map((item, index) => (
             <article
               key={`partners${index}`}
-              className="mt-4 md:mt-0 w-full sm:w-48"
+              className="mt-4 md:mt-0 w-full  sm:w-64 relative"
             >
-              <img src={item.image} className="w-full h-auto" alt="name" />
+              <img src={item.image} className="w-full h-auto" alt={item.name} />
             </article>
           ))}
         </aside>
