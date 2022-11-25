@@ -300,3 +300,14 @@ export const quality_label = {
 };
 
 export const copyright: string = "ESIC. Tous droits reservés.";
+
+// formation cta
+export const formation_cta = {
+  button: {
+    label: "Book a training",
+    link: "/reserver-formation",
+  },
+  title: "Start you path right now ",
+  subtitle:
+    "Empower your tech teams to produce key business outcomes by making upskilling and reskilling as easy as powering up their laptop. Tap into the power of curated learning paths to guide teams through the exact skills they need to progress from novice to guru across avariety of tech skills.",
+};

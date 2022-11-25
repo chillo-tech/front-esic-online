@@ -7,6 +7,7 @@ import Link from "next/link";
 import { BsImageAlt } from "react-icons/bs";
 import { AiFillCaretDown, AiOutlineSearch } from "react-icons/ai";
 import { useOnAway } from "../../utils/custom-hooks";
+import { FormationCTA } from "../../components/sections/formtion-cta";
 
 export default function Mediateur() {
   const [selected, setSelected] = useState<any>(null);
@@ -87,7 +88,7 @@ export default function Mediateur() {
               >
                 {formations.map((item: any) => (
                   <li
-                    key={item.name}
+                    key={`cat${item.name}`}
                     className="w-full hover:bg-secondary/20 cursor-pointer transition-colors px-4 py-1"
                   >
                     {item.name}
@@ -133,7 +134,7 @@ export default function Mediateur() {
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-8">
             {result.map((course: any) => (
-              <article>
+              <article key={`${course.slug}`}>
                 <div className="w-full h-44 bg-gray-400 flex items-center justify-center">
                   <BsImageAlt className="text-gray-300 w-24 h-24" />
                 </div>
@@ -158,25 +159,7 @@ export default function Mediateur() {
         </aside>
       </section>
 
-      <section className="py-16 bg-secondary text-white max-w-7xl mx-auto rounded-2xl">
-        <header className="max-w-3xl mx-auto">
-          <h2 className="text-white text-center"> Start you path right now </h2>
-          <p className="text-center text-white">
-            Empower your tech teams to produce key business outcomes by making
-            upskilling and reskilling as easy as powering up their laptop. Tap
-            into the power of curated learning paths to guide teams through the
-            exact skills they need to progress from novice to guru across a
-            variety of tech skills.
-          </p>
-          <p className="text-center">
-            <Link href={formations_page.cta.link}>
-              <button className="px-8 py-3 text-secondary bg-white mt-8 text-lg font-semibold rounded-full">
-                {formations_page.cta.label}
-              </button>
-            </Link>
-          </p>
-        </header>
-      </section>
+      <FormationCTA />
     </MainLayout>
   );
 }

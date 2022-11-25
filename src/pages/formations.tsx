@@ -7,6 +7,8 @@ import Link from "next/link";
 import { BsImageAlt } from "react-icons/bs";
 import { AiFillCaretDown, AiOutlineSearch } from "react-icons/ai";
 import { useOnAway } from "../utils/custom-hooks";
+import { FormationCTA } from "../components/sections/formtion-cta";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 export default function Mediateur() {
   const [selected, setSelected] = useState<any>(null);
@@ -76,7 +78,7 @@ export default function Mediateur() {
         </div>
       </section>
 
-      <section className="flex flex-wrap max-w-7xl mx-auto py-12 sm:py-16">
+      <section className="flex flex-wrap max-w-7xl mx-auto py-12 sm:py-16 ">
         <aside className="">
           <div className="mb-16">
             <h2 className="text-xl font-semibold sm:text-2xl">
@@ -85,7 +87,7 @@ export default function Mediateur() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
               {formations.map((item: any) => (
                 <div
-                  key={item.name}
+                  key={item.slug}
                   className="w-full border-2 text-center  hover:bg-secondary/20 cursor-pointer transition-colors p-4"
                 >
                   {item.name}
@@ -109,56 +111,48 @@ export default function Mediateur() {
                   </button>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-8">
-                {get_formation_courses(item.slug)
-                  .filter((item: any, index: any) => index < 4)
-                  .map((course: any) => (
-                    <div>
-                      <div className="w-full h-44 bg-gray-400 flex items-center justify-center">
-                        <BsImageAlt className="text-gray-300 w-24 h-24" />
-                      </div>
-                      <div className="p-3 border h-40 relative">
-                        <h3 className="font-semibold">{course.name}</h3>
-                        <h6 className="mt-1 text-sm text-gray-700">
-                          {["string", "number"].includes(typeof course.hours)
-                            ? `${course.hours} Heures`
-                            : `${course.hours[0]} - ${course.hours[1]}Heures`}
-                        </h6>
-                        <div className="left-0 bottom-4 absolute w-full px-4">
-                          <Link href={course.link}>
-                            <button className="bg-secondary text-white p-2 text-sm w-full">
-                              {formations_page.search.details.cta.label}
-                            </button>
-                          </Link>
+              <div className="mt-8 relative">
+                {/* <div className="absolute top-[50%] w-full flex justify-between text-center text-gray-100">
+                  <button className="p-2 rounded-full bg-secondary text-white">
+                    <HiChevronLeft className="w-8 h-8" />
+                  </button>
+                  <button className="p-2 rounded-full bg-secondary text-white">
+                    <HiChevronRight className="w-8 h-8" />
+                  </button>
+                </div> */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                  {get_formation_courses(item.slug)
+                    .filter((item: any, index: any) => index < 4)
+                    .map((course: any) => (
+                      <div key={course.slug}>
+                        <div className="w-full h-44 bg-gray-400 flex items-center justify-center">
+                          <BsImageAlt className="text-gray-300 w-24 h-24" />
+                        </div>
+                        <div className="p-3 border h-40 relative">
+                          <h3 className="font-semibold">{course.name}</h3>
+                          <h6 className="mt-1 text-sm text-gray-700">
+                            {["string", "number"].includes(typeof course.hours)
+                              ? `${course.hours} Heures`
+                              : `${course.hours[0]} - ${course.hours[1]}Heures`}
+                          </h6>
+                          <div className="left-0 bottom-4 absolute w-full px-4">
+                            <Link href={course.link}>
+                              <button className="bg-secondary text-white p-2 text-sm w-full">
+                                {formations_page.search.details.cta.label}
+                              </button>
+                            </Link>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                </div>
               </div>
             </article>
           ))}
         </aside>
       </section>
 
-      <section className="py-16 bg-secondary text-white max-w-7xl mx-auto rounded-2xl">
-        <header className="max-w-3xl mx-auto">
-          <h2 className="text-white text-center"> Start you path right now </h2>
-          <p className="text-center text-white">
-            Empower your tech teams to produce key business outcomes by making
-            upskilling and reskilling as easy as powering up their laptop. Tap
-            into the power of curated learning paths to guide teams through the
-            exact skills they need to progress from novice to guru across a
-            variety of tech skills.
-          </p>
-          <p className="text-center">
-            <Link href={formations_page.cta.link}>
-              <button className="px-8 py-3 text-secondary bg-white mt-8 text-lg font-semibold rounded-full">
-                {formations_page.cta.label}
-              </button>
-            </Link>
-          </p>
-        </header>
-      </section>
+      <FormationCTA />
     </MainLayout>
   );
 }

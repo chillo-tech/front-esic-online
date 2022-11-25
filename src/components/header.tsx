@@ -83,9 +83,6 @@ export default function Header() {
                                     {subItem.label}
                                   </button>
                                 </Link>
-                                <p className="text-sm text-gray-700">
-                                  {subItem.subtitle}
-                                </p>
                               </div>
                             </div>
                           </li>
