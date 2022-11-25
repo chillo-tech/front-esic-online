@@ -60,8 +60,25 @@ export const contact = {
 export const formations = {
   link: "/formations",
   title: "Esic - Trainings",
-  subtitle:
-    "Mattis amet hendrerit dolor, quisque lorem pharetra. Pellentesque lacus nisi urna, arcu sociis eu. Orci vel lectus nisl eget eget ut consectetur. Sit justo viverra non adipisicing elit distinctio.",
+  hero: {
+    title: "Grow up your carreer with our trainings",
+    subtitle:
+      "Take you career to the next level with courses in domains with high demand on the  job market today. Gain a deep undestanding on a specific subject that bring value to your profil. Choose a course in one of ours categories and get started right now.",
+  },
+  cta: {
+    label: "Book a training",
+    link: "/reserver-formation",
+  },
+  all_courses: {
+    label: "All courses",
+  },
+  search: {
+    details: {
+      cta: {
+        label: "Fint out more",
+      },
+    },
+  },
 };
 
 export const poe = {

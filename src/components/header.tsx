@@ -42,7 +42,7 @@ export default function Header() {
                 }`}
               >
                 <Link href={item.link}>
-                  <button className="px-6 flex space-x-2 justify-center xl:text-lg items-center font-medium transition-colors hover:text-primary">
+                  <button className="px-6 flex space-x-2 justify-center lg:text-lg items-center font-medium transition-colors hover:text-primary">
                     <span>{item.label}</span>
                     {item.submenu.length > 0 ? (
                       <>

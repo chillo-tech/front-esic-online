@@ -59,8 +59,10 @@ body {
   @apply block font-medium text-gray-900;
 }
 
-#footer h2,
-h3 {
+#footer h2 {
+  @apply text-white;
+}
+#footer h3 {
   @apply text-white;
 }
 
@@ -88,4 +90,8 @@ header p {
 
 .menu-item-sub-item:hover .menu-item-sub-item-sub {
   display: block;
+}
+
+.input-checkbox {
+  @apply w-5 h-5 text-secondary bg-secondary focus:text-secondary p-2 outline-secondary;
 }
