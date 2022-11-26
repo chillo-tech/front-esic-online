@@ -1,4 +1,4 @@
-import formations from "../../utils/data/formations-list";
+import formations from "../../utils/data/formations-list.json";
 import { useState } from "react";
 import { hero } from "../../utils/data";
 import Link from "next/link";

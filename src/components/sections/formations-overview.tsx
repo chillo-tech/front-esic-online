@@ -1,5 +1,5 @@
 import { formations_overview } from "../../utils/data";
-import formations from "../../utils/data/formations-list";
+import formations from "../../utils/data/formations-list.json";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -45,11 +45,7 @@ export default function FormationsOverview() {
                   >
                     <div>
                       <h5 className="text-lg font-semibold"> {course.name}</h5>
-                      <h6>
-                        {["string", "number"].includes(typeof course.hours)
-                          ? `${course.hours} Heures`
-                          : `${course.hours[0]} - ${course.hours[1]}Heures`}
-                      </h6>
+                      <h6>{course.hours}</h6>
                     </div>
                     <div>
                       <button className="px-4 py-2 text-sm rounded-full text-white bg-secondary shadow">

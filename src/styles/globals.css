@@ -95,3 +95,9 @@ header p {
 .input-checkbox {
   @apply w-5 h-5 text-secondary bg-secondary focus:text-secondary p-2 outline-secondary;
 }
+
+.chapter-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}

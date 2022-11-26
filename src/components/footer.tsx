@@ -8,7 +8,7 @@ import {
   quality_label,
 } from "../utils/data";
 
-import formations from "../utils/data/formations-list";
+import formations from "../utils/data/formations-list.json";
 import ContactInfos from "../components/contact-infos";
 
 export default function Footer() {

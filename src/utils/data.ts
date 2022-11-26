@@ -1,6 +1,6 @@
 import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 import { domainToASCII } from "url";
-import formations_list from "./data/formations-list";
+import formations_list from "./data/formations-list.json";
 
 // Header
 export const header = {
@@ -307,7 +307,7 @@ export const formation_cta = {
     label: "Book a training",
     link: "/reserver-formation",
   },
-  title: "Start you path right now ",
+  title: "Start this course right now",
   subtitle:
     "Empower your tech teams to produce key business outcomes by making upskilling and reskilling as easy as powering up their laptop. Tap into the power of curated learning paths to guide teams through the exact skills they need to progress from novice to guru across avariety of tech skills.",
 };

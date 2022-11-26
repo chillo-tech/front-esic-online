@@ -1,33 +1,15 @@
+import Link from "next/link";
+import { BsImageAlt } from "react-icons/bs";
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
 import { formations as formations_page } from "../utils/data/pages-list";
-import formations_list from "../utils/data/formations-list";
-import { useEffect, useState, useRef } from "react";
-import Link from "next/link";
-import { BsImageAlt } from "react-icons/bs";
-import { AiFillCaretDown, AiOutlineSearch } from "react-icons/ai";
-import { useOnAway } from "../utils/custom-hooks";
 import { FormationCTA } from "../components/sections/formtion-cta";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import formations_list from "../utils/data/formations-list.json";
+import Course from "../utils/models/Course";
 
 export default function Mediateur() {
-  const [selected, setSelected] = useState<any>(null);
-  const [formations, setFormations] = useState<any>(formations_list);
-  const [result, setResult] = useState<any>([]);
-  const [showChooseCategorie, setShowChooseCategorie] =
-    useState<boolean>(false);
-
-  const categoryFilter = useRef(null);
-  useOnAway(categoryFilter, () => {
-    setShowChooseCategorie(false);
-  });
-
-  function get_all_courses() {
-    return formations.map((item: any) => item.courses).flat();
-  }
-
-  function get_formation_courses(slug: string) {
-    const formation = formations.find((item: any) => item.slug == slug);
+  function get_formation_courses(slug: string): Course[] {
+    const formation = formations_list.find((item: any) => item.slug == slug);
     if (formation == undefined) {
       return [];
     } else {
@@ -35,24 +17,10 @@ export default function Mediateur() {
     }
   }
 
-  function handleInput(e: any) {
-    setResult((items: any) =>
-      get_all_courses().filter((item: any) =>
-        item.name.includes(e.target.value)
-      )
-    );
-  }
-
-  function chooseCategorie(item: any) {}
-
-  useEffect(() => {
-    setResult(() => get_all_courses());
-  }, []);
-
   return (
     <MainLayout>
       <Head>
-        <title> {formations.title} </title>
+        <title> {formations_page.title} </title>
       </Head>
 
       <section
@@ -85,18 +53,19 @@ export default function Mediateur() {
               Get start with one domain
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-              {formations.map((item: any) => (
-                <div
+              {formations_list.map((item: any) => (
+                <a
                   key={item.slug}
-                  className="w-full border-2 text-center  hover:bg-secondary/20 cursor-pointer transition-colors p-4"
+                  href={item.link}
+                  className="w-full border-2 text-center block hover:bg-secondary/20 cursor-pointer transition-colors p-4"
                 >
                   {item.name}
-                </div>
+                </a>
               ))}
             </div>
           </div>
 
-          {formations.map((item: any) => (
+          {formations_list.map((item: any) => (
             <article key={item.name} className="w-full mb-16">
               <div className="flex justify-between items-center">
                 <div className="w-full md:w-3/4">
@@ -106,20 +75,14 @@ export default function Mediateur() {
                   <p className="mt-2">{item.subtitle}</p>
                 </div>
                 <div className="w-full md:w-1/4 justify-end flex">
-                  <button className="text-secondary font-semibold rounded-full border-2 border-secondary hover:bg-secondary hover:text-white px-4 py-2">
-                    Discover more
-                  </button>
+                  <a className="" href={item.link}>
+                    <button className="text-secondary w-full block h-full font-semibold rounded-full border-2 border-secondary hover:bg-secondary hover:text-white px-4 py-2">
+                      Discover more
+                    </button>
+                  </a>
                 </div>
               </div>
               <div className="mt-8 relative">
-                {/* <div className="absolute top-[50%] w-full flex justify-between text-center text-gray-100">
-                  <button className="p-2 rounded-full bg-secondary text-white">
-                    <HiChevronLeft className="w-8 h-8" />
-                  </button>
-                  <button className="p-2 rounded-full bg-secondary text-white">
-                    <HiChevronRight className="w-8 h-8" />
-                  </button>
-                </div> */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                   {get_formation_courses(item.slug)
                     .filter((item: any, index: any) => index < 4)

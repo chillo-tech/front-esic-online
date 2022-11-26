@@ -41,7 +41,7 @@ export default function Header() {
                   displaySubmenuFull(item) ? "" : "relative"
                 }`}
               >
-                <Link href={item.link}>
+                <a href={item.link} className="block">
                   <button className="px-6 flex space-x-2 justify-center lg:text-lg items-center font-medium transition-colors hover:text-primary">
                     <span>{item.label}</span>
                     {item.submenu.length > 0 ? (
@@ -55,7 +55,7 @@ export default function Header() {
                       </>
                     ) : null}
                   </button>
-                </Link>
+                </a>
                 {item.submenu.length > 0 ? (
                   <div
                     className={`menu-item-sub hidden absolute left-0 top-6 pt-6 z-40 ${
@@ -78,11 +78,11 @@ export default function Header() {
                                 />
                               </div>
                               <div>
-                                <Link href={subItem.link}>
-                                  <button className="flex w-full items-center uppercase text-lg transition-colors hover:text-primary">
+                                <a className="inline-block" href={subItem.link}>
+                                  <button className="flex w-full items-center  2xl:text-lg transition-colors hover:text-primary">
                                     {subItem.label}
                                   </button>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           </li>
@@ -94,11 +94,11 @@ export default function Header() {
                           <li key={`leaf${subItem.label}`} className="mt-3">
                             <div className="flex justify-start items-center space-x-2">
                               <div>
-                                <Link href={subItem.link}>
+                                <a className="inline-block" href={subItem.link}>
                                   <button className="flex w-full items-center transition-colors hover:text-primary">
                                     {subItem.label}
                                   </button>
-                                </Link>
+                                </a>
                               </div>
                             </div>
                           </li>
@@ -112,11 +112,11 @@ export default function Header() {
           </ul>
 
           <div className="text-lg">
-            <Link href={header.contact.link}>
+            <a className="inline-block" href={header.contact.link}>
               <button className="px-8 py-1.5 inline-block  text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors">
                 {header.contact.label}
               </button>
-            </Link>
+            </a>
           </div>
         </div>
       </nav>

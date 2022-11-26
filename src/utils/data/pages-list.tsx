@@ -81,6 +81,30 @@ export const formations = {
   },
 };
 
+export const course_page = {
+  cta: {
+    button: {
+      label: "Book this course",
+      link: "/reserver-formation",
+    },
+    title: "Start you path right now ",
+    subtitle:
+      "Empower your tech teams to produce key business outcomes by making upskilling and reskilling as easy as powering up their laptop. Tap into the power of curated learning paths to guide teams through the exact skills they need to progress from novice to guru across avariety of tech skills.",
+  },
+  achievements: {
+    title: "What you will learn",
+  },
+  requirements: {
+    title: "Requirements",
+  },
+  syllabus: {
+    title: "Course content",
+  },
+  description: {
+    title: "Course description",
+  },
+};
+
 export const poe = {
   link: "/poe",
   title: "Esic - POE",
