@@ -166,4 +166,47 @@ export const competences_development_plan = {
 export const book_course = {
   link: "/reserver-formation",
   title: "ESIC - Book a course",
+  hero: {
+    title: "Start you training",
+    subtitle:
+      "Give your career a boost by starting your training now. Pick  a course of your choice from our extensive catalogue. <br><br>Fill in the form and one of our experts will contact you to discuss your needs",
+  },
+  form: {
+    fields: {
+      firstname: {
+        label: "Firstname",
+        placeholder: "",
+      },
+      lastname: {
+        label: "Lastname",
+        placeholder: "",
+      },
+      email: {
+        label: "Email address",
+        placeholder: "",
+      },
+      phone: {
+        label: "Phone",
+        placeholder: "",
+      },
+      accept_terms: {
+        label:
+          "J'accepte les conditions generales d'utilisation et la politique de confidentialite",
+      },
+      commercial_use: {
+        label:
+          "J'accepte que mes informations soient utilisés à des fins commerciales",
+      },
+    },
+    choices: {
+      title: "Which formation do you need ?",
+      indication: "You can choose many",
+      other_choice: {
+        label: "Other",
+      },
+    },
+    previous: "Previous",
+    next: "Continue",
+    submit: "Valider",
+  },
 };

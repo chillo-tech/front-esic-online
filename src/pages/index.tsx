@@ -17,7 +17,7 @@ export default function Home() {
         <title> {home.title} </title>
       </Head>
 
-      {/* <Hero2 /> */}
+      <Hero2 />
 
       <Stats />
 

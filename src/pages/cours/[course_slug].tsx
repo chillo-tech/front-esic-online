@@ -16,7 +16,7 @@ import {
 } from "react-icons/ai";
 import Course from "../../utils/models/Course";
 import Chapter from "../../utils/models/Chapter";
-import { FormationCTA } from "../../components/sections/formtion-cta";
+import { FormationCTA } from "../../components/sections/formation-cta";
 
 export default function Formations() {
   const [course, setCourse] = useState<Partial<Course>>({});

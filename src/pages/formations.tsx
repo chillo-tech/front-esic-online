@@ -3,7 +3,7 @@ import { BsImageAlt } from "react-icons/bs";
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
 import { formations as formations_page } from "../utils/data/pages-list";
-import { FormationCTA } from "../components/sections/formtion-cta";
+import { FormationCTA } from "../components/sections/formation-cta";
 import formations_list from "../utils/data/formations-list.json";
 import Course from "../utils/models/Course";
 

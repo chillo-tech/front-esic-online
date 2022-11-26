@@ -62,6 +62,7 @@ body {
 #footer h2 {
   @apply text-white;
 }
+
 #footer h3 {
   @apply text-white;
 }

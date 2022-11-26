@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { BsImageAlt } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FormationCTA } from "../../components/sections/formtion-cta";
+import { FormationCTA } from "../../components/sections/formation-cta";
 import formations_list from "../../utils/data/formations-list.json";
 import Formation from "../../utils/models/Formation";
 import Course from "../../utils/models/Course";
