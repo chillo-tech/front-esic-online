@@ -8,14 +8,11 @@ import { BsImageAlt } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FormationCTA } from "../../components/sections/formation-cta";
 import formations_list from "../../utils/data/formations-list.json";
-import Formation from "../../utils/models/Formation";
-import Course from "../../utils/models/Course";
-
 export default function Mediateur() {
   const router = useRouter();
-  const [formation, setFormation] = useState<Partial<Formation>>({});
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [result, setResult] = useState<Course[]>([]);
+  const [formation, setFormation] = useState<any>({});
+  const [courses, setCourses] = useState<any[]>([]);
+  const [result, setResult] = useState<any[]>([]);
 
   function handleInput(e: any) {
     setResult((items: any) =>

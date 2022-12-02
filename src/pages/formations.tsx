@@ -5,10 +5,9 @@ import MainLayout from "../components/main-layout";
 import { formations as formations_page } from "../utils/data/pages-list";
 import { FormationCTA } from "../components/sections/formation-cta";
 import formations_list from "../utils/data/formations-list.json";
-import Course from "../utils/models/Course";
 
 export default function Mediateur() {
-  function get_formation_courses(slug: string): Course[] {
+  function get_formation_courses(slug: string): any[] {
     const formation = formations_list.find((item: any) => item.slug == slug);
     if (formation == undefined) {
       return [];
