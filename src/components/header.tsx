@@ -9,8 +9,18 @@ import {
   AiOutlineRight,
   AiOutlineClose,
 } from "react-icons/ai";
+import { useQuery } from "react-query";
+import { getMenus } from "../services";
 
 export default function Header() {
+  // Queries
+  const  { isSuccess, isLoading, isError, data: {data} = {} }  = useQuery<any>({
+    queryKey:  ["menus"],
+    queryFn:  getMenus,
+    refetchOnWindowFocus: false,
+    staleTime: 3600000, //1jour
+    cacheTime: 3600000 //1jour
+  });
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   function displaySubmenuFull(item: any) {

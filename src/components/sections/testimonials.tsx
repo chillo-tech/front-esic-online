@@ -21,6 +21,7 @@ export default function Testimonials() {
           <p className="text-xl mt-2 sm:mt-8">{testimonials.subtitle}</p>
         </header>
         <aside className="w-full sm:w-3/5  text-white bg-secondary py-12 sm:py-0">
+          {/**
           <LightSlide slideSpeed={1} slideStep={10} className="relative">
             <LightSlideWrapper className="slide-wrapper flex w-full  items-center mx-auto">
               {testimonials_list.map((item, ind) => (
@@ -67,6 +68,7 @@ export default function Testimonials() {
               </div>
             </div>
           </LightSlide>
+           */}
         </aside>
       </div>
     </section>
