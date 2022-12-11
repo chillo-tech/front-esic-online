@@ -7,8 +7,10 @@ import Testimonials from "../components/sections/testimonials";
 import Location from "../components/sections/location";
 import Partners from "../components/sections/partners";
 import CertificationsOverview from "../components/sections/certifications-overview";
-import FormationsOverview from "../components/sections/formations-overview";
 import { home } from "../utils/data/pages-list";
+import TopFormations from "src/components/sections/top-formations";
+import AboutOverview from "src/components/sections/about-overview";
+import Features from "src/components/sections/features";
 
 export default function Home() {
   return (
@@ -21,7 +23,11 @@ export default function Home() {
 
       <Stats />
 
-      <FormationsOverview />
+      <TopFormations />
+
+      <AboutOverview />
+
+      <Features />
 
       <CertificationsOverview />
 

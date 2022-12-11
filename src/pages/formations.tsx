@@ -6,7 +6,7 @@ import { formations as formations_page } from "../utils/data/pages-list";
 import { FormationCTA } from "../components/sections/formation-cta";
 import formations_list from "../utils/data/formations-list.json";
 
-export default function Mediateur() {
+export default function Formations() {
   function get_formation_courses(slug: string): any[] {
     const formation = formations_list.find((item: any) => item.slug == slug);
     if (formation == undefined) {

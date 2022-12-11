@@ -102,3 +102,11 @@ header p {
   overflow: hidden;
   transition: max-height 0.4s ease-out;
 }
+
+.animated-icon {
+  display: none;
+}
+
+.with-animated-icon:hover .animated-icon {
+  display: inline-block;
+}

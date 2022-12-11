@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  ReactElement,
-  createContext,
-  useContext,
-} from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 
 const SlideContext = createContext<any>({});
 
@@ -13,161 +7,138 @@ type Props = {
   slideSpeed: number; // seconds
   className?: string;
   children: React.ReactNode;
+  showCount: number;
+  changeAll: boolean;
+  id: string;
 };
 
-function LightSlide({ slideSpeed, slideStep, className, children }: Props) {
-  const [prio, setPrio] = useState<number[]>([]);
+function LightSlide({
+  slideSpeed,
+  slideStep,
+  className,
+  children,
+  showCount,
+  changeAll,
+  id,
+}: Props) {
+  const [moves, setMoves] = useState<number>(0);
+
   useEffect(() => {
-    setPrio(() => []);
-    changePositions([2, 1], 0);
     setTimeout(() => {
-      const slideWrapper = document.querySelector(
-        ".slide-wrapper"
-      ) as HTMLElement;
-      if (slideWrapper != undefined) {
-        let max = (slideWrapper.children[0] as HTMLElement).offsetHeight;
-        console.log(max);
-        for (let i = 0; i < slideWrapper.children.length; i++) {
-          const child = slideWrapper.children[0] as HTMLElement;
+      // Compute slide wrapper high by getting the highest of his children.
+      const slideWrappers = document.querySelectorAll(".slide-wrapper");
+      slideWrappers.forEach((item) => {
+        const wrapper = item as HTMLElement;
+        const slideItems = wrapper.querySelectorAll(".slide-item");
+        let max = (slideItems[0] as HTMLElement).offsetHeight;
+        slideItems.forEach((item, index) => {
+          const child = item as HTMLElement;
+          // find the element with the max-height.
           if (child.offsetHeight > max) max = child.offsetHeight;
-        }
-        slideWrapper.style.height = `${max}px`;
-      }
-    }, 50);
-  }, [changePositions]);
-
-  function changePositions(
-    priorities: number[] = [2, 1],
-    direction: number = 0
-  ) {
-    setTimeout(() => {
-      const slideItems = document.querySelectorAll(".slide-item");
-      const maxIndex = priorities.indexOf(
-        priorities.reduce((a, b) => Math.max(a, b))
-      );
-      const minIndex = priorities.indexOf(
-        priorities.reduce((a, b) => Math.min(a, b))
-      );
-
-      let current = slideItems[maxIndex] as HTMLElement;
-      let previous = slideItems[minIndex] as HTMLElement;
-
-      const width = current.offsetWidth;
-
-      // Stack all element on the side.
-      slideItems.forEach((item, ind) => {
-        const element = item as HTMLElement;
-        element.style.zIndex = `${priorities[ind]}`;
-        // Stack element on the right side by default.
-        slideItems.forEach(
-          (item) => ((item as HTMLElement).style.left = `${width}px`)
-        );
+          // create virtual long element
+          child.style.width = `${100 / showCount}%`;
+          child.style.left = `${child.offsetWidth * index}px`;
+        });
+        wrapper.style.height = `${max}px`;
       });
-
-      // If no direction is set. The current element is directly set on top.
-      if (direction == 0) {
-        current.style.left = "0px";
-      }
-
-      let interval: NodeJS.Timer;
-      let position = 0;
-      let step = slideStep;
-
-      if (direction == 1) {
-        // Show the previous
-        previous.style.left = "0px";
-
-        // move the slide.
-        interval = setInterval(() => {
-          const remainingSpace = width + position;
-          if (step > remainingSpace) step = remainingSpace;
-          position = position - step;
-          previous.style.left = `${position}px`;
-          current.style.left = `${position + width}px`;
-          if (remainingSpace == 0) {
-            clearInterval(interval);
-          }
-        }, slideSpeed);
-      }
-
-      if (direction == 2) {
-        previous = slideItems[
-          priorities.indexOf(priorities.reduce((a, b) => Math.max(a, b)) - 1)
-        ] as HTMLElement;
-
-        // Stack element on the left side
-        slideItems.forEach(
-          (item) => ((item as HTMLElement).style.left = `-${width}px`)
-        );
-        // Show the previous
-        previous.style.left = "0px";
-        // move the slide.
-        interval = setInterval(() => {
-          const remainingSpace = width - position;
-          if (step > remainingSpace) step = remainingSpace;
-          position = position + step;
-          previous.style.left = `${position}px`;
-          current.style.left = `${position - width}px`;
-          if (remainingSpace == 0) {
-            clearInterval(interval);
-          }
-        }, slideSpeed);
-      }
-    }, 10);
-  }
+    }, 50);
+  }, []);
 
   function previous() {
-    const slideItems = document.querySelectorAll(".slide-item");
+    // left ++
+    // show all element after Math.ceil(total/showCount)
+    const slideItems = document
+      .getElementById(id)
+      ?.querySelectorAll(".slide-item");
+    if (slideItems == null) return 0;
 
-    if (prio.length == 0) {
-      const priorities = Array.from(Array(slideItems.length).keys()).map(
-        (i) => slideItems.length - 1 - i
-      );
-      // store priorities.
-      setPrio(() => priorities.map((item) => (item + 1) % slideItems.length));
-      // Apply movement.
-      changePositions(
-        priorities.map((item) => (item + 1) % slideItems.length),
-        1
-      );
-    } else {
-      const priorities = prio.map((item) => (item + 1) % slideItems.length);
-      // store priorities
-      setPrio(() => priorities);
-      // Appli movement.
-      changePositions(priorities, 1);
+    const tempMoves = moves - 1;
+    if (tempMoves >= 0) {
+      setMoves(tempMoves);
+      slideItems.forEach((item, _) => {
+        let interval: NodeJS.Timer;
+        const child = item as HTMLElement;
+        let width = child.offsetWidth;
+        // If we show a certain number of slides. The we change move width a step = to one slide length
+        // Or with a length = to the compound width of all the slides.
+        if (changeAll) {
+          width = width * showCount;
+        }
+
+        let stepCount = Math.floor(width / slideStep);
+
+        const styles = getComputedStyle(child, null);
+        const initialPosition = parseFloat(
+          styles.getPropertyValue("left").split("px")[0]
+        );
+        let position = initialPosition;
+
+        interval = setInterval(() => {
+          position = position + slideStep;
+          child.style.left = `${position}px`;
+          stepCount = stepCount - 1;
+
+          if (stepCount < 0) {
+            child.style.left = `${initialPosition + width}px`;
+            clearInterval(interval);
+          }
+        }, slideSpeed);
+      });
     }
   }
 
   function next() {
-    const slideItems = document.querySelectorAll(".slide-item");
-    function sanitizeMod(item: number) {
-      const mod = (item - 1) % slideItems.length;
-      if (mod < 0) {
-        return (mod + slideItems.length) % slideItems.length;
-      } else {
-        return mod;
-      }
-    }
-    if (prio.length == 0) {
-      const temp = Array.from(Array(slideItems.length).keys()).map(
-        (i) => slideItems.length - 1 - i
-      );
-      setPrio(() => temp.map((item) => sanitizeMod(item)));
-      changePositions(
-        temp.map((item) => sanitizeMod(item)),
-        2
-      );
-    } else {
-      const temp = prio.map((item) => sanitizeMod(item));
-      setPrio(() => temp);
-      changePositions(temp, 2);
+    // left --
+    // show all element after Math.ceil(total/showCount)
+    const slideItems = document
+      .getElementById(id)
+      ?.querySelectorAll(".slide-item");
+    if (slideItems == null) return 0;
+
+    const tempMoves = moves + 1;
+    const moveCondition = changeAll
+      ? Math.floor(slideItems.length / showCount)
+      : Math.ceil(slideItems.length / showCount);
+
+    if (tempMoves <= moveCondition) {
+      setMoves(tempMoves);
+      slideItems.forEach((item, _) => {
+        let interval: NodeJS.Timer;
+        const child = item as HTMLElement;
+        let width = child.offsetWidth;
+        // If we show a certain number of slides. The we change move width a step = to one slide length
+        // Or with a length = to the compound width of all the slides.
+        if (changeAll) {
+          width = width * showCount;
+        }
+
+        let stepCount = Math.floor(width / slideStep);
+
+        const styles = getComputedStyle(child, null);
+        const initialPosition = parseFloat(
+          styles.getPropertyValue("left").split("px")[0]
+        );
+        let position = initialPosition;
+
+        interval = setInterval(() => {
+          position = position - slideStep;
+          child.style.left = `${position}px`;
+          stepCount = stepCount - 1;
+
+          if (stepCount < 0) {
+            child.style.left = `${initialPosition - width}px`;
+            clearInterval(interval);
+          }
+        }, slideSpeed);
+      });
     }
   }
 
   return (
-    <SlideContext.Provider value={{ previous, next }}>
-      <div className={className}>{children}</div>
+    <SlideContext.Provider value={{ previous, next, moves, showCount }}>
+      <div className={className} id={id}>
+        {children}
+      </div>
     </SlideContext.Provider>
   );
 }
@@ -193,9 +164,12 @@ function LightSlideItem({
   className?: string;
   children: React.ReactNode;
 }) {
+  const { moves } = useContext(SlideContext);
+  const { showCount } = useContext(SlideContext);
+
   return (
-    <article className={`slide-item absolute w-full ${className}`}>
-      {children}
+    <article className={`slide-item absolute  ${className}`}>
+      <div>{children}</div>
     </article>
   );
 }
@@ -217,8 +191,32 @@ function LightSlideButton({
   );
 }
 
+function LightSlideNavigation({
+  className,
+  children,
+}: {
+  className: string;
+  children: React.ReactNode;
+}) {
+  const { next, previous, moves } = useContext(SlideContext);
+  return null;
+}
+
 LightSlideButton.defaultProps = {
   className: "p-2 text-white",
 };
 
-export { LightSlide, LightSlideWrapper, LightSlideItem, LightSlideButton };
+LightSlide.defaultProps = {
+  changeAll: false,
+  slideSpeed: 1,
+  slideStep: 10,
+  showCount: 1,
+};
+
+export {
+  LightSlide,
+  LightSlideWrapper,
+  LightSlideItem,
+  LightSlideButton,
+  LightSlideNavigation,
+};

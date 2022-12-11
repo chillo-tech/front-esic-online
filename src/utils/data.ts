@@ -311,3 +311,65 @@ export const formation_cta = {
   subtitle:
     "Empower your tech teams to produce key business outcomes by making upskilling and reskilling as easy as powering up their laptop. Tap into the power of curated learning paths to guide teams through the exact skills they need to progress from novice to guru across avariety of tech skills.",
 };
+
+export const top_formations = {
+  title: "Top formations",
+};
+
+export const home_features = {
+  items: [
+    {
+      title: "Quality",
+      link: "",
+      image: "/images/icon-quality.png",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore ratione ex nobis? Fuga quasi odio, ut, reprehenderit, dicta porro necessitatibus doloribus cumque saepe consequuntur dolorem veritatis. Tenetur eum beatae doloribus.",
+    },
+    {
+      title: "Financement",
+      link: "",
+      image: "/images/icon-financement.png",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore ratione ex nobis? Fuga quasi odio, ut, reprehenderit, dicta porro necessitatibus doloribus cumque saepe consequuntur dolorem veritatis. Tenetur eum beatae doloribus.",
+    },
+    {
+      title: "CPF",
+      link: "",
+      image: "/images/icon-cpf.png",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore ratione ex nobis? Fuga quasi odio, ut, reprehenderit, dicta porro necessitatibus doloribus cumque saepe consequuntur dolorem veritatis. Tenetur eum beatae doloribus.",
+    },
+    {
+      title: "Catalogue",
+      link: "",
+      image: "/images/icon-pdf.png",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore ratione ex nobis? Fuga quasi odio, ut, reprehenderit, dicta porro necessitatibus doloribus cumque saepe consequuntur dolorem veritatis. Tenetur eum beatae doloribus.",
+    },
+  ],
+};
+
+export const about_overview = {
+  title: "About us",
+  subtitle: "A training organisation dedicated to IT professionals",
+  items: [
+    {
+      title: "Know more about us",
+      subtitle: "A training organisation dedicated to IT professionals",
+      description:
+        "For more than 20 years, we have been contributing to the digital transformation of companies and administrations by developing the IT skills of their employees. More than 6,000 people take our training courses each year in France and abroad, either face-to-face or remotely. <br/><br/> Our trainers are active consultants with an average of 10 years experience, who offer real business training courses, inspired by their experience in the field.",
+    },
+    {
+      title: "Our strengths",
+      subtitle: "A permanent structure at your service",
+      description:
+        "As a Qualiopi-certified training centre, recognised by large companies and OPCOs, we can support you throughout your training programme. You benefit from dedicated contacts who are keen to provide you with a rapid and reliable response. Whether it's a question of finding the best catalogue training course for you or implementing the pedagogical engineering required for a customised programme, flexibility is the order of the day. <br/><br/> It is not surprising that 94% of our participants say they are satisfied or very satisfied!",
+    },
+    {
+      title: "Our training offer",
+      subtitle: "A complete offer, regularly updated and enriched",
+      description:
+        "With more than 2,000 training courses and certifications, PLB meets almost all the IT training needs of companies: official training courses from publishers and training courses 100% developed by PLB. Our catalogue thus addresses all the major IT fields and professions and all levels: from beginners to experts. <br/><br/>Our content is the result of our technological watch and feedback from our trainers, for training that is always based on practice.",
+    },
+  ],
+};
