@@ -1,7 +1,7 @@
 import Head from "next/head";
 
-import Header from "../components/header";
-import Footer from "../components/footer";
+import Header from "../containers/components/header";
+import Footer from "../containers/components/footer";
 import Newsletter from "../components/sections/newsletter";
 import Hero2 from "../components/sections/hero-2";
 import Stats from "../components/sections/stats";
