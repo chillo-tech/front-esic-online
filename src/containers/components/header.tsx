@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { header } from "../utils/data";
+import { header, slugify } from "utils";
 import {
   AiOutlineCaretUp,
   AiOutlineCaretDown,
@@ -10,11 +10,10 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { useQuery } from "react-query";
-import { getMenus } from "../services";
-
+import { getMenus } from "../../services";
+import classNames from 'classnames';
 export default function Header() {
-  // Queries
-  const  { isSuccess, isLoading, isError, data: {data} = {} }  = useQuery<any>({
+  const  { isSuccess, isLoading, data: {data: menus} = {} }  = useQuery<any>({
     queryKey:  ["menus"],
     queryFn:  getMenus,
     refetchOnWindowFocus: false,
@@ -30,7 +29,7 @@ export default function Header() {
   return (
     <>
       <nav
-        className="bg-white fixed w-full shadow-xl top-0 py-4 z-40 hidden md:block"
+        className="bg-white w-full shadow-xl top-0 py-4 z-40 hidden md:block"
         id="navbar"
       >
         <div className="px-8 flex items-center justify-between md:text-lg relative">
@@ -42,15 +41,10 @@ export default function Header() {
               alt="Logo Esic"
             />
           </Link>
-
+          {isLoading ?(
           <ul className="flex items-center space-x-2 text-gray-700 font-medium">
             {header.menu.map((item, ind) => (
-              <li
-                key={`menu${ind}`}
-                className={`menu-item ${
-                  displaySubmenuFull(item) ? "" : "relative"
-                }`}
-              >
+              <li key={`menu${ind}`} className={`menu-item ${displaySubmenuFull(item) ? "" : "relative"}`}>
                 <a href={item.link} className="block">
                   <button className="px-6 flex space-x-2 justify-center lg:text-lg items-center font-medium transition-colors hover:text-primary">
                     <span>{item.label}</span>
@@ -120,12 +114,24 @@ export default function Header() {
               </li>
             ))}
           </ul>
-
+          ) : null }
+           {isSuccess?
+           (
+              <ul className="flex items-center space-x-2 text-gray-700 font-medium">
+                {menus.data.sort((a:any, b: any) => a.ordre - b.ordre).map((item: any) => (
+                  <li key={`${item.id}`} className={classNames('menu-item', {'relative': item.libelle.toLowerCase() === 'certifications'})}>
+                    <a href={`/${slugify(item.libelle)}`} className="block px-6 py-2 space-x-2 justify-center lg:text-lg items-center font-medium transition-colors hover:text-primary">
+                        <span>{item.libelle}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+           )
+           : null
+          }
           <div className="text-lg">
-            <a className="inline-block" href={header.contact.link}>
-              <button className="px-8 py-1.5 inline-block  text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors">
+            <a className="inline-block px-8 py-1.5 text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors" href={header.contact.link}>
                 {header.contact.label}
-              </button>
             </a>
           </div>
         </div>
@@ -165,7 +171,7 @@ export default function Header() {
             </button>
           </div>
           <ul className="space-y-4 mt-8">
-            {header.menu.map((item, ind) => (
+            {header.menu.map((item: any, ind: number) => (
               <li key={`menu${ind}`}>
                 <Link href={item.link}>
                   <button className="px-6 flex space-x-2 justify-center items-center font-medium transition-colors hover:text-primary">

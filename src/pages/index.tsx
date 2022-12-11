@@ -9,10 +9,11 @@ import Partners from "../components/sections/partners";
 import CertificationsOverview from "../components/sections/certifications-overview";
 import FormationsOverview from "../components/sections/formations-overview";
 import { home } from "../utils/data/pages-list";
+import OpenedLayout from "containers/opened";
 
 export default function Home() {
   return (
-    <MainLayout>
+    <OpenedLayout>
       <Head>
         <title> {home.title} </title>
       </Head>
@@ -30,6 +31,6 @@ export default function Home() {
       <Partners />
 
       <Location />
-    </MainLayout>
+    </OpenedLayout>
   );
 }

@@ -1,5 +1,5 @@
-import Header from "../components/header";
-import Footer from "../components/footer";
+import Header from "../containers/components/header";
+import Footer from "../containers/components/footer";
 import Newsletter from "../components/sections/newsletter";
 
 type LayoutProps = {
