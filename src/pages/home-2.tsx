@@ -6,9 +6,9 @@ import Partners from "../components/sections/partners";
 import CertificationsOverview from "../components/sections/certifications-overview";
 import FormationsOverview from "../components/sections/formations-overview";
 import { home } from "../utils/data/pages-list";
-import Footer from "../components/footer";
+import Footer from "../containers/components/footer";
 import Newsletter from "../components/sections/newsletter";
-import Header from "../components/header";
+import Header from "../containers/components/header";
 
 export default function Home2() {
   return (

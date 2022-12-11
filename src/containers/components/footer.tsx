@@ -6,15 +6,15 @@ import {
   formations_links,
   copyright,
   quality_label,
-} from "../utils/data";
+} from "../../utils/data";
 
-import formations from "../utils/data/formations-list.json";
-import ContactInfos from "../components/contact-infos";
+import formations from "../../utils/data/formations-list.json";
+import ContactInfos from "../../components/contact-infos";
 
 export default function Footer() {
   return (
     <footer id="footer" className="bg-sky-900 text-white px-4 sm:px-0">
-      <div className="max-w-7xl mx-auto  pt-8 sm:pt-16">
+      <div className="container mx-auto  pt-8 sm:pt-16">
         <section className="flex flex-wrap">
           <article className="w-full sm:w-1/5 mt-8 sm:mt-0">
             <h2 className="text-2xl font-semibold"> {contacts.title} </h2>
@@ -43,15 +43,13 @@ export default function Footer() {
             </ul>
           </article>
 
-          <article className="relative w-full sm:w-2/5 mt-8 sm:mt-0">
-            <h2 className="font-bold text-2xl">{quality_label.title}</h2>
-            <p className="mt-2  sm:mt-6 text-gray-100 relative">
-              {quality_label.description}
-            </p>
-            <img
+          <article className="relative w-full sm:w-2/5 mt-8 sm:mt-0 px-6 flex items-center justify-center">
+            <Image
+              width={500}
+              height={400}
               alt="Qualiopi"
               src={quality_label.image}
-              className="mt-8 rounded-xl"
+              className="mt-8 rounded-xl mx-auto"
             />
           </article>
         </section>

@@ -105,7 +105,7 @@ export const header = {
     },
   ],
   contact: {
-    label: "Contact us",
+    label: "Contact",
     link: "/contact",
     submenu: [],
   },
@@ -256,19 +256,17 @@ export const usefull_links = {
 };
 
 export const formations_links = {
-  title: "Our trainings",
+  title: "Nos formations",
 };
 
 export const about_us = {
-  title: "About",
+  title: "Nous connaitre",
   links: [
     { target: "/#", label: "ESIC" },
     { target: "/#", label: "Training" },
     { target: "/#", label: "Certifications" },
     { target: "/#", label: "Contact us" },
-    { target: "/#", label: "Terms and conditions" },
-    { target: "/#", label: "Legales mentions" },
-    { target: "/#", label: "Site map" },
+    { target: "/#", label: "Terms and conditions" }
   ],
 };
 
