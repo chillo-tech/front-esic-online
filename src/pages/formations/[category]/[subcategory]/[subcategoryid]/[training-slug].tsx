@@ -21,7 +21,7 @@ function Training({id}: {id: string}) {
         <meta name="description" content={'formations.data.description'} />
       </Head>
       <main>
-        <pre>{JSON.stringify(data.data, null, 2)}</pre>
+        <pre>{JSON.stringify(data, null, 2)}</pre>
       </main>
     </OpenedLayout>
   )
