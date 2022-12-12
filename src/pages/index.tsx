@@ -4,12 +4,11 @@ import Stats from "../components/sections/stats";
 import Testimonials from "../components/sections/testimonials";
 import Location from "../components/sections/location";
 import Partners from "../components/sections/partners";
-import CertificationsOverview from "../components/sections/certifications-overview";
 import { home } from "../utils/data/pages-list";
 import TopFormations from "../components/sections/top-formations";
 import AboutOverview from "../components/sections/about-overview";
 import Features from "../components/sections/features";
-import OpenedLayout from "../containers/opened";
+import OpenedLayout from "containers/opened";
 
 export default function Home() {
   return (

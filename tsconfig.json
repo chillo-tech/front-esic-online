@@ -16,9 +16,10 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths": {
+      "components/*": ["./components/*", "./components"],
       "services/*": ["./services/*", "./services"],
       "utils/*": ["./utils/*", "./utils"]
-   }
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
