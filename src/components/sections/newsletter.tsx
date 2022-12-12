@@ -1,6 +1,11 @@
+import Image from "next/image";
+import { useState } from "react";
+import { cn, loaderProp } from "utils/image-loader";
 import { newsletter } from "../../utils/data";
 
 export default function Newsletter() {
+  const [isLoading, setLoading] = useState(true);
+
   return (
     <section className="bg-white py-8 md:py-20">
       <div className="max-w-7xl flex flex-wrap mx-auto items-center px-3 md:px-0">
@@ -29,11 +34,19 @@ export default function Newsletter() {
           </form>
         </aside>
         <aside className="w-full  sm:w-1/2 relative">
-          <img
-            alt="esic formations"
-            src={"/images/newsletter.svg"}
-            className="hidden sm:block w-3/4 mx-auto"
-          />
+        <Image
+          fill={true}
+          src={"/images/newsletter.svg"}
+          alt="esic formations"
+          loader={loaderProp}
+          className={cn(
+            'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
+            isLoading
+              ? 'scale-110 blur-2xl grayscale'
+              : 'scale-100 blur-0 grayscale-0'
+          )}
+          onLoadingComplete={() => setLoading(false)}
+        />
         </aside>
       </div>
     </section>

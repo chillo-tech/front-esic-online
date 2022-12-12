@@ -1,7 +1,12 @@
 import { partners } from "../../utils/data";
 import Link from "next/link";
+import { useState } from "react";
+import Image from "next/image";
+import { cn, loaderProp } from "utils/image-loader";
 
 export default function Partners() {
+  const [isLoading, setLoading] = useState(true);
+
   return (
     <section className=" py-8 md:py-20 ">
       <div className="max-w-7xl mx-auto px-3 sm:px-0">
@@ -14,7 +19,19 @@ export default function Partners() {
               key={`partners${index}`}
               className="mt-4 md:mt-0 w-full  sm:w-64 relative"
             >
-              <img src={item.image} className="w-full h-auto" alt={item.name} />
+            <Image 
+                  fill={true}
+                  src={item.image}
+                  alt={item.name} 
+                  loader={loaderProp}
+                  className={cn(
+                    'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
+                    isLoading
+                      ? 'scale-110 blur-2xl grayscale'
+                      : 'scale-100 blur-0 grayscale-0'
+                  )}
+                  onLoadingComplete={() => setLoading(false)}
+                />
             </article>
           ))}
         </div>
