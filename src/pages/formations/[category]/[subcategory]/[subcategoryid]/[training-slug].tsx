@@ -1,7 +1,7 @@
 import OpenedLayout from "containers/opened";
 import Head from "next/head";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import {
   HiAcademicCap,
@@ -24,6 +24,29 @@ function Training({ id }: { id: string }) {
     staleTime: 3600000, //1jour
     cacheTime: 3600000, //1jour
   });
+
+  useEffect(() => {
+    window.onscroll = function () {
+      let panel = document.getElementById("formation-panel") as HTMLElement;
+      let header = document.getElementById("navbar") as HTMLElement;
+      let courseCtaElement = document.getElementById("equipe") as HTMLElement;
+
+      if (panel != null && header != null && courseCtaElement != null) {
+        if (window.scrollY > panel.offsetTop) {
+          panel.style.top = header.offsetHeight + "px";
+        } else {
+          panel.style.top = "200px";
+        }
+
+        if (window.scrollY > courseCtaElement.offsetTop) {
+          panel.classList.add("hidden");
+        } else {
+          panel.classList.remove("hidden");
+        }
+      }
+    };
+  });
+
   return (
     <OpenedLayout>
       <Head>
@@ -41,6 +64,12 @@ function Training({ id }: { id: string }) {
                 <h2 className="text-4xl mt-2 sm:text-5xl font-extrabold text-center sm:text-left ">
                   {data?.data.data.name}
                 </h2>
+                <h3
+                  dangerouslySetInnerHTML={{
+                    __html: data?.data.data.short_description,
+                  }}
+                  className="mt-2 sm:text-lg text-center sm:text-left "
+                ></h3>
                 <ul className="mt-8  items-center flex space-x-3">
                   <li className="flex space-x-2 items-center text-lg font-medium">
                     <AiOutlineClockCircle className="w-5 h-5 text-secondary" />
@@ -56,9 +85,7 @@ function Training({ id }: { id: string }) {
                     <span>CPF Eligible</span>
                   </li>
                 </ul>
-                <div className="sm:text-4xl font-bold mt-4">
-                  {data?.data.data.price_ht}&euro; HT
-                </div>
+
                 <div className="mt-12 space-x-6">
                   <Link
                     href="/reserver-formation"
@@ -80,24 +107,34 @@ function Training({ id }: { id: string }) {
                 className="w-[300px] rounded-md shadow-2xl fixed top-[200px] z-50 sm:left-[70%] 2xl:left-[65%] bg-white"
               >
                 <div className="py-4 space-y-3 px-8 bg-secondary text-white rounded-md rounded-b-none">
-                  <h3 className="text-lg font-semibold"> Les sessions</h3>
+                  <div className="sm:text-4xl font-bold mt-4">
+                    {data?.data.data.price_ht}&euro; HT
+                  </div>
+                  <h3 className="mt-2 font-semibold text-lg">
+                    Les sessions disponibles
+                  </h3>
                   {[
                     { start_date: "01/01/2022", end_date: "01/02/2022" },
                     { start_date: "01/02/2021", end_date: "01/03/2022" },
-                  ].map((item) => (
-                    <div>
+                  ].map((item, index) => (
+                    <div key={`session${index}`}>
                       Du {item.start_date} au {item.end_date}
                     </div>
                   ))}
                 </div>
-                <ul className="mt-4  px-8">
+                <ul className="mt-4  px-8 pb-8">
                   {[
                     "Financements",
-                    "Pre-requis",
+                    "Pré-requis",
                     "Programme",
                     "Notre equipe",
-                  ].map((item) => (
-                    <li className="border-b py-3">{item}</li>
+                  ].map((item, index) => (
+                    <li
+                      key={`item${index}`}
+                      className="border-b py-3 font-medium"
+                    >
+                      {item}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -106,7 +143,9 @@ function Training({ id }: { id: string }) {
         </section>
         <section className="max-w-7xl mx-auto sm:pb-20">
           <article className="mt-12 max-w-4xl px-3">
-            <h3 className="text-2xl font-semibold">Financements</h3>
+            <h3 className="text-2xl font-semibold">
+              Comment financer votre formation ?
+            </h3>
             <p
               className="mt-4"
               dangerouslySetInnerHTML={{
@@ -128,7 +167,7 @@ function Training({ id }: { id: string }) {
           </article>
 
           <article className="mt-12 max-w-4xl px-3">
-            <h3 className="text-2xl font-semibold">Pre-requis</h3>
+            <h3 className="text-2xl font-semibold">Pré-requis</h3>
             <p
               className="mt-4"
               dangerouslySetInnerHTML={{
@@ -137,12 +176,12 @@ function Training({ id }: { id: string }) {
             ></p>
           </article>
 
-          <article className="mt-12 max-w-4xl px-3">
+          <article className="mt-12 max-w-4xl px-3" id="equipe">
             <h3 className="text-2xl font-semibold">Equipe</h3>
             <p
               className="mt-4"
               dangerouslySetInnerHTML={{
-                __html: data?.data.data.description,
+                __html: data?.data.data.teachers_description,
               }}
             ></p>
           </article>

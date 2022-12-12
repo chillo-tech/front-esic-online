@@ -104,7 +104,7 @@ export const header = {
   ],
   contact: {
     label: "Contact",
-    link: "/contact",
+    link: "/contactez-nous",
     submenu: [],
   },
 };

@@ -22,28 +22,28 @@ export const contact = {
   title: "Esic - Contact",
   subtitle: "",
   header: {
-    title: "Contact us",
+    title: "Envoyez nous un message",
     subtitle:
-      "You wish to position yourself or obtain more information on our training courses, our certifications registered with the RNCP and RS or to pass a diploma or obtain professional recognition. Our advisors are available by telephone or on site.",
+      "Nous reviendrons vers vous assez vite",
   },
   infos: {
-    title: "Contact information",
+    title: "Nos coordonnées",
     description:
-      "All ours training are created by professionals, the best in their domains in order to empower skills that are in demand in the job market and with a look in the future. Following a training is good but getting a certification in recognition of your abilities is better.",
+      "Toutes nos formations sont créées par des professionnels, les meilleurs dans leurs domaines afin de renforcer les compétences recherchées sur le marché du travail et tournées vers l'avenir. Suivre une formation c'est bien mais obtenir une certification en reconnaissance de ses capacités c'est mieux.",
   },
   form: {
-    title: "Send us a message",
+    title: "Envoyez nous votre message",
     first_name: {
-      label: "First name",
+      label: "Prénom",
     },
     last_name: {
-      label: "Last name",
+      label: "Nom",
     },
     email: {
-      label: "Adresse email",
+      label: "Email",
     },
     phone: {
-      label: "Phone",
+      label: "Téléphone",
     },
     subject: {
       label: "Subject",
@@ -52,7 +52,7 @@ export const contact = {
       label: "Message",
     },
     submit: {
-      label: "Send your message",
+      label: "Envoyer",
     },
   },
 };
