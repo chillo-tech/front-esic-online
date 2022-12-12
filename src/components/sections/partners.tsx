@@ -8,24 +8,25 @@ export default function Partners() {
   const [isLoading, setLoading] = useState(true);
 
   return (
-    <section className=" py-8 md:py-20 ">
+    <section className="py-16">
       <div className="max-w-7xl mx-auto px-3 sm:px-0">
-        <header className="text-center">
-          <h2>{partners.title}</h2>
+        <header className="text-center mb-10">
+          <h2 >{partners.title}</h2>
         </header>
-        <div className="mt-4 md:mt-16  flex w-full flex-wrap justify-center gap-2 md:gap-12">
+        <div className="grid gap-4 md:grid-cols-3">
           {partners.items.map((item, index) => (
             <article
               key={`partners${index}`}
-              className="mt-4 md:mt-0 w-full  sm:w-64 relative"
+              className="h-48 relative"
             >
+            
             <Image 
                   fill={true}
                   src={item.image}
                   alt={item.name} 
                   loader={loaderProp}
                   className={cn(
-                    'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
+                    'relative object-contain duration-700 ease-in-out group-hover:opacity-75',
                     isLoading
                       ? 'scale-110 blur-2xl grayscale'
                       : 'scale-100 blur-0 grayscale-0'

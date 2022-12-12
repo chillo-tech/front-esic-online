@@ -15,7 +15,7 @@ export default function Location() {
   }, []);
 
   return (
-    <section className="pt-8 pb-0 sm:pt-20 bg-gray-100">
+    <section className="pt-4 pb-0 bg-gray-100">
       <header className="max-w-3xl mx-auto text-center">
         <h2 className="py-10">Nos bureaux</h2>
       </header>

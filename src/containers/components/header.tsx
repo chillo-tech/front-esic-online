@@ -25,7 +25,7 @@ export default function Header() {
 
   return (
       <nav
-        className="bg-white w-full shadow-xl top-0 py-4 z-40 hidden md:block"
+        className="bg-white fixed w-full shadow-xl top-0 py-4 z-40 hidden md:block"
         id="navbar"
       >
         <div className="px-8 flex items-center justify-between md:text-lg relative">

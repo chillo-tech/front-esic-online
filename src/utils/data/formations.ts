@@ -1,4 +1,4 @@
-[
+const formations = [
   {
     "link": "/formations/cyber-securite",
     "name": "Cyber sécurité",
@@ -30666,3 +30666,4 @@
     "short_description": "Beatae a reprehenderit autem vero voluptatum laboriosam officia laudantium odio. Accusamus corporis pariatur praesentium autem accusantium culpa. Veritatis quo maiores nesciunt repellendus officia."
   }
 ]
+export {formations};

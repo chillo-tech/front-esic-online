@@ -1,18 +1,21 @@
-import { about_overview } from "../../utils/data";
+import { about_overview } from "utils";
 
 export default function AboutOverview() {
   return (
-    <section className="container mx-auto py-12 md:py-16">
-      <header className="text-center">
-        <h2>{about_overview.title}</h2>
-        <p>{about_overview.subtitle}</p>
-      </header>
-      <div className="mt-12 md:mt-16">
-        <div className="flex flex-wrap md:flex-nowrap space-x-8">
+    <section className="clear-both md:py-16">
+      <div className="container mx-auto">
+        <header className="text-center mb-4">
+          <h2>{about_overview.title}</h2>
+          <p>{about_overview.subtitle}</p>
+        </header>
+      </div>
+
+      <div className=" container mx-auto py-4">
+        <div className="grid gap-4 md:grid-cols-3">
           {about_overview.items.map((item, index) => (
             <article
               key={`about_ov${index}`}
-              className="w-full  text-gray-700 bg-secondary/5  p-8 relative pb-20"
+              className="text-gray-700 bg-secondary/5  px-8 py-8 relative"
             >
               <h3 className="text-lg font-semibold">{item.title}</h3>
               <p

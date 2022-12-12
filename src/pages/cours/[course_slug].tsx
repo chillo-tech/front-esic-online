@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import MainLayout from "../../components/main-layout";
 import { course_page } from "../../utils/data/pages-list";
-import formations_list from "../../utils/data/formations-list.json";
+import formations_list from "../../utils/data/formations";
 import {
   AiOutlineCaretDown,
   AiOutlineCaretUp,

@@ -1,5 +1,4 @@
-import { formations_overview } from "../../utils/data";
-import formations from "../../utils/data/formations-list.json";
+import {formations, formations_overview} from "utils";
 import Link from "next/link";
 import { useState } from "react";
 

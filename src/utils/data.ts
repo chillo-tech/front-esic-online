@@ -1,4 +1,4 @@
-import formations_list from "./data/formations-list.json";
+import {formations} from "./data/formations";
 
 // Header
 export const header = {
@@ -12,7 +12,7 @@ export const header = {
         //   link: "/votre-formation-chez-esic",
         //   submenu: [],
         // },
-        ...formations_list.map((item) => ({
+        formations.map((item) => ({
           label: item.name,
           link: item.link,
           subtitle: item.subtitle,
@@ -121,7 +121,7 @@ export const hero = {
       placeholder: "Rechercher une formation, e.g: Introduction à python",
     },
     submit: {
-      label: "Get start",
+      label: "Rechercher",
     },
     result: {
       cta: {

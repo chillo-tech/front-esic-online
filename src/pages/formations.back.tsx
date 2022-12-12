@@ -4,7 +4,7 @@ import Head from "next/head";
 import MainLayout from "../components/main-layout";
 import { formations as formations_page } from "../utils/data/pages-list";
 import { FormationCTA } from "../components/sections/formation-cta";
-import formations_list from "../utils/data/formations-list.json";
+import formations_list from "../utils/data/formations";
 
 export default function Formations() {
   function get_formation_courses(slug: string): any[] {

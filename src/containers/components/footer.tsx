@@ -6,21 +6,20 @@ import {
   formations_links,
   copyright,
   quality_label,
-} from "../../utils/data";
-
-import formations from "../../utils/data/formations-list.json";
-import ContactInfos from "../../components/contact-infos";
+  formations
+} from "utils";
+import ContactInfos from "components/contact-infos";
 
 export default function Footer() {
   return (
-    <footer className="shadow-xl py-16 w-full bg-blue-900 text-white font-sans font-extralight">
-      <div className="container mx-auto grid grid-cols-4 gap-6">
-          <article>
+    <footer className="shadow-xl py-8 w-full bg-blue-900 text-white font-sans font-extralight">
+      <div className="container mx-auto grid md:grid-cols-4 gap-6">
+          <article className="px-4">
             <h2 className="text-2xl font-semibold"> {contacts.title} </h2>
             <ContactInfos />
           </article>
 
-          <article>
+          <article className="px-4">
             <h2 className="mb-3 font-bold text-2xl"> {about_us.title} </h2>
             <ul>
               {about_us.links.map((link, ind) => (
@@ -33,7 +32,7 @@ export default function Footer() {
             </ul>
           </article>
 
-          <article>
+          <article className="px-4">
             <h2 className="mb-3 font-bold text-2xl "> {formations_links.title} </h2>
             <ul>
               {formations.map((formation, ind) => (

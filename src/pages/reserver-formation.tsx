@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import MainLayout from "../components/main-layout";
 import { book_course, course_page } from "../utils/data/pages-list";
 import { line, Point, wave } from "../utils/helpers";
-import formations_list from "../utils/data/formations-list.json";
+import formations_list from "../utils/data/formations";
 
 export default function ReserverFormation() {
   const [step, setStep] = useState<string>("choices");

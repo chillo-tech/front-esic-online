@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import formations_list from "../../utils/data/formations-list.json";
+import formations_list from "../../utils/data/formations";
 import fs from "fs";
 import { faker } from "@faker-js/faker";
 import { slugify } from "../../utils/helpers";

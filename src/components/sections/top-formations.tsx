@@ -1,5 +1,4 @@
-import { top_formations } from "../../utils/data";
-import formations from "../../utils/data/formations-list.json";
+import {formations, top_formations } from "utils";
 import { BsImageAlt } from "react-icons/bs";
 import { AiOutlineClockCircle, AiOutlineUser } from "react-icons/ai";
 import {
