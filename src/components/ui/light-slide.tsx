@@ -42,7 +42,7 @@ function LightSlide({
         wrapper.style.height = `${max}px`;
       });
     }, 50);
-  }, []);
+  }, [showCount]);
 
   function previous() {
     // left ++
