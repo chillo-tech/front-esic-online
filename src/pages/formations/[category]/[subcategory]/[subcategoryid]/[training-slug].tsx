@@ -124,16 +124,16 @@ function Training({ id }: { id: string }) {
                 </div>
                 <ul className="mt-4  px-8 pb-8">
                   {[
-                    "Financements",
-                    "Pré-requis",
-                    "Programme",
-                    "Notre equipe",
+                    { label: "Financements", target: "#financements" },
+                    { label: "Pré-requis", target: "#pre-requis" },
+                    { label: "Programme", target: "#programme" },
+                    { label: "Notre equipe", target: "#notre-equipe" },
                   ].map((item, index) => (
                     <li
                       key={`item${index}`}
                       className="border-b py-3 font-medium"
                     >
-                      {item}
+                      <Link href={item.target}>{item.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -142,9 +142,10 @@ function Training({ id }: { id: string }) {
           </div>
         </section>
         <section className="max-w-7xl mx-auto sm:pb-20">
-          <article className="mt-12 max-w-4xl px-3">
+          <article className="mt-12 max-w-4xl px-3" id="financements">
             <h3 className="text-2xl font-semibold">
               Comment financer votre formation ?
+              <span className="bg-secondary block h-1 w-36 my-2"></span>
             </h3>
             <p
               className="mt-4"
@@ -157,6 +158,7 @@ function Training({ id }: { id: string }) {
           <article className="mt-12 max-w-4xl px-3">
             <h3 className="text-2xl font-semibold">
               Programme de la formation
+              <span className="bg-secondary block h-1 w-36 my-2"></span>
             </h3>
             <p
               className="mt-4"
@@ -167,7 +169,10 @@ function Training({ id }: { id: string }) {
           </article>
 
           <article className="mt-12 max-w-4xl px-3">
-            <h3 className="text-2xl font-semibold">Pré-requis</h3>
+            <h3 className="text-2xl font-semibold">
+              Pré-requis{" "}
+              <span className="bg-secondary block h-1 w-36 my-2"></span>
+            </h3>
             <p
               className="mt-4"
               dangerouslySetInnerHTML={{
@@ -177,7 +182,9 @@ function Training({ id }: { id: string }) {
           </article>
 
           <article className="mt-12 max-w-4xl px-3" id="equipe">
-            <h3 className="text-2xl font-semibold">Equipe</h3>
+            <h3 className="text-2xl font-semibold">
+              Equipe <span className="bg-secondary block h-1 w-36 my-2"></span>
+            </h3>
             <p
               className="mt-4"
               dangerouslySetInnerHTML={{
