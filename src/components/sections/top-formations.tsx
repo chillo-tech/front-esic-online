@@ -24,7 +24,7 @@ export default function TopFormations() {
         <LightSlide
           slideSpeed={1}
           slideStep={50}
-          showCount={4}
+          showCount={3}
           changeAll={true}
           className="relative"
           id="top-formation"

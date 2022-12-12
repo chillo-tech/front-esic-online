@@ -28,9 +28,9 @@ export default function Home() {
 
       <Features />
 
-      <CertificationsOverview />
+      {/* <CertificationsOverview />
 
-      <Testimonials />
+      <Testimonials /> */}
 
       <Partners />
 
