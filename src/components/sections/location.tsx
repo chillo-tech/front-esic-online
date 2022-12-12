@@ -5,16 +5,17 @@ export default function Location() {
     // Adjust map size to screen size
     const map = document.querySelector(".map");
     if (map != null) {
-      if (window.innerWidth > 1280) {
-        map.setAttribute("width", "1280"); // max-w-7xl
-      } else {
-        map.setAttribute("width", `${window.innerWidth}`);
-      }
+      map.setAttribute("width", `${window.innerWidth}`);
+      // if (window.innerWidth > 1280) {
+      //   map.setAttribute("width", "1280"); // max-w-7xl
+      // } else {
+      //   map.setAttribute("width", `${window.innerWidth}`);
+      // }
     }
   }, []);
 
   return (
-    <section className="py-8 pb-0 sm:py-20 bg-gray-100">
+    <section className="pt-8 pb-0 sm:pt-20 bg-gray-100">
       <header className="max-w-3xl mx-auto text-center">
         <h2>{location.title}</h2>
         <p>{location.subtitle}</p>
