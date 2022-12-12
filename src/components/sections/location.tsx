@@ -14,21 +14,15 @@ export default function Location() {
   }, []);
 
   return (
-    <section className="py-8 pb-0 sm:py-20 bg-gray-100">
+    <section className="bg-slate-100">
       <header className="max-w-3xl mx-auto text-center">
-        <h2>{location.title}</h2>
-        <p>{location.subtitle}</p>
+        <h2 className="py-10">Nos bureaux</h2>
       </header>
       <div className="w-full overflow-hidden">
         <iframe
-          className="map mx-auto mt-4 sm:mt-12"
-          width=""
+          className="map mx-auto w-full"
           height="500"
           src="https://maps.google.com/maps?q=36%20avenue%20Pierre%20Brosolette&t=&z=13&ie=UTF8&iwloc=&output=embed"
-          frameBorder="0"
-          scrolling="no"
-          marginHeight={0}
-          marginWidth={0}
         ></iframe>
       </div>
     </section>

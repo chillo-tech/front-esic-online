@@ -1,31 +1,14 @@
 import Head from "next/head";
 import ContactInfos from "../components/contact-infos";
-import MainLayout from "../components/main-layout";
 import { contact } from "../utils/data/pages-list";
-import Image from "next/image";
-
+import OpenedLayout from 'containers/opened';
 export default function Contact() {
   return (
-    <MainLayout>
+    <OpenedLayout>
       <Head>
         <title> {contact.title} </title>
       </Head>
-      <header className="max-w-7xl items-center mx-auto flex flex-wrap px-3 md:px-0 py-12 pt-16 md:pt-20 md:py-0">
-        <aside className="w-full sm:w-1/2">
-          <h1 className="text-4xl sm:text-7xl font-bold text-gray-900">
-            {contact.header.title}
-          </h1>
-          <p className="sm:max-w-xl">{contact.header.subtitle}</p>
-        </aside>
-        <aside className="hidden sm:block w-1/2 relative">
-          <img
-            alt="Esic formations"
-            src={"/images/esic-elearning.svg"}
-            className="hidden sm:block w-3/5 mx-auto"
-          />
-        </aside>
-      </header>
-      <section className="max-w-7xl mx-auto flex flex-wrap">
+      <section className="py-10 max-w-7xl mx-auto flex flex-wrap">
         <aside className="w-full md:w-[35%] bg-secondary text-white  p-3 py-8 md:p-8">
           <h2 className="text-3xl sm:text-4xl font-bold">
             {contact.infos.title}
@@ -93,19 +76,6 @@ export default function Contact() {
               </div>
             </div>
             <div className="sm:col-span-2">
-              <label htmlFor="subject" className="input-label">
-                {contact.form.subject.label}
-              </label>
-              <div className="mt-1">
-                <input
-                  type="text"
-                  name="subject"
-                  id="subject"
-                  className="input-text bg-transparent"
-                />
-              </div>
-            </div>
-            <div className="sm:col-span-2">
               <div className="flex justify-between">
                 <label htmlFor="message" className="input-label">
                   {contact.form.message.label}
@@ -132,6 +102,6 @@ export default function Contact() {
           </form>
         </aside>
       </section>
-    </MainLayout>
+    </OpenedLayout>
   );
 }

@@ -1,13 +1,10 @@
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { header, slugify } from "utils";
 import {
   AiOutlineCaretUp,
-  AiOutlineCaretDown,
-  AiOutlineMenu,
-  AiOutlineRight,
-  AiOutlineClose,
+  AiOutlineCaretDown
 } from "react-icons/ai";
 import { useQuery } from "react-query";
 import { getMenus } from "../../services";
@@ -129,9 +126,11 @@ export default function Header() {
            : null
           }
           <div className="text-lg">
-            <a className="inline-block px-8 py-1.5 text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors" href={header.contact.link}>
+            <Link 
+              className="inline-block px-8 py-1.5 text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors" 
+              href={header.contact.link}>
                 {header.contact.label}
-            </a>
+            </Link>
           </div>
         </div>
       </nav>

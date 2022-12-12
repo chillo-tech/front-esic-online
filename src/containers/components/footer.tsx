@@ -13,8 +13,8 @@ import ContactInfos from "../../components/contact-infos";
 
 export default function Footer() {
   return (
-    <footer className="drop-shadow-2xl w-full bg-blue-900 text-white font-sans font-extralight">
-      <div className="container mx-auto py-6 grid grid-cols-4 gap-6">
+    <footer className="shadow-xl py-16 w-full bg-blue-900 text-white font-sans font-extralight">
+      <div className="container mx-auto grid grid-cols-4 gap-6">
           <article>
             <h2 className="text-2xl font-semibold"> {contacts.title} </h2>
             <ContactInfos />

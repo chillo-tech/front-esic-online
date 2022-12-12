@@ -16,10 +16,6 @@ export default function ContactInfos() {
         <AiOutlinePhone className="w-6 h-6 rotate-180" />
         <span>{contacts.phone}</span>
       </li>
-      <li className="py-2 ml-3 flex space-x-2 items-center">
-        <AiOutlineIdcard className="w-6 h-6" />
-        <span>{contacts.siret}</span>
-      </li>
       <li className="py-2 ml-3 flex space-x-6">
         <BsFacebook className="w-6 h-6" />
         <BsLinkedin className="w-6 h-6" />
