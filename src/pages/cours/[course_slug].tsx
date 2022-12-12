@@ -145,10 +145,17 @@ export default function Formations() {
               <div className="sm:text-4xl font-bold text-center">
                 1000&euro; HT
               </div>
-              <Link href={course_page.cta.button.link}>
-                <button className="px-8 py-3 w-full text-white bg-secondary mt-8 text-lg font-semibold rounded-full">
-                  {course_page.cta.button.label}
-                </button>
+              <Link
+                href={course_page.cta.button.link}
+                className="px-8 py-3 w-full text-white bg-secondary mt-8 text-lg font-semibold rounded-full"
+              >
+                {course_page.cta.button.label}
+              </Link>
+              <Link
+                href={course_page.cta.button.link}
+                className="px-8 py-3 w-full text-secondary border-secondary mt-4 text-lg font-semibold rounded-full"
+              >
+                Take contact
               </Link>
             </div>
           </div>

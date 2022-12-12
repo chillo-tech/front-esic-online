@@ -48,7 +48,7 @@ export default function TopFormations() {
           </header>
           <LightSlideWrapper className="flex w-full items-center mx-auto  mt-8">
             {all_formations.map((course: any) => (
-              <LightSlideItem key={course.slug}>
+              <LightSlideItem key={`top${course.slug}`}>
                 <div className="px-2">
                   <div className="w-full h-44 bg-gray-400 flex items-center justify-center">
                     <BsImageAlt className="text-gray-300 w-24 h-24" />
