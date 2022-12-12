@@ -27,7 +27,6 @@ export default function Header() {
   }
 
   return (
-    <>
       <nav
         className="bg-white w-full shadow-xl top-0 py-4 z-40 hidden md:block"
         id="navbar"
@@ -136,71 +135,5 @@ export default function Header() {
           </div>
         </div>
       </nav>
-
-      <nav className="bg-white md:hidden border-b p-4 text-gray-700">
-        <div className="flex justify-between">
-          <Link href={"/"}>
-            <Image
-              src={"/images/logo.png"}
-              width={150}
-              height={50}
-              alt="Logo Esic"
-            />
-          </Link>
-          <button onClick={() => setShowMobileMenu(true)}>
-            <AiOutlineMenu className="w-6 h-6" />
-          </button>
-        </div>
-
-        <div
-          className={`${
-            showMobileMenu ? "" : "hidden"
-          } transition-display fixed h-screen w-full bg-white border-b top-0 left-0 z-50 p-6 `}
-        >
-          <div className="flex justify-between">
-            <Link href={"/"}>
-              <Image
-                src={"/images/logo.png"}
-                width={200}
-                height={150}
-                alt="Logo Esic"
-              />
-            </Link>
-            <button onClick={() => setShowMobileMenu(false)}>
-              <AiOutlineClose className="w-6 h-6" />
-            </button>
-          </div>
-          <ul className="space-y-4 mt-8">
-            {header.menu.map((item: any, ind: number) => (
-              <li key={`menu${ind}`}>
-                <Link href={item.link}>
-                  <button className="px-6 flex space-x-2 justify-center items-center font-medium transition-colors hover:text-primary">
-                    <span>{item.label}</span>
-                    {item.submenu.length > 0 ? (
-                      <>
-                        <AiOutlineCaretDown
-                          className={`w-4 h-4 menu-item-down`}
-                        />
-                        <AiOutlineCaretUp
-                          className={`w-4 h-4 hidden menu-item-up`}
-                        />
-                      </>
-                    ) : null}
-                  </button>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="text-lg mt-8 space-y-2">
-            <a
-              href={header.contact.link}
-              className="px-4 py-1.5 block text-center  text-white bg-secondary rounded-md hover:bg-orange/50 transition-colors"
-            >
-              {header.contact.label}
-            </a>
-          </div>
-        </div>
-      </nav>
-    </>
   );
 }
