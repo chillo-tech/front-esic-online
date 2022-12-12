@@ -15,7 +15,7 @@ function PageNotFound() {
             mal saisi l&apos;adresse ou la page a été déplacée.
           </p>
           <p className="pt-3">
-            En cliquant sur ce lien vous pouvez{" "}
+            En cliquant sur ce lien vous pouvez
             <Link
               href="/"
               className="text-green-700 border-b border-b-green-700"

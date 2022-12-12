@@ -111,14 +111,14 @@ export const header = {
 
 // Hero
 export const hero = {
-  title: ["ESIC", "Your training center"],
+  title: ["ESIC", "Votre centre de formation"],
   subtitle:
-    "Together towards excellence in your IT, management, design, language and office skills. More than 400 certified training courses in vocational training, sandwich courses and apprenticeships.",
+    "Ensemble vers l'excellence dans vos compétences en informatique, gestion, design, langues et bureautique. Plus de 400 formations certifiées en formation professionnelle, en alternance et en apprentissage.",
   small: "Start new carreer right by following of our path",
   form: {
     input: {
       label: "",
-      placeholder: "Find your formation, e.g: Introduction du python",
+      placeholder: "Rechercher une formation, e.g: Introduction à python",
     },
     submit: {
       label: "Get start",
@@ -138,7 +138,7 @@ export const stats = {
     "Great expertise and a reliable training package developed over several years.",
   items: [
     {
-      label: "Year of Experience",
+      label: "Années d'experiences",
       value: "25",
     },
     {
@@ -198,8 +198,8 @@ export const testimonials = {
 
 // partners
 export const partners = {
-  title: "Our clients and partners",
-  subtitle: "Clients with whom we have carried out major projects",
+  title: "Ils nous font confiance",
+  subtitle: "Clients avec lesquels nous avons réalisé des projets importants",
   items: [
     {
       name: "Solutec",
@@ -215,28 +215,28 @@ export const partners = {
     },
   ],
   button: {
-    label: "Start working with us ",
+    label: "Contactez-nous",
     link: "/contact",
   },
 };
 
 // Location
 export const location = {
-  title: "Our locations",
+  title: "Notre localisation",
   subtitle:
-    "You can register in our center in person or online. You can follow ours training wherever you are. Our teachers will lead the right way.",
+    "Vous pouvez vous inscrire dans notre centre en personne ou en ligne. Vous pouvez suivre notre formation où que vous soyez. Nos enseignants vous guideront dans la bonne direction.",
 };
 
 // Newsletter
 export const newsletter = {
   button: "Register",
-  title: "Received all the news and informations",
+  title: "Inscrivez-vous à notre newsletter",
   subtitle:
-    "Receive our weekly newsletter for the latest news on our formations, certifications, exclusive offers, promotions and much more.",
+    "Recevez notre newsletter hebdomadaire pour connaître les dernières nouvelles sur nos formations, certifications, offres exclusives, promotions et bien plus encore.",
   form: {
     email: {
       label: "Adresse email",
-      placeholder: "Enter your email",
+      placeholder: "Entrer votre adresse email",
     },
   },
 };
@@ -261,10 +261,10 @@ export const about_us = {
   title: "Nous connaitre",
   links: [
     { target: "/#", label: "ESIC" },
-    { target: "/#", label: "Training" },
+    { target: "/#", label: "Formations" },
     { target: "/#", label: "Certifications" },
-    { target: "/#", label: "Contact us" },
-    { target: "/#", label: "Terms and conditions" },
+    { target: "/#", label: "Contactez-nos" },
+    { target: "/#", label: "Termes et conditions" },
   ],
 };
 
@@ -309,7 +309,7 @@ export const formation_cta = {
 };
 
 export const top_formations = {
-  title: "Top formations",
+  title: "Nos meilleures formations",
 };
 
 export const home_features = {
@@ -346,26 +346,27 @@ export const home_features = {
 };
 
 export const about_overview = {
-  title: "About us",
-  subtitle: "A training organisation dedicated to IT professionals",
+  title: "Nous connaitre",
+  subtitle:
+    "Un organisme de formation dédié aux professionnels de l'informatique",
   items: [
     {
       title: "Know more about us",
       subtitle: "A training organisation dedicated to IT professionals",
       description:
-        "For more than 20 years, we have been contributing to the digital transformation of companies and administrations by developing the IT skills of their employees. More than 6,000 people take our training courses each year in France and abroad, either face-to-face or remotely. <br/><br/> Our trainers are active consultants with an average of 10 years experience, who offer real business training courses, inspired by their experience in the field.",
+        "Depuis plus de 20 ans, nous contribuons à la transformation numérique des entreprises et des administrations en développant les compétences informatiques de leurs collaborateurs. Plus de 6 000 personnes suivent chaque année nos formations en France et à l'étranger, en présentiel ou à distance. <br/><br/> Nos formateurs sont des consultants actifs ayant en moyenne 10 ans d'expérience, qui proposent de véritables formations métiers, inspirées de leur expérience terrain.",
     },
     {
-      title: "Our strengths",
+      title: "Nos forces",
       subtitle: "A permanent structure at your service",
       description:
-        "As a Qualiopi-certified training centre, recognised by large companies and OPCOs, we can support you throughout your training programme. You benefit from dedicated contacts who are keen to provide you with a rapid and reliable response. Whether it's a question of finding the best catalogue training course for you or implementing the pedagogical engineering required for a customised programme, flexibility is the order of the day. <br/><br/> It is not surprising that 94% of our participants say they are satisfied or very satisfied!",
+        "En tant que centre de formation certifié Qualiopi, reconnu par les grandes entreprises et les OPCO, nous pouvons vous accompagner tout au long de votre parcours de formation. Vous bénéficiez d'interlocuteurs dédiés soucieux de vous apporter une réponse rapide et fiable. Qu'il s'agisse de trouver la meilleure formation catalogue pour vous ou de mettre en place l'ingénierie pédagogique nécessaire à un programme sur mesure, la flexibilité est de mise. <br/><br/> Pas étonnant que 94% de nos participants se disent satisfaits ou très satisfaits !",
     },
     {
-      title: "Our training offer",
+      title: "Notre offre de formation",
       subtitle: "A complete offer, regularly updated and enriched",
       description:
-        "With more than 2,000 training courses and certifications, PLB meets almost all the IT training needs of companies: official training courses from publishers and training courses 100% developed by PLB. Our catalogue thus addresses all the major IT fields and professions and all levels: from beginners to experts. <br/><br/>Our content is the result of our technological watch and feedback from our trainers, for training that is always based on practice.",
+        "Avec plus de 2 000 formations et certifications, ESIC répond à la quasi-totalité des besoins de formation informatique des entreprises : formations officielles des éditeurs et formations 100% développées par ESIC. Notre catalogue s'adresse ainsi à tous les grands domaines et métiers de l'informatique et à tous les niveaux : du débutant à l'expert. <br/><br/>Nos contenus sont le fruit de notre veille technologique et des retours de nos formateurs, pour une formation toujours basée sur la pratique.",
     },
   ],
 };

@@ -14,9 +14,13 @@ import {
   LightSlideItem,
   LightSlideWrapper,
 } from "../ui/light-slide";
+import Image from "next/image";
+import { cn, loaderProp } from "utils/image-loader";
+import { useState } from "react";
 
 export default function TopFormations() {
   const all_formations = formations.map((item) => item.courses).flat();
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <section className="bg-secondary/5">
@@ -46,12 +50,24 @@ export default function TopFormations() {
               </LightSlideButton>
             </div>
           </header>
-          <LightSlideWrapper className="flex w-full items-center mx-auto  mt-8">
+          <LightSlideWrapper className="grid md:grid-cols-3 items-center mx-auto  mt-8">
             {all_formations.map((course: any) => (
               <LightSlideItem key={`top${course.slug}`}>
                 <div className="px-2">
-                  <div className="w-full h-44 bg-gray-400 flex items-center justify-center">
-                    <BsImageAlt className="text-gray-300 w-24 h-24" />
+                  <div className="relative h-44 bg-gray-400 flex items-center justify-center">
+                  <Image
+                      fill={true}
+                      src="/images/esic-image-5.jpg"
+                      alt={`Empty`}
+                      loader={loaderProp}
+                      className={cn(
+                        'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
+                        isLoading
+                          ? 'scale-110 blur-2xl grayscale'
+                          : 'scale-100 blur-0 grayscale-0'
+                      )}
+                      onLoadingComplete={() => setIsLoading(false)}
+                    />
                   </div>
                   <div className="p-3 border h-[15rem] relative bg-white">
                     <h3 className="font-semibold">{course.name}</h3>
