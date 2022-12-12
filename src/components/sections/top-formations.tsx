@@ -20,7 +20,7 @@ export default function TopFormations() {
 
   return (
     <section className="bg-secondary/5">
-      <div className="py-8 sm:py-24 max-w-[81rem] mx-auto">
+      <div className="py-8 sm:py-16 max-w-[81rem] mx-auto">
         <LightSlide
           slideSpeed={1}
           slideStep={50}

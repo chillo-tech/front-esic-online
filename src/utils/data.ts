@@ -1,5 +1,3 @@
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
-import { domainToASCII } from "url";
 import formations_list from "./data/formations-list.json";
 
 // Header
@@ -266,7 +264,7 @@ export const about_us = {
     { target: "/#", label: "Training" },
     { target: "/#", label: "Certifications" },
     { target: "/#", label: "Contact us" },
-    { target: "/#", label: "Terms and conditions" }
+    { target: "/#", label: "Terms and conditions" },
   ],
 };
 

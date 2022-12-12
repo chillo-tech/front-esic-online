@@ -24,7 +24,7 @@ export default function Hero2() {
 
   return (
     <>
-      <section className="flex relative md:min-h-[800px] 2xl:min-h-[900px] ">
+      <section className="flex relative md:min-h-[800px] 2xl:min-h-[900px]">
         <aside className="w-full sm:max-w-xl 2xl:max-w-2xl mx-auto flex bg-transparent z-10 pt-12 xl:pt-[200px]  2xl:pt-[250px]">
           <article>
             <div className="text-4xl sm:text-6xl font-extrabold text-center sm:text-left">
@@ -81,7 +81,7 @@ export default function Hero2() {
 
         <aside
           id="hero-image-container"
-          className="w-full md:w-1/2 hidden md:block relative"
+          className="w-full md:w-1/2 hidden md:block relative z-0"
         ></aside>
       </section>
     </>

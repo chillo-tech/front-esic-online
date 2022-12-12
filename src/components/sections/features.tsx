@@ -1,10 +1,13 @@
-import { home_features } from "src/utils/data";
+import { home_features } from "../../utils/data";
 
 export default function Features() {
   return (
-    <section className="bg-[#0C4A6E] text-white max-w-7xl mx-auto flex flex-wrap md:flex-nowrap px-12 py-12 mt-12 mb-8 md:mb-20">
-      {home_features.items.map((item) => (
-        <article className="w-full   bg-secondary/5 px-6 relative text-center">
+    <section className="bg-[#0C4A6E] text-white max-w-7xl mx-auto flex flex-wrap md:flex-nowrap px-12 py-12 mb-8 md:mb-20">
+      {home_features.items.map((item, index) => (
+        <article
+          key={`hf${index}`}
+          className="w-full   bg-secondary/5 px-6 relative text-center"
+        >
           <img
             className="w-16 h-16 mx-auto"
             alt={item.title}

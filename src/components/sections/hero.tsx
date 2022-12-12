@@ -71,7 +71,7 @@ export default function Hero() {
           </div>
         </article>
       </aside>
-      <aside className="w-full md:w-1/2 relative">
+      <aside className="w-full md:w-1/2 relative z-0">
         <Image
           fill={true}
           alt="esic formations"
