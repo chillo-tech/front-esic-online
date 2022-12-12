@@ -3,13 +3,15 @@ import { useQuery } from "react-query";
 import { getSubCategories } from "services/index";
 import PageHeader from "components/pages/PageHeader";
 import HoverCard from "components/pages/HoverCard";
-function Formation({ subcategoryid }: { subcategoryid: string }) {
+import { useRouter } from "next/router";
+function Formation() {
+  const router = useRouter();
+  const { subcategoryid } = router.query;
   const { isSuccess, isLoading, data } = useQuery<any>({
     queryKey: ["formations", subcategoryid],
     queryFn: () =>
       getSubCategories({
-        //id: subcategoryid as string,
-        id: "17fc673c-06b5-425a-b3f2-c5ae011c10ec",
+        id: subcategoryid as string,
         fields:
           "id,libelle,description,formations.formations_id.id,formations.formations_id.libelle,formations.formations_id.description",
       }),

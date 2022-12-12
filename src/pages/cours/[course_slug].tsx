@@ -97,7 +97,7 @@ export default function Formations() {
   return (
     <MainLayout>
       <Head>Esic - {course.name}</Head>
-      {course.image}
+
       <section
         className="w-full bg-cover bg-center"
         style={{ backgroundImage: `url(${course.image})` }}
