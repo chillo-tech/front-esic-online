@@ -42,7 +42,7 @@ function LightSlide({
         wrapper.style.height = `${max}px`;
       });
     }, 50);
-  }, []);
+  }, [showCount]);
 
   function previous() {
     // left ++
@@ -169,7 +169,7 @@ function LightSlideItem({
 
   return (
     <article className={`slide-item absolute  ${className}`}>
-      <div>{children}</div>
+      <div className="overflow-hidden">{children}</div>
     </article>
   );
 }

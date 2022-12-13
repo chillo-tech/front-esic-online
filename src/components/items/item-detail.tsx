@@ -4,8 +4,8 @@ import { slugify } from 'utils/helpers'
 
 function ItemDetail({path, data, subfield='souscategories', subFieldWrapper='sousCategories_id'}: any) {
   return (
-    <article className=''>
-      <h2 className='text-3xl font-extrabold text-gray-500 flex items-center justify-between w-full py-2 text-left border-b  border-green-700 focus:ring-4 focus:ring-gray-200'>
+    <article className='p-4 md:p-0'>
+      <h2 className='text-2xl md:text-3xl font-extrabold text-gray-500 flex items-center justify-between w-full py-2 text-left border-b  border-green-700 focus:ring-4 focus:ring-gray-200'>
         {data.libelle}
       </h2>
       {

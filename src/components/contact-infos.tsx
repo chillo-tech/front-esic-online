@@ -8,7 +8,7 @@ import { contacts } from "../utils/data";
 export default function ContactInfos() {
   return (
     <ul className="pl-3">
-      <li className="py-2 ml-3 flex space-x-2 items-center">
+      <li className="py-2 ml-3 flex space-x-2 items-center font-extralight">
         <AiOutlineEnvironment className="w-6 h-6" />
         <span>{contacts.location}</span>
       </li>

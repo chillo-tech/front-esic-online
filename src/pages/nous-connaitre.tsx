@@ -1,6 +1,6 @@
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
-import { about_us } from "../utils/data/pages-list";
+import { about_us } from "utils";
 
 export default function NousConnaitre() {
   return (

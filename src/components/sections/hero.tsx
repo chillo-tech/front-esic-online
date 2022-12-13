@@ -1,6 +1,5 @@
-import formations from "../../utils/data/formations-list.json";
+import {formations, hero} from "utils";
 import { useState } from "react";
-import { hero } from "../../utils/data";
 import Link from "next/link";
 import Image from "next/image";
 

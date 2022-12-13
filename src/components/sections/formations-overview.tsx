@@ -1,6 +1,4 @@
-import { formations_overview } from "../../utils/data";
-import formations from "../../utils/data/formations-list.json";
-import Link from "next/link";
+import {formations, formations_overview} from "utils";
 import { useState } from "react";
 
 export default function FormationsOverview() {

@@ -1,15 +1,12 @@
 import { useRef, useState } from "react";
 import { AiFillCaretDown } from "react-icons/ai";
-import { useOnAway } from "../../utils/custom-hooks";
 
 export default function CategorieFilter() {
   const [showChooseCategorie, setShowChooseCategorie] = useState<any>(false);
   const [categories, setCategories] = useState<any>([]);
 
   const categoryFilter = useRef(null);
-  useOnAway(categoryFilter, () => {
-    setShowChooseCategorie(false);
-  });
+
   return (
     <div className="w-full md:w-1/4 flex items-center justify-between relative">
       <div

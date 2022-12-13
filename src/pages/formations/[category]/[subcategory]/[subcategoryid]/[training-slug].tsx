@@ -88,13 +88,13 @@ function Training({ id }: { id: string }) {
 
                 <div className="mt-12 space-x-6">
                   <Link
-                    href="/reserver-formation"
+                    href="/contactez-nous"
                     className="px-8 py-3 w-full text-white bg-secondary mt-8 text-lg font-semibold rounded-full"
                   >
                     Je candidate
                   </Link>
                   <Link
-                    href="/reserver-formation"
+                    href="/contactez-nous"
                     className="px-8 py-3 w-full text-white border border-white mt-8 text-lg font-semibold rounded-full"
                   >
                     Je telecharge le programme

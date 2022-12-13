@@ -1,9 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import formations_list from "../../utils/data/formations-list.json";
+import {formations, slugify} from "utils";
 import fs from "fs";
 import { faker } from "@faker-js/faker";
-import { slugify } from "../../utils/helpers";
 
 type Data = {
   name: string;
@@ -13,7 +12,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const output = formations_list.map((sujet) => {
+  const output = formations.map((sujet) => {
     return {
       ...sujet,
       short_description: faker.lorem.sentences(3),
