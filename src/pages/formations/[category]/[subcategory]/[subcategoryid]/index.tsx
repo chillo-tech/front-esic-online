@@ -28,7 +28,7 @@ function Formation() {
           description={data.data.data.description}
         />
       ) : null}
-      <main className="container mx-auto pt-5 pb-10">
+      <main className="container mx-auto pt-5 pb-10 px-2">
         {isSuccess && data.data.data ? (
           <>
           <section className="grid md:grid-cols-3 gap-6">

@@ -58,24 +58,24 @@ function Training({ id }: { id: string }) {
           className="w-full bg-cover bg-center"
           style={{ backgroundImage: `url()` }}
         >
-          <div className="bg-gradient-to-r from-sky-900 bg-black/50 w-full h-full">
-            <div className="max-w-7xl mx-auto px-3 flex relative">
-              <div className="max-w-4xl py-16 pt-24 text-white">
-                <h2 className="text-4xl mt-2 sm:text-5xl font-extrabold text-center sm:text-left ">
+          <div className="bg-gradient-to-r from-sky-900 bg-black/50 h-full px-4">
+            <div className="container mx-auto flex relative">
+              <div className="max-w-4xl md:py-16 md:pt-24 text-white">
+                <h2 className="text-4xl mt-10 md:text-5xl font-extrabold">
                   {data?.data.data.name}
                 </h2>
-                <h3
+                <div
                   dangerouslySetInnerHTML={{
                     __html: data?.data.data.short_description,
                   }}
-                  className="mt-2 sm:text-lg text-center sm:text-left "
-                ></h3>
-                <ul className="mt-8  items-center flex space-x-3">
+                  className="my-10"
+                ></div>
+                <ul className="mt-8 items-center flex space-x-3 flex-col md:flex-row">
                   <li className="flex space-x-2 items-center text-lg font-medium">
                     <AiOutlineClockCircle className="w-5 h-5 text-secondary" />
                     <span>10 Hours</span>
                   </li>
-                  <li className="flex space-x-2 items-center text-lg font-medium">
+                  <li className="flex space-x-2 items-center text-lg font-medium my-3">
                     <HiOutlineMap className="w-5 h-5 text-secondary" />
                     <span>Online, In Office, Mixe</span>
                   </li>
@@ -86,16 +86,16 @@ function Training({ id }: { id: string }) {
                   </li>
                 </ul>
 
-                <div className="mt-12 space-x-6">
+                <div className="grid gap-3 justify-center items-center py-4 md:grid-cols-2 md:gap">
                   <Link
                     href="/contactez-nous"
-                    className="px-8 py-3 w-full text-white bg-secondary mt-8 text-lg font-semibold rounded-full"
+                    className="px-8 py-3 text-white text-center bg-secondary text-lg font-semibold rounded-full"
                   >
                     Je candidate
                   </Link>
                   <Link
                     href="/contactez-nous"
-                    className="px-8 py-3 w-full text-white border border-white mt-8 text-lg font-semibold rounded-full"
+                    className="px-8 py-3 text-white text-center border border-white text-lg font-semibold rounded-full"
                   >
                     Je telecharge le programme
                   </Link>
@@ -104,7 +104,7 @@ function Training({ id }: { id: string }) {
 
               <div
                 id="formation-panel"
-                className="w-[300px] rounded-md shadow-2xl fixed top-[200px] z-50 sm:left-[70%] 2xl:left-[65%] bg-white"
+                className="xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-50 sm:left-[70%] 2xl:left-[65%] bg-white"
               >
                 <div className="py-4 space-y-3 px-8 bg-secondary text-white rounded-md rounded-b-none">
                   <div className="sm:text-4xl font-bold mt-4">
@@ -141,8 +141,8 @@ function Training({ id }: { id: string }) {
             </div>
           </div>
         </section>
-        <section className="max-w-7xl mx-auto sm:pb-20">
-          <article className="mt-12 max-w-4xl px-3" id="financements">
+        <section className="container mx-auto py-6 px-4 md:py-12">
+          <article className="max-w-4xl" id="financements">
             <h3 className="text-2xl font-semibold">
               Comment financer votre formation ?
               <span className="bg-secondary block h-1 w-36 my-2"></span>
@@ -155,7 +155,7 @@ function Training({ id }: { id: string }) {
             ></p>
           </article>
 
-          <article className="mt-12 max-w-4xl px-3">
+          <article className="mt-12 max-w-4xl">
             <h3 className="text-2xl font-semibold">
               Programme de la formation
               <span className="bg-secondary block h-1 w-36 my-2"></span>
@@ -168,7 +168,7 @@ function Training({ id }: { id: string }) {
             ></p>
           </article>
 
-          <article className="mt-12 max-w-4xl px-3">
+          <article className="mt-12 max-w-4xl">
             <h3 className="text-2xl font-semibold">
               Pré-requis{" "}
               <span className="bg-secondary block h-1 w-36 my-2"></span>
@@ -181,7 +181,7 @@ function Training({ id }: { id: string }) {
             ></p>
           </article>
 
-          <article className="mt-12 max-w-4xl px-3" id="equipe">
+          <article className="mt-12 max-w-4xl" id="equipe">
             <h3 className="text-2xl font-semibold">
               Equipe <span className="bg-secondary block h-1 w-36 my-2"></span>
             </h3>

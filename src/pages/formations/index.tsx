@@ -2,7 +2,6 @@ import Items from "components/items";
 import PageHeader from "components/pages/PageHeader";
 import OpenedLayout from "containers/opened";
 import Head from "next/head";
-import Link from "next/link";
 import React from "react";
 import { useQuery } from "react-query";
 import { getFormations } from "services";
@@ -33,7 +32,7 @@ function Formations() {
           description={formations.data.description}
         />
       ) : null}
-      <main className="container mx-auto pt-5 pb-10">
+      <main className="container mx-auto pb-5">
         <Items
           itemsPath="categories"
           urlPath="formations"

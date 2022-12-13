@@ -110,3 +110,13 @@ header p {
 .with-animated-icon:hover .animated-icon {
   display: inline-block;
 }
+
+details[open] summary .caret-down {
+  display: none;
+}
+details[open] summary .caret-up {
+  display: block;
+}
+details summary .caret-up {
+  display: none;
+}

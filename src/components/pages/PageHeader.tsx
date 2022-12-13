@@ -6,14 +6,14 @@ interface Params {
 }
 function PageHeader({title, description, image='images/esic-image-5.jpg'}: Params) {
   return (
-    <div className="w-full bg-cover bg-center h-80" style={{ backgroundImage: `url(/${image})`}}>
+    <div className="md:text-left text-center w-full bg-cover bg-center md:h-80" style={{ backgroundImage: `url(/${image})`}}>
       <div className="bg-black/10 bg-gradient-to-r from-secondary w-full h-full">
-        <div className="container mx-auto flex py-16 text-white flex-col h-full justify-center">
+        <div className="container mx-auto flex md:py-16 py-4  text-white flex-col h-full justify-center">
               <h1 className='font-extralight text-xl'>
                 {title}
               </h1>
               {description ? (
-              <div className="text-4xl font-extrabold text-center sm:text-left"
+              <div className="font-extrabold text-2xl md:text-left md:text-4xl "
                 dangerouslySetInnerHTML={{__html: description}} />) : null}
         </div>
       </div>
