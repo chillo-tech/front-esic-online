@@ -370,3 +370,13 @@ export const about_overview = {
     },
   ],
 };
+
+export const certifications_menu = [
+  "Management / Gestion de projet",
+  "Informatique / Developpement",
+  "Reseaux",
+  "Methodes agiles / Projets agiles",
+  "Cybersecurite",
+  "Commerce /Compatibilite",
+  "Entreprise",
+];

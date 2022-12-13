@@ -3,7 +3,7 @@ import { useEffect } from "react";
 /**
  * Hook that alerts clicks outside of the passed ref
  */
-export function useOnAway(ref: any, callback: any) {
+export function useOnClickAway(ref: any, callback: any) {
   useEffect(() => {
     /**
      * Alert if clicked on outside of element

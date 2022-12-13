@@ -20,7 +20,7 @@ function PageNotFound() {
               href="/"
               className="text-green-700 border-b border-b-green-700"
             >
-              retourner à la page d'accueil.
+              retourner à la page d&apos;accueil.
             </Link>
           </p>
         </main>

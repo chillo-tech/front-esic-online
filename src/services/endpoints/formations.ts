@@ -1,4 +1,6 @@
+import axios from "axios";
 import { axiosInstance } from "../axios-instance";
+
 const getFormations = () => {
   return axiosInstance.get("menus/1/?fields=id,libelle,titre,description");
 };
@@ -16,6 +18,7 @@ const getSubCategories = ({
     },
   });
 };
+
 const getDetail = ({
   id,
   fields,
@@ -32,4 +35,18 @@ const getDetail = ({
   });
 };
 
-export { getFormations, getSubCategories, getDetail };
+const getAllSubcategories = () => {
+  return axiosInstance.get("sousCategories?fields=libelle");
+};
+
+const getCategoriesCertifications = () => {
+  return axiosInstance.get("categories?fields");
+};
+
+export {
+  getFormations,
+  getSubCategories,
+  getDetail,
+  getCategoriesCertifications,
+  getAllSubcategories,
+};
