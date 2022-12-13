@@ -13,7 +13,7 @@ function Items({itemsPath, urlPath, fields}: Params) {
     cacheTime: 3600000
   });
   return (
-    <section className='grid grid-cols-2 gap-6'>
+    <section className='grid md:grid-cols-2 md:gap-4'>
       { isSuccess 
         ? (
           <>
