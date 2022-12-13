@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import MainLayout from "../../components/main-layout";
-import { course_page } from "../../utils/data/pages-list";
-import formations_list from "../../utils/data/formations";
+import {formations, course_page} from "utils";
+
 import {
   AiOutlineCaretDown,
   AiOutlineCaretUp,
@@ -47,7 +47,7 @@ export default function Formations() {
   }
 
   function get_all_courses(): any[] {
-    return formations_list.map((item) => item.courses).flat();
+    return formations.map((item) => item.courses).flat();
   }
 
   function formatDuration(duration: number): string {

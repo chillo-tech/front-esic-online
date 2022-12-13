@@ -56,57 +56,6 @@ export default function Header() {
                     ) : null}
                   </button>
                 </a>
-                {item.submenu.length > 0 ? (
-                  <div
-                    className={`menu-item-sub hidden absolute left-0 top-6 pt-6 z-40 ${
-                      displaySubmenuFull(item) ? "w-full " : "w-[300px]"
-                    }`}
-                  >
-                    {item.label == "Formations" ? (
-                      <ul className="bg-white w-full border-t-8 border-primary px-8 pb-8 flex flex-wrap">
-                        {item.submenu.map((subItem) => (
-                          <li
-                            key={`leaf${subItem.label}`}
-                            className="w-1/3 mt-4"
-                          >
-                            <div className="flex justify-start items-center space-x-2">
-                              <div className="w-20 h-20  relative">
-                                <Image
-                                  src={subItem.image}
-                                  fill={true}
-                                  alt={subItem.label}
-                                />
-                              </div>
-                              <div>
-                                <a className="inline-block" href={subItem.link}>
-                                  <button className="flex w-full items-center  2xl:text-lg transition-colors hover:text-primary">
-                                    {subItem.label}
-                                  </button>
-                                </a>
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <ul className="bg-white border-t-8 pb-4 shadow-xl border-primary px-4">
-                        {item.submenu.map((subItem) => (
-                          <li key={`leaf${subItem.label}`} className="mt-3">
-                            <div className="flex justify-start items-center space-x-2">
-                              <div>
-                                <a className="inline-block" href={subItem.link}>
-                                  <button className="flex w-full items-center transition-colors hover:text-primary">
-                                    {subItem.label}
-                                  </button>
-                                </a>
-                              </div>
-                            </div>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ) : null}
               </li>
             ))}
           </ul>

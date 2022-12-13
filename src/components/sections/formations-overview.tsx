@@ -1,5 +1,4 @@
 import {formations, formations_overview} from "utils";
-import Link from "next/link";
 import { useState } from "react";
 
 export default function FormationsOverview() {

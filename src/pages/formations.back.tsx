@@ -2,13 +2,12 @@ import Link from "next/link";
 import { BsImageAlt } from "react-icons/bs";
 import Head from "next/head";
 import MainLayout from "../components/main-layout";
-import { formations as formations_page } from "../utils/data/pages-list";
+import { formations, formations_page } from "utils";
 import { FormationCTA } from "../components/sections/formation-cta";
-import formations_list from "../utils/data/formations";
 
 export default function Formations() {
   function get_formation_courses(slug: string): any[] {
-    const formation = formations_list.find((item: any) => item.slug == slug);
+    const formation = formations.find((item: any) => item.slug == slug);
     if (formation == undefined) {
       return [];
     } else {
@@ -52,7 +51,7 @@ export default function Formations() {
               Get start with one domain
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-              {formations_list.map((item: any) => (
+              {formations.map((item: any) => (
                 <a
                   key={item.slug}
                   href={item.link}
@@ -64,7 +63,7 @@ export default function Formations() {
             </div>
           </div>
 
-          {formations_list.map((item: any) => (
+          {formations.map((item: any) => (
             <article key={item.name} className="w-full mb-16">
               <div className="flex justify-between items-center">
                 <div className="w-full md:w-3/4">
