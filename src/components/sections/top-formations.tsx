@@ -50,8 +50,8 @@ export default function TopFormations() {
             </div>
           </header>
           <LightSlideWrapper className="grid md:grid-cols-4  gap-10 items-center mx-auto  mt-8">
-            {all_formations.map((course: any) => (
-              <LightSlideItem key={`top${course.slug}`}>
+            {all_formations.map((course: any, index: number) => (
+              <LightSlideItem key={`top-${index}-${course.slug}`}>
                 <div className="px-2">
                   <div className="relative h-44 bg-gray-400 flex items-center justify-center">
                   <Image
@@ -59,6 +59,7 @@ export default function TopFormations() {
                       src="/images/esic-image-5.jpg"
                       alt={`Empty`}
                       loader={loaderProp}
+                      unoptimized={true}
                       className={cn(
                         'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
                         isLoading

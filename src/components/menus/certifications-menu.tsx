@@ -1,12 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import { certifications_menu } from "utils/data";
+import { slugify } from "utils/helpers";
 export default function CertificationsMenu({
+  parent,
   items,
   className,
 }: {
+  parent: any,
   items: any[];
   className: string;
-}) {
+}){
   return (
     <div
       className={`${className} flex absolute top-[3.7rem] -left-[15rem] bg-white shadow-xl w-[1200px]`}
@@ -21,13 +25,13 @@ export default function CertificationsMenu({
                   key={`certif${index}${subIndex}`}
                   className="flex items-center space-x-2"
                 >
-                  <article className="relative bg-gray-300 w-[50px] h-[50px]">
+                  <span className="relative bg-gray-300 w-[50px] h-[50px]">
                     <Image
                       fill={true}
                       src="/images/icon-quality.png"
                       alt="Esic image"
                     />
-                  </article>
+                  </span>
                   <div>
                     <h4 className="text-sm font-medium">Certification ESIC</h4>
                     <h5 className="text-xs mt-1">certification esic</h5>

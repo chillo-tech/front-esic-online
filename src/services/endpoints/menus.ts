@@ -1,7 +1,7 @@
 import { axiosInstance } from "../axios-instance";
 const getMenus = () => {
   return axiosInstance.get(
-    "menus?fields=id,libelle,display,ordre,sous_menus.label,sous_menus.label,sous_menus.link"
+    "menus?fields=fields=id,libelle,menu_category.categories_id.id,menu_category.categories_id.libelle,menu_category.categories_id.souslibelle"
   );
 };
 

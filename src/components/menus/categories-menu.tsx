@@ -1,11 +1,15 @@
+import Debug from "components/Debug";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import { getAllSubcategories } from "services";
+import { slugify } from "utils/slugify";
 
 export default function CategoriesMenu({
+  parent,
   items,
   className,
 }: {
+  parent: any,
   items: any[];
   className: string;
 }) {
@@ -23,7 +27,7 @@ export default function CategoriesMenu({
         <ul className="grid grid-cols-2">
           {data?.data.data.map((item: any, index: number) => (
             <li key={`${item.libelle}${index}`}>
-              <Link href="#">
+              <Link href={`${slugify(parent.libelle)}/${slugify(item.libelle)}-${item.id}`}>
                 <span className="block hover:bg-secondary/20 px-4 py-2 w-full">
                   {item.libelle}
                 </span>
@@ -37,7 +41,7 @@ export default function CategoriesMenu({
           <ul>
             {items.map((item: any, index) => (
               <li key={`${item.label}${index}`}>
-                <Link href={item?.link}>
+                <Link href={`${slugify(parent.libelle)}/${slugify(item.libelle)}-${item.id}`}>
                   <span className="block  py-2 w-full">{item.label}</span>
                 </Link>
               </li>

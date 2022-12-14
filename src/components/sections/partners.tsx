@@ -21,6 +21,7 @@ export default function Partners() {
                 src={item.image}
                 alt={item.name}
                 loader={loaderProp}
+                unoptimized={true}
                 className={cn(
                   "relative object-contain duration-700 ease-in-out group-hover:opacity-75",
                   isLoading

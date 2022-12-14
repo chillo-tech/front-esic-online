@@ -19,6 +19,7 @@ export default function Features() {
                 src={item.image}
                 alt={item.title}
                 loader={loaderProp}
+                unoptimized={true}
                 className={cn(
                   'relative object-contain duration-700 ease-in-out group-hover:opacity-75',
                   isLoading

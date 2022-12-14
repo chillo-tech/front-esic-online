@@ -32,7 +32,7 @@ function Formations() {
           description={formations.data.description}
         />
       ) : null}
-      <main className="container mx-auto pb-5">
+      <main className="container mx-auto pb-5 md:py-10">
         <Items
           itemsPath="categories"
           urlPath="formations"
