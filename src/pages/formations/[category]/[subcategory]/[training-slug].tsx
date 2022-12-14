@@ -17,8 +17,7 @@ function Training({ id }: { id: string }) {
     queryKey: ["formations", "detail", id],
     queryFn: () =>
       getDetail({
-        //id: id.split("-")[1],
-        id: "3",
+        id,
       }),
     refetchOnWindowFocus: false,
     staleTime: 3600000, //1jour
@@ -86,18 +85,18 @@ function Training({ id }: { id: string }) {
                   </li>
                 </ul>
 
-                <div className="grid gap-3 justify-center items-center py-4 md:grid-cols-2 md:gap">
+                <div className="text-md grid gap-3 justify-center items-center py-4 md:grid-cols-3 md:gap">
                   <Link
                     href="/contactez-nous"
-                    className="px-8 py-3 text-white text-center bg-secondary text-lg font-semibold rounded-full"
+                    className="p-3 text-white text-center bg-secondary rounded-full"
                   >
                     Je candidate
                   </Link>
                   <Link
                     href="/contactez-nous"
-                    className="px-8 py-3 text-white text-center border border-white text-lg font-semibold rounded-full"
+                    className="p-3 text-white text-center border border-white rounded-full"
                   >
-                    Je telecharge le programme
+                    Je télécharge le programme
                   </Link>
                 </div>
               </div>
@@ -198,8 +197,10 @@ function Training({ id }: { id: string }) {
   );
 }
 
+export default Training;
+
 export async function getServerSideProps(context: any) {
   const { params } = context;
-  return { props: { ...params, id: params["training-slug"] } };
+  const id = params.subcategory.substring(params.subcategory.lastIndexOf("-") + 1);
+  return { props: { ...params, id } };
 }
-export default Training;

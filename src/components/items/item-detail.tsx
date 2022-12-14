@@ -21,7 +21,7 @@ function ItemDetail({path, data, subfield='souscategories', subFieldWrapper='sou
                   .map((sub: any)=>(
                     <li key={sub[subFieldWrapper].id}>
                       <Link 
-                          href={`/${path}/${slugify(data.libelle)}/${slugify(sub[subFieldWrapper].libelle)}/${sub[subFieldWrapper].id}`}
+                          href={`/${path}/${slugify(data.libelle)}/${slugify(sub[subFieldWrapper].libelle)}-${sub[subFieldWrapper].id}`}
                           className='hover:bg-slate-100 text-lg block py-1 px-4 font-sans font-extralight'
                         >
                         {sub[subFieldWrapper].libelle}

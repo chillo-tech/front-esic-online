@@ -23,7 +23,7 @@ export default function TopFormations() {
 
   return (
     <section className="bg-secondary/5">
-      <div className="py-8 sm:py-16 max-w-[81rem] mx-auto">
+      <div className="py-8 sm:py-16 container mx-auto">
         <LightSlide
           slideSpeed={1}
           slideStep={50}
@@ -49,7 +49,7 @@ export default function TopFormations() {
               </LightSlideButton>
             </div>
           </header>
-          <LightSlideWrapper className="grid md:grid-cols-3 items-center mx-auto  mt-8">
+          <LightSlideWrapper className="grid md:grid-cols-4  gap-10 items-center mx-auto  mt-8">
             {all_formations.map((course: any) => (
               <LightSlideItem key={`top${course.slug}`}>
                 <div className="px-2">
@@ -68,7 +68,7 @@ export default function TopFormations() {
                       onLoadingComplete={() => setIsLoading(false)}
                     />
                   </div>
-                  <div className="p-3 border h-[15rem] relative bg-white">
+                  <div className="p-10 border h-[20rem] relative bg-white">
                     <h3 className="font-semibold">{course.name}</h3>
                     <ul className="mt-4 space-y-4 font-medium">
                       <li className="flex space-x-3 items-center">

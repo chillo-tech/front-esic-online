@@ -2,7 +2,7 @@ import axios from "axios";
 import { axiosInstance } from "../axios-instance";
 
 const getFormations = () => {
-  return axiosInstance.get("menus/1/?fields=id,libelle,titre,description");
+  return axiosInstance.get("menus/1/?fields=id,libelle,titre,description,*.*");
 };
 
 const getSubCategories = ({

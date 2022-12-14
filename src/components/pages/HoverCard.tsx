@@ -17,7 +17,6 @@ interface Params {
 function HoverCard({id, title, subtitle, image, price="1 300 HT", duration="3 Jours"}: Params) {
   const [isLoading, setLoading] = useState(true);
   const {query} = useRouter();
-  
   return (
     <article className='relative h-96 font-sans'>
        <Image 
@@ -25,6 +24,7 @@ function HoverCard({id, title, subtitle, image, price="1 300 HT", duration="3 Jo
           src={image}
           alt={`${title} ${subtitle}`}
           loader={loaderProp}
+          unoptimized
           className={cn(
             'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
             isLoading
@@ -45,7 +45,7 @@ function HoverCard({id, title, subtitle, image, price="1 300 HT", duration="3 Jo
 
         <Link 
           className='bg-green-500 px-4 py-2 rounded-md items-center hidden link'
-          href={`/formations/${query.subcategory}/${query.item}/${query.subcategory}/${slugify(title)}-${id}`}
+          href={`/formations/${query.category}/${query.subcategory}/${slugify(title)}-${id}`}
         >
           En savoir plus <BsArrowRightCircle className='ml-3'/>
         </Link>
