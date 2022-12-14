@@ -12,12 +12,15 @@ export default function CertificationsMenu({
       className={`${className} flex absolute top-[3.7rem] -left-[15rem] bg-white shadow-xl w-[1200px]`}
     >
       <ul className="grid grid-cols-3 w-full p-8 gap-8">
-        {certifications_menu.map((item) => (
-          <li className="">
+        {certifications_menu.map((item, index) => (
+          <li key={`certif${index}`}>
             <h3 className="uppercase text-sm font-bold">{item}</h3>
             <ul className="grid grid-cols-2 gap-4 mt-4">
-              {[1, 2, 3, 4].map((item) => (
-                <li className="flex items-center space-x-2">
+              {[1, 2, 3, 4].map((subItem, subIndex) => (
+                <li
+                  key={`certif${index}${subIndex}`}
+                  className="flex items-center space-x-2"
+                >
                   <article className="relative bg-gray-300 w-[50px] h-[50px]">
                     <Image
                       fill={true}

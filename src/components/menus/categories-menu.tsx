@@ -44,7 +44,7 @@ export default function CategoriesMenu({
             ))}
           </ul>
           <button className="bg-white text-primary px-4 py-2 font-semibold rounded-full mt-4">
-            S'inscrire à une formation
+            S&apos;inscrire à une formation
           </button>
         </div>
       </div>
