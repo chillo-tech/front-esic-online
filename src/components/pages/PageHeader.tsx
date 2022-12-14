@@ -6,7 +6,7 @@ interface Params {
 }
 function PageHeader({title, description, image='images/esic-image-5.jpg'}: Params) {
   return (
-    <div className="md:text-left text-center w-full bg-cover bg-center md:h-80" style={{ backgroundImage: `url(/${image})`}}>
+    <div className="md:text-left text-center w-full bg-cover bg-center h-40 md:h-80" style={{ backgroundImage: `url(/${image})`}}>
       <div className="bg-black/10 bg-gradient-to-r from-secondary w-full h-full">
         <div className="container mx-auto flex md:py-16 py-4  text-white flex-col h-full justify-center">
               <h1 className='font-extralight text-xl'>
