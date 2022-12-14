@@ -45,7 +45,7 @@ export default function Header() {
 
         <ul
           ref={menuLinks}
-          className="flex items-center space-x-2 text-gray-700 font-medium"
+          className="flex items-center space-x-2 text-gray-700 font-medium w-full"
         >
           {menus?.data
             .sort((a: any, b: any) => a.ordre - b.ordre)
@@ -53,8 +53,8 @@ export default function Header() {
               <li
                 key={`${item.id}`}
                 onClick={() => toggleShowMenu(item.id)}
-                className={classNames("menu-item  relative cursor-pointer", {
-                  relative: item.libelle.toLowerCase() === "certifications",
+                className={classNames("menu-item  cursor-pointer", {
+                  relative: item.display == "simple_menu",
                 })}
               >
                 <div

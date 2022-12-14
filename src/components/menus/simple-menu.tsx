@@ -13,7 +13,7 @@ export default function SimpleMenu({
     >
       {items.map((item: any, index) => (
         <li key={`${item.label}${index}`}>
-          <Link href={item?.link}>
+          <Link href="#">
             <span className="block hover:bg-secondary/20 px-4 py-2 w-full">
               {item.label}
             </span>

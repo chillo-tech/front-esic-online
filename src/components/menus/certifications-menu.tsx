@@ -9,7 +9,7 @@ export default function CertificationsMenu({
 }) {
   return (
     <div
-      className={`${className} flex absolute top-[3.7rem] -left-[15rem] bg-white shadow-xl w-[1200px]`}
+      className={`${className} flex absolute left-0 top-[3.7rem] bg-blue-900 shadow-xl w-full text-white`}
     >
       <ul className="grid grid-cols-3 w-full p-8 gap-8">
         {certifications_menu.map((item, index) => (
