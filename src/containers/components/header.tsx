@@ -8,6 +8,7 @@ import classNames from "classnames";
 import DisplayMenu from "components/menus/display-menu";
 import { HiChevronDown, HiChevronUp, HiMenu, HiX } from "react-icons/hi";
 import { useOnClickAway } from "utils/custom-hooks";
+import { useRouter } from "next/router";
 export default function Header() {
   const { data: { data: menus } = {} } = useQuery<any>({
     queryKey: ["menus"],
@@ -22,20 +23,26 @@ export default function Header() {
   useOnClickAway(menuLinks, () => {
     setShowMenu(() => ({}));
   });
+  const router = useRouter();
 
-  function toggleShowMenu(id: number): void {
-    setShowMenu((values) => ({
-      [id]: !values[id],
-    }));
+  function toggleShowMenu(item: any): void {
+    if (window.innerWidth > 768) {
+      //md
+      setShowMenu((values) => ({
+        [item.id]: !values[item.id],
+      }));
+    } else {
+      router.push(`/${slugify(item.libelle)}`);
+    }
   }
 
   return (
     <nav
-      className="bg-white w-full shadow-xl top-0 py-4 relative z-40 "
+      className="bg-white w-full shadow-xl top-0  relative z-40 "
       id="navbar"
     >
       <div className="px-8 flex flex-wrap md:flex-nowrap items-center justify-between md:text-lg relative">
-        <div className="flex items-center justify-between w-full md:w-auto">
+        <div className="flex items-center justify-between w-full md:w-auto py-4">
           <Link href={"/"} className="">
             <Image
               src={"/images/logo.png"}
@@ -59,57 +66,74 @@ export default function Header() {
           </button>
         </div>
 
-        <ul
-          ref={menuLinks}
+        <div
           className={classNames(
-            "md:flex items-center space-x-2 text-gray-700 font-medium  justify-center w-full h-screen md:h-auto pt-8 md:pt-0",
+            "w-full justify-center h-screen  md:h-auto  md:pt-0",
             {
-              block: showMobileMenu,
-              hidden: !showMobileMenu,
+              "flex flex-col-reverse": showMobileMenu,
+              "hidden md:flex": !showMobileMenu,
             }
           )}
         >
-          {menus?.data
-            .sort((a: any, b: any) => a.ordre - b.ordre)
-            .map((item: any, index: number) => (
-              <li
-                key={`nav-${index}-${item.id}`}
-                onClick={() => toggleShowMenu(item.id)}
-                className={classNames("menu-item  cursor-pointer", {
-                  relative: item.display == "simple_menu",
-                })}
-              >
-                <div
-                  //href={`/${slugify(item.libelle)}`}
-                  className="flex px-6 py-2 space-x-2 justify-center text-2xl  md:text-lg items-center font-medium transition-colors hover:text-primary"
+          <ul
+            ref={menuLinks}
+            className="md:flex -mt-16 md:-mt-0 items-center space-x-2 text-gray-700 font-medium justify-center"
+          >
+            {menus?.data
+              .sort((a: any, b: any) => a.ordre - b.ordre)
+              .map((item: any, index: number) => (
+                <li
+                  key={`nav-${index}-${item.id}`}
+                  onClick={() => toggleShowMenu(item)}
+                  className={classNames("menu-item  cursor-pointer", {
+                    relative: item.display == "simple_menu",
+                  })}
                 >
-                  <span>{item.libelle}</span>
-                  <span className="hidden md:inline-block">
-                    <HiChevronDown
-                      className={classNames("w-5 h-5 text-gray-500", {
-                        hidden:
-                          showMenu[item.id] || item.sous_menus.length == 0,
+                  <div
+                    //href={`/${slugify(item.libelle)}`}
+                    className={classNames(
+                      "flex py-2  md:py-6 px-4 space-x-2 justify-center text-2xl  md:text-base 2xl:text-lg items-center font-medium ",
+                      {
+                        "bg-secondary text-white": showMenu[item.id],
+                      }
+                    )}
+                  >
+                    <span>{item.libelle}</span>
+                    <span className="hidden md:inline-block">
+                      <HiChevronDown
+                        className={classNames("w-5 h-5 ", {
+                          hidden:
+                            showMenu[item.id] || item.sous_menus.length == 0,
+                        })}
+                      />
+                      <HiChevronUp
+                        className={classNames("w-5 h-5  ", {
+                          hidden:
+                            !showMenu[item.id] || item.sous_menus.length == 0,
+                        })}
+                      />
+                    </span>
+                  </div>
+                  <div className="hidden md:block">
+                    <DisplayMenu
+                      className={classNames("absolute top-[4.5rem] ", {
+                        hidden: !showMenu[item.id],
                       })}
-                    />
-                    <HiChevronUp
-                      className={classNames("w-5 h-5  text-gray-500", {
-                        hidden:
-                          !showMenu[item.id] || item.sous_menus.length == 0,
-                      })}
-                    />
-                  </span>
-                </div>
-                <div className="hidden md:block">
-                  <DisplayMenu
-                    className={classNames("", {
-                      hidden: !showMenu[item.id],
-                    })}
-                    item={item}
-                  ></DisplayMenu>
-                </div>
-              </li>
-            ))}
-        </ul>
+                      item={item}
+                    ></DisplayMenu>
+                  </div>
+                </li>
+              ))}
+            <li className="w-full text-center mt-8">
+              <Link
+                className="md:hidden px-8 py-4 block w-full text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors"
+                href={header.contact.link}
+              >
+                {header.contact.label}
+              </Link>
+            </li>
+          </ul>
+        </div>
 
         <div className="text-lg">
           <Link
