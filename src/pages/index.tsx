@@ -1,7 +1,5 @@
 import Head from "next/head";
 import Hero from "../components/sections/hero";
-import Stats from "../components/sections/stats";
-import Testimonials from "../components/sections/testimonials";
 import Location from "../components/sections/location";
 import Partners from "../components/sections/partners";
 import { home } from "../utils/data/pages-list";
