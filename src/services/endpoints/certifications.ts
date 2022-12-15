@@ -4,4 +4,8 @@ const getCertifications = () => {
   return axiosInstance.get("certifications");
 };
 
-export { getCertifications };
+const getCertificationCategory = (id: number) => {
+  return null;
+};
+
+export { getCertifications, getCertificationCategory };
