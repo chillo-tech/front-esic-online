@@ -1,11 +1,15 @@
 import { axiosInstance } from "../axios-instance";
 
 const getFormations = () => {
-  const base ='id,libelle,titre,description';
-  const categories =  'menu_category.categories_id.id,menu_category.categories_id.libelle';
-  const subcategories =  'menu_category.categories_id.souscategories.sousCategories_id.id,menu_category.categories_id.souscategories.sousCategories_id.libelle,menu_category.categories_id.souscategories.sousCategories_id.ordre';
+  const base = "id,libelle,titre,description";
+  const categories =
+    "menu_category.categories_id.id,menu_category.categories_id.libelle";
+  const subcategories =
+    "menu_category.categories_id.souscategories.sousCategories_id.id,menu_category.categories_id.souscategories.sousCategories_id.libelle,menu_category.categories_id.souscategories.sousCategories_id.ordre";
   const fields = `${base},${categories},${subcategories}`;
-  return axiosInstance.get(`menus?filter[libelle][_eq]=Formations&fields=${fields}`);
+  return axiosInstance.get(
+    `menus?filter[libelle][_eq]=Formations&fields=${fields}`
+  );
 };
 
 const getSubCategories = ({
@@ -22,23 +26,23 @@ const getSubCategories = ({
   });
 };
 
-const getCategories = ({fields}: {fields: string}) => {
+const getCategories = ({ fields }: { fields: string }) => {
   return axiosInstance.get(`categories`, {
-    params: {...(fields ? { fields } : {})}
+    params: { ...(fields ? { fields } : {}) },
   });
 };
 
-const getCategory = ({id}: {id: string}) => {
-  const base ='id,libelle,titre,description';
-  const subcategories = 'souscategories.sousCategories_id.id,souscategories.sousCategories_id.libelle';
+const getCategory = ({ id }: { id: string }) => {
+  const base = "id,libelle,titre,description";
+  const subcategories =
+    "souscategories.sousCategories_id.id,souscategories.sousCategories_id.libelle";
   //const categories =  'menu_category.categories_id.id,menu_category.categories_id.libelle';
   //const subcategories =  'menu_category.categories_id.souscategories.sousCategories_id.id,menu_category.categories_id.souscategories.sousCategories_id.libelle,menu_category.categories_id.souscategories.sousCategories_id.ordre';
-  const fields = `${base},${subcategories}`//,${categories},${subcategories}`;
+  const fields = `${base},${subcategories}`; //,${categories},${subcategories}`;
   return axiosInstance.get(`categories/${id}`, {
-    params: {...(fields ? { fields } : {})}
+    params: { ...(fields ? { fields } : {}) },
   });
 };
-
 
 const getDetail = ({
   id,
@@ -64,12 +68,6 @@ const getCategoriesCertifications = () => {
   return axiosInstance.get("categories?fields");
 };
 
-const getCategories = () => {
-  return axiosInstance.get(
-    "categories?fields=libelle,souscategories,souscategories.sousCategories_id.libelle"
-  );
-};
-
 export {
   getFormations,
   getCategory,
@@ -78,5 +76,4 @@ export {
   getDetail,
   getCategoriesCertifications,
   getAllSubcategories,
-  getCategories,
 };

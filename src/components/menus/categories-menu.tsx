@@ -1,10 +1,8 @@
-import Debug from "components/Debug";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import { getCategories } from "services";
 
 export default function CategoriesMenu({
-  parent,
   items,
   className,
 }: {
@@ -14,7 +12,11 @@ export default function CategoriesMenu({
 }) {
   const { data } = useQuery<any>({
     queryKey: ["categories"],
-    queryFn: getCategories,
+    queryFn: () =>
+      getCategories({
+        fields:
+          "id,libelle,souscategories,souscategories.sousCategories_id.libelle",
+      }),
     refetchOnWindowFocus: false,
   });
 
@@ -23,8 +25,8 @@ export default function CategoriesMenu({
       className={`${className} flex absolute top-[3.7rem] left-0 bg-blue-900 shadow-xl w-full`}
     >
       <div className="w-full md:w-3/4 px-8">
-        {data?.data.data.map((item: any, _) => (
-          <li
+        {data?.data.data.map((item: any) => (
+          <div
             key={`cat${item.id}`}
             className="border-b border-white/20 grid grid-cols-3 gap-4"
           >
@@ -38,7 +40,7 @@ export default function CategoriesMenu({
                 </li>
               ))}
             </ul>
-          </li>
+          </div>
           // <li key={`${item.libelle}${index}`}>
           //   <Link href="#">
           //     <span className="block hover:bg-secondary/20 px-4 py-2 w-full">
@@ -54,7 +56,7 @@ export default function CategoriesMenu({
             {items.map((item: any, index) => (
               <li key={`${item.label}${index}`}>
                 <Link href="#">
-                  <span className="block  py-2 w-full">{item.label}</span>
+                  <span className="block  py-2 w-full">{item.libelle}</span>
                 </Link>
               </li>
             ))}

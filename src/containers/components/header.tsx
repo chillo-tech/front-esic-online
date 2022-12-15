@@ -35,7 +35,7 @@ export default function Header() {
       id="navbar"
     >
       <div className="px-8 flex flex-wrap md:flex-nowrap items-center justify-between md:text-lg relative">
-        <div className="flex justify-between w-full md:w-auto">
+        <div className="flex items-center justify-between w-full md:w-auto">
           <Link href={"/"} className="">
             <Image
               src={"/images/logo.png"}
@@ -49,12 +49,12 @@ export default function Header() {
             onClick={() => setShowMobileMenu(!showMobileMenu)}
           >
             <HiMenu
-              className={classNames("w-6 h-6 md:hidden", {
+              className={classNames("w-8 h-8 md:hidden", {
                 hidden: showMobileMenu,
               })}
             />
             <HiX
-              className={classNames("w-6 h-6", { hidden: !showMobileMenu })}
+              className={classNames("w-8 h-8", { hidden: !showMobileMenu })}
             />
           </button>
         </div>
@@ -62,7 +62,7 @@ export default function Header() {
         <ul
           ref={menuLinks}
           className={classNames(
-            "md:flex items-center space-x-2 text-gray-700 font-medium w-full h-screen md:h-auto pt-8 md:pt-0",
+            "md:flex items-center space-x-2 text-gray-700 font-medium  justify-center w-full h-screen md:h-auto pt-8 md:pt-0",
             {
               block: showMobileMenu,
               hidden: !showMobileMenu,
@@ -81,7 +81,7 @@ export default function Header() {
               >
                 <div
                   //href={`/${slugify(item.libelle)}`}
-                  className="flex px-6 py-2 space-x-2 justify-center lg:text-lg items-center font-medium transition-colors hover:text-primary"
+                  className="flex px-6 py-2 space-x-2 justify-center text-2xl  md:text-lg items-center font-medium transition-colors hover:text-primary"
                 >
                   <span>{item.libelle}</span>
                   <span className="hidden md:inline-block">

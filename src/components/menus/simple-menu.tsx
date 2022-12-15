@@ -15,10 +15,10 @@ export default function SimpleMenu({
       className={`${className} absolute top-[3.7rem] left-0 bg-blue-900 text-white/90 md:text-lg w-[320px] shadow-xl`}
     >
       {items.map((item: any, index) => (
-        <li key={`${item.label}${index}`}>
+        <li key={`${item.libelle}${index}`}>
           <Link href="#">
             <span className="block hover:bg-secondary/20 px-4 py-2 w-full">
-              {item?.categories_id?.libelle}
+              {item.libelle}
             </span>
           </Link>
         </li>
