@@ -106,7 +106,7 @@ export default function Contact() {
           {
             mutation.isIdle 
             ? (
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid">
+            <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid md:px-20">
               <div className={formStyles.form_control}>
                   <div className={formStyles.form_control}>
                     <label htmlFor="name" className={formStyles.form_control__label}>

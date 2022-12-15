@@ -3,6 +3,9 @@ import Head from "next/head";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import { BsBarChart } from "react-icons/bs";
+import { BiCoinStack } from "react-icons/bi";
+import { GiPositionMarker } from "react-icons/gi";
 import {
   HiAcademicCap,
   HiBadgeCheck,
@@ -49,8 +52,8 @@ function Training({ id }: { id: string }) {
   return (
     <OpenedLayout>
       <Head>
-        <title>{"formations.data.titre"}</title>
-        <meta name="description" content={"formations.data.description"} />
+        <title>{`${data?.data.data.libelle}`} </title>
+        <meta name="description" content={`${data?.data.data.description}`} />
       </Head>
       <main>
         <section
@@ -61,28 +64,72 @@ function Training({ id }: { id: string }) {
             <div className="container mx-auto flex relative">
               <div className="max-w-4xl md:py-16 md:pt-24 text-white">
                 <h2 className="text-4xl mt-10 md:text-5xl font-extrabold">
-                  {data?.data.data.name}
+                  {data?.data.data.libelle}
                 </h2>
+                <div className="flex">
+                
+
+                  
+                </div>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: data?.data.data.short_description,
                   }}
                   className="my-10"
                 ></div>
-                <ul className="mt-8 items-center flex space-x-3 flex-col md:flex-row">
-                  <li className="flex space-x-2 items-center text-lg font-medium">
-                    <AiOutlineClockCircle className="w-5 h-5 text-secondary" />
-                    <span>10 Hours</span>
-                  </li>
-                  <li className="flex space-x-2 items-center text-lg font-medium my-3">
-                    <HiOutlineMap className="w-5 h-5 text-secondary" />
-                    <span>Online, In Office, Mixe</span>
-                  </li>
-
-                  <li className="flex space-x-2 items-center text-lg font-medium">
-                    <HiBadgeCheck className="w-5 h-5 text-secondary" />
-                    <span>CPF Eligible</span>
-                  </li>
+                <ul className="mt-8 items-start flex flex-col md:flex-row">
+                  {
+                   data?.data.data.niveau ? 
+                    <li className="flex items-end py-2 mr-3">
+                      <BsBarChart className="mr-2 text-green-600 text-3xl"/> 
+                      <span className="text-xl">{data?.data.data.niveau === "BEGINNER" ? 'Débutant': null}</span>
+                      <span className="text-xl">{data?.data.data.niveau === "INTERMEDIARY" ? 'Intermediaire': null}</span>
+                      <span className="text-xl">{data?.data.data.niveau === "ADVANCED" ? 'Avancé': null}</span>
+                    </li> 
+                    : 
+                    null
+                  }
+                  {
+                   data?.data.data.duree ? 
+                    <li className="flex items-center py-2 pr-3">
+                      <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
+                      <span>{data?.data.data.duree }</span>
+                    </li>
+                    : 
+                    null
+                  }
+                   {
+                   (data?.data.data.distanciel || data?.data.data.presentiel) ? 
+                    <li className="flex items-center py-2 pr-3">
+                      <GiPositionMarker className="text-red-400 text-3xl"/> 
+                      {data?.data.data.distanciel ? 
+                        <span className="flex items-center mr-2">
+                          En ligne
+                        </span> 
+                        : 
+                        null
+                      }
+                      {
+                        data?.data.data.presentiel ? 
+                        <span className="flex items-center">
+                          dans nos locaux
+                        </span> 
+                        : 
+                        null
+                      }
+                    </li>
+                    : 
+                    null
+                  }
+                  {
+                   (data?.data.data.prix && data?.data.data.cpf ) ? 
+                    <li className="flex items-center py-2 pr-3">
+                      <BiCoinStack className="mr-2 text-yellow-600 text-3xl"/> 
+                      Eligible au CPF
+                    </li> 
+                    : 
+                    null
+                  }
                 </ul>
 
                 <div className="text-md grid gap-3 justify-center items-center py-4 md:grid-cols-3 md:gap">
@@ -201,6 +248,6 @@ export default Training;
 
 export async function getServerSideProps(context: any) {
   const { params } = context;
-  const id = params.subcategory.substring(params.subcategory.lastIndexOf("-") + 1);
+  const id = params['training-slug'].substring(params['training-slug'].lastIndexOf("-") + 1);
   return { props: { ...params, id } };
 }

@@ -114,7 +114,7 @@ export default function Header() {
                       />
                     </span>
                   </div>
-                  <div className="hidden md:block">
+                  <div className="font-light font-sans hidden md:block">
                     <DisplayMenu
                       className={classNames("absolute top-[4.5rem] ", {
                         hidden: !showMenu[item.id],

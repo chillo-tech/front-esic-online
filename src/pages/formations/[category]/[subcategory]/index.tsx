@@ -13,7 +13,7 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
       getSubCategories({
         id: subcategoryid as string,
         fields:
-          "id,libelle,description,formations.formations_id.id,formations.formations_id.name,formations.formations_id.description",
+          "id,libelle,description,formations.formations_id.id,formations.formations_id.libelle,formations.formations_id.description",
       }),
     refetchOnWindowFocus: false,
     staleTime: 3600000, //1jour
@@ -32,6 +32,7 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
           <>
             <section className="grid md:grid-cols-3 gap-6">
               {data.data.data.formations.map((formation: any, index: number) => (
+                <>
                 <HoverCard
                   id={formation.formations_id.id}
                   title={formation.formations_id.libelle}
@@ -40,6 +41,7 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
                   key={`${formation.id}-${index}`}
                   link={`/formations/${link}/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
                 />
+                </>
               ))}
             </section>
           </>
@@ -53,6 +55,6 @@ export default SousCategories;
 
 export async function getServerSideProps(context: any) {
   const { params } = context;
-  const id = params.category.substring(params.category.lastIndexOf("-") + 1);
+  const id = params.subcategory.substring(params.subcategory.lastIndexOf("-") + 1);
   return { props: { ...params, id, link:`${params.category}/${params.subcategory}` } };
 }
