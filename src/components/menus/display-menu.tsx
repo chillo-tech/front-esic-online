@@ -3,20 +3,22 @@ import CertificationsMenu from "./certifications-menu";
 import SimpleMenu from "./simple-menu";
 
 export default function DisplayMenu({
+  parent,
   items,
   display,
   className,
 }: {
+  parent: any;
   items: any[];
   display: string;
   className: string;
 }) {
   switch (display) {
     case "certifications_menu":
-      return <CertificationsMenu items={items} className={className} />;
+      return <CertificationsMenu parent={parent} items={items} className={className} />;
     case "categories_menu":
-      return <CategoriesMenu items={items} className={className} />;
+      return <CategoriesMenu parent={parent} items={items} className={className} />;
     default:
-      return <SimpleMenu items={items} className={className} />;
+      return <SimpleMenu parent={parent} items={items} className={className} />;
   }
 }

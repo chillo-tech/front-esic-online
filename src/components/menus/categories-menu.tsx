@@ -1,15 +1,18 @@
+import Debug from "components/Debug";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import { getCategories } from "services";
 
 export default function CategoriesMenu({
+  parent,
   items,
   className,
 }: {
+  parent: any;
   items: any[];
   className: string;
 }) {
-  const { isSuccess, isLoading, data } = useQuery<any>({
+  const { data } = useQuery<any>({
     queryKey: ["categories"],
     queryFn: getCategories,
     refetchOnWindowFocus: false,

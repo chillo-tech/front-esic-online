@@ -13,18 +13,19 @@ interface Params {
   price?: string,
   duration?: string,
   image: string,
+  link: string
 }
-function HoverCard({id, title, subtitle, image, price="1 300 HT", duration="3 Jours"}: Params) {
+function HoverCard({id, title, subtitle, image,link, price="1 300 HT", duration="3 Jours"}: Params) {
   const [isLoading, setLoading] = useState(true);
   const {query} = useRouter();
-  
   return (
-    <article className='relative h-96 font-sans'>
+    <article className='relative h-96 font-sans font-extralight'>
        <Image 
           fill={true}
           src={image}
-          alt={`${title} ${subtitle}`}
+          alt={`${title}`}
           loader={loaderProp}
+          unoptimized
           className={cn(
             'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
             isLoading
@@ -35,8 +36,8 @@ function HoverCard({id, title, subtitle, image, price="1 300 HT", duration="3 Jo
         />
       <div className="[&>.link]:hover:flex flex flex-col justify-between items-start description absolute hover:duration-700 hover:top-0 bottom-0 right-0 left-0 bg-black bg-opacity-75 p-6 text-white">
         <div>
-          <h3 className='text-xl ont-extralight'>{title}</h3>
-          <p className='text-xl text-semibold flex pt-3'>
+          <h3 className='text-xl'>{title}</h3>
+          <p className='text-xl flex pt-3'>
             <span>{duration}</span> 
             <span className='mx-2'>-</span> 
             <span>{price}</span>
@@ -45,7 +46,7 @@ function HoverCard({id, title, subtitle, image, price="1 300 HT", duration="3 Jo
 
         <Link 
           className='bg-green-500 px-4 py-2 rounded-md items-center hidden link'
-          href={`/formations/${query.subcategory}/${query.item}/${query.subcategory}/${slugify(title)}-${id}`}
+          href={link}
         >
           En savoir plus <BsArrowRightCircle className='ml-3'/>
         </Link>

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { header, slugify } from "utils";
 import { useQuery } from "react-query";
-import { getMenus } from "../../services";
+import { getMenus } from "services";
 import classNames from "classnames";
 import DisplayMenu from "components/menus/display-menu";
 import { HiChevronDown, HiChevronUp, HiMenu, HiX } from "react-icons/hi";
@@ -71,9 +71,9 @@ export default function Header() {
         >
           {menus?.data
             .sort((a: any, b: any) => a.ordre - b.ordre)
-            .map((item: any) => (
+            .map((item: any, index: number) => (
               <li
-                key={`${item.id}`}
+                key={`nav-${index}-${item.id}`}
                 onClick={() => toggleShowMenu(item.id)}
                 className={classNames("menu-item  cursor-pointer", {
                   relative: item.display == "simple_menu",

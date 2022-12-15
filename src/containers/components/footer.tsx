@@ -24,7 +24,7 @@ export default function Footer() {
             <ul>
               {about_us.links.map((link, ind) => (
                 <li key={`agency${ind}`} className="ml-3">
-                  <Link href={link.target} className="py-1 block">
+                  <Link href={link.target} className="py-2 block">
                     {link.label}
                   </Link>
                 </li>
@@ -37,7 +37,7 @@ export default function Footer() {
             <ul>
               {formations.map((formation, ind) => (
                 <li key={`formation${ind}`} className="ml-3">
-                  <Link href={formation.link} className="py-1 block">
+                  <Link href={formation.link} className="py-2 block">
                     {formation.name}
                   </Link>
                 </li>
@@ -56,7 +56,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-blue-800 text-center py-2">
-        <div className="container mx-auto py-1">
+        <div className="container mx-auto py-2">
           Copyright &copy; {new Date().getFullYear()} {copyright}
         </div>
       </div>

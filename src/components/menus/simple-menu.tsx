@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { slugify } from "utils/slugify";
 
 export default function SimpleMenu({
+  parent,
   items,
   className,
 }: {
+  parent: any;
   items: any[];
   className: string;
 }) {
@@ -15,7 +18,7 @@ export default function SimpleMenu({
         <li key={`${item.label}${index}`}>
           <Link href="#">
             <span className="block hover:bg-secondary/20 px-4 py-2 w-full">
-              {item.label}
+              {item?.categories_id?.libelle}
             </span>
           </Link>
         </li>
