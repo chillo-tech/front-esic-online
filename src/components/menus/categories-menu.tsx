@@ -17,32 +17,31 @@ export default function CategoriesMenu({
 
   return (
     <div
-      className={` flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full`}
+      className={`${className} flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full`}
     >
-      <div className="w-3/4 px-8 py-4">
-        <ul className="grid grid-cols-2">
-          {data?.data.data.map((item: any, _) => (
-            <li key={`cat${item.id}`} className="border-b">
-              <ul>
-                {item.souscategories?.map((sous: any, index: number) => (
-                  <li key={`sc${item.id}${index}`}>
-                    {sous.sousCategories_id.libelle}
-                  </li>
-                ))}
-              </ul>
-            </li>
-            // <li key={`${item.libelle}${index}`}>
-            //   <Link href="#">
-            //     <span className="block hover:bg-secondary/20 px-4 py-2 w-full">
-            //       {item.libelle}
-            //     </span>
-            //   </Link>
-            // </li>
-          ))}
-        </ul>
+      <div className="w-full md:w-3/4 px-8 py-4">
+        {data?.data.data.map((item: any, _) => (
+          <li key={`cat${item.id}`} className="border-b grid grid-cols-3 gap-4">
+            <h4 className="uppercase font-bold text-lg pt-8">{item.libelle}</h4>
+            <ul className="col-span-2 grid grid-cols-2 text-gray-700 px-4 py-4">
+              {item.souscategories?.map((sous: any, index: number) => (
+                <li key={`sc${item.id}${index}`}>
+                  {sous.sousCategories_id.libelle}
+                </li>
+              ))}
+            </ul>
+          </li>
+          // <li key={`${item.libelle}${index}`}>
+          //   <Link href="#">
+          //     <span className="block hover:bg-secondary/20 px-4 py-2 w-full">
+          //       {item.libelle}
+          //     </span>
+          //   </Link>
+          // </li>
+        ))}
       </div>
-      <div className="w-1/4">
-        <div className="bg-primary h-full text-white py-8 px-8">
+      <div className="hidden md:block w-1/4 pt-16 pr-16">
+        <div className="bg-primary  text-white py-8 px-8">
           <ul>
             {items.map((item: any, index) => (
               <li key={`${item.label}${index}`}>
