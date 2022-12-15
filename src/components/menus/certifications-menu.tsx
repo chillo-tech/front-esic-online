@@ -3,14 +3,12 @@ import Link from "next/link";
 import { certifications_menu } from "utils/data";
 import { slugify } from "utils/helpers";
 export default function CertificationsMenu({
-  parent,
-  items,
+  item,
   className,
 }: {
-  parent: any,
-  items: any[];
+  item: any;
   className: string;
-}){
+}) {
   return (
     <div
       className={`${className} flex absolute left-0 top-[3.7rem] bg-blue-900 shadow-xl w-full text-white`}
@@ -18,7 +16,12 @@ export default function CertificationsMenu({
       <ul className="grid grid-cols-3 w-full p-8 gap-8">
         {certifications_menu.map((item, index) => (
           <li key={`certif${index}`}>
-            <h3 className="uppercase text-sm font-bold">{item}</h3>
+            <Link
+              className="uppercase text-sm font-bold"
+              href={`/certifications/${slugify(item)}`}
+            >
+              {item}
+            </Link>
             <ul className="grid grid-cols-2 gap-4 mt-4">
               {[1, 2, 3, 4].map((subItem, subIndex) => (
                 <li
@@ -32,10 +35,18 @@ export default function CertificationsMenu({
                       alt="Esic image"
                     />
                   </span>
-                  <div>
-                    <h4 className="text-sm font-medium">Certification ESIC</h4>
-                    <h5 className="text-xs mt-1">certification esic</h5>
-                  </div>
+                  <Link
+                    href={`/certifications/${slugify(item)}/${slugify(
+                      "Certification ESIC"
+                    )}-${subIndex}`}
+                  >
+                    <span className="text-sm font-medium block">
+                      Certification ESIC
+                    </span>
+                    <span className="text-xs mt-1 block">
+                      certification esic
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>

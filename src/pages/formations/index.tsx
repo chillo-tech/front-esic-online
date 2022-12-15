@@ -1,4 +1,3 @@
-import Debug from "components/Debug";
 import Items from "components/items";
 import PageHeader from "components/pages/PageHeader";
 import OpenedLayout from "containers/opened";
@@ -42,7 +41,6 @@ function Formations() {
           </main>
         </>
       ) : null}
-      
     </OpenedLayout>
   );
 }

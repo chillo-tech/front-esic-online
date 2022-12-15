@@ -104,8 +104,7 @@ export default function Header() {
                     className={classNames("", {
                       hidden: !showMenu[item.id],
                     })}
-                    items={item.sous_menus}
-                    display={item.display}
+                    item={item}
                   ></DisplayMenu>
                 </div>
               </li>

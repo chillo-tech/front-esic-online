@@ -1,13 +1,14 @@
 import { axiosInstance } from "../axios-instance";
-// const getMenus = () => {
-//   return axiosInstance.get(
-//     "menus?fields=id,libelle,menu_category.categories_id.id,menu_category.categories_id.libelle,menu_category.categories_id.souslibelle"
-//   );
-// };
 
 const getMenus = () => {
+  const menus = "id,libelle,display";
+  const categories =
+    "menu_category.categories_id.id,menu_category.categories_id.libelle,menu_category.categories_id.id,menu_category.categories_id.souslibelle";
+  const souscategories =
+    "menu_category.categories_id.souscategories,menu_category.categories_id.souscategories.sousCategories_id.id,menu_category.categories_id.souscategories.sousCategories_id.libelle";
+  const sousmenus = "sous_menus,sous_menus.id,sous_menus.libelle";
   return axiosInstance.get(
-    "menus?fields=id,libelle,display,sous_menus,sous_menus.id,sous_menus.libelle"
+    `menus?fields=${menus},${categories},${souscategories},${sousmenus}`
   );
 };
 

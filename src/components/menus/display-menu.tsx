@@ -1,32 +1,21 @@
+import { slugify } from "utils/helpers";
 import CategoriesMenu from "./categories-menu";
 import CertificationsMenu from "./certifications-menu";
 import SimpleMenu from "./simple-menu";
 
 export default function DisplayMenu({
-  parent,
-  items,
-  display,
+  item,
   className,
 }: {
-  parent?: any;
-  items: any[];
-  display: string;
+  item: any;
   className: string;
 }) {
-  switch (display) {
-    case "certifications_menu":
-      return (
-        <CertificationsMenu
-          parent={parent}
-          items={items}
-          className={className}
-        />
-      );
-    case "categories_menu":
-      return (
-        <CategoriesMenu parent={parent} items={items} className={className} />
-      );
+  switch (slugify(item.libelle)) {
+    case "certifications":
+      return <CertificationsMenu item={item} className={className} />;
+    case "formations":
+      return <CategoriesMenu item={item} className={className} />;
     default:
-      return <SimpleMenu parent={parent} items={items} className={className} />;
+      return <SimpleMenu items={item.sous_menus} className={className} />;
   }
 }
