@@ -17,13 +17,18 @@ export default function CategoriesMenu({
 
   return (
     <div
-      className={`${className} flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full`}
+      className={`${className} flex absolute top-[3.7rem] left-0 bg-blue-900 shadow-xl w-full`}
     >
-      <div className="w-full md:w-3/4 px-8 py-4">
+      <div className="w-full md:w-3/4 px-8">
         {data?.data.data.map((item: any, _) => (
-          <li key={`cat${item.id}`} className="border-b grid grid-cols-3 gap-4">
-            <h4 className="uppercase font-bold text-lg pt-8">{item.libelle}</h4>
-            <ul className="col-span-2 grid grid-cols-2 text-gray-700 px-4 py-4">
+          <li
+            key={`cat${item.id}`}
+            className="border-b border-white/20 grid grid-cols-3 gap-4"
+          >
+            <h4 className="uppercase font-bold text-lg pt-8 text-white">
+              {item.libelle}
+            </h4>
+            <ul className="col-span-2 grid grid-cols-2 text-white/90 px-4 py-4">
               {item.souscategories?.map((sous: any, index: number) => (
                 <li key={`sc${item.id}${index}`}>
                   {sous.sousCategories_id.libelle}

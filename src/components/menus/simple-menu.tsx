@@ -9,7 +9,7 @@ export default function SimpleMenu({
 }) {
   return (
     <ul
-      className={`${className} absolute top-[3.7rem] left-0 bg-white md:text-lg w-[320px] shadow-xl`}
+      className={`${className} absolute top-[3.7rem] left-0 bg-blue-900 text-white/90 md:text-lg w-[320px] shadow-xl`}
     >
       {items.map((item: any, index) => (
         <li key={`${item.label}${index}`}>
