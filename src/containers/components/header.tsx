@@ -68,16 +68,16 @@ export default function Header() {
 
         <div
           className={classNames(
-            "w-full justify-center h-screen  md:h-auto  md:pt-0",
+            "w-full justify-center items-center h-screen  md:h-auto  md:pt-0",
             {
               "flex flex-col-reverse": showMobileMenu,
-              "hidden md:flex": !showMobileMenu,
+              "hidden md:block ": !showMobileMenu,
             }
           )}
         >
           <ul
             ref={menuLinks}
-            className="md:flex -mt-16 md:-mt-0 items-center space-x-2 text-gray-700 font-medium justify-center"
+            className="md:flex justify-center  -mt-16 md:-mt-0 items-center w-full space-x-2 text-gray-700 font-medium "
           >
             {menus?.data
               .sort((a: any, b: any) => a.ordre - b.ordre)
@@ -92,7 +92,7 @@ export default function Header() {
                   <div
                     //href={`/${slugify(item.libelle)}`}
                     className={classNames(
-                      "flex py-2  md:py-6 px-4 space-x-2 justify-center text-2xl  md:text-base 2xl:text-lg items-center font-medium ",
+                      "inline-flex py-2 w-full  md:py-6 px-4 space-x-2 justify-center text-2xl  md:text-base 2xl:text-lg items-center font-medium ",
                       {
                         "bg-secondary text-white": showMenu[item.id],
                       }
@@ -124,9 +124,9 @@ export default function Header() {
                   </div>
                 </li>
               ))}
-            <li className="w-full text-center mt-8">
+            <li className="md:hidden  w-full text-center mt-8">
               <Link
-                className="md:hidden px-8 py-4 block w-full text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors"
+                className="px-8 py-4 block w-full text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors"
                 href={header.contact.link}
               >
                 {header.contact.label}
