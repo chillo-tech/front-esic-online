@@ -10,7 +10,7 @@ export default function CategoriesMenu({
 }) {
   return (
     <div
-      className={`${className} flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full border-t-4 border-blue-800`}
+      className={`${className} flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full border-t-4 border-blue-800 z-50`}
     >
       <div className="w-full md:w-3/4 px-8">
         {item.menu_category.map((item: any) => (
@@ -22,7 +22,7 @@ export default function CategoriesMenu({
               href={`/formations/${slugify(item.categories_id.libelle)}-${
                 item.categories_id.id
               }`}
-              className="uppercase font-bold text-lg pt-8 text-blue-800"
+              className="uppercase font-bold text-lg pt-8 text-blue-800 flex flex-col justify-center"
             >
               {item.categories_id.libelle}
             </Link>
@@ -36,7 +36,7 @@ export default function CategoriesMenu({
                       )}-${item.categories_id.id}/${slugify(
                         sous.sousCategories_id.libelle
                       )}-${sous.sousCategories_id.id}`}
-                      className="py-8"
+                      className="py-1 block"
                     >
                       {sous.sousCategories_id.libelle}
                     </Link>
@@ -48,7 +48,7 @@ export default function CategoriesMenu({
         ))}
       </div>
 
-      <div className="hidden md:block w-1/4 pt-16 pr-16">
+      <div className="hidden md:block w-1/4 pt-16 pr-16 bg-primary">
         <div className="bg-primary  text-white py-8 px-8">
           <ul>
             {item.sous_menus.map((item: any, index: number) => (

@@ -15,7 +15,7 @@ interface Params {
   image: string,
   link: string
 }
-function HoverCard({id, title, subtitle, image,link, price="1 300 HT", duration="3 Jours"}: Params) {
+function HoverCard({id, title, subtitle, image,link}: Params) {
   const [isLoading, setLoading] = useState(true);
   const {query} = useRouter();
   return (
@@ -38,9 +38,7 @@ function HoverCard({id, title, subtitle, image,link, price="1 300 HT", duration=
         <div>
           <h3 className='text-xl'>{title}</h3>
           <p className='text-xl flex pt-3'>
-            <span>{duration}</span> 
-            <span className='mx-2'>-</span> 
-            <span>{price}</span>
+            <span>{subtitle}</span> 
           </p>
         </div>
 
