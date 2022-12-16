@@ -19,7 +19,7 @@ export default function CertificationsMenu({
               className="uppercase text-sm font-bold"
               href={`/certifications/${slugify(
                 element.certificationCategories_id.libelle
-              )}`}
+              )}-${element.certificationCategories_id.id}`}
             >
               {element.certificationCategories_id.libelle}
             </Link>
@@ -42,7 +42,7 @@ export default function CertificationsMenu({
                         element.certificationCategories_id.libelle
                       )}/${slugify(
                         sub.certificationSousCategories_id.libelle
-                      )}-${subIndex}`}
+                      )}-${sub.certificationSousCategories_id.id}`}
                     >
                       <span className="text-sm font-medium block">
                         {sub.certificationSousCategories_id.libelle}

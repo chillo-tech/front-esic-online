@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { useQuery } from "react-query";
-import { getCategories } from "services";
 import { slugify } from "utils/slugify";
 
 export default function CategoriesMenu({
@@ -10,16 +8,6 @@ export default function CategoriesMenu({
   item: any;
   className: string;
 }) {
-  const { data } = useQuery<any>({
-    queryKey: ["categories"],
-    queryFn: () =>
-      getCategories({
-        fields:
-          "id,libelle,souscategories,souscategories.sousCategories_id.libelle",
-      }),
-    refetchOnWindowFocus: false,
-  });
-
   return (
     <div
       className={`${className} flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full border-t-4 border-blue-800`}
