@@ -7,7 +7,7 @@ import { slugify } from "utils/slugify";
 export default function CategoriesMenu({item, className}: {item: any;className: string;}) {
   return (
     <div
-      className={`${className} flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full border-t-4 border-blue-800`}
+      className={`${className} flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full border-t-4 border-blue-800 z-50`}
     >
       <div className="w-full md:w-3/4 px-8">
         {item.menu_category.map((item: any) => (

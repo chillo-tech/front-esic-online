@@ -3,7 +3,7 @@ import {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axio
 const onRequest = async (config: AxiosRequestConfig): Promise<AxiosRequestConfig> => { 
   return {
       ...config,
-      baseURL: `${process.env.API_URL}`,
+      baseURL: `${process.env.API_URL}/items`,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',

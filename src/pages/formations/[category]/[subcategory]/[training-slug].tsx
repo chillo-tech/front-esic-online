@@ -1,7 +1,7 @@
 import OpenedLayout from "containers/opened";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsBarChart } from "react-icons/bs";
 import { BiCoinStack } from "react-icons/bi";
@@ -14,8 +14,13 @@ import {
 } from "react-icons/hi";
 import { useQuery } from "react-query";
 import { getDetail } from "services/index";
+import Image from "next/image";
+import { cn, loaderProp } from "utils/image-loader";
+import Debug from "components/Debug";
+import { getDisplayedDate } from "utils/DateFormat";
 
 function Training({ id }: { id: string }) {
+  const [isImageLoading, setLoading] = useState(true);
   const { isSuccess, isLoading, data } = useQuery<any>({
     queryKey: ["formations", "detail", id],
     queryFn: () =>
@@ -52,16 +57,35 @@ function Training({ id }: { id: string }) {
   return (
     <OpenedLayout>
       <Head>
-        <title>{`${data?.data.data.libelle}`} </title>
+        <title>{data?.data.data.libelle} </title>
         <meta name="description" content={`${data?.data.data.description}`} />
       </Head>
       <main>
-        <section
-          className="w-full bg-cover bg-center"
-          style={{ backgroundImage: `url()` }}
-        >
+        <section className="w-full bg-cover bg-cente relative">
           <div className="bg-gradient-to-r from-sky-900 bg-black/50 h-full px-4">
-            <div className="container mx-auto flex relative">
+          {
+            data?.data.data.image ? (
+              <>
+                <div className="bg-black/10 bg-gradient-to-r from-black/80 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20" />
+                <Image
+                  fill={true}
+                  src={`${process.env.API_URL}/assets/${data?.data.data.image.filename_disk}`}
+                  alt={data?.data.data.libelle}
+                  loader={loaderProp}
+                  unoptimized
+                  className={cn(
+                    'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
+                    isImageLoading
+                      ? 'scale-110 blur-2xl grayscale'
+                      : 'scale-100 blur-0 grayscale-0'
+                  )}
+                  onLoadingComplete={() => setLoading(false)}
+                />
+              </>
+            ): 
+            null 
+          }
+            <div className="container mx-auto flex relative z-20">
               <div className="max-w-4xl md:py-16 md:pt-24 text-white">
                 <h2 className="text-4xl mt-10 md:text-5xl font-extrabold">
                   {data?.data.data.libelle}
@@ -140,7 +164,7 @@ function Training({ id }: { id: string }) {
                   {
                    (data?.data.data.programmepdf ) ? 
                       <Link
-                        href="/contactez-nous"
+                        href={`${process.env.API_URL}/assets/${data?.data.data.programmepdf}?download`}
                         className="p-3 text-white text-center border border-white rounded-full"
                       >
                         Je télécharge le programme
@@ -238,25 +262,29 @@ function Training({ id }: { id: string }) {
             
           <div
                 id="formation-panel"
-                className="font-sans xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-50 sm:left-[70%] 2xl:left-[65%] bg-white"
+                className="font-sans xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-30 sm:left-[70%] 2xl:left-[65%] bg-white"
               >
                 <div className="py-4 space-y-3 px-8 bg-secondary text-white rounded-md rounded-b-none">
                   <div className="sm:text-4xl font-bold mt-4">
                     {data?.data.data.prix}
                   </div>
-                  <div className="sessions py-4">
-                    <h3 className="mt-2 font-semibold text-2xl mb-2">
-                      Nos prochaines
-                    </h3>
-                    {[
-                      { start_date: "01/01/2022", end_date: "01/02/2022" },
-                      { start_date: "01/02/2021", end_date: "01/03/2022" },
-                    ].map((item, index) => (
-                      <div key={`session${index}`}>
-                        Du {item.start_date} au {item.end_date}
-                      </div>
-                    ))}
-                  </div>
+                  {
+                    data?.data.data.sessions ? 
+                      (
+                        <div className="sessions py-4">
+                          <h3 className="mt-2 font-semibold text-2xl mb-2">
+                            Nos prochaines
+                          </h3>
+                          {data?.data.data.sessions.map((item: any, index: number) => (
+                            <div key={`session-${id}-${index}`} className="bg-slate-50 text-slate-600 mb-3 rounded-md p-2">
+                              <p className="mb-0">Du {getDisplayedDate(item.sessions_id.debut)}</p>
+                              <p className="mb-0">Au {getDisplayedDate(item.sessions_id.fin)}</p> 
+                            </div>
+                          ))}
+                        </div>
+                      )
+                    : null 
+                  }
                 </div>
                 <ul className="mt-4  px-8 pb-8">
                   {[

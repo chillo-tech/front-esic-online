@@ -45,18 +45,17 @@ const getCategory = ({ id }: { id: string }) => {
 };
 
 const getDetail = ({
-  id,
-  fields,
+  id
 }: {
   id: string | string[];
   fields?: string;
 }) => {
-  console.log({ id });
-
+  const base = '*';
+  const images = 'image.*';
+  const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut';
+  const fields = `${base},${images},${sessions}`;
   return axiosInstance.get(`formations/${id}`, {
-    params: {
-      ...(fields ? { fields } : {}),
-    },
+    params: { ...(fields ? { fields } : {}) },
   });
 };
 
