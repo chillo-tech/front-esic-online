@@ -10,13 +10,13 @@ export default function CertificationsMenu({
 }) {
   return (
     <div
-      className={`${className} flex absolute left-0 top-[3.7rem] bg-blue-900 shadow-xl w-full text-white`}
+      className={`${className} flex absolute left-0 top-[3.7rem]  shadow-xl w-full bg-white border-t-4 border-blue-800`}
     >
       <ul className="grid grid-cols-3 w-full p-8 gap-8">
         {item.menu_certificationCategory.map((element: any, index: number) => (
           <li key={`certif${index}`}>
             <Link
-              className="uppercase text-sm font-bold"
+              className="uppercase text-sm font-bold text-blue-900"
               href={`/certifications/${slugify(
                 element.certificationCategories_id.libelle
               )}-${element.certificationCategories_id.id}`}
