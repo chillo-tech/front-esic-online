@@ -67,9 +67,7 @@ function Training({ id }: { id: string }) {
                   {data?.data.data.libelle}
                 </h2>
                 <div className="flex">
-                
-
-                  
+                  {data?.data.data.souslibelle}
                 </div>
                 <div
                   dangerouslySetInnerHTML={{
@@ -139,38 +137,130 @@ function Training({ id }: { id: string }) {
                   >
                     Je candidate
                   </Link>
-                  <Link
-                    href="/contactez-nous"
-                    className="p-3 text-white text-center border border-white rounded-full"
-                  >
-                    Je télécharge le programme
-                  </Link>
+                  {
+                   (data?.data.data.programmepdf ) ? 
+                      <Link
+                        href="/contactez-nous"
+                        className="p-3 text-white text-center border border-white rounded-full"
+                      >
+                        Je télécharge le programme
+                      </Link>
+                    : 
+                    null
+                  }
+                 
                 </div>
               </div>
-
-              <div
+            </div>
+          </div>
+        </section>
+        <section className="container mx-auto py-6 px-4 grid md:py-12 md:grid-cols-10">
+          <section className="md:col-span-6">
+            {
+              data?.data.data.contenu ? 
+                (<article className="mb-7" dangerouslySetInnerHTML={{__html: data?.data.data.contenu}}/>)
+              : null
+            }
+            {
+              data?.data.data.objectifs ? 
+              (
+                <article className="mt-5" id="objectifs">
+                <h3 className="text-2xl font-semibold">
+                  Objectifs de la formation
+                  <span className="bg-secondary block h-1 w-36 my-2"></span>
+                </h3>
+                <div
+                  className="mt-4"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.data.data.objectifs,
+                  }}
+                ></div>
+              </article>
+              )
+              : null
+            }
+            {
+              data?.data.data.programme ? 
+              (
+                <article className="mt-5" id="programme">
+                <h3 className="text-2xl font-semibold">
+                  Programme de la formation
+                  <span className="bg-secondary block h-1 w-36 my-2"></span>
+                </h3>
+                <div
+                  className="mt-4"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.data.data.programme,
+                  }}
+                ></div>
+              </article>
+              )
+              : null
+            }
+            {
+              data?.data.data.etudiants ? 
+              (
+                <article className="mt-5" id="pre-requis">
+                <h3 className="text-2xl font-semibold">
+                  Pré requis
+                  <span className="bg-secondary block h-1 w-36 my-2"></span>
+                </h3>
+                <div
+                  className="mt-4"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.data.data.etudiants,
+                  }}
+                ></div>
+              </article>
+              )
+              : null
+            }
+            {
+              data?.data.data.ressources ? 
+              (
+                <article className="mt-5" id="ressources">
+                <h3 className="text-2xl font-semibold">
+                  Ressources utilisées pour cette formation
+                  <span className="bg-secondary block h-1 w-36 my-2"></span>
+                </h3>
+                <div
+                  className="mt-4"
+                  dangerouslySetInnerHTML={{
+                    __html: data?.data.data.ressources,
+                  }}
+                ></div>
+              </article>
+              )
+              : null
+            }
+          </section>
+          <aside className="md:col-span-4">
+            
+          <div
                 id="formation-panel"
-                className="xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-50 sm:left-[70%] 2xl:left-[65%] bg-white"
+                className="font-sans xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-50 sm:left-[70%] 2xl:left-[65%] bg-white"
               >
                 <div className="py-4 space-y-3 px-8 bg-secondary text-white rounded-md rounded-b-none">
                   <div className="sm:text-4xl font-bold mt-4">
-                    {data?.data.data.price_ht}&euro; HT
+                    {data?.data.data.prix}
                   </div>
-                  <h3 className="mt-2 font-semibold text-lg">
-                    Les sessions disponibles
-                  </h3>
-                  {[
-                    { start_date: "01/01/2022", end_date: "01/02/2022" },
-                    { start_date: "01/02/2021", end_date: "01/03/2022" },
-                  ].map((item, index) => (
-                    <div key={`session${index}`}>
-                      Du {item.start_date} au {item.end_date}
-                    </div>
-                  ))}
+                  <div className="sessions py-4">
+                    <h3 className="mt-2 font-semibold text-2xl mb-2">
+                      Nos prochaines
+                    </h3>
+                    {[
+                      { start_date: "01/01/2022", end_date: "01/02/2022" },
+                      { start_date: "01/02/2021", end_date: "01/03/2022" },
+                    ].map((item, index) => (
+                      <div key={`session${index}`}>
+                        Du {item.start_date} au {item.end_date}
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <ul className="mt-4  px-8 pb-8">
                   {[
-                    { label: "Financements", target: "#financements" },
+                    { label: "Financements", target: "/financements" },
                     { label: "Pré-requis", target: "#pre-requis" },
                     { label: "Programme", target: "#programme" },
                     { label: "Notre equipe", target: "#notre-equipe" },
@@ -184,60 +274,7 @@ function Training({ id }: { id: string }) {
                   ))}
                 </ul>
               </div>
-            </div>
-          </div>
-        </section>
-        <section className="container mx-auto py-6 px-4 md:py-12">
-          <article className="max-w-4xl" id="financements">
-            <h3 className="text-2xl font-semibold">
-              Comment financer votre formation ?
-              <span className="bg-secondary block h-1 w-36 my-2"></span>
-            </h3>
-            <p
-              className="mt-4"
-              dangerouslySetInnerHTML={{
-                __html: data?.data.data.description,
-              }}
-            ></p>
-          </article>
-
-          <article className="mt-12 max-w-4xl">
-            <h3 className="text-2xl font-semibold">
-              Programme de la formation
-              <span className="bg-secondary block h-1 w-36 my-2"></span>
-            </h3>
-            <p
-              className="mt-4"
-              dangerouslySetInnerHTML={{
-                __html: data?.data.data.description,
-              }}
-            ></p>
-          </article>
-
-          <article className="mt-12 max-w-4xl">
-            <h3 className="text-2xl font-semibold">
-              Pré-requis{" "}
-              <span className="bg-secondary block h-1 w-36 my-2"></span>
-            </h3>
-            <p
-              className="mt-4"
-              dangerouslySetInnerHTML={{
-                __html: data?.data.data.description,
-              }}
-            ></p>
-          </article>
-
-          <article className="mt-12 max-w-4xl" id="equipe">
-            <h3 className="text-2xl font-semibold">
-              Equipe <span className="bg-secondary block h-1 w-36 my-2"></span>
-            </h3>
-            <p
-              className="mt-4"
-              dangerouslySetInnerHTML={{
-                __html: data?.data.data.teachers_description,
-              }}
-            ></p>
-          </article>
+          </aside>
         </section>
       </main>
     </OpenedLayout>
