@@ -6,7 +6,7 @@ export default function BilanCompetences() {
   return (
     <MainLayout>
       <Head>
-        <title> {competence_assement.title} </title>
+        <title>{competence_assement.title}</title>
       </Head>
     </MainLayout>
   );

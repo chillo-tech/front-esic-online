@@ -13,17 +13,15 @@ const getFormations = () => {
 };
 
 const getSubCategories = ({
-  id,
-  fields,
+  id
 }: {
   id: string | string[];
   fields?: string;
 }) => {
-  return axiosInstance.get(`sousCategories/${id}`, {
-    params: {
-      ...(fields ? { fields } : {}),
-    },
-  });
+  const base = "id,libelle,titre,description";
+  const formations = "formation_id.id,formation_id.libelle,formation_id.souslibelle,formation_id.duree,formation_id.prix,formation_id.image";
+  const fields = `${base},${formations}`
+  return axiosInstance.get(`sousCategories/${id}=?fields=${fields}`);
 };
 
 const getCategories = ({ fields }: { fields: string }) => {

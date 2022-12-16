@@ -6,7 +6,7 @@ export default function ComprendreLaVae() {
   return (
     <MainLayout>
       <Head>
-        <title> {understand_vae.title} </title>
+        <title>{understand_vae.title} </title>
       </Head>
     </MainLayout>
   );
