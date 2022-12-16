@@ -1,10 +1,14 @@
 import Debug from "components/Debug";
 import Link from "next/link";
-import { useQuery } from "react-query";
-import { getCategories } from "services";
 import { slugify } from "utils/slugify";
 
-export default function CategoriesMenu({item, className}: {item: any;className: string;}) {
+export default function CategoriesMenu({
+  item,
+  className,
+}: {
+  item: any;
+  className: string;
+}) {
   return (
     <div
       className={`${className} flex absolute top-[3.7rem] left-0 bg-white shadow-xl w-full border-t-4 border-blue-800 z-50`}
