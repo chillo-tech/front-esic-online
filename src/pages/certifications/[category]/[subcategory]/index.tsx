@@ -1,7 +1,6 @@
 import PageHeader from "components/pages/PageHeader";
 import OpenedLayout from "containers/opened";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { getCertificationSubCategory } from "services/certifications";
