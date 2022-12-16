@@ -1,4 +1,4 @@
-import { slugify } from "utils/helpers";
+import { slugify } from "utils/slugify";
 import CategoriesMenu from "./categories-menu";
 import CertificationsMenu from "./certifications-menu";
 import SimpleMenu from "./simple-menu";
