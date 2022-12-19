@@ -1,27 +1,49 @@
 import OpenedLayout from "containers/opened";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsBarChart } from "react-icons/bs";
 import { BiCoinStack } from "react-icons/bi";
-import { GiPositionMarker } from "react-icons/gi";
-import {
-  HiAcademicCap,
-  HiBadgeCheck,
-  HiCheck,
-  HiOutlineMap,
-} from "react-icons/hi";
-import { useQuery } from "react-query";
-import { getDetail } from "services/index";
+import { GiPositionMarker,GiCancel } from "react-icons/gi";
+import { useMutation, useQuery } from "react-query";
+import { add, getDetail } from "services/index";
 import Image from "next/image";
 import { cn, loaderProp } from "utils/image-loader";
-import Debug from "components/Debug";
 import { getDisplayedDate } from "utils/DateFormat";
+import {useForm} from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { EMAIL_ERROR_MESSAGE, EMAIL_PATTERN } from "utils/index";
+import { useRouter } from "next/router";
+import Message from "components/Message";
+import formStyles from 'styles/Form.module.css';
+var classNames = require('classnames');
+
+export type Message = {
+  email: string, 
+  formation?: string,
+  libelle_formation?:string
+  fichier?: string
+}
+const schema = yup.object({
+    email: yup.string()
+              .email(EMAIL_ERROR_MESSAGE)
+              .required(EMAIL_ERROR_MESSAGE)
+              .matches(EMAIL_PATTERN, {message: EMAIL_ERROR_MESSAGE}),
+}).required();
 
 function Training({ id }: { id: string }) {
+  const mutation = useMutation({mutationFn: ((message:Message) => add("/telechargements", message))});
+  const router = useRouter();
+	const {register, handleSubmit, formState: {errors}} = useForm<Message>({
+		mode: "onChange",
+		resolver: yupResolver(schema)
+	});
+  
   const [isImageLoading, setLoading] = useState(true);
-  const { isSuccess, isLoading, data } = useQuery<any>({
+  const [displayDownloadForm, setDisplayDownloadForm] = useState(false);
+  const { data } = useQuery<any>({
     queryKey: ["formations", "detail", id],
     queryFn: () =>
       getDetail({
@@ -31,29 +53,14 @@ function Training({ id }: { id: string }) {
     staleTime: 3600000, //1jour
     cacheTime: 3600000, //1jour
   });
-
-  useEffect(() => {
-    window.onscroll = function () {
-      let panel = document.getElementById("formation-panel") as HTMLElement;
-      let header = document.getElementById("navbar") as HTMLElement;
-      let courseCtaElement = document.getElementById("equipe") as HTMLElement;
-
-      if (panel != null && header != null && courseCtaElement != null) {
-        if (window.scrollY > panel.offsetTop) {
-          panel.style.top = header.offsetHeight + "px";
-        } else {
-          panel.style.top = "200px";
-        }
-
-        if (window.scrollY > courseCtaElement.offsetTop) {
-          panel.classList.add("hidden");
-        } else {
-          panel.classList.remove("hidden");
-        }
-      }
-    };
-  });
-
+  const onSubmit = (formData: Message) => {
+    mutation.mutate({...formData, libelle_formation: data?.data.data.libelle, formation: data?.data.data.id, fichier: data?.data.data.programmepdf  });
+	};
+  const handleError = (error:any) => {
+    error.preventDefault();
+    mutation.reset();
+    router.push('/contactez-nous')
+  }
   return (
     <OpenedLayout>
       <Head>
@@ -163,12 +170,11 @@ function Training({ id }: { id: string }) {
                   </Link>
                   {
                    (data?.data.data.programmepdf ) ? 
-                      <Link
-                        href={`${process.env.API_URL}/assets/${data?.data.data.programmepdf}?download`}
+                      <button type="button" onClick={() => setDisplayDownloadForm(!displayDownloadForm)}
                         className="p-3 text-white text-center border border-white rounded-full"
                       >
                         Je télécharge le programme
-                      </Link>
+                      </button>
                     : 
                     null
                   }
@@ -259,19 +265,16 @@ function Training({ id }: { id: string }) {
             }
           </section>
           <aside className="md:col-span-4">
-            
-          <div
-                id="formation-panel"
-                className="font-sans xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-30 sm:left-[70%] 2xl:left-[65%] bg-white"
-              >
-                <div className="py-4 space-y-3 px-8 bg-secondary text-white rounded-md rounded-b-none">
-                  <div className="sm:text-4xl font-bold mt-4">
+            {/* xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-30 sm:left-[70%] 2xl:left-[65%]  */}
+              <div id="formation-panel" className="font-sans bg-white w-2/3 mx-auto md:shadow-2xl rounded-lg" >
+                <div className="py-4 space-y-3 px-8 bg-secondary text-white rounded-t-lg">
+                  <div className="text-3xl font-bold mt-4">
                     {data?.data.data.prix}
                   </div>
                   {
                     data?.data.data.sessions ? 
                       (
-                        <div className="sessions py-4">
+                        <div className="sessions py-2">
                           <h3 className="mt-2 font-semibold text-2xl mb-2">
                             Nos prochaines
                           </h3>
@@ -286,7 +289,7 @@ function Training({ id }: { id: string }) {
                     : null 
                   }
                 </div>
-                <ul className="mt-4  px-8 pb-8">
+                <ul className="mt-4  px-8 pb-8 rounded-b-lg">
                   {[
                     { label: "Financements", target: "/financements" },
                     { label: "Pré-requis", target: "#pre-requis" },
@@ -305,6 +308,64 @@ function Training({ id }: { id: string }) {
           </aside>
         </section>
       </main>
+      <section className={classNames({ 'fixed': displayDownloadForm, 'hidden': !displayDownloadForm },`text-white h-screen overflow-hidden bg-gray-700 fixed left-0 top-0 right-0 bottom-0 z-50 font-sans flex flex-col justify-between items-center`)}>
+         <p className="pdf-form container mx-auto flex justify-end pt-7 px-2">
+          <button type="button" onClick={() => {setDisplayDownloadForm(false); mutation.reset();}}>
+            <GiCancel className="text-4xl" />
+          </button>
+         </p>
+         <div className="pdf-form container mx-auto flex flex-col md:items-center justify-center">
+           
+            {mutation.isError ? (
+              <Message 
+                type="error" 
+                firstMessage='Une erreur est survenue, nous allons la résoudre sous peu' 
+                secondMessage="N'hésitez pas à nous passer un coup de fil" 
+                action={handleError} 
+                actionLabel="Contactez nous"
+              />) 
+            : null}
+            {mutation.isSuccess ? (
+              <Message 
+                type="success" 
+                firstMessage='Merci de votre intérêt pour cette formation' 
+                secondMessage='Nous venons de vous transmettre un mail contenant le lien pour télécharger le programme' 
+                action={() => {setDisplayDownloadForm(false); mutation.reset();}}
+                actionLabel="C'est noté"
+              />) 
+            : null}
+            {
+              mutation.isIdle 
+              ? (
+                <>
+                <h2 className="text-center text-3xl md:text-4xl leading-10 font-extralight mt-4 flex flex-col items-center">
+                  Téléchargez le programme de la formation 
+                  <span className="text-green-600 block md:mt-2">{data?.data.data.libelle}</span>
+                </h2>
+                <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid md:px-20 px-2 !font-extralight">
+                  <label htmlFor="email" className={formStyles.form_control__label}>
+                    <span className='text-white text-2xl font-extralight'>Votre email</span>
+                    <p className="text-slate-300 !text-sm">Promis nous n&apos;allons pas spammer </p>
+                  </label>
+                  <div className="flex flex-col">
+                    <div className="grid md:grid-cols-8">
+                      <input type="text" id="email" placeholder="Votre email"
+                              className={`mb-1 md:mb-0 w-full !text-black border-gray-300 py-3 rounded-l-lg rounded-r-lg md:rounded-r-none shadow-sm focus:border-indigo-500 md:col-span-7 !md:rounded-r-none`}
+                              {...register("email")}/>
+                      <button type='submit' className='bg-secondary text-white border-yellow-500 px-4 py-4 rounded-md md:rounded-l-none !md:mt-1 md:block w-full'>
+                        <span>Télécharger</span>
+                      </button>
+                    </div>
+                    <p className={formStyles.form_control__error}>{errors.email?.message}</p>
+                  </div>
+                </form>
+               </>
+              )
+              : null
+            }
+         </div>
+         <p />
+      </section>
     </OpenedLayout>
   );
 }

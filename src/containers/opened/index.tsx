@@ -5,7 +5,7 @@ import React from "react";
 
 function OpenedLayout({ children }: { children: any }) {
   return (
-    <section className="w-full">
+    <section className="w-full relative">
       <Head>
         <title>Centre de formation esic</title>
         <meta
