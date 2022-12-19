@@ -18,7 +18,7 @@ export type Message = {
   phone: string,
   profile: string,
   subject: string,
-  contactChannel: any,
+  contactChannel: string[],
 }
 const schema = yup.object({
     name: yup.string().trim()
@@ -49,7 +49,7 @@ const schema = yup.object({
 }).required();
 
 export default function Contact() {
-  const mutation = useMutation({mutationFn: ((message:Message) => add("/contacts", message))});
+  const mutation = useMutation({mutationFn: ((message:any) => add("/contacts", message))});
   const router = useRouter();
 	const {register, handleSubmit, watch, formState: {errors}} = useForm<Message>({
 		mode: "onChange",
