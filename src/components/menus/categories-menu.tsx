@@ -1,4 +1,3 @@
-import Debug from "components/Debug";
 import Link from "next/link";
 import { slugify } from "utils/slugify";
 
@@ -20,7 +19,9 @@ export default function CategoriesMenu({
             className="border-b border-gray-300 grid grid-cols-3 gap-4"
           >
             <Link
-              href={`/formations/${slugify(item.categories_id.libelle)}-${item.categories_id.id}`}
+              href={`/formations/${slugify(item.categories_id.libelle)}-${
+                item.categories_id.id
+              }`}
               className="uppercase font-bold text-lg pt-8 text-blue-800 flex flex-col justify-center"
             >
               {item.categories_id.libelle}
