@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Raleway", sans-serif;
-}
 
 /*==== FIN Testing des polices ===*/
 #home-police-1 {

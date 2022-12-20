@@ -1,6 +1,6 @@
 import { axiosInstance } from "../axios-instance";
 
-const getFormations = () => {
+const getFormations = ({limit}: {limit: number}) => {
   const base = "id,libelle,titre,description";
   const categories =
     "menu_category.categories_id.id,menu_category.categories_id.libelle";
@@ -8,16 +8,29 @@ const getFormations = () => {
     "menu_category.categories_id.souscategories.sousCategories_id.id,menu_category.categories_id.souscategories.sousCategories_id.libelle,menu_category.categories_id.souscategories.sousCategories_id.ordre";
   const fields = `${base},${categories},${subcategories}`;
   return axiosInstance.get(
-    `menus?filter[libelle][_eq]=Formations&fields=${fields}`
+    `menus?filter[libelle][_eq]=Formations`, {
+      params: { 
+        ...(fields ? { fields } : {}),
+        ...(limit ? { limit } : {}),
+      },
+    }
   );
 };
 
-const getSubCategories = ({
-  id
-}: {
-  id: string | string[];
-  fields?: string;
-}) => {
+const getTopTrainings = ({limit = 3}: {limit?: number}) => {
+  const base = "id,libelle,topFormation,prix,cpf,niveau,duree,image";
+  const fields = `${base}`;
+  return axiosInstance.get(
+    `formations?sort[]=-date_updated&filter[topFormation][_eq]=true`, {
+      params: { 
+        ...(fields ? { fields } : {}),
+        ...(limit ? { limit } : {}),
+      },
+    }
+  );
+};
+
+const getSubCategories = ({id}: {id: string | string[]; fields?: string}) => {
   const base = "id,libelle,titre,description";
   const formations = "formations.formations_id.id,formations.formations_id.libelle,formations.formations_id.souslibelle,formations.formations_id.duree,formations.formations_id.prix,formations.formations_id.image";
   const fields = `${base},${formations}`;
@@ -66,6 +79,7 @@ const getCategoriesCertifications = () => {
 };
 
 export {
+  getTopTrainings,
   getFormations,
   getCategory,
   getCategories,

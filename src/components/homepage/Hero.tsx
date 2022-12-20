@@ -2,12 +2,27 @@ import { hero, formations } from "utils";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { stats } from "../../utils/data";
+import { useQuery } from "react-query";
+import { read } from 'services/index';
+import Debug from "components/Debug";
 
 export default function Hero() {
   const [result, setResult] = useState<any>([]);
   const [showResult, setShowResult] = useState(false);
   const all_formations = formations.map((item) => item.courses).flat();
-
+  const {
+    isSuccess,
+    data
+  } = useQuery<any>({
+    queryKey: ["statistics"],
+    queryFn: () => read({
+      path: 'statistiques',
+      fields: 'libelle,articles.article_id.id,articles.article_id.souslibelle,articles.article_id.libelle,articles.article_id.ordre'
+    }),
+    refetchOnWindowFocus: false,
+    staleTime: 3600000, //1jour
+    cacheTime: 3600000, //1jour
+  });
   useEffect(() => {}, []);
 
   function handleInput(e: any) {
@@ -74,23 +89,24 @@ export default function Hero() {
           </article>
         </aside>
 
-        <div className="relative md:absolute  md:top-[50%] pt-4 md:pt-20 z-30 w-full ">
-          <div className="mx-auto max-w-7xl">
-            <div className="mx-auto rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4 mt-4 md:mt-12">
-              {stats.items.map((item, ind) => (
-                <article key={`stat${ind}`} className="py-8 text-center">
-                  <div className="text-6xl font-extrabold text-secondary">
-                    {item.value}
-                  </div>
-                  <div className="mt-2 text-lg leading-6 font-medium text-gray-500">
-                    {item.label}
-                  </div>
-                </article>
-              ))}
+        {isSuccess ? (
+          <div className="relative md:absolute  md:top-[50%] pt-4 md:pt-20 z-30 w-full ">
+            <div className="mx-auto max-w-7xl">
+              <div className="mx-auto rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4 mt-4 md:mt-12">
+                {data?.data.data[0].articles && data?.data.data[0].articles.map((item:any) => (
+                  <article key={`stat${item.article_id?.id}`} className="py-8 text-center">
+                    <div className="text-6xl font-extrabold text-secondary">
+                      {item?.article_id?.libelle}
+                    </div>
+                    <div className="mt-2 text-lg leading-6 font-medium text-gray-500">
+                      {item?.article_id?.souslibelle}
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-
+      ) : null }
         <div
           className="absolute z-0 hidden md:block  h-full w-3/4 bg-cover right-0 "
           style={{ backgroundImage: "url(/images/esic-hero-image-4.jpg)" }}

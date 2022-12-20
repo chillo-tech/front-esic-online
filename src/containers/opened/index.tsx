@@ -22,3 +22,10 @@ function OpenedLayout({ children }: { children: any }) {
 }
 
 export default OpenedLayout;
+
+export async function getServerSideProps(context: any) {
+  console.log('====================================');
+  console.log("dddeee");
+  console.log('====================================');
+  return { props: {} };
+}

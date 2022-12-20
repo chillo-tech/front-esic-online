@@ -71,7 +71,7 @@ export default function Contact() {
       <Head>
         <title> {contact.title} </title>
       </Head>
-      <section className="pt-32 pb-16 container mx-auto flex flex-wrap font-sans">
+      <section className="pt-12 pb-16 container mx-auto flex flex-wrap font-sans">
         <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">
           <h2 className="text-3xl sm:text-4xl font-bold">
             {contact.infos.title}

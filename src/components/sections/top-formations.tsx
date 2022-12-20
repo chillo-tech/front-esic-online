@@ -38,7 +38,7 @@ export default function TopFormations() {
           id="top-formation"
         >
           <article className="flex flex-wrap md:flex-nowrap text-3xl font-bold md:text-4xl justify-between px-3 md:mt-0">
-            <h2 className="">{top_formations.title}</h2>
+            <h2 className="t">{top_formations.title}</h2>
             <div className="flex space-x-2 mt-4 md:mt-0">
               <LightSlideButton
                 to="left"

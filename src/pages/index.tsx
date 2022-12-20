@@ -1,30 +1,24 @@
 import Head from "next/head";
-import Hero from "../components/sections/hero";
-import Location from "../components/sections/location";
-import Partners from "../components/sections/partners";
-import { home } from "../utils/data/pages-list";
-import TopFormations from "../components/sections/top-formations";
-import AboutOverview from "../components/sections/about-overview";
-import Features from "../components/sections/features";
+import Hero from "components/homepage/hero";
+import { home } from "utils/data/pages-list";
+import AboutOverview from "components/homepage/AboutOverview";
+import NotreOffre from "components/homepage/NotreOffre";
 import OpenedLayout from "containers/opened";
+import TopTrainings from "components/homepage/TopTrainings";
+import OurCustomers from "components/homepage/OurCustomers";
+import Location from "components/homepage/Location";
 
 export default function Home() {
   return (
     <OpenedLayout>
       <Head>
-        <title> {home.title} </title>
+        <title>{home.title} </title>
       </Head>
-
       <Hero />
-
-      <TopFormations />
-
+      <TopTrainings />
       <AboutOverview />
-
-      <Features />
-
-      <Partners />
-
+      <NotreOffre />
+      <OurCustomers />
       <Location />
     </OpenedLayout>
   );
