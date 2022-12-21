@@ -16,7 +16,7 @@ export type Message = {
   message: string, 
   email: string, 
   phone: string,
-  userProfile: string,
+  profile: string,
   subject: string,
   contactChannel: string[],
 }
@@ -30,7 +30,7 @@ const schema = yup.object({
               .email(EMAIL_ERROR_MESSAGE)
               .required(EMAIL_ERROR_MESSAGE)
               .matches(EMAIL_PATTERN, {message: EMAIL_ERROR_MESSAGE}),
-    userProfile: yup.string()
+    profile: yup.string()
           .trim()
           .required(REQUIRED_ERROR_MESSAGE),
     subject: yup.string()
@@ -49,17 +49,17 @@ const schema = yup.object({
 }).required();
 
 export default function Contact() {
-  const mutation = useMutation({mutationFn: ((message:Message) => add("/message", message))});
+  const mutation = useMutation({mutationFn: ((message:any) => add("/contacts", message))});
   const router = useRouter();
 	const {register, handleSubmit, watch, formState: {errors}} = useForm<Message>({
 		mode: "onChange",
 		resolver: yupResolver(schema)
 	});
 
-  const userProfile = watch("userProfile");
+  const profile = watch("profile");
   const contactChannel = watch("contactChannel");
 	const onSubmit = (data: Message) => {
-    mutation.mutate(data);
+    mutation.mutate({...data, contactChannel: contactChannel.join(", ").toLowerCase()});
 	};
 
   const handleError = (error:any) => {
@@ -71,7 +71,7 @@ export default function Contact() {
       <Head>
         <title> {contact.title} </title>
       </Head>
-      <section className="pt-32 pb-16 container mx-auto flex flex-wrap font-sans">
+      <section className="pt-12 pb-16 container mx-auto flex flex-wrap font-sans">
         <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">
           <h2 className="text-3xl sm:text-4xl font-bold">
             {contact.infos.title}
@@ -145,16 +145,16 @@ export default function Contact() {
                     <label htmlFor="phone" className={formStyles.form_control__label}>
                       <span className='text-black'>Vous êtes</span>
                     </label>
-                    <select {...register("userProfile")} className={formStyles.form_control__input}>
+                    <select {...register("profile")} className={formStyles.form_control__input}>
                       <option value="">Veuillez sélectionner</option>
                       {
                         USER_PROFILE.map((profile: any, index: number) => (<option key={`profile-${index}`} value={profile.value}>{profile.label}</option>))
                       }
                     </select>
-                    <p className={formStyles.form_control__error}>{errors.userProfile?.message}</p>
+                    <p className={formStyles.form_control__error}>{errors.profile?.message}</p>
                   </div>
               </div>
-              { userProfile ?
+              { profile ?
                 (
                   <div className={formStyles.form_control}>
                       <div className={formStyles.form_control}>
@@ -164,14 +164,14 @@ export default function Contact() {
                         <select {...register("subject")} className={formStyles.form_control__input}>
                           <option value="">Veuillez sélectionner</option>
                           {
-                            userProfile === 'particulier'  ? 
+                            profile === 'particulier'  ? 
                             (
                               USER_PROFILE_OPTIONS.map((profile: any, index: number) => (<option key={`profile-options-${index}`} value={profile.value}>{profile.label}</option>))
                             )
                             : null
                           }
                           {
-                            userProfile === 'entreprise'  ? 
+                            profile === 'entreprise'  ? 
                             (
                               COMPANY_PROFILE_OPTIONS.map((company: any, index: number) => (<option key={`company-options-${index}`} value={company.value}>{company.label}</option>))
                             )

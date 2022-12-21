@@ -1,6 +1,6 @@
 export const home = {
   link: "/",
-  title: "Esic - Home",
+  title: "Esic - 5 000 formations, en presentiel et à distance",
 };
 export const formations_page = {
   title: '',

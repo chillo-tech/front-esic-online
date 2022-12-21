@@ -77,7 +77,7 @@ export default function Header() {
         >
           <ul
             ref={menuLinks}
-            className="md:flex justify-center  -mt-16 md:-mt-0 items-center w-full space-x-2 text-gray-700 font-medium "
+            className="md:flex justify-center  -mt-16 md:-mt-0 items-center w-full space-x-2 text-gray-700"
           >
             {menus?.data
               .sort((a: any, b: any) => a.ordre - b.ordre)
@@ -92,7 +92,7 @@ export default function Header() {
                   <div
                     //href={`/${slugify(item.libelle)}`}
                     className={classNames(
-                      "inline-flex py-2 w-full  md:py-6 px-4 space-x-2 justify-center text-2xl  md:text-base 2xl:text-lg items-center font-medium ",
+                      "inline-flex py-2 w-full  md:py-6 px-4 space-x-2 justify-center text-2xl  md:text-base 2xl:text-lg items-center",
                       {
                         "bg-secondary text-white": showMenu[item.id],
                       }

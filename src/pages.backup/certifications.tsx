@@ -6,7 +6,7 @@ export default function Certifications() {
   return (
     <MainLayout>
       <Head>
-        <title> {certifications.title} </title>
+        <title>{certifications.title} </title>
       </Head>
     </MainLayout>
   );

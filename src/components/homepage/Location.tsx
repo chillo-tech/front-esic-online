@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { location } from "../../utils/data";
-export default function Location() {
+function Location() {
   useEffect(() => {
     // Adjust map size to screen size
     const map = document.querySelector(".map");
@@ -16,8 +15,8 @@ export default function Location() {
 
   return (
     <section className="pt-4 pb-0 bg-gray-100">
-      <header className="max-w-3xl mx-auto text-center">
-        <h2 className="py-10">Nos bureaux</h2>
+      <header className="mb-4 container mx-auto px-2">
+        <h2 className="text-2xl md:text-4xl font-extrabold mb-1">Nos bureaux</h2>
       </header>
       <div className="w-full overflow-hidden">
         <iframe
@@ -29,3 +28,4 @@ export default function Location() {
     </section>
   );
 }
+export default Location;

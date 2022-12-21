@@ -5,12 +5,12 @@ import React from "react";
 
 function OpenedLayout({ children }: { children: any }) {
   return (
-    <section className="w-full">
+    <section className="w-full relative">
       <Head>
-        <title>Informez nos contacts de vos évènements</title>
+        <title>Centre de formation esic</title>
         <meta
           name="description"
-          content="Informez nos contacts de vos évènements"
+          content="Centre de formation esic"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -22,3 +22,10 @@ function OpenedLayout({ children }: { children: any }) {
 }
 
 export default OpenedLayout;
+
+export async function getServerSideProps(context: any) {
+  console.log('====================================');
+  console.log("dddeee");
+  console.log('====================================');
+  return { props: {} };
+}
