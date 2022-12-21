@@ -9,16 +9,12 @@ import { getFormations } from "services";
 function Formations() {
   const {
     isSuccess,
-    isLoading,
     data: {
       data: formations = { data: [{ libelle: "", description: "" }] },
     } = {},
   } = useQuery<any>({
     queryKey: ["formations"],
-    queryFn: getFormations,
-    refetchOnWindowFocus: false,
-    staleTime: 3600000, //1jour
-    cacheTime: 3600000, //1jour
+    queryFn: ()=>getFormations({limit: 30})
   });
   return (
     <OpenedLayout>
