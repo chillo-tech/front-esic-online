@@ -103,13 +103,13 @@ export default function Header() {
                       <HiChevronDown
                         className={classNames("w-5 h-5 ", {
                           hidden:
-                            showMenu[item.id] || item.sous_menus.length == 0,
+                            showMenu[item.id] || (item.sous_menus.length == 0 && item.pages.length == 0)
                         })}
                       />
                       <HiChevronUp
                         className={classNames("w-5 h-5  ", {
                           hidden:
-                            !showMenu[item.id] || item.sous_menus.length == 0,
+                            !showMenu[item.id] || (item.sous_menus.length == 0 && item.pages.length == 0)
                         })}
                       />
                     </span>

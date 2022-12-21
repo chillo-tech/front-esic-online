@@ -48,7 +48,7 @@ export default function CategoriesMenu({
         ))}
       </div>
 
-      <div className="hidden md:block w-1/4 pt-16 pr-16 bg-primary">
+      <div className="hidden md:block w-1/4 pt-16 bg-primary">
         <div className="bg-primary  text-white py-8 px-8">
           <ul>
             {item.sous_menus.map((item: any, index: number) => (

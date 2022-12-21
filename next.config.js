@@ -14,6 +14,10 @@ const nextConfig = {
         source: '/items/:path*',
         destination: `${process.env.API_URL}/items/:path*`
       },
+      {
+        source: '/financements-cpf/compte-formation-cpf-:id*',
+        destination: "/financements-cpf/compte-formation-cpf",
+      }
     ]
   },
 }

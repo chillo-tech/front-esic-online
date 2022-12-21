@@ -7,6 +7,17 @@ const getMenus = () => {
       id: "",
       libelle: "",
       display: "",
+      pages: {
+        id: "",
+        libelle: "",
+        souslibelle: "",
+        souscategories: {
+          sousCategories_id: {
+            id: "",
+            libelle: "",
+          },
+        }
+      },
       menu_category: {
         categories_id: {
           id: "",
