@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Hero from "components/homepage/hero";
+import Hero from "../components/homepage/Hero";
 import { home } from "utils/data/pages-list";
 import AboutOverview from "components/homepage/AboutOverview";
 import NotreOffre from "components/homepage/NotreOffre";
