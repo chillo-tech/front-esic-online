@@ -1,1 +1,0 @@
-- Remove wistria relation in Document object
