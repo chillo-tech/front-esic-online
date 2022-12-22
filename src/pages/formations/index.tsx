@@ -15,7 +15,7 @@ function Formations() {
     } = {},
   } = useQuery<any>({
     queryKey: ["formations"],
-    queryFn: getFormations,
+    queryFn: () => getFormations,
     refetchOnWindowFocus: false,
     staleTime: 3600000, //1jour
     cacheTime: 3600000, //1jour

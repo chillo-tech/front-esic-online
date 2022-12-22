@@ -26,7 +26,7 @@ export default function CategoriesMenu({
             >
               {item.categories_id.libelle}
             </Link>
-            <ul className="col-span-3 grid grid-cols-3 text-gray-900/90 px-4 py-4">
+            <ul className="col-span-3 grid grid-cols-3 text-gray-900/90 px-6 py-4">
               {item.categories_id.souscategories?.map(
                 (sous: any, index: number) => (
                   <li key={`sc${item.id}${index}`}>
@@ -63,7 +63,7 @@ export default function CategoriesMenu({
             href={"/reverser-formation"}
             className="inline-block bg-white text-center text-primary px-4 py-2 font-semibold rounded-full mt-4"
           >
-            S&apos;inscrire à une formation
+            S&apos;inscrire 
           </Link>
         </div>
       </div>
