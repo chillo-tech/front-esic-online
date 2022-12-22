@@ -2,7 +2,10 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
-import { BsArrowRightCircle } from 'react-icons/bs';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import { BiCoinStack } from 'react-icons/bi';
+import { BsArrowRightCircle, BsBarChart } from 'react-icons/bs';
+import { GiPositionMarker } from 'react-icons/gi';
 import { cn, loaderProp } from 'utils/image-loader'
 import { slugify } from 'utils/slugify';
 interface Params {
@@ -13,13 +16,14 @@ interface Params {
   price?: string,
   duration?: string,
   image: string,
-  link: string
+  link: string,
+  others?: any
 }
-function HoverCard({id, title, subtitle, image,link}: Params) {
+function HoverCard({id, title, subtitle, image, link, others}: Params) {
   const [isLoading, setLoading] = useState(true);
   const {query} = useRouter();
   return (
-    <article className='relative h-96 font-sans font-extralight'>
+    <article className='relative h-96 font-sans font-otherslight mb-3'>
        <Image 
           fill={true}
           src={image}
@@ -40,6 +44,32 @@ function HoverCard({id, title, subtitle, image,link}: Params) {
           <p className='text-xl flex pt-3'>
             <span>{subtitle}</span> 
           </p>
+
+          <ul className="flex flex-row text-lg items-center">
+                  {
+                   others.niveau ? 
+                    <li className="flex items-center mr-3">
+                      <BsBarChart className="mr-2 text-green-600 text-xl"/> 
+                      <span>
+                        {others.niveau === "BEGINNER" ? 'Débutant': null}
+                        {others.niveau === "INTERMEDIARY" ? 'Intermediaire': null}
+                        {others.niveau === "ADVANCED" ? 'Avancé': null}
+                      </span>
+                    </li> 
+                    : 
+                    null
+                  }
+                  {
+                   ((others.prix && others.cpf) || others.cpf) ? 
+                    <li className="flex items-center pr-3">
+                      <BiCoinStack className="mr-2 text-yellow-600 text-xl"/> 
+                      Eligible au CPF
+                    </li> 
+                    : 
+                    null
+                  }
+          </ul>
+
         </div>
 
         <Link 

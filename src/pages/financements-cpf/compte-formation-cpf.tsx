@@ -1,17 +1,18 @@
 import Debug from 'components/Debug';
+import Trainings from 'components/trainings';
 import OpenedLayout from 'containers/opened'
+import { ApplicationContext } from 'context/ApplicationContext';
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useQuery } from 'react-query';
 import { read } from 'services/index';
 import { cn, loaderProp } from 'utils/image-loader';
 
 function CompteFormationCpf({id}: {id: string}) {
-  
+  const {updateSearchPrams} = useContext(ApplicationContext);
   const [isImageLoading, setLoading] = useState(true);
   const {
     isSuccess,
-    isLoading,
     data,
   } = useQuery<any>({
     queryKey: ["CompteFormationCpf", id],
@@ -20,6 +21,7 @@ function CompteFormationCpf({id}: {id: string}) {
         path: `page/${id}`,
         fields: '*'
       }),
+      onSuccess: () => updateSearchPrams({path: 'formations', title: "Formations éligibles au CPF"})
   });
   return (
     <OpenedLayout>
@@ -28,11 +30,11 @@ function CompteFormationCpf({id}: {id: string}) {
         isSuccess ? (
           <>
             <section className="grid bg-slate-100 md:grid-cols-2 items-center text-gray-700">
-              <article className='px-36'>
+              <article className='px-24 py-10 md:py-0'>
                   <div className="flex text-xl font-extralight">
                     {data?.data.data.souslibelle}
                   </div>
-                  <h2 className="text-4xl md:text-5xl font-extrabold">
+                  <h2 className="text-3xl md:text-4xl font-extrabold">
                     {data?.data.data.libelle}
                   </h2>
                   <div
@@ -41,66 +43,25 @@ function CompteFormationCpf({id}: {id: string}) {
                     }}
                     className="my-5 text-xl font-extralight " />
               </article>
-             <div className="relative" style={{height: '450px'}}>
-             <div className="bg-black opacity-30 w-full absolute left-0 top-0 bottom-0 right-0 z-20" />
-                    <Image
-                      fill={true}
-                      src={`${process.env.API_URL}/assets/${data?.data.data.image}`}
-                      alt={data?.data.data.libelle}
-                      loader={loaderProp}
-                      unoptimized
-                      className={cn(
-                        'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
-                        isImageLoading
-                          ? 'scale-110 blur-2xl grayscale'
-                          : 'scale-100 blur-0 grayscale-0'
-                      )}
-                      onLoadingComplete={() => setLoading(false)}
-                    />
-             </div>
-            </section>
-             <section className="w-full bg-cover bg-cente relative h-96">
-              <div className="bg-gradient-to-r from-sky-900 bg-black/50 h-96 px-4">
-              {
-                data?.data.data.image ? (
-                  <>
-                    <div className="bg-black/10 bg-gradient-to-r from-black/80 w-full h-96 absolute left-0 top-0 bottom-0 right-0 z-20" />
-                    <Image
-                      fill={true}
-                      src={`${process.env.API_URL}/assets/${data?.data.data.image}`}
-                      alt={data?.data.data.libelle}
-                      loader={loaderProp}
-                      unoptimized
-                      className={cn(
-                        'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
-                        isImageLoading
-                          ? 'scale-110 blur-2xl grayscale'
-                          : 'scale-100 blur-0 grayscale-0'
-                      )}
-                      onLoadingComplete={() => setLoading(false)}
-                    />
-                  </>
-                ): 
-                null 
-              }
-                <div className="container mx-auto flex relative z-20">
-                  <div className="max-w-4xl md:py-16 md:pt-24 text-white">
-                    <h2 className="text-4xl mt-10 md:text-5xl font-extrabold">
-                      {data?.data.data.libelle}
-                    </h2>
-                    <div className="flex">
-                      {data?.data.data.souslibelle}
-                    </div>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: data?.data.data.short_description,
-                      }}
-                      className="my-10"
-                    ></div>
-                  </div>
-                </div>
+              <div className="relative hidden md:block" style={{height: '450px'}}>
+              <div className="bg-black opacity-30 w-full absolute left-0 top-0 bottom-0 right-0 z-20" />
+                      <Image
+                        fill={true}
+                        src={`${process.env.API_URL}/assets/${data?.data.data.image}`}
+                        alt={data?.data.data.libelle}
+                        loader={loaderProp}
+                        unoptimized
+                        className={cn(
+                          'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
+                          isImageLoading
+                            ? 'scale-110 blur-2xl grayscale'
+                            : 'scale-100 blur-0 grayscale-0'
+                        )}
+                        onLoadingComplete={() => setLoading(false)}
+                      />
               </div>
             </section>
+            <Trainings title = "Formations éligibles au CPF"/>
           </>
         ) : null
       }
