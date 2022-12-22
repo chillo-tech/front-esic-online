@@ -29,7 +29,7 @@ function CompteFormationCpf({id}: {id: string}) {
           <>
             <section className="grid bg-slate-100 md:grid-cols-2 items-center text-gray-700">
               <article className='px-36'>
-                  <div className="flex">
+                  <div className="flex text-xl font-extralight">
                     {data?.data.data.souslibelle}
                   </div>
                   <h2 className="text-4xl md:text-5xl font-extrabold">
@@ -37,14 +37,13 @@ function CompteFormationCpf({id}: {id: string}) {
                   </h2>
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: data?.data.data.short_description,
+                      __html: data?.data.data.description,
                     }}
-                    className="my-10"
-                  ></div>
+                    className="my-5 text-xl font-extralight " />
               </article>
              <div className="relative" style={{height: '450px'}}>
              <div className="bg-black opacity-30 w-full absolute left-0 top-0 bottom-0 right-0 z-20" />
-             <Image
+                    <Image
                       fill={true}
                       src={`${process.env.API_URL}/assets/${data?.data.data.image}`}
                       alt={data?.data.data.libelle}
