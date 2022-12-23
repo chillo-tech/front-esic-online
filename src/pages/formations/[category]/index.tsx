@@ -16,11 +16,7 @@ function Category({
   libelle: string;
   link: string;
 }) {
-  const {
-    isSuccess,
-    isLoading,
-    data: category,
-  } = useQuery<any>({
+  const { isSuccess, data: category } = useQuery<any>({
     queryKey: ["category", slugify(libelle), id],
     queryFn: () =>
       getCategory({

@@ -12,7 +12,7 @@ export default function SimpleMenu({
 }) {
   return (
     <ul
-      className={`${className} left-0 bg-white text-slate-800 md:text-lg w-[320px] shadow-xl`}
+      className={`${className} left-0 bg-white text-gray-900 md:text-lg w-[320px] shadow-xl`}
     >
       {items.map((item: any, index) => (
         <li key={`${item ? item.id : item.id}`}>
