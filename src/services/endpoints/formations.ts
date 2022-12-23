@@ -34,7 +34,7 @@ const getSubCategories = ({id}: {id: string | string[]; fields?: string}) => {
   const base = "id,libelle,titre,description";
   const formations = "formations.formations_id.id,formations.formations_id.libelle,formations.formations_id.souslibelle,formations.formations_id.duree,formations.formations_id.prix,formations.formations_id.image";
   const fields = `${base},${formations}`;
-  return axiosInstance.get(`sousCategories/${id}?fields=${fields}`);
+  return axiosInstance.get(`sousCategories/${id}?fields=${fields}&limit=10`);
 };
 
 const getCategories = ({ fields }: { fields: string }) => {
@@ -51,7 +51,10 @@ const getCategory = ({ id }: { id: string }) => {
   //const subcategories =  'menu_category.categories_id.souscategories.sousCategories_id.id,menu_category.categories_id.souscategories.sousCategories_id.libelle,menu_category.categories_id.souscategories.sousCategories_id.ordre';
   const fields = `${base},${subcategories}`; //,${categories},${subcategories}`;
   return axiosInstance.get(`categories/${id}`, {
-    params: { ...(fields ? { fields } : {}) },
+    params: { 
+      ...(fields ? { fields } : {}),
+      limit: 10
+    },
   });
 };
 

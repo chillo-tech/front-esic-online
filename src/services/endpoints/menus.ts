@@ -31,7 +31,7 @@ const getMenus = () => {
           },
         },
       },
-      menu_certificationCategory: {
+      certifications: {
         certificationCategories_id: {
           id: "",
           libelle: "",

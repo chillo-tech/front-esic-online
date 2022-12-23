@@ -44,31 +44,36 @@ function HoverCard({id, title, subtitle, image, link, others}: Params) {
           <p className='text-xl flex pt-3'>
             <span>{subtitle}</span> 
           </p>
-
-          <ul className="flex flex-row text-lg items-center">
-                  {
-                   others.niveau ? 
-                    <li className="flex items-center mr-3">
-                      <BsBarChart className="mr-2 text-green-600 text-xl"/> 
-                      <span>
-                        {others.niveau === "BEGINNER" ? 'Débutant': null}
-                        {others.niveau === "INTERMEDIARY" ? 'Intermediaire': null}
-                        {others.niveau === "ADVANCED" ? 'Avancé': null}
-                      </span>
-                    </li> 
-                    : 
-                    null
-                  }
-                  {
-                   ((others.prix && others.cpf) || others.cpf) ? 
-                    <li className="flex items-center pr-3">
-                      <BiCoinStack className="mr-2 text-yellow-600 text-xl"/> 
-                      Eligible au CPF
-                    </li> 
-                    : 
-                    null
-                  }
-          </ul>
+          {
+            others ? 
+            (
+              <ul className="flex flex-row text-lg items-center">
+                {
+                  others.niveau ? 
+                  <li className="flex items-center mr-3">
+                    <BsBarChart className="mr-2 text-green-600 text-xl"/> 
+                    <span>
+                      {others.niveau === "BEGINNER" ? 'Débutant': null}
+                      {others.niveau === "INTERMEDIARY" ? 'Intermediaire': null}
+                      {others.niveau === "ADVANCED" ? 'Avancé': null}
+                    </span>
+                  </li> 
+                  : 
+                  null
+                }
+                {
+                  ((others.prix && others.cpf) || others.cpf) ? 
+                  <li className="flex items-center pr-3">
+                    <BiCoinStack className="mr-2 text-yellow-600 text-xl"/> 
+                    Eligible au CPF
+                  </li> 
+                  : 
+                  null
+                }
+              </ul>
+            )
+            : null
+          }
 
         </div>
 
