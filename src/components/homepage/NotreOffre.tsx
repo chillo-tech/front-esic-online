@@ -1,4 +1,5 @@
 import Debug from "components/Debug";
+import ContactUsText from "components/shared/ContactUsText";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -61,12 +62,7 @@ export default function NotreOffre() {
               </article>
             ))}
           </div> 
-          <p className='flex justify-center items-center py-2'>
-            <Link href="/contactez-nous" className='flex items-center text-blue-900 md:text-white'> 
-              <BsArrowRightCircle className='mr-2 text-blue-900 md:text-white' /> 
-              Contactez nous pour en savoir plus
-            </Link>
-          </p>
+          <ContactUsText />
         </div>
       </section>
     ): null }

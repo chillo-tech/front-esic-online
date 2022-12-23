@@ -5,6 +5,7 @@ const STRING_WITH_NUMBERS_REGEXP: any = /^\D*(\d\D*){10,}$/;
 const PHONE_ERROR_MESSAGE: string = 'Votre numéro de téléphone est invalide';
 const EMAIL_ERROR_MESSAGE: string = 'Votre mail est invalide';
 const REQUIRED_ERROR_MESSAGE: string = "Ce champ est requis";
+const EMPTY_SESSION: string = "Aucune session n'est programée à ce jour";
 const USER_PROFILE: any = [
   {
     value: 'particulier',
@@ -62,6 +63,7 @@ const COMPANY_PROFILE_OPTIONS: any = [
   }
 ]
 export {
+  EMPTY_SESSION,
     PHONE_PATTERN, 
     EMAIL_PATTERN, 
     STRING_WITH_NUMBERS_REGEXP, 

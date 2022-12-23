@@ -40,37 +40,37 @@ function Trainings(params: Params) {
     {
       isSuccess ? (
         <section>
-        <div className="container px-2 py-10 mx-auto">
-          <h2 className="text-3xl md:text-4xl font-extrabold">
-              {params.title}
-          </h2>
-          <div className="grid gap-4 md:py-6 md:grid-cols-3">
+          <div className="container pt-10 mx-auto">
+            <h2 className="text-2xl md:text-4xl font-extrabold">
+                {params.title}
+            </h2>
+            <div className="grid gap-4 md:py-6 md:grid-cols-3">
+              {
+                data.data.data.slice(0, 3).map((training: any) =>(
+                  <HoverCard
+                      id={training.id}
+                      title={training.libelle}
+                      subtitle={training.subtitle}
+                      image={training.image ? `${process.env.API_URL}/assets/${training.image}?w=300&h=200fill=true` : "/images/esic-image-5.jpg"}
+                      key={`${training.id}`}
+                      others={training}
+                      link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
+                    />
+                ))
+              }
+            </div>
             {
-              data.data.data.slice(0, 3).map((training: any) =>(
-                <HoverCard
-                    id={training.id}
-                    title={training.libelle}
-                    subtitle={training.subtitle}
-                    image={training.image ? `${process.env.API_URL}/assets/${training.image}?w=300&h=200fill=true` : "/images/esic-image-5.jpg"}
+              data.data.data.slice(3, 10).map((training: any) =>(
+                  <TrainingTable 
                     key={`${training.id}`}
-                    others={training}
+                    id={training.id}
+                    data={training}
                     link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
                   />
-              ))
-            }
+                ))
+              }
           </div>
-          {
-            data.data.data.slice(3, 10).map((training: any) =>(
-                <TrainingTable 
-                  key={`${training.id}`}
-                  id={training.id}
-                  data={training}
-                  link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
-                />
-              ))
-            }
-        </div>
-      </section>
+        </section>
       ) : null
     }
     </>

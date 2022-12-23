@@ -16,6 +16,6 @@ export default function DisplayMenu({
     case "formations":
       return <CategoriesMenu item={item} className={className} />;
     default:
-      return <SimpleMenu parent={slugify(item.libelle.replaceAll("/", "-"))} items={item.sous_menus && item.sous_menus.length ? item.sous_menus : item.pages } className={className} />;
+      return <SimpleMenu parent={`${slugify(item.libelle.replaceAll("/", "-"))}`} items={item.sous_menus && item.sous_menus.length ? item.sous_menus : item.pages } className={className} />;
   }
 }

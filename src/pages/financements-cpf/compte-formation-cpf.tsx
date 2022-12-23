@@ -1,4 +1,5 @@
 import Debug from 'components/Debug';
+import AllTrainings from 'components/shared/AllTrainings';
 import Trainings from 'components/trainings';
 import OpenedLayout from 'containers/opened'
 import { ApplicationContext } from 'context/ApplicationContext';
@@ -28,9 +29,9 @@ function CompteFormationCpf({id}: {id: string}) {
      
       {
         isSuccess ? (
-          <>
-            <section className="grid bg-slate-100 md:grid-cols-2 items-center text-gray-700">
-              <article className='px-24 py-10 md:py-0'>
+          <section className="px-2">
+            <header className="grid bg-slate-100 md:grid-cols-2 items-center text-gray-700">
+              <article className='px-5 md:px-24 py-10 md:py-0'>
                   <div className="flex text-xl font-extralight">
                     {data?.data.data.souslibelle}
                   </div>
@@ -60,9 +61,10 @@ function CompteFormationCpf({id}: {id: string}) {
                         onLoadingComplete={() => setLoading(false)}
                       />
               </div>
-            </section>
+            </header>
             <Trainings title = "Formations éligibles au CPF"/>
-          </>
+            <AllTrainings />
+          </section>
         ) : null
       }
     </OpenedLayout>

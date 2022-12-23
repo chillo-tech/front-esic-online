@@ -32,7 +32,7 @@ export default function Header() {
         [item.id]: !values[item.id],
       }));
     } else {
-      router.push(`/${slugify(item.libelle)}`);
+      router.push(`/${slugify(item.libelle.replace('/', '-'))}`);
     }
   }
 
@@ -41,7 +41,7 @@ export default function Header() {
       className="bg-white w-full shadow-xl top-0  relative z-40 "
       id="navbar"
     >
-      <div className="px-8 flex flex-wrap md:flex-nowrap items-center justify-between md:text-lg relative">
+      <div className="px-2 md:px-8 flex flex-wrap md:flex-nowrap items-center justify-between md:text-lg relative">
         <div className="flex items-center justify-between w-full md:w-auto py-4">
           <Link href={"/"} className="">
             <Image
@@ -98,7 +98,8 @@ export default function Header() {
                       }
                     )}
                   >
-                    <span>{item.libelle}</span>
+                    
+                    {(item.sous_menus.length == 0 && item.pages.length == 0) ? <Link href={`/${slugify(item.libelle)}-${item.id}`}>{item.libelle}</Link> : <span>{item.libelle}</span>}
                     <span className="hidden md:inline-block">
                       <HiChevronDown
                         className={classNames("w-5 h-5 ", {

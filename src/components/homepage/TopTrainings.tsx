@@ -1,4 +1,5 @@
 import Debug from 'components/Debug';
+import AllTrainings from 'components/shared/AllTrainings';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react'
@@ -18,10 +19,7 @@ function TopTrainings() {
     data
   } = useQuery<any>({
     queryKey: ["top-trainings"],
-    queryFn: () => getTopTrainings({limit: 4}),
-    refetchOnWindowFocus: false,
-    staleTime: 3600000, //1jour
-    cacheTime: 3600000, //1jour
+    queryFn: () => getTopTrainings({limit: 4})
   });
   return (
     <>
@@ -124,9 +122,7 @@ function TopTrainings() {
                 </article>
             ))}
           </div>
-          <p className='flex justify-end items-center py-2'>
-            <Link href="/formations" className='flex items-center'> <BsArrowRightCircle className='mr-2' /> Voir toutes nos formations</Link>
-          </p>
+          <AllTrainings />
         </div>
       </section>
     ): null }

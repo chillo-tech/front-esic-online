@@ -15,6 +15,10 @@ const nextConfig = {
         destination: `${process.env.API_URL}/items/:path*`,
       },
       {
+        source: '/poe-:id*',
+        destination: "/poe",
+      },
+      {
         source: '/financements-cpf/compte-formation-cpf-:id*',
         destination: "/financements-cpf/compte-formation-cpf",
       }
