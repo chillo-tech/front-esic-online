@@ -33,7 +33,7 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
                     id={formation.formations_id.id}
                     title={formation.formations_id.libelle}
                     subtitle={formation.formations_id.subtitle}
-                    image={formation.formations_id.image ? formation.formations_id.image: "/images/esic-image-5.jpg"}
+                    image={formation.formations_id.image ? `${process.env.API_URL}/assets/${ formation.formations_id.image}`: "/images/esic-image-5.jpg"}
                     key={`${formation.id}-${index}`}
                     link={`/nos-formations/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
                   />

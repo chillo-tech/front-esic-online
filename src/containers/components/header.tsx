@@ -43,6 +43,7 @@ function Header() {
                 src={"/images/logo.png"}
                 width={150}
                 height={50}
+                priority={true}
                 alt="Logo Esic"
               />
             </Link>

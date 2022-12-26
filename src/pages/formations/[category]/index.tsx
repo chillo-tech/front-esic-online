@@ -45,7 +45,7 @@ function Category({
                     <HoverCard
                       id={souscategory?.souscategories_id.id}
                       title={souscategory?.souscategories_id.libelle}
-                      image={souscategory.souscategories_id.image ? souscategory.souscategories_id.image: "/images/esic-image-5.jpg"}
+                      image={souscategory.souscategories_id.image ? `${process.env.API_URL}/assets/${souscategory.souscategories_id.image}`: "/images/esic-image-5.jpg"}
                       key={`sc-${souscategory?.souscategories_id}-${index}`}
                       link={`/formations/${link}/${slugify(
                         souscategory?.souscategories_id.libelle

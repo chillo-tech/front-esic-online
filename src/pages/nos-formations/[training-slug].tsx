@@ -74,7 +74,7 @@ function Training({ id }: { id: string }) {
           {
             data?.data.data.image ? (
               <>
-                <div className="bg-slate/10 bg-gradient-to-r from-black/50 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20" />
+                <div className="bg-slate/10 bg-gradient-to-r from-black/90 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20" />
                 <Image
                   fill={true}
                   src={`${process.env.API_URL}/assets/${data?.data.data.image.filename_disk}`}
@@ -131,7 +131,7 @@ function Training({ id }: { id: string }) {
                         : 
                         null
                       }{
-                        data?.data.data.heures ? 
+                        data?.data.data.heures && !data?.data.data.jours ? 
                         <span className="flex items-center pr-3">
                           <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
                           <span>{data?.data.data.heures} Heures</span>
@@ -148,15 +148,16 @@ function Training({ id }: { id: string }) {
                     <li className="flex items-center py-2 pr-3">
                       <GiPositionMarker className="text-red-400 text-3xl"/> 
                       {data?.data.data.distanciel ? 
-                        <span className="flex items-center mr-2">
+                        <span className="flex items-center">
                           En ligne
-                        </span> 
-                        : 
+                        </span>
+                        :
                         null
                       }
+                      {(data?.data.data.distanciel && data?.data.data.presentiel) ? (<span className="ml-1">ou</span>) : null}
                       {
                         data?.data.data.presentiel ? 
-                        <span className="flex items-center">
+                        <span className="flex items-center ml-1">
                           Dans nos locaux
                         </span> 
                         : 
@@ -234,7 +235,7 @@ function Training({ id }: { id: string }) {
                   <span className="bg-secondary block h-1 w-36 my-2"></span>
                 </h3>
                 <div
-                  className="mt-4"
+                  className="mt-4 ck-content"
                   dangerouslySetInnerHTML={{
                     __html: data?.data.data.programme,
                   }}

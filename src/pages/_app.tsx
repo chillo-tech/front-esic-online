@@ -18,10 +18,12 @@ export default function App({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <ApplicationContextWrapper>
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
-    </ApplicationContextWrapper>
+    <>
+      <ApplicationContextWrapper>
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </ApplicationContextWrapper>
+    </>
   )
 }

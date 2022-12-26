@@ -3,3 +3,4 @@ export * from "./axios-interceptors";
 export * from "./endpoints/add";
 export * from "./endpoints/fetch-data";
 export * from "./endpoints/formations";
+export * from "./endpoints/certifications";

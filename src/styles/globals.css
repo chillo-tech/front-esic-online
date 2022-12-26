@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import 'content-styles';
 @layer base {
   .search-empty input {
     @apply border-4 rounded-b-xl focus:shadow-none;
