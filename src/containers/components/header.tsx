@@ -1,150 +1,108 @@
-import Image from "next/image";
-import { useRef, useState } from "react";
-import Link from "next/link";
-import { header, slugify } from "utils";
-import { useQuery } from "react-query";
-import { getMenus } from "services";
-import classNames from "classnames";
-import DisplayMenu from "components/menus/display-menu";
-import { HiChevronDown, HiChevronUp, HiMenu, HiX } from "react-icons/hi";
-import { useOnClickAway } from "utils/custom-hooks";
-import { useRouter } from "next/router";
-export default function Header() {
-  const { data: { data: menus } = {} } = useQuery<any>({
-    queryKey: ["menus"],
-    queryFn: getMenus,
-    refetchOnWindowFocus: false,
-    staleTime: 3600000, //1jour
-    cacheTime: 3600000, //1jour
-  });
-  const [showMenu, setShowMenu] = useState<Record<number, boolean>>({});
-  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
-  const menuLinks = useRef(null);
-  useOnClickAway(menuLinks, () => {
-    setShowMenu(() => ({}));
-  });
+import Image from 'next/image'
+import Link from 'next/link'
+import React, { useEffect } from 'react'
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { fetchData } from 'services/index';
+import Navigation from './Navigation';
+import { HiOutlineMenu } from 'react-icons/hi';
+import classNames from 'classnames';
+import { GiCancel } from 'react-icons/gi';
+import { useRouter } from 'next/router';
+
+function Header() {
   const router = useRouter();
+  const [showMenu, setshowMenu] = useState(false);
 
-  function toggleShowMenu(item: any): void {
-    if (window.innerWidth > 768) {
-      //md
-      setShowMenu((values) => ({
-        [item.id]: !values[item.id],
-      }));
-    } else {
-      router.push(`/${slugify(item.libelle.replace('/', '-'))}`);
-    }
-  }
+  const closeManu = () => {
+    setshowMenu(false);
+  };
 
+  useEffect(() => {
+      router.events.on('routeChangeStart', closeManu);
+      return () => router.events.off('routeChangeStart', closeManu);
+  }, [router.events]);
+
+  const {
+    isSuccess,
+    data,
+  } = useQuery<any>({
+    queryKey: ["menus"],
+    queryFn: () =>
+      fetchData({
+        path: "menus",
+        fields: "id,libelle,ordre,*.*"
+      })  
+   });
   return (
-    <nav
-      className="bg-white w-full shadow-xl top-0  relative z-40 "
-      id="navbar"
-    >
-      <div className="px-2 md:px-8 flex flex-wrap md:flex-nowrap items-center justify-between md:text-lg relative">
-        <div className="flex items-center justify-between w-full md:w-auto py-4">
-          <Link href={"/"} className="">
-            <Image
-              src={"/images/logo.png"}
-              width={150}
-              height={50}
-              alt="Logo Esic"
-            />
-          </Link>
-          <button
-            className="md:hidden  text-gray-700"
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-          >
-            <HiMenu
-              className={classNames("w-8 h-8 md:hidden", {
-                hidden: showMobileMenu,
-              })}
-            />
-            <HiX
-              className={classNames("w-8 h-8", { hidden: !showMobileMenu })}
-            />
-          </button>
+    <>
+      <header className='bg-white w-full shadow-xl top-0 relative z-40'>
+        <div className="hidden md:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
+            <Link href={"/"} className="">
+              <Image
+                src={"/images/logo.png"}
+                width={150}
+                height={50}
+                alt="Logo Esic"
+              />
+            </Link>
+            {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
+            <Link
+              className="px-8 py-3 text-white bg-green-600 rounded-full  hover:bg-secondary/90 transition-colors"
+              href='/'
+            >
+              Contactez nous
+            </Link>
         </div>
-
-        <div
-          className={classNames(
-            "w-full justify-center items-center h-screen  md:h-auto  md:pt-0",
-            {
-              "flex flex-col-reverse": showMobileMenu,
-              "hidden md:block ": !showMobileMenu,
-            }
-          )}
-        >
-          <ul
-            ref={menuLinks}
-            className="md:flex justify-center  -mt-16 md:-mt-0 items-center w-full space-x-2 text-gray-700"
-          >
-            {menus?.data
-              .sort((a: any, b: any) => a.ordre - b.ordre)
-              .map((item: any, index: number) => (
-                <li
-                  key={`nav-${index}-${item.id}`}
-                  onClick={() => toggleShowMenu(item)}
-                  className={classNames("menu-item  cursor-pointer", {
-                    relative: item.display == "simple_menu",
-                  })}
-                >
-                  <div
-                    //href={`/${slugify(item.libelle)}`}
-                    className={classNames(
-                      "inline-flex py-2 w-full  md:py-6 px-4 space-x-2 justify-center text-2xl  md:text-base 2xl:text-lg items-center",
-                      {
-                        "bg-secondary text-white": showMenu[item.id],
-                      }
-                    )}
-                  >
-                    
-                    {(item.sous_menus.length == 0 && item.pages.length == 0) ? <Link href={`/${slugify(item.libelle)}-${item.id}`}>{item.libelle}</Link> : <span>{item.libelle}</span>}
-                    <span className="hidden md:inline-block">
-                      <HiChevronDown
-                        className={classNames("w-5 h-5 ", {
-                          hidden:
-                            showMenu[item.id] || (item.sous_menus.length == 0 && item.pages.length == 0)
-                        })}
-                      />
-                      <HiChevronUp
-                        className={classNames("w-5 h-5  ", {
-                          hidden:
-                            !showMenu[item.id] || (item.sous_menus.length == 0 && item.pages.length == 0)
-                        })}
-                      />
-                    </span>
-                  </div>
-                  <div className="font-light font-sans hidden md:block">
-                    <DisplayMenu
-                      className={classNames("absolute top-[4.5rem] ", {
-                        hidden: !showMenu[item.id],
-                      })}
-                      item={item}
-                    ></DisplayMenu>
-                  </div>
-                </li>
-              ))}
-            <li className="md:hidden  w-full text-center mt-8">
-              <Link
-                className="px-8 py-4 block w-full text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors"
-                href={header.contact.link}
-              >
-                {header.contact.label}
+        <div className="items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2 md:hidden">
+            <div className="flex justify-between items-center">
+              <Link href={"/"} className="">
+                <Image
+                  src={"/images/logo.png"}
+                  width={150}
+                  height={50}
+                  alt="Logo Esic"
+                />
               </Link>
-            </li>
-          </ul>
+              <button type="button" onClick={() => setshowMenu(!showMenu)}
+                className=""
+              >
+                <HiOutlineMenu className='text-4xl'/>
+              </button>
+            </div>
         </div>
+      </header>
 
-        <div className="text-lg">
+      <div className={classNames({ 'fixed flex flex-col': showMenu, 'hidden': !showMenu },`h-screen overflow-hidden bg-white w-full fixed left-0 top-0 right-0 bottom-0 z-50 font-sans justify-between`)}>
+         <div className="flex justify-between items-center py-4 pr-2">
+            <Link href={"/"} className="">
+              <Image
+                src={"/images/logo.png"}
+                width={150}
+                height={50}
+                alt="Logo Esic"
+              />
+            </Link>
+            <button type="button" onClick={() => setshowMenu(!showMenu)}
+              className=""
+            >
+              <GiCancel className='text-4xl'/>
+            </button>
+          </div>
+         <div className="container mx-auto flex flex-col">
+            {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
+         </div>
+         <p className='py-4 flex items-center justify-center'>
           <Link
-            className="hidden md:inline-block px-8 py-1.5 text-white bg-secondary rounded-full  hover:bg-secondary/90 transition-colors"
-            href={header.contact.link}
+            className="px-8 py-3 text-white bg-green-600 rounded-full  hover:bg-secondary/90 transition-colors"
+            href='/'
           >
-            {header.contact.label}
+            Contactez nous
           </Link>
-        </div>
+         </p>
       </div>
-    </nav>
-  );
+    </>
+  )
 }
+
+export default Header

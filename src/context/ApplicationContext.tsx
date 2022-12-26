@@ -1,5 +1,4 @@
-import Head from 'next/head';
-import { createContext, useCallback, useEffect, useMemo, useReducer} from 'react';
+import { createContext, useCallback, useMemo, useReducer} from 'react';
 import {INITIAL_STATE, UPDATE_SEARCH_TRAINING_PARAMS} from 'utils'
 import {ApplicationReducer} from './ApplicationReducer';
 

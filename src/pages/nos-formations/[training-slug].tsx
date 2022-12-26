@@ -16,9 +16,9 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { EMAIL_ERROR_MESSAGE, EMAIL_PATTERN, EMPTY_SESSION } from "utils/index";
 import { useRouter } from "next/router";
-import Message from "components/Message";
 import formStyles from 'styles/Form.module.css';
 import ContactUsText from "components/shared/ContactUsText";
+import Message from "components/shared/Message";
 var classNames = require('classnames');
 
 export type Message = {
@@ -74,7 +74,7 @@ function Training({ id }: { id: string }) {
           {
             data?.data.data.image ? (
               <>
-                <div className="bg-black/10 bg-gradient-to-r from-black/80 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20" />
+                <div className="bg-slate/10 bg-gradient-to-r from-black/50 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20" />
                 <Image
                   fill={true}
                   src={`${process.env.API_URL}/assets/${data?.data.data.image.filename_disk}`}
@@ -93,14 +93,14 @@ function Training({ id }: { id: string }) {
             ): 
             null 
           }
-            <div className="container mx-auto flex relative z-20">
-              <div className="max-w-4xl md:py-16 md:pt-24 text-white">
-                <h2 className="text-4xl mt-10 md:text-5xl font-extrabold">
+            <div className="container flex relative z-20">
+              <div className="max-w-4xl md:py-16 md:pt-24 text-white pt-10">
+                <h4 className="flex">
+                  {data?.data.data.souslibelle}
+                </h4>
+                <h2 className="text-2xl md:text-5xl font-extrabold">
                   {data?.data.data.libelle}
                 </h2>
-                <div className="flex">
-                  {data?.data.data.souslibelle}
-                </div>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: data?.data.data.short_description,
@@ -119,22 +119,22 @@ function Training({ id }: { id: string }) {
                     : 
                     null
                   }
-                   {
-                   data?.data.data.duree_en_jours || data?.data.data.duree_en_heures  ? 
+                  {
+                   data?.data.data.jours || data?.data.data.heures  ? 
                     <li className="flex items-center py-2 pr-3">
                       {
-                        data?.data.data.duree_en_jours ? 
+                        data?.data.data.jours ? 
                         <span className="flex items-center pr-3">
                           <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
-                          <span>{data?.data.data.duree_en_jours} Jours</span>
+                          <span>{data?.data.data.jours} Jours</span>
                         </span>
                         : 
                         null
                       }{
-                        data?.data.data.duree_en_heures ? 
+                        data?.data.data.heures ? 
                         <span className="flex items-center pr-3">
                           <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
-                          <span>{data?.data.data.duree_en_heures} Heures</span>
+                          <span>{data?.data.data.heures} Heures</span>
                         </span>
                         : 
                         null
@@ -157,7 +157,7 @@ function Training({ id }: { id: string }) {
                       {
                         data?.data.data.presentiel ? 
                         <span className="flex items-center">
-                          dans nos locaux
+                          Dans nos locaux
                         </span> 
                         : 
                         null
@@ -177,7 +177,7 @@ function Training({ id }: { id: string }) {
                   }
                 </ul>
 
-                <div className="text-md grid gap-3 justify-center items-center py-4 md:grid-cols-3 md:gap">
+                <div className="text-md grid gap-3 items-center py-4 md:grid-cols-3 md:gap">
                   <Link
                     href="/contactez-nous"
                     className="p-3 text-white text-center bg-secondary rounded-full"
@@ -280,10 +280,10 @@ function Training({ id }: { id: string }) {
               : null
             }
           </section>
-          <aside className="md:col-span-4">
+          <aside className="md:col-span-4 mt-10 md:mt-0">
             {/* xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-30 sm:left-[70%] 2xl:left-[65%]  */}
-              <div id="formation-panel" className="font-sans bg-white w-2/3 mx-auto md:shadow-2xl rounded-lg" >
-                <div className="py-4 space-y-3 px-8 bg-secondary text-white rounded-t-lg">
+              <div id="formation-panel" className="font-sans bg-white md:w-2/3 mx-auto md:shadow-2xl rounded-lg" >
+                <div className="py-4 space-y-3 px-4 bg-secondary text-white rounded-t-lg">
                   <div className="text-3xl font-bold mt-4">
                     {data?.data.data.prix}
                   </div>
@@ -305,7 +305,7 @@ function Training({ id }: { id: string }) {
                     : (
                       <>
                         <p className="text-center">{EMPTY_SESSION}</p>
-                        <ContactUsText />
+                        <ContactUsText classes="justify-center" />
                       </>
                     ) 
                   }
@@ -359,7 +359,7 @@ function Training({ id }: { id: string }) {
               mutation.isIdle 
               ? (
                 <>
-                <h2 className="text-center text-3xl md:text-4xl leading-10 font-extralight mt-4 flex flex-col items-center">
+                <h2 className="text-center text-xl md:text-4xl leading-10 font-extralight mt-4 flex flex-col items-center">
                   Téléchargez le programme de la formation 
                   <span className="text-green-600 block md:mt-2">{data?.data.data.libelle}</span>
                 </h2>

@@ -14,8 +14,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./src",
+    "baseUrl": "src",
     "paths": {
+      "containers/*": ["./containers/*", "./containers"],
       "context/*": ["./context/*", "./context"],
       "components/*": ["./components/*", "./components"],
       "services/*": ["./services/*", "./services"],

@@ -4,7 +4,7 @@ import {
   AiOutlinePhone,
 } from "react-icons/ai";
 import { BsFacebook, BsLinkedin, BsTwitter } from "react-icons/bs";
-import { contacts } from "../utils/data";
+import { contacts } from "utils";
 export default function ContactInfos() {
   return (
     <ul className="pl-3">

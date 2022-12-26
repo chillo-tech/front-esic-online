@@ -8,19 +8,10 @@ const nextConfig = {
     API_URL: process.env.API_URL,
   },
   async rewrites() {
-    console.log("Rewrites called");
     return [
       {
-        source: "/items/:path*",
-        destination: `${process.env.API_URL}/items/:path*`,
-      },
-      {
-        source: '/poe-:id*',
-        destination: "/poe",
-      },
-      {
-        source: '/financements-cpf/compte-formation-cpf-:id*',
-        destination: "/financements-cpf/compte-formation-cpf",
+        source: '/formations',
+        destination: "/nos-formations",
       }
     ]
   },

@@ -1,15 +1,19 @@
 import Head from "next/head";
-import ContactInfos from "../components/contact-infos";
-import OpenedLayout from 'containers/opened';
+import OpenedLayout from '../containers/opened';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { CONTACT_CHANNEL, COMPANY_PROFILE_OPTIONS, EMAIL_PATTERN, REQUIRED_ERROR_MESSAGE, EMAIL_ERROR_MESSAGE, PHONE_ERROR_MESSAGE, contact, USER_PROFILE, USER_PROFILE_OPTIONS } from "utils/index";
-import { useMutation } from "react-query";
+import { contact, CONTACT_CHANNEL, COMPANY_PROFILE_OPTIONS, EMAIL_PATTERN, REQUIRED_ERROR_MESSAGE, EMAIL_ERROR_MESSAGE, PHONE_ERROR_MESSAGE, USER_PROFILE, USER_PROFILE_OPTIONS, ENTREPRISE_PARAMS, cn, loaderProp } from "../utils/index";
+import { useMutation, useQuery } from "react-query";
 import { useRouter } from "next/router";
-import { add } from "services/index";
+import { add, fetchData } from "../services/index";
 import formStyles from 'styles/Form.module.css';
-import Message from "components/Message";
+import Message from "components/shared/Message";
+import Link from "next/link";
+import { useState } from "react";
+import { HiOutlineMail } from "react-icons/hi";
+import { BsPhone } from "react-icons/bs";
+import Image from "next/image";
 
 export type Message = {
   name: string, 
@@ -49,13 +53,25 @@ const schema = yup.object({
 }).required();
 
 export default function Contact() {
+
+  const [isImageLoading, setLoading] = useState(true);
   const mutation = useMutation({mutationFn: ((message:any) => add("/contacts", message))});
   const router = useRouter();
 	const {register, handleSubmit, watch, formState: {errors}} = useForm<Message>({
 		mode: "onChange",
 		resolver: yupResolver(schema)
 	});
-
+  const {
+    isSuccess,
+    data,
+  } = useQuery<any>({
+    queryKey: ["Entreprise", "contact"],
+    queryFn: () =>
+      fetchData({
+        path: "Entreprise",
+        fields: ENTREPRISE_PARAMS
+      })  
+   });
   const profile = watch("profile");
   const contactChannel = watch("contactChannel");
 	const onSubmit = (data: Message) => {
@@ -69,22 +85,85 @@ export default function Contact() {
   return (
     <OpenedLayout>
       <Head>
-        <title> {contact.title} </title>
+        <title> ESIC|contactez nous </title>
       </Head>
       <section className="pt-12 pb-16 container mx-auto flex flex-wrap font-sans">
         <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">
           <h2 className="text-3xl sm:text-4xl font-bold">
             {contact.infos.title}
           </h2>
-          <p className="text-gray-100 font-extralight mt-6">
-            {contact.infos.description}
-          </p>
-          <div className="mt-8">
-            <ContactInfos />
-          </div>
+          <>
+          {
+            isSuccess ? (
+              <article className="py-5 md:col-span-2">
+              <Link href={'/'} className="font-extrabold text-4xl">{data.data.data.libelle}</Link>
+              {
+                 (data?.data.data.description) ? 
+                    <div className="py-3" dangerouslySetInnerHTML={{__html: data.data.data.description}}/>
+                  : 
+                  null
+                }
+                {
+                 (data?.data.data.telephone) ? 
+                  <li className="flex items-center py-2 pr-3">
+                    <BsPhone className="mr-2 text-white text-3xl"/> 
+                    {data?.data.data.telephone}
+                  </li> 
+                  : 
+                  null
+                }
+                {
+                 (data?.data.data.email) ? 
+                  <li className="flex items-center py-2 pr-3">
+                    <HiOutlineMail className="mr-2 text-white text-3xl"/> 
+                    {data?.data.data.email}
+                  </li> 
+                  : 
+                  null
+                }
+                {
+                  (data?.data.data.adresses) ? 
+                  (
+                    <p>
+                      {data?.data.data.adresses[0].rue}, {data?.data.data.adresses[0].codepostal}
+                      <span className="uppercase ml-1">{data?.data.data.adresses[0].ville}</span>
+                    </p>
+                  )
+                  :null
+                }
+                {
+                 (data?.data.data.liens) ? 
+                  <p className="flex py-4">
+                    {data?.data.data.liens.map((item: any) => (
+                      <Link href={item.lien} className="inline-block mr-5 items-center py-2 px-3 w-12 h-12 relative" key={item.id}>
+                         <Image
+                            fill={true}
+                            src={`${process.env.API_URL}/assets/${item.image.filename_disk}`}
+                            alt={data?.data.data.libelle}
+                            loader={loaderProp}
+                            unoptimized
+                            className={cn(
+                              'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
+                              isImageLoading
+                                ? 'scale-110 blur-2xl grayscale'
+                                : 'scale-100 blur-0 grayscale-0'
+                            )}
+                            onLoadingComplete={() => setLoading(false)}
+                          />
+                      </Link> 
+                    ))}
+                  </p>
+                 
+                  : 
+                  null
+                }
+              </article>
+            ): null
+          }
+         </>
         </aside>
         <aside className="w-full md:w-[65%] border p-4 md:p-8 bg-secondary/5">
-          <h3 className="text-3xl sm:text-4xl font-bold text-gray-900">
+          <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 md:px-20">
             {contact.form.title}
           </h3>
           {mutation.isError ? (

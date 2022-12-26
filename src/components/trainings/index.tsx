@@ -1,37 +1,31 @@
 import React, { useContext } from 'react'
-import { ApplicationContext } from 'context/ApplicationContext';
+import { ApplicationContext } from '../../context/ApplicationContext';
 import { useQuery } from 'react-query';
-import { read } from 'services/index';
-import { slugify } from 'utils/slugify';
-import Debug from 'components/Debug';
-import HoverCard from 'components/pages/HoverCard';
-import TrainingTable from 'components/items/TrainingTable';
+import { fetchData } from 'services';
+import { slugify } from '../../utils/slugify';
+import HoverCard from 'components/shared/HoverCard';
+import TrainingTable from './TrainingTable';
 
 interface Params {
   title: string
 }
 function Trainings(params: Params) {
 
-  const base = 'status,id,libelle,souslibelle,prix,presentiel,distanciel,niveau,cpf,duree_en_heures,duree_en_jours,image';
+  const base = 'status,id,libelle,souslibelle,prix,presentiel,distanciel,niveau,cpf,heures,jours,image';
   const images = 'image.*';
   const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut';
   const fields = `${base},${images},${sessions}`;
   const {state: {trainingsParams}} = useContext(ApplicationContext);
-  console.log(trainingsParams);
   const {
     isSuccess,
     data,
   } = useQuery<any>({
     queryKey: ["Trainings", (Object.values(trainingsParams) as string[]).map((param: string) => slugify(String(param))).join('-')],
     queryFn: () =>
-      read({
+    fetchData({
         fields: base,
         path: trainingsParams.path,
-        limit: 10,
-        filter: {
-           "cpf": { "_eq": true },
-           "status": { "_eq": "published" },
-        }
+        limit: 10
       })  
    });
   
@@ -39,7 +33,7 @@ function Trainings(params: Params) {
     <>
     {
       isSuccess ? (
-        <section>
+        <section className=''>
           <div className="container pt-10 mx-auto">
             <h2 className="text-2xl md:text-4xl font-extrabold">
                 {params.title}

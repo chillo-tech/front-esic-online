@@ -2,7 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@layer base {
+  .search-empty input {
+    @apply border-4 rounded-b-xl focus:shadow-none;
+  }
+  
+  .search-list ul {
+    @apply border-4 rounded-b-xl focus:shadow-none;
+  }
+  .search {
+    @apply focus:border-none
+  }
+  
+  .hero {
+    @apply bg-gray-100  h-[calc(100vh-90px)] overflow-auto
+  }
+}
 /*==== FIN Testing des polices ===*/
 #home-police-1 {
   font-family: "Source Sans Pro", sans-serif;

@@ -10,10 +10,8 @@ class AppDocument extends Document {
   render() {
     return (
         <Html className="scroll-smooth" lang="fr">
-          <Head>
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          <body className='font-sans font-light'>
+          <Head />
+          <body className='font-sans font-extralight bg-slate-100'>
             <Main />
             <NextScript />
           </body>
