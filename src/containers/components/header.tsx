@@ -49,7 +49,7 @@ function Header() {
             {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
             <Link
               className="px-8 py-3 text-white bg-green-600 rounded-full  hover:bg-secondary/90 transition-colors"
-              href='/'
+              href='/contactez-nous'
             >
               Contactez nous
             </Link>
@@ -95,7 +95,7 @@ function Header() {
          <p className='py-4 flex items-center justify-center'>
           <Link
             className="px-8 py-3 text-white bg-green-600 rounded-full  hover:bg-secondary/90 transition-colors"
-            href='/'
+            href='/contactez-nous'
           >
             Contactez nous
           </Link>

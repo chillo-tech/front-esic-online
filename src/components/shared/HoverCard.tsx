@@ -19,7 +19,7 @@ interface Params {
 function HoverCard({id, title, subtitle, image, link, others}: Params) {
   const [isLoading, setLoading] = useState(true);
   return (
-    <article className='relative h-96 font-sans font-otherslight mb-3 rounded-xl overflow-hidden'>
+    <article className='relative h-96 font-sans font-otherslight mb-3 rounded-md overflow-hidden shadow-xl'>
        <Image 
           fill={true}
           src={image}

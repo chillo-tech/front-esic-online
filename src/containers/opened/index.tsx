@@ -1,5 +1,5 @@
-import Footer from "containers/components/Footer";
-import Header from "containers/components/header";
+import Footer from "../components/Footer";
+import Header from "../components/header";
 import Head from "next/head";
 import React from "react";
 

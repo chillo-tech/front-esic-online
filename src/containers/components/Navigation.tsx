@@ -16,7 +16,7 @@ function Navigation({items}: Params) {
               .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
               .map((item: any, index: any) => (
                 <li key={`md-${index}-${item.id}`}>
-                  <Link href={`${slugify(item.libelle)}-${item.id}`}
+                  <Link href={`/${slugify(item.libelle)}-${item.id}`}
                         title={item.libelle}
                         className="block py-6 px-4 text-gray-700 text-xl text-center md:text-left hover:bg-green-600/10">
                      {item.libelle}

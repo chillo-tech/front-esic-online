@@ -12,6 +12,10 @@ const nextConfig = {
       {
         source: '/formations',
         destination: "/nos-formations",
+      },
+      {
+        source: '/formations-:id*',
+        destination: "/formations",
       }
     ]
   },

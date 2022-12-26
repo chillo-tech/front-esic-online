@@ -72,6 +72,11 @@ const USER_PROFILE_OPTIONS: any = [
     label: 'Autre'
   }
 ]
+
+const top_formations = {
+  title: "Nos meilleures formations",
+};
+
 const contact = {
   link: "/contact",
   title: "Esic - Contact",
@@ -136,6 +141,7 @@ export {
   hero,
   contact,
   contacts,
+  top_formations,
   USER_PROFILE_OPTIONS,
   COMPANY_PROFILE_OPTIONS,
   CONTACT_CHANNEL,

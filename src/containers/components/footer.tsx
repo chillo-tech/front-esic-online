@@ -8,7 +8,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { useState } from "react";
 
 
-export default function Footer() {
+function Footer() {
 
   const [isImageLoading, setLoading] = useState(true);
 
@@ -27,7 +27,7 @@ export default function Footer() {
     <footer className="shadow-xl py-8 w-full bg-blue-900 text-white font-sans font-extralight">
       {
         isSuccess ? (
-          <div className="container text-xl">
+          <div className="container text-xl md:!px-0">
             <div className="grid gap-7 md:grid-cols-4 items-start">
               <article className="py-5 md:col-span-2">
                 <Link href={'/'} className="font-extrabold text-4xl">{data.data.data.libelle}</Link>
@@ -149,3 +149,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;

@@ -31,10 +31,10 @@ const getTopTrainings = ({limit = 3}: {limit?: number}) => {
 };
 
 const getSubCategories = ({id}: {id: string | string[]; fields?: string}) => {
-  const base = "id,libelle,titre,description";
-  const formations = "formations.formations_id.id,formations.formations_id.libelle,formations.formations_id.souslibelle,formations.formations_id.duree,formations.formations_id.prix,formations.formations_id.image";
+  const base = "id,libelle,description,image";
+  const formations = "formations.formations_id.souslibelle,formations.formations_id.libelle,formations.formations_id.description,formations.formations_id.image,formations.formations_id.id";
   const fields = `${base},${formations}`;
-  return axiosInstance.get(`sousCategories/${id}?fields=${fields}&limit=10`);
+  return axiosInstance.get(`souscategories/${id}?fields=${fields}`);
 };
 
 const getCategories = ({ fields }: { fields: string }) => {
@@ -46,7 +46,7 @@ const getCategories = ({ fields }: { fields: string }) => {
 const getCategory = ({ id }: { id: string }) => {
   const base = "id,libelle,titre,description";
   const subcategories =
-    "souscategories.sousCategories_id.id,souscategories.sousCategories_id.libelle";
+    "souscategories.souscategories_id.id,souscategories.souscategories_id.libelle";
   //const categories =  'menu_category.categories_id.id,menu_category.categories_id.libelle';
   //const subcategories =  'menu_category.categories_id.souscategories.sousCategories_id.id,menu_category.categories_id.souscategories.sousCategories_id.libelle,menu_category.categories_id.souscategories.sousCategories_id.ordre';
   const fields = `${base},${subcategories}`; //,${categories},${subcategories}`;
