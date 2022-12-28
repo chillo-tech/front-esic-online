@@ -1,7 +1,7 @@
 import OpenedLayout from "containers/opened";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsBarChart } from "react-icons/bs";
 import { BiCoinStack } from "react-icons/bi";
@@ -14,11 +14,12 @@ import { getDisplayedDate } from "utils/DateFormat";
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { EMAIL_ERROR_MESSAGE, EMAIL_PATTERN, EMPTY_SESSION } from "utils/index";
+import { EMAIL_ERROR_MESSAGE, EMAIL_PATTERN, EMPTY_SESSION, slugify } from "utils/index";
 import { useRouter } from "next/router";
 import formStyles from 'styles/Form.module.css';
 import ContactUsText from "components/shared/ContactUsText";
 import Message from "components/shared/Message";
+import { ApplicationContext } from "context/ApplicationContext";
 var classNames = require('classnames');
 
 export type Message = {
@@ -34,7 +35,8 @@ const schema = yup.object({
               .matches(EMAIL_PATTERN, {message: EMAIL_ERROR_MESSAGE}),
 }).required();
 
-function Training({ id }: { id: string }) {
+function Training({ id, slug }: { id: string, slug: string }) {
+  const {updateLastTraining} = useContext(ApplicationContext);
   const mutation = useMutation({mutationFn: ((message:Message) => add("/telechargements", message))});
   const router = useRouter();
 	const {register, handleSubmit, formState: {errors}} = useForm<Message>({
@@ -45,14 +47,17 @@ function Training({ id }: { id: string }) {
   const [isImageLoading, setLoading] = useState(true);
   const [displayDownloadForm, setDisplayDownloadForm] = useState(false);
   const { data } = useQuery<any>({
-    queryKey: ["formations", "detail", id],
+    queryKey: ["formations", "detail",  slug, id],
     queryFn: () =>
       getDetail({
         id,
       }),
-    refetchOnWindowFocus: false,
-    staleTime: 3600000, //1jour
-    cacheTime: 3600000, //1jour
+    onSuccess: (data: any) => {
+      updateLastTraining(data.data.data)
+    },
+    onError: () => {
+      router.push('/page-inconnue')
+    }
   });
   const onSubmit = (formData: Message) => {
     mutation.mutate({...formData, libelle_formation: data?.data.data.libelle, formation: data?.data.data.id, fichier: data?.data.data.programmepdf  });
@@ -180,7 +185,7 @@ function Training({ id }: { id: string }) {
 
                 <div className="text-md grid gap-3 items-center py-4 md:grid-cols-3 md:gap">
                   <Link
-                    href="/contactez-nous"
+                    href={{ pathname: '/nos-formations/votre-candidature', query: { formation: `${slugify(data?.data.data.libelle)}-${data?.data.data.id}` } }}
                     className="p-3 text-white text-center bg-secondary rounded-full"
                   >
                     Je candidate
@@ -212,17 +217,17 @@ function Training({ id }: { id: string }) {
               data?.data.data.objectifs ? 
               (
                 <article className="mt-5" id="objectifs">
-                <h3 className="text-2xl font-semibold">
-                  Objectifs de la formation
-                  <span className="bg-secondary block h-1 w-36 my-2"></span>
-                </h3>
-                <div
-                  className="mt-4"
-                  dangerouslySetInnerHTML={{
-                    __html: data?.data.data.objectifs,
-                  }}
-                ></div>
-              </article>
+                  <h3 className="text-2xl font-semibold">
+                    Objectifs de la formation
+                    <span className="bg-secondary block h-1 w-24 my-2"></span>
+                  </h3>
+                  <div
+                    className="mt-4"
+                    dangerouslySetInnerHTML={{
+                      __html: data?.data.data.objectifs,
+                    }}
+                  ></div>
+                </article>
               )
               : null
             }
@@ -245,7 +250,7 @@ function Training({ id }: { id: string }) {
               : null
             }
             {
-              data?.data.data.etudiants ? 
+              data?.data.data.prerequis ? 
               (
                 <article className="mt-5" id="pre-requis">
                 <h3 className="text-2xl font-semibold">
@@ -255,7 +260,7 @@ function Training({ id }: { id: string }) {
                 <div
                   className="mt-4"
                   dangerouslySetInnerHTML={{
-                    __html: data?.data.data.etudiants,
+                    __html: data?.data.data.prerequis,
                   }}
                 ></div>
               </article>
@@ -304,10 +309,10 @@ function Training({ id }: { id: string }) {
                         </div>
                       )
                     : (
-                      <>
+                      <div>
                         <p className="text-center">{EMPTY_SESSION}</p>
                         <ContactUsText classes="justify-center" />
-                      </>
+                      </div>
                     ) 
                   }
                 </div>
@@ -397,5 +402,5 @@ export default Training;
 export async function getServerSideProps(context: any) {
   const { params } = context;
   const id = params['training-slug'].substring(params['training-slug'].lastIndexOf("-") + 1);
-  return { props: { ...params, id } };
+  return { props: { ...params, id, slug: params['training-slug'] } };
 }

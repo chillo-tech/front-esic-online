@@ -1,20 +1,22 @@
 import Head from "next/head";
-import OpenedLayout from '../containers/opened';
+import OpenedLayout from 'containers/opened';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { contact, CONTACT_CHANNEL, COMPANY_PROFILE_OPTIONS, EMAIL_PATTERN, REQUIRED_ERROR_MESSAGE, EMAIL_ERROR_MESSAGE, PHONE_ERROR_MESSAGE, USER_PROFILE, USER_PROFILE_OPTIONS, ENTREPRISE_PARAMS, cn, loaderProp } from "../utils/index";
-import { useMutation } from "react-query";
+
+import { contact, CONTACT_CHANNEL, COMPANY_PROFILE_OPTIONS, EMAIL_PATTERN, REQUIRED_ERROR_MESSAGE, EMAIL_ERROR_MESSAGE, PHONE_ERROR_MESSAGE, USER_PROFILE, USER_PROFILE_OPTIONS, ENTREPRISE_PARAMS, cn, loaderProp, EMPTY_SESSION, getDisplayedDate } from "utils/index";
+import { useMutation, useQuery } from "react-query";
 import { useRouter } from "next/router";
-import { add} from "../services/index";
+import { add, getDetail } from "services/index";
 import formStyles from 'styles/Form.module.css';
 import Message from "components/shared/Message";
 import Link from "next/link";
-import { useState,useContext } from "react";
-import { ApplicationContext } from "context/ApplicationContext";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsPhone } from "react-icons/bs";
 import Image from "next/image";
+import { useState,useContext, useMemo } from "react";
+import { ApplicationContext } from "context/ApplicationContext";
+import Debug from "components/Debug";
 
 export type Message = {
   name: string, 
@@ -24,10 +26,11 @@ export type Message = {
   profile: string,
   subject: string,
   contactChannel: string[],
+  sessions: string[],
 }
 const schema = yup.object({
     name: yup.string().trim()
-          .required("Ce champ est requis"),
+          .required("name Ce champ est requis"),
     phone: yup.string()
                 .required(PHONE_ERROR_MESSAGE)
                 .min(10, PHONE_ERROR_MESSAGE),
@@ -47,36 +50,69 @@ const schema = yup.object({
                     .min(1)
                     .required(REQUIRED_ERROR_MESSAGE)
                    .nullable(),
+    sessions: yup
+                    .array()
+                    .of(yup.string())
+                    .min(1)
+                    .required(REQUIRED_ERROR_MESSAGE)
+                   .nullable(),
     message: yup.string()
           .trim()
           .required(REQUIRED_ERROR_MESSAGE)
           .min(30, "Dites nous en un peu plus s'il vous plait(min. 30)")
 }).required();
 
-export default function Contact() {
-
-  const {state} = useContext(ApplicationContext);
+function Candidature({params}: any) {
+  const {state, updateLastTraining} = useContext(ApplicationContext);
   const [isImageLoading, setLoading] = useState(true);
-  const mutation = useMutation({mutationFn: ((message:any) => add("/contacts", message))});
   const router = useRouter();
-	const {register, handleSubmit, watch, formState: {errors}} = useForm<Message>({
-		mode: "onChange",
-		resolver: yupResolver(schema)
-	});
-  const profile = watch("profile");
-  const contactChannel = watch("contactChannel");
-	const onSubmit = (data: Message) => {
+  
+  const onSubmit = (data: Message) => {
     mutation.mutate({...data, contactChannel: contactChannel.join(", ").toLowerCase()});
 	};
+  const onError = (errors: any, e: any) => console.log({errors});
 
   const handleError = (error:any) => {
     error.preventDefault()
     router.push('/')
   }
+  
+  const mutation = useMutation({mutationFn: ((message:any) => add("/contacts", message))});
+	const {register, handleSubmit, watch, formState: {errors}, setValue} = useForm<Message>({
+    mode: "onChange",
+		resolver: yupResolver(schema)
+	});
+  const { data } = useQuery<any>({
+    queryKey: ["formations", "detail",  params.slug, params.id],
+    queryFn: () =>
+    getDetail({
+      id: params.id,
+    }),
+    onSuccess: (data: any) => {
+      updateLastTraining(data.data.data);
+      setValue(
+        "subject", 
+        `Candidature pour la formation ${data?.data.data.libelle}`,
+        { shouldValidate: true, shouldDirty: true, shouldTouch: true }
+      )
+      if(data?.data.data.sessions && data?.data.data.sessions.length === 0) {
+        setValue(
+          "sessions", 
+          ["Aucune n'est programmée"],
+          { shouldValidate: true, shouldDirty: true, shouldTouch: true }
+        )
+      }
+    },
+    onError: () => {
+      router.push('/page-inconnue')
+    }
+  });
+  const contactChannel = watch("contactChannel");	
+  const sessions = watch("sessions");	
   return (
     <OpenedLayout>
       <Head>
-        <title> ESIC|contactez nous </title>
+        <title> ESIC| {data?.data.data.libelle} </title>
       </Head>
       <section className="pt-12 pb-16 container mx-auto flex flex-wrap font-sans">
         <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">
@@ -85,7 +121,7 @@ export default function Contact() {
           </h2>
           <>
           {
-            (state && state.company) ? (
+            state && state.company ? (
               <article className="py-5 md:col-span-2">
               <Link href={'/'} className="font-extrabold text-4xl">{state.company.libelle}</Link>
               {
@@ -126,7 +162,7 @@ export default function Contact() {
                  (state.company.liens) ? 
                   <p className="flex py-4">
                     {state.company.liens.map((item: any, index: number) => (
-                      <Link href={item.lien} className="inline-block mr-5 items-center py-2 px-3 w-12 h-12 relative" key={`contact-${index}-${item.id}`}>
+                      <Link href={item.lien} className="inline-block mr-5 items-center py-2 px-3 w-12 h-12 relative" key={`candidature-${index}-${item.id}`}>
                          <Image
                             fill={true}
                             src={`${process.env.API_URL}/assets/${item.image.filename_disk}`}
@@ -144,7 +180,6 @@ export default function Contact() {
                       </Link> 
                     ))}
                   </p>
-                 
                   : 
                   null
                 }
@@ -155,7 +190,7 @@ export default function Contact() {
         </aside>
         <aside className="w-full md:w-[65%] border p-4 md:p-8 bg-secondary/5">
           <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 md:px-20">
-            {contact.form.title}
+            Votre candidature
           </h3>
           {mutation.isError ? (
             <Message 
@@ -176,7 +211,7 @@ export default function Contact() {
           {
             mutation.isIdle 
             ? (
-            <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid md:px-20">
+            <form onSubmit={handleSubmit(onSubmit, onError)} className="mt-6 grid md:px-20">
               <div className={formStyles.form_control}>
                   <div className={formStyles.form_control}>
                     <label htmlFor="name" className={formStyles.form_control__label}>
@@ -218,41 +253,59 @@ export default function Contact() {
                     <select {...register("profile")} className={formStyles.form_control__input}>
                       <option value="">Veuillez sélectionner</option>
                       {
-                        USER_PROFILE.map((profile: any, index: number) => (<option key={`profile-${index}`} value={profile.value}>{profile.label}</option>))
+                        USER_PROFILE.map((profile: any, index: number) => (<option key={`c-profile-${index}`} value={profile.value}>{profile.label}</option>))
                       }
                     </select>
                     <p className={formStyles.form_control__error}>{errors.profile?.message}</p>
                   </div>
               </div>
-              { profile ?
-                (
-                  <div className={formStyles.form_control}>
-                      <div className={formStyles.form_control}>
-                        <label htmlFor="phone" className={formStyles.form_control__label}>
-                          <span className='text-black'>Votre demande concerne</span>
+              {
+                (data?.data.data.sessions && data?.data.data.sessions.length) ? 
+                  (
+                    <div className="sessions py-2">
+                      <label htmlFor="sessions" className={formStyles.form_control__label}>
+                        <span className='text-black'>Quelle session pourrait vous convenir</span>
+                      </label>
+                      <div aria-describedby="sessions" className="grid gap-4 md:grid-cols-2">
+                      {data.data.data.sessions.map((session: any, index: number) => (
+                        <label key={`session-${session.sessions_id.id}-${index}`} htmlFor={`session-${session.sessions_id.id}-${index}`}
+                          className={`
+                            border flex flex-col py-3 
+                            border-green-500 text-center 
+                            rounded-md font-extralight cursor-pointer 
+                            ${sessions && sessions.indexOf(session.sessions_id.id) > -1 ? 'bg-green-500 text-white' : ''}`
+                          }
+                        >
+                          <input type="checkbox" id={`session-${session.sessions_id.id}-${index}`}
+                            value={session.sessions_id.id} className='hidden'
+                            {...register("sessions")}
+                          />
+                          <span className="mb-0">Du {getDisplayedDate(session.sessions_id.debut)}</span>
+                          <span className="mb-0">Au {getDisplayedDate(session.sessions_id.fin)}</span> 
                         </label>
-                        <select {...register("subject")} className={formStyles.form_control__input}>
-                          <option value="">Veuillez sélectionner</option>
-                          {
-                            profile === 'particulier'  ? 
-                            (
-                              USER_PROFILE_OPTIONS.map((profile: any, index: number) => (<option key={`profile-options-${index}`} value={profile.value}>{profile.label}</option>))
-                            )
-                            : null
+                        ))}
+                        <label key={`any`} htmlFor='any'
+                          className={`
+                            items-center justify-center
+                            border flex flex-col py-3 
+                            border-green-500 text-center 
+                            rounded-md font-extralight cursor-pointer 
+                            ${sessions && sessions.indexOf("Aucune") > -1 ? 'bg-green-500 text-white' : ''}`
                           }
-                          {
-                            profile === 'entreprise'  ? 
-                            (
-                              COMPANY_PROFILE_OPTIONS.map((company: any, index: number) => (<option key={`company-options-${index}`} value={company.value}>{company.label}</option>))
-                            )
-                            : null
-                          }
-                        </select>
-                        <p className={formStyles.form_control__error}>{errors.subject?.message}</p>
+                        >
+                          <input type="checkbox" id='any'
+                            value='Aucune' className='hidden'
+                            {...register("sessions")}
+                          /> 
+                          <span className="mb-0">Peu importe</span>
+                        </label>
                       </div>
-                  </div>
-                )
-                : null 
+
+                    </div>
+                  )
+                : (
+                  null
+                ) 
               }
               <div className={formStyles.form_control}>
                 <label htmlFor="message" className={formStyles.form_control__label}>
@@ -271,7 +324,7 @@ export default function Contact() {
                     <label htmlFor="phone" className={formStyles.form_control__label}>
                       <span className='text-black'>Comment souhaitez vous être contacté</span>
                     </label>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid md:grid-cols-2 gap-4">
                       {
                         CONTACT_CHANNEL.map((channel: any, index: number) => (
                         <label key={`channel-${index}`} htmlFor={channel.value} 
@@ -304,4 +357,32 @@ export default function Contact() {
       </section>
     </OpenedLayout>
   );
+}
+export default Candidature;
+
+export async function getServerSideProps(context: any) {
+  const { query } = context;
+  let params: any = {}
+  if (!query) {
+    return {
+      notFound: true,
+    }
+  }
+  if (!query.formation) {
+    return {
+      notFound: true,
+    }
+  } 
+
+  if(query.formation)  {
+    const id = query.formation.substring(query.formation.lastIndexOf("-") + 1);
+    
+    params = {
+      id,
+      slug: query.formation,
+      "type": "formation"
+    }
+  }
+
+  return { props: {params} };
 }

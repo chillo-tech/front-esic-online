@@ -8,6 +8,8 @@ const REQUIRED_ERROR_MESSAGE: string = "Ce champ est requis";
 const EMPTY_SESSION: string = "Aucune session n'est programée à ce jour";
 const INITIAL_STATE = {trainingsParams: {path: 'formations'}}
 const UPDATE_SEARCH_TRAINING_PARAMS = "UPDATE_SEARCH_TRAINING_PARAMS";
+const UPDATE_LAST_TRAINING = "UPDATE_LAST_TRAINING";
+const UPDATE_COMPANY = "UPDATE_COMPANY";
 const COMPANY_PROFILE_OPTIONS: any = [
   {
     value: 'formation de salariés',
@@ -146,6 +148,8 @@ export {
   COMPANY_PROFILE_OPTIONS,
   CONTACT_CHANNEL,
   INITIAL_STATE, 
+  UPDATE_COMPANY,
+  UPDATE_LAST_TRAINING,
   UPDATE_SEARCH_TRAINING_PARAMS,
   EMPTY_SESSION,
   PHONE_PATTERN, 

@@ -5,11 +5,11 @@ import { fetchData } from "services/index";
 import { ENTREPRISE_PARAMS, cn, loaderProp, slugify } from "utils/index";
 import { BsPhone } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
-import { useState } from "react";
-
+import { useState,useContext } from "react";
+import { ApplicationContext } from "context/ApplicationContext";
 
 function Footer() {
-
+  const {updateCompany} = useContext(ApplicationContext);
   const [isImageLoading, setLoading] = useState(true);
 
   const {
@@ -21,7 +21,10 @@ function Footer() {
       fetchData({
         path: "Entreprise",
         fields: ENTREPRISE_PARAMS
-      })  
+      }),
+      onSuccess: (data: any) => {
+        updateCompany(data.data.data)
+      }
    });
   return (
     <footer className="shadow-xl py-8 w-full bg-blue-900 text-white font-sans font-extralight">

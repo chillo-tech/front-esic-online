@@ -1,10 +1,12 @@
 import { createContext, useCallback, useMemo, useReducer} from 'react';
-import {INITIAL_STATE, UPDATE_SEARCH_TRAINING_PARAMS} from 'utils'
+import {INITIAL_STATE, UPDATE_COMPANY, UPDATE_LAST_TRAINING, UPDATE_SEARCH_TRAINING_PARAMS} from 'utils'
 import {ApplicationReducer} from './ApplicationReducer';
 
 interface AppContextInterface {
   state: any;
   updateSearchPrams: (data: any) => void;
+  updateCompany: (data: any) => void;
+  updateLastTraining: (data: any) => void;
 }
 type Props = {
   children: JSX.Element,
@@ -15,10 +17,18 @@ function ApplicationContextWrapper({children}: Props) {
   const updateSearchPrams = useCallback((data: {}) => {
     dispatch({type: UPDATE_SEARCH_TRAINING_PARAMS, data});
   },[]);
+  const updateLastTraining = useCallback((data: {}) => {
+    dispatch({type: UPDATE_LAST_TRAINING, data});
+  },[]);
+  const updateCompany = useCallback((data: {}) => {
+    dispatch({type: UPDATE_COMPANY, data});
+  },[]);
 	const authContext = useMemo(() => ({
     state,
-		updateSearchPrams
-	}), [state, updateSearchPrams]);
+    updateLastTraining,
+		updateSearchPrams,
+    updateCompany
+	}), [state, updateSearchPrams,updateLastTraining,updateCompany]);
 
 	return (
 		<ApplicationContext.Provider value={{...authContext}}>
