@@ -18,6 +18,10 @@ const nextConfig = {
         destination: "/formations",
       },
       {
+        source: '/poe-:id*',
+        destination: "/poe",
+      },
+      {
         source: '/certifications-:id*',
         destination: "/certifications",
       

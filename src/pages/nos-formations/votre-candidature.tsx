@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
-import { contact, CONTACT_CHANNEL, COMPANY_PROFILE_OPTIONS, EMAIL_PATTERN, REQUIRED_ERROR_MESSAGE, EMAIL_ERROR_MESSAGE, PHONE_ERROR_MESSAGE, USER_PROFILE, USER_PROFILE_OPTIONS, ENTREPRISE_PARAMS, cn, loaderProp, EMPTY_SESSION, getDisplayedDate } from "utils/index";
+import { contact, CONTACT_CHANNEL, EMAIL_PATTERN, REQUIRED_ERROR_MESSAGE, EMAIL_ERROR_MESSAGE, PHONE_ERROR_MESSAGE, USER_PROFILE, USER_PROFILE_OPTIONS, ENTREPRISE_PARAMS, cn, loaderProp, EMPTY_SESSION, getDisplayedDate } from "utils/index";
 import { useMutation, useQuery } from "react-query";
 import { useRouter } from "next/router";
 import { add, getDetail } from "services/index";
@@ -14,9 +14,8 @@ import Link from "next/link";
 import { HiOutlineMail } from "react-icons/hi";
 import { BsPhone } from "react-icons/bs";
 import Image from "next/image";
-import { useState,useContext, useMemo } from "react";
+import { useState,useContext } from "react";
 import { ApplicationContext } from "context/ApplicationContext";
-import Debug from "components/Debug";
 
 export type Message = {
   name: string, 
@@ -67,8 +66,20 @@ function Candidature({params}: any) {
   const [isImageLoading, setLoading] = useState(true);
   const router = useRouter();
   
-  const onSubmit = (data: Message) => {
-    mutation.mutate({...data, contactChannel: contactChannel.join(", ").toLowerCase()});
+  const onSubmit = (message: Message) => {
+    const mappedSessions = message.sessions.map((sessionId: String) => {
+      if(data && data?.data.data.sessions) {
+        const session = data?.data.data.sessions.find((item: any) => item.sessions_id.id == sessionId);
+        return session ? `Du ${getDisplayedDate(session.sessions_id.debut)} Au ${getDisplayedDate(session.sessions_id.fin)}`.replaceAll(',', '') : sessionId;
+      }
+      return sessionId;
+    })
+    const sessions = mappedSessions.join(", ");
+    mutation.mutate({
+      ...message, 
+      subject: `${message.subject} - Sessions ${sessions}`,
+      contactChannel: `${contactChannel.join(", ").toLowerCase()}`
+    });
 	};
   const onError = (errors: any, e: any) => console.log({errors});
 

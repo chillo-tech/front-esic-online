@@ -1,32 +1,36 @@
-import Debug from '../../components/Debug';
-import AllTrainings from '../../components/shared/AllTrainings';
-import ContactUsText from '../../components/shared/ContactUsText';
-import Trainings from '../../components/trainings';
-import OpenedLayout from '../../containers/opened'
-import { ApplicationContext } from '../../context/ApplicationContext';
-import Image from 'next/image';
+import ContactUsText from 'components/shared/ContactUsText';
+import PageHeader from 'components/shared/PageHeader';
+import OpenedLayout from 'containers/opened'
+import { ApplicationContext } from 'context/ApplicationContext';
 import Link from 'next/link';
 import React, { useContext, useState } from 'react'
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { useQuery } from 'react-query';
-import { read } from '../../services/index';
-import { getDisplayedDate } from '../../utils/DateFormat';
-import { cn, loaderProp } from '../../utils/image-loader';
+import { fetchData } from 'services/index';
+import { getDisplayedDate } from 'utils/DateFormat';
 
-function CompteFormationCpf({id}: {id: string}) {
-  const {updateSearchPrams} = useContext(ApplicationContext);
-  const [isImageLoading, setLoading] = useState(true);
+function POE({id}: {id: string}) {
+  const base = 'id,libelle,souslibelle,ordre,image,description,abstrait';
+  const categories = 'categories.categories_id.id,categories.categories_id.libelle';
+  const pages = 'pages.pages_id.id,pages.pages_id.libelle,pages.pages_id.image,pages.pages_id.description,pages.pages_id.abstrait';
+  const pagesSessions = 'pages.pages_id.sessions.*';
+  const fields=`${base},${categories},${pages},${pagesSessions}`
+  const [sessions, setSessions] = useState([]);
   const {
     isSuccess,
     data,
   } = useQuery<any>({
-    queryKey: ["CompteFormationCpf", id],
-    queryFn: () =>
-      read({
-        path: `page/${id}`,
-        fields: '*, sessions.*'
-      }),
-      onSuccess: () => updateSearchPrams({path: 'formations', title: "Formations éligibles au CPF"})
+    queryKey: ["POE=", id],
+    queryFn: () => fetchData({path: `menus/${id}`, fields}), 
+    onSuccess: ({data}: any) => {
+      const pages = data?.data.pages;
+      if(pages && pages.length) {
+        console.log(pages[0].pages_id.sessions);
+        if(pages[0].pages_id.sessions && pages[0].pages_id.sessions.length){
+          setSessions(pages[0].pages_id.sessions);
+        }
+      }
+    }
   });
   return (
     <OpenedLayout>
@@ -34,40 +38,10 @@ function CompteFormationCpf({id}: {id: string}) {
       {
         isSuccess ? (
           <section className="px-2">
-            <header className="grid bg-red-50 md:grid-cols-2 items-center text-gray-700">
-              <article className='px-5 md:px-24 py-10 md:py-0'>
-                  <div className="flex text-xl font-extralight">
-                    {data?.data.data.souslibelle}
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-extrabold">
-                    {data?.data.data.libelle}
-                  </h2>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: data?.data.data.description,
-                    }}
-                    className="my-5 text-xl font-extralight " />
-              </article>
-              <div className="relative hidden md:block" style={{height: '500px'}}>
-              <div className="bg-black opacity-30 w-full absolute left-0 top-0 bottom-0 right-0 z-20" />
-                      <Image
-                        fill={true}
-                        src={`${process.env.API_URL}/assets/${data?.data.data.image}`}
-                        alt={data?.data.data.libelle}
-                        loader={loaderProp}
-                        unoptimized
-                        className={cn(
-                          'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
-                          isImageLoading
-                            ? 'scale-110 blur-2xl grayscale'
-                            : 'scale-100 blur-0 grayscale-0'
-                        )}
-                        onLoadingComplete={() => setLoading(false)}
-                      />
-              </div>
-            </header>
+           <PageHeader data={data?.data.data}/>
+
             {
-              data.data.data.sessions && data.data.data.sessions.length
+              sessions && sessions.length
               ? (
                 <>
                
@@ -76,8 +50,8 @@ function CompteFormationCpf({id}: {id: string}) {
                       Toutes nos sessions
                   </h2>
                   {
-                    data.data.data.sessions.map((session: any) => (
-                      <article key={session.id} className=" md:py-5 py-10 text-lg grid items-center mb-3 bg-slate-100 px-6 md:grid-cols-7 rounded-lg text-gray-700">
+                    sessions.map((session: any) => (
+                      <article key={session.id} className=" md:py-5 py-10 text-lg grid items-center mb-3 bg-white px-6 md:grid-cols-7 rounded-lg text-gray-700">
                         <h2 className='py-2 text-green-700 md:col-span-4 font-extrabold text-center md:text-left'>{session.libelle}</h2>
                         <div className="py-2 dates md:col-span-2 items-center md:items-start flex flex-col">
                           <p className='flex items-center'><AiOutlineCalendar className="mr-1" />Du {getDisplayedDate(session.debut)}</p>
@@ -98,7 +72,7 @@ function CompteFormationCpf({id}: {id: string}) {
                 </>
               ): null
             }
-            <div className="flex items-end justify-end px-2 mx-auto container !text-blue-900">
+            <div className="flex items-end justify-end px-2 py-3 mb-4 mx-auto container !text-blue-900">
               <ContactUsText />
             </div>
           </section>
@@ -108,7 +82,7 @@ function CompteFormationCpf({id}: {id: string}) {
   )
 }
 
-export default CompteFormationCpf
+export default POE
 export async function getServerSideProps(context: any) {
   const { query: {id} } = context;
   return { props: { id } };

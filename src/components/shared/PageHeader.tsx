@@ -20,7 +20,7 @@ function PageHeader({data}: any) {
           </h2>
           <RenderHtmlContent 
             classes="my-5 text-xl font-extralight"
-            content={data.abstrait ? data.abstrait : data.description}
+            content={data.abstrait ? data.abstrait: null}
           />
       </article>
       {

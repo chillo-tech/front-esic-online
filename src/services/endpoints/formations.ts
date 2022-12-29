@@ -66,7 +66,7 @@ const getDetail = ({
 }) => {
   const base = '*';
   const images = 'image.*';
-  const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut,sessions.sessions_id.id';
+  const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut,sessions.sessions_id.id,sessions.sessions_id.libelle';
   const fields = `${base},${images},${sessions}`;
   return axiosInstance.get(`formations/${id}`, {
     params: { ...(fields ? { fields } : {}) },
