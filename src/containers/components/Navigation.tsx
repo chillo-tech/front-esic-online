@@ -10,7 +10,7 @@ function Navigation({items}: Params) {
     <>
     {
       items.length ? (
-        <nav className='navigation'>
+        <nav className='navigation uppercase !mr-20'>
           <ul className='md:flex'>
              {items
               .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
@@ -18,7 +18,7 @@ function Navigation({items}: Params) {
                 <li key={`md-${index}-${item.id}`}>
                   <Link href={`/${slugify(item.libelle)}-${item.id}`}
                         title={item.libelle}
-                        className="block py-6 px-4 text-gray-700 text-xl text-center md:text-left hover:bg-green-600/10">
+                        className="block py-6 px-4 text-gray-700 text-md text-center md:text-left hover:bg-green-600/10">
                      {item.libelle}
                   </Link> 
                 </li>

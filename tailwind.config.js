@@ -17,9 +17,17 @@ module.exports = {
           '2xl': '2rem',
         }
       },
-      colors: {
+      colors: {      
+        'white': '#ffffff',
         primary: "#2C7CBB",
         secondary: "#418106",
+        'app-blue': '#207CBB',
+        'app-light-blue': '#EEF5FA',
+        'app-light-green': '#EAEDEE',
+        'app-green': '#008100',
+        'app-gray': '#333333',
+        'app-light-gray': '#545F76',
+        'app-stone': '#29303F'
       },
     },
   },

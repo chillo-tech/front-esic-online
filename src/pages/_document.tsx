@@ -9,7 +9,7 @@ class AppDocument extends Document {
   }
   render() {
     return (
-        <Html className="scroll-smooth" lang="fr">
+        <Html className="scroll-smooth" style={{scrollBehavior:'smooth'}} lang="fr">
           <Head />
           <body className='font-sans font-extralight bg-slate-100'>
             <Main />

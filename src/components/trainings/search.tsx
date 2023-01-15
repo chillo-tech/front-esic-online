@@ -3,6 +3,7 @@ import Debug from 'components/Debug';
 import Link from 'next/link';
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { GoSearch } from 'react-icons/go';
 import { useQuery } from 'react-query';
 import { fetchData } from 'services/index';
 import { slugify } from 'utils/slugify';
@@ -37,12 +38,13 @@ function Search({classes}: Params) {
       'search-empty': !isSuccess || (isSuccess && !data?.data.data.length),
       'search-list': (isSuccess && data?.data.data.length)
     })}>
-      <form action="" className='flex'>
+      <form action="" className='flex relative'>
         <input 
           placeholder="Rechercher une formation, e.g: Introduction à python"
-          className={classNames("text-xl w-full rounded-t-2xl py-4 border-t-4 border-l-4 border-r-4 text-gray-800 border-gray-300 !focus:!border-gray-300 px-5", {[`${classes}`]:true})}
+          className={classNames("placeholder:text-white !bg-transparent text-xl w-full rounded-t-2xl py-6 border-t-4 border-l-4 border-r-4 text-white border-gray-300 !focus:!border-gray-300 px-5", {[`${classes}`]:true})}
           {...register("text", { onChange: handleInputChange})} 
         />
+        <GoSearch className='absolute right-5 top-6 text-4xl' />
       </form>
       <div className="results relative" style={{height: '1px'}}>
         {(isSuccess && data?.data.data.length) ? (

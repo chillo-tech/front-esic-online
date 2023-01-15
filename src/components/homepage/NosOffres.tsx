@@ -1,3 +1,4 @@
+import AllTrainings from "components/shared/AllTrainings";
 import ContactUsText from "components/shared/ContactUsText";
 import Image from "next/image";
 import { useState } from "react";
@@ -20,46 +21,49 @@ export default function NosOffres() {
   return (
     <>
     {isSuccess ? (
-      <section className="md:bg-blue-900 text-white py-10">
-        <div className="container mx-auto px-2">
-          <div className="grid gap-4 md:grid-cols-4">
-            {data?.data.data[0].articles
-                .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
-                .map((item: any) => (
-                  <article
-                    key={`hf${item.id}`}
-                    className="w-full px-6 py-8 relative text-center bg-blue-900"
-                  >
-                    <div className="relative h-16">
-                      <Image 
-                        fill={true}
-                        src={`${process.env.API_URL}/assets/${item.image}?w=50&h=50fill=true`}
-                        alt={item.libelle}
-                        loader={loaderProp}
-                        unoptimized={true}
-                        className={cn(
-                          'relative object-contain duration-700 ease-in-out group-hover:opacity-75',
-                          isLoading
-                            ? 'scale-110 blur-2xl grayscale'
-                            : 'scale-100 blur-0 grayscale-0'
-                        )}
-                        onLoadingComplete={() => setLoading(false)}
-                      />
-                    </div>
-                    <h3 className="text-xl md:text-xl font-semibold my-4">
-                      {item.libelle}
-                    </h3>
-                    {/* <h4>{item.subtitle}</h4> */}
-                    <div
-                      className="mt-4 !font-extralight"
-                      dangerouslySetInnerHTML={{ __html: item.description }}
+      <section className="bg-app-blue text-white bg-no-repeat bg-left bg-contain bg-[url('/images/pages/offers-left-arc.svg')]">
+        <section className="py-16 bg-[length:1000px_230px] border border-red-3 bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/offers-bottom-arc.svg')]">
+          <div className="container mx-auto px-2 flex flex-col justity-center">
+            <div className="grid gap-4 md:grid-cols-3">
+              {data?.data.data[0].articles
+                  .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
+                  .slice(0, 3)
+                  .map((item: any) => (
+                    <article
+                      key={`hf${item.id}`}
+                      className="w-full px-6 py-8 relative text-center"
                     >
-                    </div>
-                  </article>
-                ))}
-          </div> 
-          <ContactUsText classes="justify-end"/>
-        </div>
+                      <div className="relative h-24">
+                        <Image 
+                          fill={true}
+                          src={`${process.env.API_URL}/assets/${item.image}?w=50&h=50fill=true`}
+                          alt={item.libelle}
+                          loader={loaderProp}
+                          unoptimized={true}
+                          className={cn(
+                            'relative object-contain duration-700 ease-in-out group-hover:opacity-75',
+                            isLoading
+                              ? 'scale-110 blur-2xl grayscale'
+                              : 'scale-100 blur-0 grayscale-0'
+                          )}
+                          onLoadingComplete={() => setLoading(false)}
+                        />
+                      </div>
+                      <h3 className="text-4xl md:text-4xl font-semibold mt-6">
+                        {item.libelle}
+                      </h3>
+                      {/* <h4>{item.subtitle}</h4> */}
+                      <div
+                        className="mt-4 !font-extralight text-xl"
+                        dangerouslySetInnerHTML={{ __html: item.description }}
+                      >
+                      </div>
+                    </article>
+                  ))}
+            </div> 
+            <AllTrainings classes='border border-app-white text-app-white hover:bg-white hover:text-app-blue'/>
+          </div>
+        </section>
       </section>
     ): null }
     </>

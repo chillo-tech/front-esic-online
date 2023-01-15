@@ -3,10 +3,13 @@ import Image from "next/image";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
 import { ENTREPRISE_PARAMS, cn, loaderProp, slugify } from "utils/index";
-import { BsPhone } from "react-icons/bs";
+import { BsArrowRightShort, BsArrowUpCircle, BsPhone } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { useState,useContext } from "react";
 import { ApplicationContext } from "context/ApplicationContext";
+import classNames from "classnames";
+import {BiMapPin } from "react-icons/bi";
+import AllTrainings from "components/shared/AllTrainings";
 
 function Footer() {
   const {updateCompany} = useContext(ApplicationContext);
@@ -27,53 +30,115 @@ function Footer() {
       }
    });
   return (
-    <footer className="shadow-xl py-8 w-full bg-blue-900 text-white font-sans font-extralight">
+    <footer className="text-center relative shadow-xl pb-20 w-full bg-gradient-to-b via-app-stone from-app-light-gray to-app-stone text-white font-sans font-extralight">
       {
         isSuccess ? (
-          <div className="container text-xl md:!px-0">
-            <div className="grid gap-7 md:grid-cols-4 items-start">
-              <article className="py-5 md:col-span-2">
-                <Link href={'/'} className="font-extrabold text-4xl">{data.data.data.libelle}</Link>
+          <>
+            <div className="relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
+                <div className="container md:!px-0">
+                  <article className="py-5 md:col-span-2 text-3xl">
+                    <Link href={'/'} className="font-extrabold text-6xl mb-2">{data.data.data.libelle}</Link>
+                    {
+                        (data?.data.data.description) ? 
+                          <div className="py-3 leading-10" dangerouslySetInnerHTML={{__html: data.data.data.description}}/>
+                        : 
+                        null
+                      }
+                    <p className="py-12 flex items-center justify-center relative"> 
+                      <AllTrainings
+                        link="/contactez-nous"
+                        text="Contactez nous"
+                       classes='bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue text-2l'/>
+                    </p>
+                  </article>
+                </div>
+                <div className="container my-10 grid md:grid-cols-3 md:!px-0">
+                  <article>
+                    <h3 className="text-app-white text-left mb-6 text-4xl font-bold">Nous contacter</h3>
+                      {
+                        (data?.data.data.telephone) ? 
+                        <Link href={`tel:${data?.data.data.telephone}`} 
+                          className="text-app-light-gray flex items-center text-3xl font-light pr-3">
+                          <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
+                            <BsPhone className="text-4xl text-app-blue"/> 
+                          </span>
+                          {data?.data.data.telephone}
+                        </Link> 
+                        : 
+                        null
+                      }
+                      {
+                        (data?.data.data.email) ? 
+                        <Link href={`mailto:${data?.data.data.email}`} className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
+                          <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
+                            <HiOutlineMail className="text-4xl text-app-blue"/> 
+                          </span>
+                          {data?.data.data.email}
+                        </Link> 
+                        : 
+                        null
+                      }
+                      {
+                        (data?.data.data.adresses) ? 
+                        (
+                          <article className="flex text-app-light-gray font-light">
+                            <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
+                              <BiMapPin className="text-4xl text-app-blue"/> 
+                            </span>
+                            <p className="flex flex-col text-left text-3xl">
+                              {data?.data.data.adresses[0].rue}
+                              <span className="uppercase ml-1">{data?.data.data.adresses[0].codepostal} {data?.data.data.adresses[0].ville}</span>
+                            </p>  
+                          </article>
+                          
+                        )
+                        :null
+                      }
+                  </article>
+                  <article className="flex flex-col text-left my-10 md:my-0 md:px-10">
+                    <h3 className="text-app-white text-left mb-6 text-4xl font-bold">Nous connaitre</h3>
+                    {data?.data.data.pages.map((item: any) => (
+                      <Link href={`a-propos-de-nous/${slugify(item.libelle)}-${item.id}`} key={`pages-${item.id}`}
+                            className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
+                        {item.libelle}
+                      </Link> 
+                    ))}
+                  </article>
+                  <article className="flex flex-col justify-center items-center">
+                  {
+                    (data?.data.data.certifications) ? 
+                      <>
+                        {data?.data.data.certifications.map((item: any) => (
+                          <div className="inline-block items-center w-60 h-32 relative overflow-hidden" key={`certifications-${item.id}`}>
+                              <Image
+                                fill={true}
+                                src={`${process.env.API_URL}/assets/${item.directus_files_id.filename_disk}`}
+                                alt={data?.data.data.libelle}
+                                loader={loaderProp}
+                                unoptimized
+                                className={cn(
+                                  'relative object-contain duration-700 ease-in-out group-hover:opacity-75 overflow-hidden',
+                                  isImageLoading
+                                    ? 'scale-110 blur-2xl grayscale'
+                                    : 'scale-100 blur-0 grayscale-0'
+                                )}
+                                onLoadingComplete={() => setLoading(false)}
+                              />
+                          </div> 
+                        ))}
+                      </>
+                      : 
+                      null
+                    }
+                  </article>
+                </div>
+                <div className="container flex flex-col md:flex-row items-center md:px-0">
                 {
-                   (data?.data.data.description) ? 
-                      <div className="py-3" dangerouslySetInnerHTML={{__html: data.data.data.description}}/>
-                    : 
-                    null
-                  }
-                  {
-                   (data?.data.data.telephone) ? 
-                    <Link href={`tel:${data?.data.data.telephone}`} className="flex items-center py-2 pr-3">
-                      <BsPhone className="mr-2 text-white text-3xl"/> 
-                      {data?.data.data.telephone}
-                    </Link> 
-                    : 
-                    null
-                  }
-                  {
-                   (data?.data.data.email) ? 
-                    <Link href={`mailto:${data?.data.data.email}`} className="flex items-center py-2 pr-3">
-                      <HiOutlineMail className="mr-2 text-white text-3xl"/> 
-                      {data?.data.data.email}
-                    </Link> 
-                    : 
-                    null
-                  }
-                  {
-                    (data?.data.data.adresses) ? 
-                    (
-                      <p>
-                        {data?.data.data.adresses[0].rue}, {data?.data.data.adresses[0].codepostal}
-                        <span className="uppercase ml-1">{data?.data.data.adresses[0].ville}</span>
-                      </p>
-                    )
-                    :null
-                  }
-                  {
-                   (data?.data.data.liens) ? 
-                    <p className="flex py-4">
+                    (data?.data.data.liens) ? 
+                    <p className="flex py-4 items-center justify-center md:justify-start">
                       {data?.data.data.liens.map((item: any, index: number) => (
-                        <Link href={item.lien} className="inline-block mr-5 items-center py-2 px-3 w-12 h-12 relative" key={`liens-${index}-${data?.data.data.libelle}`}>
-                           <Image
+                        <Link href={item.lien} className={classNames(`inline-block mr-5 items-center py-2 w-14 h-14 relative`)} key={`liens-${index}-${data?.data.data.libelle}`}>
+                            <Image
                               fill={true}
                               src={`${process.env.API_URL}/assets/${item.image.filename_disk}`}
                               alt={data?.data.data.libelle}
@@ -90,65 +155,22 @@ function Footer() {
                         </Link> 
                       ))}
                     </p>
-                   
                     : 
                     null
                   }
-              </article>
-              <article className="py-5 items-start justify-start flex flex-col">
-                {
-                  (data?.data.data.pages) ? 
-                  (
-                    <>                
-                      <h2 className="font-extrabold text-2xl mb-4">Nous connaitre</h2>
-                        {data?.data.data.pages.map((item: any) => (
-                          <Link href={`a-propos-de-nous/${slugify(item.libelle)}-${item.id}`} key={`pages-${item.id}`}
-                                className="inline-block items-center mb-2">
-                            {item.libelle}
-                          </Link> 
-                        ))}
-                    </>
-                  )
-                    : 
-                    null
-                  }
-              </article>
-              <article className="py-5">
-                {
-                  (data?.data.data.certifications) ? 
-                    <>
-                      {data?.data.data.certifications.map((item: any) => (
-                        <div className="inline-block items-center w-60 h-32 relative" key={`certifications-${item.id}`}>
-                           <Image
-                              fill={true}
-                              src={`${process.env.API_URL}/assets/${item.directus_files_id.filename_disk}`}
-                              alt={data?.data.data.libelle}
-                              loader={loaderProp}
-                              unoptimized
-                              className={cn(
-                                'relative object-contain duration-700 ease-in-out group-hover:opacity-75',
-                                isImageLoading
-                                  ? 'scale-110 blur-2xl grayscale'
-                                  : 'scale-100 blur-0 grayscale-0'
-                              )}
-                              onLoadingComplete={() => setLoading(false)}
-                            />
-                        </div> 
-                      ))}
-                    </>
-                    : 
-                    null
-                  }
-              </article>
-            </div>
-          </div>
-        ): null
+                  <div className="container">
+                    Copyright &copy; {new Date().getFullYear()} ESIC. Tous droits reservés.
+                  </div>
+                  <div className="icons">
+                    <Link href={`#accueil`}scroll={false} >
+                      <BsArrowUpCircle className="text-6xl text-app-blue"/>
+                    </Link>
+                  </div>
+                </div>
+            </div> 
+          </>
+       ): null
       }
-      <div className="border-t border-slate-500 text-center py-2">
-        <div className="container mx-auto py-2">
-          Copyright &copy; {new Date().getFullYear()} ESIC. Tous droits reservés.
-        </div>
-      </div>
     </footer>
   );
 }

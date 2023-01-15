@@ -2,7 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 @import 'content-styles';
+.mapouter{position:relative;text-align:right;height:458px;}
+.gmap_canvas {overflow:hidden;background:none!important;height:458px;}
+
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
   .search-empty input {
     @apply border-4 rounded-b-xl focus:shadow-none;
   }

@@ -18,7 +18,7 @@ function AproposDeNous() {
   return (
     <>
     {(isSuccess && data?.data.data.apropos)? (
-      <section className="clear-both py-16 bg-slate-800 bg-opacity-20">
+      <section className="clear-both py-16 bg-app-light-blue">
         <div className="container mx-auto px-2">
           <div className="grid gap-4 md:grid-cols-3">
             {data?.data.data.apropos
@@ -26,7 +26,7 @@ function AproposDeNous() {
             .map((item: any) => (
               <article
                 key={`about_ov${item.id}`}
-                className="shadow-lg p-8 relative bg-slate-100 border border-gray-200 text-slate-700"
+                className="shadow-lg p-8 relative bg-white text-slate-700"
               >
                 <h3 className="text-2xl font-semibold">{item.libelle}</h3>
                 <div
@@ -35,9 +35,7 @@ function AproposDeNous() {
                 ></div>
               </article>
             ))}
-          </div>
-          
-          <ContactUsText  classes="justify-end text-blue-700" />
+          </div>          
         </div>
       </section>
     ): null}

@@ -3,9 +3,9 @@ import Header from "containers/components/header";
 import Head from "next/head";
 import React from "react";
 
-function OpenedLayoutBack({ children }: { children: any }) {
+function OpenedLayout({ children }: { children: any }) {
   return (
-    <section className="w-full relative" id="accueil">
+    <section className="w-full relative">
       <Head>
         <title>Centre de formation esic</title>
         <meta
@@ -21,7 +21,7 @@ function OpenedLayoutBack({ children }: { children: any }) {
   );
 }
 
-export default OpenedLayoutBack;
+export default OpenedLayout;
 
 export async function getServerSideProps(context: any) {
   return { props: {} };

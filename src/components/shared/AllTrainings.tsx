@@ -1,18 +1,30 @@
+import classNames from 'classnames';
 import Link from 'next/link'
 import React from 'react'
-import { BsArrowRightCircle } from 'react-icons/bs'
+import { BsArrowRightCircle, BsArrowRightShort } from 'react-icons/bs'
 interface Params {
   text?: string;
+  link?: string;
+  icon?: boolean;
   classes?:string
 }
-function AllTrainings({text="Voir toutes nos formations", classes}: Params) {
+function AllTrainings({
+  icon= true,
+  link="/nos-formations",
+  text="Voir toutes nos formations", 
+  classes
+}: Params) {
+  
   return (
-    <div className='flex justify-end items-center text-blue-700 pt-3'>
-      <Link href="/nos-formations" className='flex items-center'> 
-        <BsArrowRightCircle className='mr-2' /> 
-        {text}
-      </Link>
-    </div>
+    <span className={classNames('flex justify-center items-center')}>
+      <Link href={link} className={
+          classNames(
+            'flex justify-center items-center uppercase px-8 py-3 rounded-lg relative', classes)
+        }>
+        <span>{text}</span>                    
+        {icon && <BsArrowRightShort className="text-4xl ml-5"/> }
+      </Link>  
+    </span>
   )
 }
 

@@ -36,8 +36,8 @@ function Header() {
    });
   return (
     <>
-      <header className='bg-white w-full shadow-xl top-0 relative z-40'>
-        <div className="hidden md:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
+      <header className='bg-white w-full top-0 relative z-40 pb-6 pt-5'>
+        <div className="container !px-0 hidden md:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
             <Link href={"/"} className="">
               <Image
                 src={"/images/logo.png"}
@@ -47,13 +47,15 @@ function Header() {
                 alt="Logo Esic"
               />
             </Link>
-            {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
-            <Link
-              className="px-8 py-3 text-white bg-green-600 rounded-full  hover:bg-secondary/90 transition-colors"
-              href='/contactez-nous'
-            >
-              Contactez nous
-            </Link>
+            <div className='flex items-center'>
+              {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
+              <Link
+                className="px-8 py-2 text-app-blue rounded-lg border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
+                href='/contactez-nous'
+              >
+                Contactez nous
+              </Link>
+            </div>
         </div>
         <div className="items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2 md:hidden">
             <div className="flex justify-between items-center">
