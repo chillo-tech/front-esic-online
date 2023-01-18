@@ -20,10 +20,11 @@ function Hero() {
     queryKey: ["Entreprise","homepage"],
     queryFn: () =>
       fetchData({
-        path: "pages?search=esic",
+        path: "pages?filter[libelle][_eq]=Esic",
         fields: "*"
       })  
    });
+   
   return (
     <>
      {
@@ -41,7 +42,7 @@ function Hero() {
             loader={loaderProp}
             unoptimized
             className={cn(
-              'z-10 absolute object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-xl',
+              ' absolute object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-xl',
               isImageLoading
                 ? 'scale-110 blur-2xl grayscale'
                 : 'scale-100 blur-0 grayscale-0'
@@ -49,7 +50,7 @@ function Hero() {
             onLoadingComplete={() => setLoading(false)}
           />
             <div style={{backgroundColor: 'rgba(30, 58, 138, 0.8)'}} 
-             className="z-40 relative pt-28 flex flex-col justify-center items-center text-white !rounded-xl text-center">
+             className="relative pt-20 flex flex-col justify-center items-center text-white !rounded-xl text-center">
                 <div className='flex justify-center items-center'>
                   <p className='relative'>
                       <Image
@@ -72,7 +73,7 @@ function Hero() {
                 <h1 className="text-4xl md:text-6xl font-bold pt-5">
                   {data.data.data[0].libelle}, {data.data.data[0].souslibelle}
                 </h1>
-                <div className="py-20 md:w-3/5">
+                <div className="py-12 md:w-3/5">
                   <Search />
                 </div>
                 <div className="text-xl md:text-2xl text-white hidden md:block"

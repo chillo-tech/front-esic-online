@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 @import 'content-styles';
+@import 'nav';
+
+
+
 .mapouter{position:relative;text-align:right;height:458px;}
 .gmap_canvas {overflow:hidden;background:none!important;height:458px;}
 

@@ -9,6 +9,7 @@ import { HiOutlineMenu } from 'react-icons/hi';
 import classNames from 'classnames';
 import { GiCancel } from 'react-icons/gi';
 import { useRouter } from 'next/router';
+import { MENU } from 'utils';
 
 function Header() {
   const router = useRouter();
@@ -31,12 +32,12 @@ function Header() {
     queryFn: () =>
       fetchData({
         path: "menus",
-        fields: "id,libelle,ordre,*.*"
+        fields: MENU
       })  
    });
   return (
     <>
-      <header className='bg-white w-full top-0 relative z-40 pb-6 pt-5'>
+      <header className='bg-white w-full top-0 relative z-40 pb-2 pt-3'>
         <div className="container !px-0 hidden md:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
             <Link href={"/"} className="">
               <Image
