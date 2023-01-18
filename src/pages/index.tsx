@@ -15,9 +15,10 @@ export default function Home() {
       <NosMeilleuresFormations />
       <AproposDeNous />
       <NosOffres />
-      <Statistiques />  
+      <Statistiques />
       <Carte />
-      <NosClients />    
+      <NosClients />
     </OpenedLayout>
   );
 }
+
