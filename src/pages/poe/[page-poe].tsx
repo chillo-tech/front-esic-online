@@ -1,5 +1,6 @@
 import ContactUsText from 'components/shared/ContactUsText';
 import PageHeader from 'components/shared/PageHeader';
+import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import OpenedLayout from 'containers/opened'
 import { ApplicationContext } from 'context/ApplicationContext';
 import Link from 'next/link';
@@ -10,24 +11,24 @@ import { fetchData } from 'services/index';
 import { getDisplayedDate } from 'utils/DateFormat';
 
 function POE({id}: {id: string}) {
-  const base = 'id,libelle,souslibelle,ordre,image,description,abstrait,*,*.*';
-  const categories = 'categories.categories_id.id,categories.categories_id.libelle';
-  const pages = 'pages.pages_id.id,pages.pages_id.libelle,pages.pages_id.image,pages.pages_id.description,pages.pages_id.abstrait';
-  //const pagesSessions = 'pages.pages_id.sessions.*';
+  const base = 'id,libelle,souslibelle,ordre,image,description,abstrait,*';
+  const categories = 'categories.*';
+  const pages = 'pages.*';
+  const articles = 'articles.*';
   const pagesSessions = 'sessions.*';
-  const fields=`${base}`
+  const fields=`${base},${categories},${pages},${pagesSessions},${articles}`
   const [sessions, setSessions] = useState([]);
   const {
     isSuccess,
     data,
   } = useQuery<any>({
-    queryKey: ["POE=", id],
-    queryFn: () => fetchData({path: `menus/${id}`, fields}), 
+    queryKey: ["POE==", id],
+    queryFn: () => fetchData({path: `pages/${id}`, fields}), 
     onSuccess: ({data}: any) => {
-      const pages = data?.data.pages;
-      if(pages && pages.length) {
-        if(pages[0].pages_id.sessions && pages[0].pages_id.sessions.length){
-          setSessions(pages[0].pages_id.sessions);
+      const pages = data?.data;
+      if(pages) {
+        if(pages.sessions && pages.sessions.length){
+          setSessions(pages.sessions);
         }
       }
     }
@@ -39,7 +40,13 @@ function POE({id}: {id: string}) {
         isSuccess ? (
           <section className="px-2">
            <PageHeader data={data?.data.data}/>
-
+           {data?.data.data.description ? (
+             <section className="bg-green-800 bg-opacity-10">
+              <div className='container'>
+                <RenderHtmlContent classes='text-xl mb-4 py-14' content={data?.data.data.description}/>
+              </div>
+             </section>
+            ) : null }
             {
               sessions && sessions.length
               ? (
@@ -83,7 +90,13 @@ function POE({id}: {id: string}) {
 }
 
 export default POE
+
 export async function getServerSideProps(context: any) {
-  const { query: {id} } = context;
-  return { props: { id } };
+  const { params } = context;
+  const id = params['page-poe'].substring(params['page-poe'].lastIndexOf("-") + 1);
+  const libelle = params['page-poe'].substring(
+    0,
+    params['page-poe'].lastIndexOf("-")
+  );
+  return { props: { ...params, id, libelle, link: params['page-poe'] } };
 }
