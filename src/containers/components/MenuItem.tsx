@@ -5,18 +5,11 @@ import { slugify } from 'utils/slugify'
 import DropDown from './DropDown';
 
 function MenuItem({item}: any) {
-<<<<<<< HEAD
   console.log({item});
   const [dropdown, setDropdown] = useState(false);
 
   return (
     <li className='relative border border-red-10'>
-=======
-  const [dropdown, setDropdown] = useState(false);
-
-  return (
-    <li className='relative'>
->>>>>>> feature/pages-poe
       {(item.categories.length || (item.pages.length && item.pages.length > 1)) ? (
         <>
           <button type="button" aria-haspopup="menu" 
