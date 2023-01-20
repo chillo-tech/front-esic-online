@@ -145,6 +145,7 @@ function NosMeilleuresFormations() {
           </div>
           <AllTrainings
               text={"Contactez nous"}
+              link="/contactez-nous"
               classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
           />
         </div>
