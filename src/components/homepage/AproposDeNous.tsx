@@ -78,8 +78,8 @@ function AproposDeNous() {
                 className="list-none flex mx-16 mb-14"
                 style={{justifyContent: 'space-between'}}
             >
-                {slides.map((slide, slideIndex) => (
-                    <li className="flex items-center">
+                {slides.map((slide : any, slideIndex: number) => (
+                    <li className="flex items-center" key={slideIndex}>
                         <span className={"mr-2 text-3xl h-10 w-10 border-2 rounded-full flex "+ (slideIndex == currentIndex ? "border-blue-400 " : "border-gray-400 ")} style={{justifyContent: 'center',alignItems: 'center'}}>
                             <span className={"text-3xl h-6 w-6 rounded-full "+ (slideIndex == currentIndex ? "bg-app-blue" : "bg-gray-400")}></span>
                         </span>
