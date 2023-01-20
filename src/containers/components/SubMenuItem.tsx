@@ -9,7 +9,7 @@ function SubMenuItem({item, depthLevel}: any) {
   console.log({item, depthLevel});
   const [dropdown, setDropdown] = useState(false);
 
-  let ref = useRef()
+  let ref = useRef<HTMLLIElement>(null)
 
   useEffect(() => {
     const handler = (event: any) => {
