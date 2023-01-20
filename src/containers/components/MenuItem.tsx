@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { BiChevronDown } from 'react-icons/bi';
 import { slugify } from 'utils/slugify'
 import DropDown from './DropDown';
@@ -8,8 +8,25 @@ function MenuItem({item}: any) {
   console.log({item});
   const [dropdown, setDropdown] = useState(false);
 
+  let ref = useRef()
+
+  useEffect(() => {
+    const handler = (event: any) => {
+      if (dropdown && ref.current && !ref.current.contains(event.target)) {
+        setDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("touchstart", handler);
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, [dropdown]);
+
   return (
-    <li className='relative border-red-10'>
+    <li className='relative border-red-10' ref={ref}>
       {(item.categories.length || (item.pages.length && item.pages.length > 1)) ? (
         <>
           <button type="button" aria-haspopup="menu" 
