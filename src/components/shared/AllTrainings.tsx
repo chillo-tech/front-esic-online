@@ -19,7 +19,7 @@ function AllTrainings({
     <span className={classNames('flex justify-center items-center')}>
       <Link href={link} className={
           classNames(
-            'flex justify-center items-center uppercase px-8 py-3 rounded-lg relative', classes)
+            'flex justify-center items-center px-8 py-3 rounded-lg relative uppercase', classes)
         }>
         <span>{text}</span>                    
         {icon && <BsArrowRightShort className="text-4xl ml-5"/> }

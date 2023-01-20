@@ -85,7 +85,7 @@ function Hero() {
                       icon= {false}
                       link='/nos-formations/votre-candidature' 
                       text="S'INSCRIRE À UNE FORMATION"
-                      classes='bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white'
+                      classes='uppercase bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white'
                     />
                   </div>
                 </div>

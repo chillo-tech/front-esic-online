@@ -5,7 +5,7 @@ import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import Trainings from 'components/trainings';
 import OpenedLayout from 'containers/opened'
 import { ApplicationContext } from 'context/ApplicationContext';
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useQuery } from 'react-query';
 import { fetchData } from 'services/index';
 
