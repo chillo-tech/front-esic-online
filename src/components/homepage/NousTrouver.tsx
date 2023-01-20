@@ -2,7 +2,7 @@ import { ApplicationContext } from 'context/ApplicationContext'
 import React, { useContext } from 'react'
 import Carte from "components/homepage/Carte";
 import AllTrainings from "components/shared/AllTrainings";
-import {BsCircleFill} from "react-icons/all";
+import { BiCircle } from 'react-icons/bi';
 
 function NousTrouver() {
   const {state} = useContext(ApplicationContext);
@@ -35,7 +35,7 @@ function NousTrouver() {
                                         key={`adresse-${adresse.id}-${index}`}
                                         className="flex items-center mb-3 text-xl"
                                     >
-                                        <BsCircleFill className="text-app-blue text-xl mr-4"/>
+                                        <BiCircle className="text-app-blue text-xl mr-4"/>
                                         {`${adresse.rue}, ${adresse.ville}`}
                                     </li>
                                 ))

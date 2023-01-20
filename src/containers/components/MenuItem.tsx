@@ -8,7 +8,7 @@ function MenuItem({item}: any) {
   console.log({item});
   const [dropdown, setDropdown] = useState(false);
 
-  let ref = useRef()
+  let ref = useRef<HTMLLIElement>(null)
 
   useEffect(() => {
     const handler = (event: any) => {
