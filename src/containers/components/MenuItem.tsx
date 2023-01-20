@@ -9,7 +9,7 @@ function MenuItem({item}: any) {
   const [dropdown, setDropdown] = useState(false);
 
   return (
-    <li className='relative border border-red-10'>
+    <li className='relative border-red-10'>
       {(item.categories.length || (item.pages.length && item.pages.length > 1)) ? (
         <>
           <button type="button" aria-haspopup="menu" 

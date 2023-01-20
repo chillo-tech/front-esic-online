@@ -36,7 +36,7 @@ function NosMeilleuresFormations() {
             .map((training:any)=> (
                 <Link 
                   href={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
-                 className='bg-slate-50 bg-app-light-green rounded-lg shadow-md' key={training.id}>
+                 className='bg-slate-50 rounded-lg shadow-md' key={training.id}>
                   {
                     training.image ? (
                       <div className='relative w-full h-72 !rounded-t-lg overflow-hidden'>
@@ -143,7 +143,10 @@ function NosMeilleuresFormations() {
                 </Link>
             ))}
           </div>
-          <AllTrainings classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'/>
+          <AllTrainings
+              text={"Contactez nous"}
+              classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
+          />
         </div>
       </section>
     ): null }
