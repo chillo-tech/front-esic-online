@@ -32,7 +32,7 @@ function SubMenuItem({item, grandparent, parent}: any) {
             <button type="button" aria-haspopup="menu"
                     aria-expanded={dropdown ? "true" : "false"}
                     onClick={() => setDropdown((prev) => !prev)}
-                    className={`flex w-56 justify-between items-center uppercase block py-2 px-4 text-sm ${dropdown ? 'text-app-blue': 'text-gray-700'}`}>
+                    className={`whitespace-nowrap flex w-56 justify-between items-center uppercase block py-2 px-4 text-sm ${dropdown ? 'text-app-blue': 'text-gray-700'}`}>
               <span className='mr-1'>{item.libelle}</span>
               <BiChevronRight className='text-xl'/>
             </button>

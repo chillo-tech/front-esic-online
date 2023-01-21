@@ -37,7 +37,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
         ): 
         null 
       }
-      <div className="description p-4">
+      <div className="description p-4 flex flex-col">
           <div className='flex justify-between mb-4 text-xl text-app-light-gray'>
             {
               training.niveau ? 
@@ -60,7 +60,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
             }
           </div>
           {displayTitle ? (
-            <h2 className="my-10 title font-extrabold text-3xl h-16 text-app-light-gray">
+            <h2 className="my-10 title font-extrabold text-2xl min-h-16 text-app-light-gray">
               {capitalize(training.libelle)}
             </h2>) 
             : 

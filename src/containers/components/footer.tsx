@@ -10,6 +10,7 @@ import { ApplicationContext } from "context/ApplicationContext";
 import classNames from "classnames";
 import {BiMapPin } from "react-icons/bi";
 import AllTrainings from "components/shared/AllTrainings";
+import RenderHtmlContent from "components/shared/RenderHtmlContent";
 
 function Footer() {
   const {updateCompany} = useContext(ApplicationContext);
@@ -40,7 +41,7 @@ function Footer() {
                     <Link href={'/'} className="font-extrabold text-6xl mb-2">{data.data.data.libelle}</Link>
                     {
                         (data?.data.data.description) ? 
-                          <div className="py-3 leading-10" dangerouslySetInnerHTML={{__html: data.data.data.description}}/>
+                          <RenderHtmlContent content={data.data.data.description} classes="py-3 leading-10" />
                         : 
                         null
                       }
@@ -90,7 +91,6 @@ function Footer() {
                               <span className="uppercase ml-1">{data?.data.data.adresses[0].codepostal} {data?.data.data.adresses[0].ville}</span>
                             </p>  
                           </article>
-                          
                         )
                         :null
                       }

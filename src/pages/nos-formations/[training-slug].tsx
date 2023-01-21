@@ -24,6 +24,8 @@ import Header from "components/detail-formation/Header";
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
 import Metadata from "components/metadata";
 import HomeTrainingItem from "components/shared/HomeTrainingItem";
+import AllTrainings from "components/shared/AllTrainings";
+import Trainings from "components/trainings";
 var classNames = require('classnames');
 
 export type Message = {
@@ -93,271 +95,49 @@ function Training({ id, slug }: { id: string, slug: string }) {
             </div>
             <div className="col-span-2">
               <div className="w-3/4 mx-auto">
-                <HomeTrainingItem training={training} displayTitle={false} classes="bg-app-light-green"/>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="w-full bg-cover bg-cente relative">
-          <div className="bg-gradient-to-r from-sky-900 bg-black/50 h-full px-4">
-          {
-            data?.data.data.image ? (
-              <>
-                <div className="bg-slate/10 bg-gradient-to-r from-black/90 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20" />
-                <Image
-                  fill={true}
-                  src={`${process.env.API_URL}/assets/${training?.image.filename_disk}`}
-                  alt={training?.libelle}
-                  loader={loaderProp}
-                  unoptimized
-                  className={cn(
-                    'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
-                    isImageLoading
-                      ? 'scale-110 blur-2xl grayscale'
-                      : 'scale-100 blur-0 grayscale-0'
-                  )}
-                  onLoadingComplete={() => setLoading(false)}
+                <HomeTrainingItem 
+                  training={training} 
+                  displayTitle={false} 
+                  classes="bg-app-light-green"
                 />
-              </>
-            ): 
-            null 
-          }
-            <div className="md:px0 container flex relative z-20">
-              <div className="max-w-4xl md:py-16 md:pt-24 text-white pt-10">
-                <h4 className="flex">
-                  {training?.souslibelle}
-                </h4>
-                <h2 className="text-2xl md:text-5xl font-extrabold">
-                  {training?.libelle}
-                </h2>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: data?.data.data.short_description,
-                  }}
-                  className="my-10"
-                ></div>
-                <ul className="mt-8 items-start flex flex-col md:flex-row">
-                  {
-                   data?.data.data.niveau ? 
-                    <li className="flex items-end py-2 mr-3">
-                      <BsBarChart className="mr-2 text-green-600 text-3xl"/> 
-                      <span className="text-xl">{training?.niveau === "BEGINNER" ? 'Débutant': null}</span>
-                      <span className="text-xl">{training?.niveau === "INTERMEDIARY" ? 'Intermediaire': null}</span>
-                      <span className="text-xl">{training?.niveau === "ADVANCED" ? 'Avancé': null}</span>
-                    </li> 
-                    : 
-                    null
-                  }
-                  {
-                   data?.data.data.jours || data?.data.data.heures  ? 
-                    <li className="flex items-center py-2 pr-3">
-                      {
-                        data?.data.data.jours ? 
-                        <span className="flex items-center pr-3">
-                          <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
-                          <span>{training?.jours} Jours</span>
-                        </span>
-                        : 
-                        null
-                      }{
-                        data?.data.data.heures && !data?.data.data.jours ? 
-                        <span className="flex items-center pr-3">
-                          <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
-                          <span>{training?.heures} Heures</span>
-                        </span>
-                        : 
-                        null
-                      }
-                    </li>
-                    : 
-                    null
-                  }
-                  {
-                   (data?.data.data.distanciel || data?.data.data.presentiel) ? 
-                    <li className="flex items-center py-2 pr-3">
-                      <GiPositionMarker className="text-red-400 text-3xl"/> 
-                      {training?.distanciel ? 
-                        <span className="flex items-center">
-                          En ligne
-                        </span>
-                        :
-                        null
-                      }
-                      {(data?.data.data.distanciel && data?.data.data.presentiel) ? (<span className="ml-1">ou</span>) : null}
-                      {
-                        data?.data.data.presentiel ? 
-                        <span className="flex items-center ml-1">
-                          Dans nos locaux
-                        </span> 
-                        : 
-                        null
-                      }
-                    </li>
-                    : 
-                    null
-                  }
-                  {
-                   (data?.data.data.prix && data?.data.data.cpf ) ? 
-                    <li className="flex items-center py-2 pr-3">
-                      <BiCoinStack className="mr-2 text-yellow-600 text-3xl"/> 
-                      Eligible au CPF
-                    </li> 
-                    : 
-                    null
-                  }
-                </ul>
-
-                <div className="text-md grid gap-3 items-center py-4 md:grid-cols-3 md:gap">
-                  <Link
-                    href={{ pathname: '/nos-formations/votre-candidature', query: { formation: `${slugify(data?.data.data.libelle)}-${training?.id}` } }}
-                    className="p-3 text-white text-center bg-secondary rounded-full"
-                  >
-                    Je candidate
-                  </Link>
-                  {
-                   (data?.data.data.programmepdf ) ? 
-                      <button type="button" onClick={() => setDisplayDownloadForm(!displayDownloadForm)}
-                        className="p-3 text-white text-center border border-white rounded-full"
-                      >
-                        Je télécharge le programme
-                      </button>
-                    : 
-                    null
-                  }
-                 
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="md:px-0 container mx-auto py-6 px-4 grid md:py-12 md:grid-cols-10">
-          <section className="md:col-span-6">
-            {
-              data?.data.data.contenu ? 
-                (<article className="mb-7" dangerouslySetInnerHTML={{__html: data?.data.data.contenu}}/>)
-              : null
-            }
-            {
-              data?.data.data.objectifs ? 
-              (
-                <article className="mt-5" id="objectifs">
-                  <h3 className="text-2xl font-semibold">
-                    Objectifs de la formation
-                    <span className="bg-secondary block h-1 w-24 my-2"></span>
-                  </h3>
-                  <div
-                    className="mt-4"
-                    dangerouslySetInnerHTML={{
-                      __html: data?.data.data.objectifs,
-                    }}
-                  ></div>
-                </article>
-              )
-              : null
-            }
-            {
-              data?.data.data.programme ? 
-              (
-                <article className="mt-5" id="programme">
-                <h3 className="text-2xl font-semibold">
-                  Programme de la formation
-                  <span className="bg-secondary block h-1 w-36 my-2"></span>
-                </h3>
-                <div
-                  className="mt-4 ck-content"
-                  dangerouslySetInnerHTML={{
-                    __html: data?.data.data.programme,
-                  }}
-                ></div>
-              </article>
-              )
-              : null
-            }
-            {
-              data?.data.data.prerequis ? 
-              (
-                <article className="mt-5" id="pre-requis">
-                <h3 className="text-2xl font-semibold">
-                  Pré requis
-                  <span className="bg-secondary block h-1 w-36 my-2"></span>
-                </h3>
-                <div
-                  className="mt-4"
-                  dangerouslySetInnerHTML={{
-                    __html: data?.data.data.prerequis,
-                  }}
-                ></div>
-              </article>
-              )
-              : null
-            }
-            {
-              data?.data.data.ressources ? 
-              (
-                <article className="mt-5" id="ressources">
-                <h3 className="text-2xl font-semibold">
-                  Ressources utilisées pour cette formation
-                  <span className="bg-secondary block h-1 w-36 my-2"></span>
-                </h3>
-                <div
-                  className="mt-4"
-                  dangerouslySetInnerHTML={{
-                    __html: data?.data.data.ressources,
-                  }}
-                ></div>
-              </article>
-              )
-              : null
-            }
-          </section>
-          <aside className="md:col-span-4 mt-10 md:mt-0">
-            {/* xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-30 sm:left-[70%] 2xl:left-[65%]  */}
-              <div id="formation-panel" className="font-sans bg-white md:w-2/3 mx-auto md:shadow-2xl rounded-lg" >
-                <div className="py-4 space-y-3 px-4 bg-secondary text-white rounded-t-lg">
-                  <div className="text-3xl font-bold mt-4">
-                    {training?.prix}
-                  </div>
-                  {
-                    (data?.data.data.sessions && data?.data.data.sessions.length) ? 
-                      (
+                {
+                  (training.sessions && training.sessions.length) ? 
+                    (
+                      <div className="bg-app-light-green px-5">
                         <div className="sessions py-2">
                           <h3 className="mt-2 font-semibold text-2xl mb-2">
                             Nos prochaines sessions
                           </h3>
                           {training?.sessions.map((item: any, index: number) => (
-                            <div key={`session-${id}-${index}`} className="bg-slate-50 text-slate-600 mb-3 rounded-md p-2">
+                            <div 
+                              className="bg-white py-2 shadow-xs text-slate-600 mb-3 px-2 border-l-8 border-[rgba(1,129,0)]"
+                              key={`session-${id}-${index}`}>
                               <p className="mb-0">Du {getDisplayedDate(item.sessions_id.debut)}</p>
                               <p className="mb-0">Au {getDisplayedDate(item.sessions_id.fin)}</p> 
                             </div>
                           ))}
                         </div>
-                      )
-                    : (
-                      <div>
-                        <p className="text-center">{EMPTY_SESSION}</p>
-                        <ContactUsText classes="justify-center" />
                       </div>
-                    ) 
-                  }
-                </div>
-                <ul className="mt-4  px-8 pb-8 rounded-b-lg">
-                  {[
-                    { label: "Financements", target: "/financements-cpf" },
-                    { label: "Pré-requis", target: "#pre-requis" },
-                    { label: "Programme", target: "#programme" },
-                    { label: "Notre equipe", target: "#notre-equipe" },
-                  ].map((item, index) => (
-                    <li
-                      key={`item${index}`}
-                      className="border-b py-3 font-medium"
-                    >
-                      <Link href={item.target}>{item.label}</Link>
-                    </li>
-                  ))}
-                </ul>
+                    )
+                  : (
+                    <div className="bg-app-light-green px-5">
+                      <p className="text-center">{EMPTY_SESSION}</p>
+                      <ContactUsText classes="justify-center" />
+                    </div>
+                  ) 
+                }
+                 <AllTrainings
+                    uppercase={false}
+                    icon={false}
+                    link="/contactez-nous"
+                    text="Comment financer la formation ?"
+                    classes='bg-none text-app-blue font-bold text-xl py-4'
+                  />
               </div>
-          </aside>
+            </div>
+          </div>
         </section>
+        <Trainings title="Autres formations" limit={3}/>
       </main>
       <section className={classNames({ 'fixed': displayDownloadForm, 'hidden': !displayDownloadForm },`text-white h-screen overflow-hidden bg-app-blue fixed left-0 top-0 right-0 bottom-0 z-50 font-sans flex flex-col justify-between items-center`)}>
          <p className="pdf-form container mx-auto flex justify-end pt-7 px-2">
