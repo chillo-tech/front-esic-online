@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { GiPositionMarker } from 'react-icons/gi';
-import { cn, loaderProp, slugify  } from 'utils';
+import { capitalize, cn, loaderProp, slugify  } from 'utils';
 
 function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any) {
   const [isImageLoading, setLoading] = useState(true);
@@ -59,7 +59,12 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
                 null
             }
           </div>
-          {displayTitle ? (<h2 className="my-10 title font-extrabold text-3xl h-16 text-app-light-gray">{training.libelle}</h2>) : null }
+          {displayTitle ? (
+            <h2 className="my-10 title font-extrabold text-3xl h-16 text-app-light-gray">
+              {capitalize(training.libelle)}
+            </h2>) 
+            : 
+          null }
           <ul className="items-start flex text-xl text-app-gray opacity-50">
               {
                 training.duree_en_jours || training.duree_en_heures  ? 

@@ -4,6 +4,7 @@ import { fetchData } from "services/index";
 import { ENTREPRISE_PARAMS } from "utils/index";
 import React, {useState} from "react";
 import {BiChevronRight, BiChevronLeft} from "react-icons/bi";
+import {BsFillRecordFill} from "react-icons/bs";
 
 function AproposDeNous() {
   const {
@@ -42,37 +43,38 @@ function AproposDeNous() {
       <section className="clear-both py-16 bg-app-light-blue">
         <div className="container mx-auto px-2">
             <ul
-                className="list-none flex mx-16 mb-14"
+                className="list-none flex lg:mx-16 md:mb-8"
                 style={{justifyContent: 'space-between'}}
             >
                 {data?.data.data.apropos.map((item: any, index:number) => (
                     <li className="flex items-center" key={index}>
-                        <span className={"mr-2 text-3xl h-10 w-10 border-2 rounded-full flex "+ (index == currentIndex ? "border-blue-400 " : "border-gray-400 ")} style={{justifyContent: 'center',alignItems: 'center'}}>
-                            <span className={"text-3xl h-6 w-6 rounded-full "+ (index == currentIndex ? "bg-app-blue" : "bg-gray-400")}></span>
+                        <span className={"mr-2 sm:text-xl md:text-2xl lg:text-3xl sm:h-4 sm:w-4 md:h-6 md:w-6 lg:h-10 lg:w-10 border-2 rounded-full flex "+ (index == currentIndex ? "border-blue-400 " : "border-gray-400 ")} style={{justifyContent: 'center',alignItems: 'center'}}>
+                            <BsFillRecordFill className={`sm:text-xl md:text-2xl lg:text-3xl sm:h-4 sm:w-4 lg:h-8 lg:w-8 ${(index == currentIndex ? 'text-app-blue' : 'text-app-gray-400')}`}/>
                         </span>
-                        <h3 className="title text-3xl text-app-light-gray">{item.libelle}</h3>
+                        <h3 className="title sm:text-xl md:text-2xl lg:text-3xl text-app-light-gray">{item.libelle}</h3>
                     </li>
                 ))}
             </ul>
             <div className='max-w-[1400px] w-full m-auto px-4 relative group'>
                 <article
                     key={`about_ov${data?.data.data.apropos[currentIndex].id}`}
-                    className="py-8 px-16 relative text-slate-700 duration-50 flex justify-center mx-20 mb-8"
+                    className="py-8 md:px-16 relative text-slate-700 duration-50 flex justify-center lg:mx-20 mb-8"
                 >
                     <div
                         style={{ backgroundImage: `url(${data?.data.data.apropos[currentIndex].image})`,width: '30%' }}
-                        className='rounded-xl bg-center bg-cover duration-500'
+                        className='rounded-xl bg-center bg-cover duration-500 hidden lg:block'
                     ></div>
                     <div
-                    style={{width: '70%', marginLeft: 80, textAlign: 'justify'}}
-                    dangerouslySetInnerHTML={{ __html: data?.data.data.apropos[currentIndex].description }}
+                        className="w-full lg:w-3/4 lg:ml-20 text-justfy"
+                        style={{textAlign: 'justify'}}
+                        dangerouslySetInnerHTML={{ __html: data?.data.data.apropos[currentIndex].description }}
                     ></div>
                 </article>
-                <div className='absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
+                <div className='hidden md:block absolute top-[50%] -translate-x-0 translate-y-[-50%] md:left-0 lg:left-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
                     <BiChevronLeft onClick={prevSlide} size={70} />
                 </div>
                 {/* Right Arrow */}
-                <div className='absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
+                <div className='hidden md:block absolute top-[50%] -translate-x-0 translate-y-[-50%] md:right-0 lg:right-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
                     <BiChevronRight onClick={nextSlide} size={70} />
                 </div>
                 <div className='flex top-4 justify-center mt-8 -mb-8'>

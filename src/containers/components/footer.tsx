@@ -52,7 +52,7 @@ function Footer() {
                     </p>
                   </article>
                 </div>
-                <div className="container my-10 grid md:grid-cols-3 md:!px-0">
+                <div className="container my-10 grid md:grid-cols-3 md:!px-4 md:!max-w-full">
                   <article>
                     <h3 className="text-app-white text-left mb-6 text-4xl font-bold">Nous contacter</h3>
                       {
@@ -98,7 +98,7 @@ function Footer() {
                   <article className="flex flex-col text-left my-10 md:my-0 md:px-10">
                     <h3 className="text-app-white text-left mb-6 text-4xl font-bold">Nous connaitre</h3>
                     {data?.data.data.pages.map((item: any) => (
-                      <Link href={`a-propos-de-nous/${slugify(item.libelle)}-${item.id}`} key={`pages-${item.id}`}
+                      <Link href={`/${slugify(item.libelle)}-${item.id}`} key={`pages-${item.id}`}
                             className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
                         {item.libelle}
                       </Link> 
@@ -109,7 +109,7 @@ function Footer() {
                     (data?.data.data.certifications) ? 
                       <>
                         {data?.data.data.certifications.map((item: any) => (
-                          <div className="inline-block items-center -mt-44 w-60 h-32 relative overflow-hidden" key={`certifications-${item.id}`}>
+                          <div className="inline-block items-center md:-mt-44 w-60 h-32 relative overflow-hidden" key={`certifications-${item.id}`}>
                               <Image
                                 fill={true}
                                 src={`${process.env.API_URL}/assets/${item.directus_files_id.filename_disk}`}

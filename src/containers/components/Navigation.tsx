@@ -1,10 +1,11 @@
-import Link from 'next/link'
 import React from 'react'
 import MenuItem from './MenuItem'
+
 type Params = {
   items: any[]
 }
 function Navigation({items}: Params) {
+  console.log({navigationItem:items});
   return (
 
     <>
