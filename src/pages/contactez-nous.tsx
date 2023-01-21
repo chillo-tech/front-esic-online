@@ -76,7 +76,7 @@ export default function Contact() {
   return (
     <OpenedLayout>
       <Head>
-        <title> ESIC|contactez nous </title>
+        <title> ESIC| Contactez nous </title>
       </Head>
       <section className="pt-12 pb-16 container mx-auto flex flex-wrap font-sans">
         <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">

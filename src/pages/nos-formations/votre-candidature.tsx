@@ -365,7 +365,7 @@ function Candidature({ params }: any) {
                       {...register("profile")}
                       className={formStyles.form_control__input}
                     >
-                      <option value="">Veuillez sélectionner</option>
+                      <option value="">Vous êtes</option>
                       {USER_PROFILE.map((profile: any, index: number) => (
                         <option
                           key={`c-profile-${index}`}
@@ -382,13 +382,13 @@ function Candidature({ params }: any) {
                 </div>
               </div>
 
-              {/* {data?.data.data.sessions && data?.data.data.sessions.length ? (
+              {data?.data.data.sessions && data?.data.data.sessions.length ? (
                 <div className="sessions py-2">
                   <label
                     htmlFor="sessions"
                     className={formStyles.form_control__label}
                   >
-                    <span className="text-black">
+                    <span className="text-black font-semibold">
                       Quelle session pourrait vous convenir
                     </span>
                   </label>
@@ -403,12 +403,12 @@ function Candidature({ params }: any) {
                           htmlFor={`session-${session.sessions_id.id}-${index}`}
                           className={`
                             border flex flex-col py-3 
-                            border-green-500 text-center 
+                            border-app-blue text-center 
                             rounded-md font-extralight cursor-pointer 
                             ${
                               sessions &&
                               sessions.indexOf(session.sessions_id.id) > -1
-                                ? "bg-green-500 text-white"
+                                ? "bg-app-blue text-white"
                                 : ""
                             }`}
                         >
@@ -453,7 +453,7 @@ function Candidature({ params }: any) {
                     </label>
                   </div>
                 </div>
-              ) : null} */}
+              ) : null}
               <div className={formStyles.form_control}>
                 {/* <label
                   htmlFor="message"
