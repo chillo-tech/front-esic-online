@@ -288,7 +288,7 @@ function Candidature({ params }: any) {
           {mutation.isIdle ? (
             <form
               onSubmit={handleSubmit(onSubmit, onError)}
-              className=" w-full mt-2 col-span-6 md:px-6"
+              className=" w-full mt-2 col-span-6 px-6 pb-6"
             >
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className={formStyles.form_control}>
