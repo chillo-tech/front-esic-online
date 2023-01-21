@@ -532,6 +532,7 @@ export default Candidature;
 export async function getServerSideProps(context: any) {
   const { query } = context;
   let params: any = {};
+
   if (!query) {
     return {
       notFound: true,
