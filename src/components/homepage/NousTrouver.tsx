@@ -2,7 +2,7 @@ import { ApplicationContext } from 'context/ApplicationContext'
 import React, { useContext } from 'react'
 import Carte from "components/homepage/Carte";
 import AllTrainings from "components/shared/AllTrainings";
-import { BiCircle } from 'react-icons/bi';
+import { BsFillRecordFill } from 'react-icons/bs';
 
 function NousTrouver() {
   const {state} = useContext(ApplicationContext);
@@ -20,10 +20,10 @@ function NousTrouver() {
                 </span>
             </h2>
         </div>
-        <div className="md:container">
-            <div className="flex justify-center grid gap-2 md:grid-cols-2">
+        <div className="lg:container">
+            <div className="flex justify-center grid gap-2 lg:grid-cols-2">
                 <Carte />
-                <div className="z-1 hidden md:block bg-white rounded-3xl shadow-lg shadow-indigo mx-20" style={{zIndex: 1}}>
+                <div className="z-1 hidden lg:block bg-white rounded-3xl shadow-lg shadow-indigo mx-20" style={{zIndex: 1}}>
                     <div className="p-8">
                         <div className="capitalize">
                             <h2 className="font-bold text-3xl mb-8">Nos adresses</h2>
@@ -35,7 +35,7 @@ function NousTrouver() {
                                         key={`adresse-${adresse.id}-${index}`}
                                         className="flex items-center mb-3 text-xl"
                                     >
-                                        <BiCircle className="text-app-blue text-xl mr-4"/>
+                                        <BsFillRecordFill className="text-app-blue text-xl mr-4"/>
                                         {`${adresse.rue}, ${adresse.ville}`}
                                     </li>
                                 ))
@@ -48,7 +48,7 @@ function NousTrouver() {
                         classes='border border-app-blue text-sm text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue px-5 py-1'/>
                 </div>
             </div>
-            <span className="z-0 hidden md:block absolute h-96 w-96 top-3/4 left-3/4 bg-app-blue rounded-full"/>
+            <span className="z-0 hidden lg:block absolute h-96 w-96 top-3/4 left-3/4 bg-app-blue rounded-full"/>
         </div>
     </section>
   )

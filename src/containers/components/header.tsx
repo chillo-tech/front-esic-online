@@ -38,7 +38,7 @@ function Header() {
   return (
     <>
       <header className='bg-white w-full top-0 relative z-40 pb-2 pt-3'>
-        <div className="container !px-0 hidden md:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
+        <div className="container !px-0 hidden lg:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
             <Link href={"/"} className="">
               <Image
                 src={"/images/logo.png"}
@@ -58,7 +58,7 @@ function Header() {
               </Link>
             </div>
         </div>
-        <div className="items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2 md:hidden">
+        <div className="md:container items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-0 px-2 lg:hidden">
             <div className="flex justify-between items-center">
               <Link href={"/"} className="">
                 <Image

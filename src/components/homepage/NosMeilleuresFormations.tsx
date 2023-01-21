@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { GiPositionMarker } from 'react-icons/gi';
 import { useQuery } from 'react-query';
 import { getTopTrainings } from 'services/index';
-import { cn, loaderProp, slugify  } from 'utils';
+import { cn, loaderProp, slugify,capitalize  } from 'utils';
 
 function NosMeilleuresFormations() {
   const [isImageLoading, setLoading] = useState(true);
@@ -21,7 +21,10 @@ function NosMeilleuresFormations() {
     {isSuccess ? (
       <section className='pt-20 pb-20 bg-white' id='formations'>
         <div className="container mx-auto px-2">
-          <div className="w-3/5 mx-auto py-12 bg-no-repeat bg-[right_center] bg-[url('/images/pages/trainings-light.svg')]">
+          <div
+              style={{backgroundPositionX: '85%', backgroundPositionY: '90%'}}
+              className="mx-auto py-12 bg-no-repeat bg-[url('/images/pages/trainings-light.svg')]"
+          >
             <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
               <span className='px-10 py-3'>
                 Nos meilleures formations
@@ -81,7 +84,9 @@ function NosMeilleuresFormations() {
                             null
                         }
                       </div>
-                      <h3 className="my-10 title font-extrabold text-3xl h-16 text-app-light-gray">{training.libelle}</h3>
+                      <h3 className="lg:my-10 title font-extrabold text-2xl text-app-light-gray">
+                        {capitalize(training.libelle)}
+                      </h3>
                       <ul className="items-start flex text-xl text-app-gray opacity-50">
                           {
                             data?.data.data.duree_en_jours || data?.data.data.duree_en_heures  ? 

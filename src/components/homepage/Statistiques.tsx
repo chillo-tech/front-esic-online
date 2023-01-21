@@ -34,14 +34,14 @@ function Statistiques() {
                   {data?.data.data.articles
                   .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
                   .map((item:any)=> (
-                      <article className='py-4 md:px-10 lg:px-0 text-right' key={item.id}>
+                      <article className='py-4 px-0 text-right' key={item.id}>
                         <h3 className="font-semibold my-4 flex items-center justify-end">
                           <BsFillSquareFill className="text-white text-4xl text-app-blue mr-2"/>
-                          <span className='text-4xl md:text-7xl ml-5'>{item.libelle}</span>
+                          <span className='text-4xl lg:text-6xl ml-5'>{item.libelle}</span>
                         </h3>
                         {/* <h4>{item.subtitle}</h4> */}
                         <div
-                            className="mt-4 !font-extralight text-2xl md:text-5xl text-right"
+                            className="mt-4 !font-extralight text-2xl lg:text-4xl text-right"
                             dangerouslySetInnerHTML={{__html: item.description}}
                         >
                         </div>

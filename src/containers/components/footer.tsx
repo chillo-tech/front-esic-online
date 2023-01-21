@@ -52,7 +52,7 @@ function Footer() {
                     </p>
                   </article>
                 </div>
-                <div className="container my-10 grid md:grid-cols-3 md:!px-0">
+                <div className="container my-10 grid md:grid-cols-3 md:!px-4 md:!max-w-full">
                   <article>
                     <h3 className="text-app-white text-left mb-6 text-4xl font-bold">Nous contacter</h3>
                       {
@@ -109,7 +109,7 @@ function Footer() {
                     (data?.data.data.certifications) ? 
                       <>
                         {data?.data.data.certifications.map((item: any) => (
-                          <div className="inline-block items-center -mt-44 w-60 h-32 relative overflow-hidden" key={`certifications-${item.id}`}>
+                          <div className="inline-block items-center md:-mt-44 w-60 h-32 relative overflow-hidden" key={`certifications-${item.id}`}>
                               <Image
                                 fill={true}
                                 src={`${process.env.API_URL}/assets/${item.directus_files_id.filename_disk}`}

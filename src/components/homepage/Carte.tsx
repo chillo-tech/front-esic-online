@@ -6,7 +6,7 @@ function Carte() {
   console.log(state);
   
   return (
-    <section className='bg-app-white overflow-hidden md:ml-10'>
+    <section className='bg-app-white overflow-hidden lg:ml-10'>
      <div className="mapouter !w-screen">
         <div className="gmap_canvas !w-screen">
           <iframe width="2000" height="458" id="gmap_canvas" src="https://maps.google.com/maps?q=36%20Av.%20Pierre%20Brossolette,%2092240%20Malakoff&t=&z=11&ie=UTF8&iwloc=&output=embed" frameBorder="0" ></iframe>

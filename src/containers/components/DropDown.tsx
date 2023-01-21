@@ -13,7 +13,12 @@ function DropDown({dropdown, parent, categories, pages}: any) {
         (categories.length) ? (
           <ul className="dropdown">
             {categories.map((categorie: any, index: number) => (
-                <SubMenuItem item={categorie.categories_id} key={`menu-categorie-${index}-${categorie.categories_id.id}`}/>
+                <SubMenuItem
+                    grandparent={parent}
+                    parent={slugify(`${categorie.categories_id.libelle}-${categorie.categories_id.id}`)}
+                    item={categorie.categories_id}
+                    key={`menu-categorie-${index}-${categorie.categories_id.id}`}
+                />
             ))}
           </ul>
         ): null
@@ -27,7 +32,7 @@ function DropDown({dropdown, parent, categories, pages}: any) {
                   href={`/${slugify(parent)}/${slugify(
                     page.pages_id.libelle
                   )}-${page.pages_id.id}`}
-                  className="py-2 block text-sm whitespace-nowrap px-3"
+                  className="py-2 block text-sm whitespace-nowrap px-4"
                   title={page.libelle}>
                     {page.pages_id.libelle}
                 </Link>
