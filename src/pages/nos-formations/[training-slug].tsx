@@ -22,6 +22,8 @@ import Message from "components/shared/Message";
 import { ApplicationContext } from "context/ApplicationContext";
 import Header from "components/detail-formation/Header";
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
+import Metadata from "components/metadata";
+import HomeTrainingItem from "components/shared/HomeTrainingItem";
 var classNames = require('classnames');
 
 export type Message = {
@@ -75,28 +77,25 @@ function Training({ id, slug }: { id: string, slug: string }) {
   }
   return (
     <OpenedLayout>
-      <Head>
-        <title>{training?.libelle}</title>
-        <meta name="titre" content={`${training.metadonnees && training.metadonnees?.titre} ? ${training.metadonnees?.titre} : ${training.titre}`} />
-        <meta name="description" content={`${training.metadonnees && training.metadonnees?.description} ? ${training.metadonnees?.description} : ${training.description}`} />
-      </Head>
+      <Metadata entry={training}/>
       <main className="bg-white">
         <Header training={training} toogleDownloadForm={toogleDownloadForm}/>
         <section className="bg-white py-10">
-          <div className="md:px0 container">
-            {TRAINING_KEYS.map(item=> (
-              <>
-              {
-                training[item.key] ? (
+          <div className="md:px-0 container border border-red-300 grid md:grid-cols-5 gap-5">
+            <div className="col-span-3">
+              {TRAINING_KEYS.filter(item => training[item.key]).map(item => (
                 <article key={`${id}-${item.key}-${slugify(item.label)}`}
-                  className="bg-white shadow-[0_5px_35px_-18px_rgba(0,0,0,0.3)] p-10 rounded-lg mb-10 w-3/5">
+                  className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-10 rounded-lg mb-10">
                   <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">{item.label}</h2>
                   <RenderHtmlContent content={training[item.key]} classes='text-gray-600 font-light text-lg py-4'/>
                 </article>
-              ) : null
-              }
-              </>
-            ))}
+              ))}
+            </div>
+            <div className="col-span-2">
+              <div className="w-3/4 mx-auto">
+                <HomeTrainingItem training={training} displayTitle={false} classes="bg-app-light-green"/>
+              </div>
+            </div>
           </div>
         </section>
         <section className="w-full bg-cover bg-cente relative">
@@ -173,7 +172,7 @@ function Training({ id, slug }: { id: string, slug: string }) {
                     : 
                     null
                   }
-                   {
+                  {
                    (data?.data.data.distanciel || data?.data.data.presentiel) ? 
                     <li className="flex items-center py-2 pr-3">
                       <GiPositionMarker className="text-red-400 text-3xl"/> 

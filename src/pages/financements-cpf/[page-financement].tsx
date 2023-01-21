@@ -1,9 +1,4 @@
-import AllTrainings from 'components/shared/AllTrainings';
-import Articles from 'components/shared/Articles';
-import PageHeader from 'components/shared/PageHeader';
-import RenderHtmlContent from 'components/shared/RenderHtmlContent';
-import Trainings from 'components/trainings';
-import OpenedLayout from 'containers/opened'
+import Page from 'components/pages';
 import { ApplicationContext } from 'context/ApplicationContext';
 import React, { useContext } from 'react'
 import { useQuery } from 'react-query';
@@ -28,30 +23,13 @@ function PageFinancement({id}: {id: string}) {
       onSuccess: () => updateSearchPrams({path: 'formations', title: "Formations éligibles au CPF"})
   });
   return (
-    <OpenedLayout>
-      
+    <>
       {
         isSuccess ? (
-          <section className="bg-green-800 bg-opacity-10">
-            <PageHeader data={data?.data.data}/>
-            <div className='container'>
-              <RenderHtmlContent classes='text-xl mb-4 py-14' content={data?.data.data.description}/>
-            </div>
-            <section className='grid bg-slate-100 '>
-              <div className='container'>
-                <Articles data={data?.data.data.articles}/>
-              </div>
-            </section>
-            <section className="bg-white">
-              <Trainings title = "Formations éligibles au CPF"/>
-              <div className="container pb-5">
-                <AllTrainings />
-              </div>
-            </section>
-          </section>
+         <Page displayTrainings={true} data={data?.data.data}/>
         ) : null
       }
-    </OpenedLayout>
+    </>
   )
 }
 

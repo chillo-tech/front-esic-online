@@ -3,8 +3,6 @@ import React from 'react'
 import { slugify } from 'utils/slugify'
 
 function SubDropDown({dropdown, parent, souscategories}: any) {
-  console.log({souscategories, dropdown});
-
   return (
       <div className={`${dropdown ? "rounded-md shadow-2xl absolute z-50 top-2.5 left-full bg-white" : "hidden"}`}>
         {

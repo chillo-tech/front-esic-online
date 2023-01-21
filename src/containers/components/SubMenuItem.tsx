@@ -1,12 +1,10 @@
 import Link from 'next/link'
 import React, {useEffect, useRef, useState} from 'react'
-import {BiChevronDown, BiChevronRight} from 'react-icons/bi';
+import {BiChevronRight} from 'react-icons/bi';
 import { slugify } from 'utils/slugify'
-import DropDown from './DropDown';
 import SubDropDown from "containers/components/SubDropDown";
 
 function SubMenuItem({item, depthLevel}: any) {
-  console.log({item, depthLevel});
   const [dropdown, setDropdown] = useState(false);
 
   let ref = useRef<HTMLLIElement>(null)

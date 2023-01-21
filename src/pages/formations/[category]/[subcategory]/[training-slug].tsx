@@ -18,6 +18,7 @@ import { EMAIL_ERROR_MESSAGE, EMAIL_PATTERN } from "utils/index";
 import { useRouter } from "next/router";
 import Message from "components/shared/Message";
 import formStyles from 'styles/Form.module.css';
+import RenderHtmlContent from "components/shared/RenderHtmlContent";
 var classNames = require('classnames');
 
 export type Message = {
@@ -100,12 +101,7 @@ function Training({ id }: { id: string }) {
                 <div className="flex">
                   {data?.data.data.souslibelle}
                 </div>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: data?.data.data.short_description,
-                  }}
-                  className="my-10"
-                ></div>
+                <RenderHtmlContent content={data?.data.data.short_description} classes="my-10"/>
                 <ul className="mt-8 items-start flex flex-col md:flex-row">
                   {
                    data?.data.data.niveau ? 
