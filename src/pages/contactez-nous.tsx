@@ -310,7 +310,7 @@ export default function Contact() {
                       {...register("profile")}
                       className={formStyles.form_control__input}
                     >
-                      <option value="">Veuillez sélectionner</option>
+                      <option value="">Vous êtes ?</option>
                       {USER_PROFILE.map((profile: any, index: number) => (
                         <option key={`profile-${index}`} value={profile.value}>
                           {profile.label}
