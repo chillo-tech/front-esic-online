@@ -30,14 +30,12 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
             <main className="container mx-auto ">
               <section className="grid md:grid-cols-3 gap-6">
                 {data.data.data.formations.map((formation: any, index: number) => (
-                  <>
-                    <HomeTrainingItem
-                        classes="bg-slate-50 rounded-lg shadow-md"
-                        training={formation.formations_id}
-                        link={`/nos-formations/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
-                        key={`${formation.formations_id.id}-${index}`}
-                    />
-                  </>
+                  <HomeTrainingItem
+                      classes="bg-slate-50 rounded-lg shadow-md"
+                      training={formation.formations_id}
+                      link={`/nos-formations/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
+                      key={`${formation.formations_id.id}-${index}`}
+                  />
                 ))}
               </section>
             </main>
