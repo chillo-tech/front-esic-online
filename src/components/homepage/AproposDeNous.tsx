@@ -43,7 +43,7 @@ function AproposDeNous() {
       <section className="clear-both py-16 bg-app-light-blue">
         <div className="container mx-auto px-2">
             <ul
-                className="list-none flex lg:mx-16 md:mb-8"
+                className="list-none lg:mx-16 md:mb-8 hidden md:flex"
                 style={{justifyContent: 'space-between'}}
             >
                 {data?.data.data.apropos.map((item: any, index:number) => (
@@ -56,6 +56,7 @@ function AproposDeNous() {
                 ))}
             </ul>
             <div className='max-w-[1400px] w-full m-auto px-4 relative group'>
+                <h3 className="md:hidden text-2xl font-semibold text-center text-app-blue">{data?.data.data.apropos[currentIndex].libelle}</h3>
                 <article
                     key={`about_ov${data?.data.data.apropos[currentIndex].id}`}
                     className="py-8 md:px-16 relative text-slate-700 duration-50 flex justify-center lg:mx-20 mb-8"
@@ -70,11 +71,11 @@ function AproposDeNous() {
                         dangerouslySetInnerHTML={{ __html: data?.data.data.apropos[currentIndex].description }}
                     ></div>
                 </article>
-                <div className='hidden md:block absolute top-[50%] -translate-x-0 translate-y-[-50%] md:left-0 lg:left-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
+                <div className="block absolute md:top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-5 text-2xl top-0 rounded-full p-2 text-app-blue cursor-pointer">
                     <BiChevronLeft onClick={prevSlide} size={70} />
                 </div>
                 {/* Right Arrow */}
-                <div className='hidden md:block absolute top-[50%] -translate-x-0 translate-y-[-50%] md:right-0 lg:right-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
+                <div className='block absolute md:top-[50%] -translate-x-0 translate-y-[-50%] right-0 md:right-5 text-2xl top-0 rounded-full p-2 text-app-blue cursor-pointer'>
                     <BiChevronRight onClick={nextSlide} size={70} />
                 </div>
                 <div className='flex top-4 justify-center mt-8 -mb-8'>

@@ -22,8 +22,7 @@ function NosMeilleuresFormations() {
       <section className='pt-20 pb-20 bg-white' id='formations'>
         <div className="container mx-auto px-2">
           <div
-              style={{backgroundPositionX: '85%', backgroundPositionY: '90%'}}
-              className="mx-auto py-12 bg-no-repeat bg-[url('/images/pages/trainings-light.svg')]"
+              className="mx-auto py-12 bg-no-repeat bg-[right_center] bg-[url('/images/pages/trainings-light.svg')]"
           >
             <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
               <span className='px-10 py-3'>
