@@ -1,8 +1,8 @@
-import Head from "next/head";
-import OpenedLayout from "containers/opened";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import Head from 'next/head';
+import OpenedLayout from 'containers/opened';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 import {
   contact,
@@ -18,18 +18,18 @@ import {
   loaderProp,
   EMPTY_SESSION,
   getDisplayedDate,
-} from "utils/index";
-import { useMutation, useQuery } from "react-query";
-import { useRouter } from "next/router";
-import { add, getDetail } from "services/index";
-import formStyles from "styles/Form.module.css";
-import Message from "components/shared/Message";
-import Link from "next/link";
-import { HiOutlineMail } from "react-icons/hi";
-import { BsPhone } from "react-icons/bs";
-import Image from "next/image";
-import { useState, useContext } from "react";
-import { ApplicationContext } from "context/ApplicationContext";
+} from 'utils/index';
+import { useMutation, useQuery } from 'react-query';
+import { useRouter } from 'next/router';
+import { add, getDetail } from 'services/index';
+import formStyles from 'styles/Form.module.css';
+import Message from 'components/shared/Message';
+import Link from 'next/link';
+import { HiOutlineMail } from 'react-icons/hi';
+import { BsPhone } from 'react-icons/bs';
+import Image from 'next/image';
+import { useState, useContext } from 'react';
+import { ApplicationContext } from 'context/ApplicationContext';
 
 export type Message = {
   name: string;
@@ -43,7 +43,7 @@ export type Message = {
 };
 const schema = yup
   .object({
-    name: yup.string().trim().required("name Ce champ est requis"),
+    name: yup.string().trim().required('name Ce champ est requis'),
     phone: yup
       .string()
       .required(PHONE_ERROR_MESSAGE)
@@ -90,29 +90,29 @@ function Candidature({ params }: any) {
           ? `Du ${getDisplayedDate(
               session.sessions_id.debut
             )} Au ${getDisplayedDate(session.sessions_id.fin)}`.replaceAll(
-              ",",
-              ""
+              ',',
+              ''
             )
           : sessionId;
       }
       return sessionId;
     });
-    const sessions = mappedSessions.join(", ");
+    const sessions = mappedSessions.join(', ');
     mutation.mutate({
       ...message,
       subject: `${message.subject} - Sessions ${sessions}`,
-      contactChannel: `${contactChannel.join(", ").toLowerCase()}`,
+      contactChannel: `${contactChannel.join(', ').toLowerCase()}`,
     });
   };
   const onError = (errors: any, e: any) => console.log({ errors });
 
   const handleError = (error: any) => {
     error.preventDefault();
-    router.push("/");
+    router.push('/');
   };
 
   const mutation = useMutation({
-    mutationFn: (message: any) => add("/contacts", message),
+    mutationFn: (message: any) => add('/contacts', message),
   });
   const {
     register,
@@ -121,11 +121,11 @@ function Candidature({ params }: any) {
     formState: { errors },
     setValue,
   } = useForm<Message>({
-    mode: "onChange",
+    mode: 'onChange',
     resolver: yupResolver(schema),
   });
   const { data } = useQuery<any>({
-    queryKey: ["formations", "detail", params.slug, params.id],
+    queryKey: ['formations', 'detail', params.slug, params.id],
     queryFn: () =>
       getDetail({
         id: params.id,
@@ -133,12 +133,12 @@ function Candidature({ params }: any) {
     onSuccess: (data: any) => {
       updateLastTraining(data.data.data);
       setValue(
-        "subject",
+        'subject',
         `Candidature pour la formation ${data?.data.data.libelle}`,
         { shouldValidate: true, shouldDirty: true, shouldTouch: true }
       );
       if (data?.data.data.sessions && data?.data.data.sessions.length === 0) {
-        setValue("sessions", ["Aucune n'est programmée"], {
+        setValue('sessions', ["Aucune n'est programmée"], {
           shouldValidate: true,
           shouldDirty: true,
           shouldTouch: true,
@@ -146,11 +146,11 @@ function Candidature({ params }: any) {
       }
     },
     onError: () => {
-      router.push("/page-inconnue");
+      router.push('/page-inconnue');
     },
   });
-  const contactChannel = watch("contactChannel");
-  const sessions = watch("sessions");
+  const contactChannel = watch('contactChannel');
+  const sessions = watch('sessions');
   return (
     <OpenedLayout>
       <Head>
@@ -249,7 +249,7 @@ function Candidature({ params }: any) {
                 contacter au sujet de ses produits et services.
               </p>
               <p className="mb-1">
-                Vous pouvez vous désabonner de ces communications à tout moment.{" "}
+                Vous pouvez vous désabonner de ces communications à tout moment.{' '}
               </p>
               <p className="mb-1">
                 Consultez notre Politique de confidentialité pour en savoir plus
@@ -288,8 +288,7 @@ function Candidature({ params }: any) {
           {mutation.isIdle ? (
             <form
               onSubmit={handleSubmit(onSubmit, onError)}
-              className=" w-full mt-2 col-span-6 px-6 pb-6"
-            >
+              className=" w-full mt-2 col-span-6 px-6 pb-6">
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className={formStyles.form_control}>
                   <div className={formStyles.form_control}>
@@ -304,7 +303,7 @@ function Candidature({ params }: any) {
                       id="name"
                       placeholder="Votre nom"
                       className={formStyles.form_control__input}
-                      {...register("name")}
+                      {...register('name')}
                     />
                     <p className={formStyles.form_control__error}>
                       {errors.name?.message}
@@ -324,7 +323,7 @@ function Candidature({ params }: any) {
                       id="email"
                       placeholder="Votre email"
                       className={formStyles.form_control__input}
-                      {...register("email")}
+                      {...register('email')}
                     />
                     <p className={formStyles.form_control__error}>
                       {errors.email?.message}
@@ -346,7 +345,7 @@ function Candidature({ params }: any) {
                       id="phone"
                       placeholder="Votre téléphone"
                       className={formStyles.form_control__input}
-                      {...register("phone")}
+                      {...register('phone')}
                     />
                     <p className={formStyles.form_control__error}>
                       {errors.phone?.message}
@@ -362,15 +361,13 @@ function Candidature({ params }: any) {
                       <span className="text-black">Vous êtes</span>
                     </label> */}
                     <select
-                      {...register("profile")}
-                      className={formStyles.form_control__input}
-                    >
+                      {...register('profile')}
+                      className={formStyles.form_control__input}>
                       <option value="">Vous êtes</option>
                       {USER_PROFILE.map((profile: any, index: number) => (
                         <option
                           key={`c-profile-${index}`}
-                          value={profile.value}
-                        >
+                          value={profile.value}>
                           {profile.label}
                         </option>
                       ))}
@@ -386,16 +383,14 @@ function Candidature({ params }: any) {
                 <div className="sessions py-2">
                   <label
                     htmlFor="sessions"
-                    className={formStyles.form_control__label}
-                  >
+                    className={formStyles.form_control__label}>
                     <span className="text-black font-semibold">
                       Quelle session pourrait vous convenir
                     </span>
                   </label>
                   <div
                     aria-describedby="sessions"
-                    className="grid gap-4 md:grid-cols-2"
-                  >
+                    className="grid gap-4 md:grid-cols-2">
                     {data.data.data.sessions.map(
                       (session: any, index: number) => (
                         <label
@@ -408,16 +403,15 @@ function Candidature({ params }: any) {
                             ${
                               sessions &&
                               sessions.indexOf(session.sessions_id.id) > -1
-                                ? "bg-app-blue text-white"
-                                : ""
-                            }`}
-                        >
+                                ? 'bg-app-blue text-white'
+                                : ''
+                            }`}>
                           <input
                             type="checkbox"
                             id={`session-${session.sessions_id.id}-${index}`}
                             value={session.sessions_id.id}
                             className="hidden"
-                            {...register("sessions")}
+                            {...register('sessions')}
                           />
                           <span className="mb-0">
                             Du {getDisplayedDate(session.sessions_id.debut)}
@@ -434,20 +428,19 @@ function Candidature({ params }: any) {
                       className={`
                             items-center justify-center
                             border flex flex-col py-3 
-                            border-green-500 text-center 
+                            border-app-blue text-center 
                             rounded-md font-extralight cursor-pointer 
                             ${
-                              sessions && sessions.indexOf("Aucune") > -1
-                                ? "bg-green-500 text-white"
-                                : ""
-                            }`}
-                    >
+                              sessions && sessions.indexOf('Aucune') > -1
+                                ? 'bg-app-blue text-white'
+                                : ''
+                            }`}>
                       <input
                         type="checkbox"
                         id="any"
                         value="Aucune"
                         className="hidden"
-                        {...register("sessions")}
+                        {...register('sessions')}
                       />
                       <span className="mb-0">Peu importe</span>
                     </label>
@@ -465,9 +458,8 @@ function Candidature({ params }: any) {
                   placeholder="Votre message"
                   id="message"
                   className={formStyles.form_control__input}
-                  {...register("message")}
-                  rows={6}
-                ></textarea>
+                  {...register('message')}
+                  rows={6}></textarea>
                 <p className={formStyles.form_control__error}>
                   {errors.message?.message}
                 </p>
@@ -477,8 +469,7 @@ function Candidature({ params }: any) {
                 <div className={formStyles.form_control}>
                   <label
                     htmlFor="phone"
-                    className={formStyles.form_control__label}
-                  >
+                    className={formStyles.form_control__label}>
                     <span className="text-black">
                       Comment souhaitez vous être contacté
                     </span>
@@ -491,17 +482,16 @@ function Candidature({ params }: any) {
                         className={`border py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
                           contactChannel &&
                           contactChannel.indexOf(channel.value) > -1
-                            ? "bg-app-blue text-white"
-                            : ""
-                        }`}
-                      >
+                            ? 'bg-app-blue text-white'
+                            : ''
+                        }`}>
                         <input
                           type="checkbox"
                           id={channel.value}
                           value={channel.value}
                           className="hidden"
-                          {...register("contactChannel")}
-                        />{" "}
+                          {...register('contactChannel')}
+                        />{' '}
                         {channel.label}
                       </label>
                     ))}
@@ -515,8 +505,7 @@ function Candidature({ params }: any) {
               <div className="w-full flex justify-center mt-12">
                 <button
                   type="submit"
-                  className="rounded-md bg-app-blue text-white border-yellow-500 px-24 uppercase py-3"
-                >
+                  className="rounded-md bg-app-blue text-white border-yellow-500 px-24 uppercase py-3">
                   <span>Envoyer</span>
                 </button>
               </div>
@@ -545,12 +534,12 @@ export async function getServerSideProps(context: any) {
   }
 
   if (query.formation) {
-    const id = query.formation.substring(query.formation.lastIndexOf("-") + 1);
+    const id = query.formation.substring(query.formation.lastIndexOf('-') + 1);
 
     params = {
       id,
       slug: query.formation,
-      type: "formation",
+      type: 'formation',
     };
   }
 

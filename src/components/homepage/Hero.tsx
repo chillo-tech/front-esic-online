@@ -1,32 +1,32 @@
-import classNames from "classnames";
-import AllTrainings from "components/shared/AllTrainings";
-import ContactUsText from "components/shared/ContactUsText";
-import Search from "components/trainings/search";
-import Image from "next/image";
-import Link from "next/link";
-import Contact from "pages/contactez-nous";
-import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { fetchData } from "services/index";
-import { cn, loaderProp } from "utils/image-loader";
+import classNames from 'classnames';
+import AllTrainings from 'components/shared/AllTrainings';
+import ContactUsText from 'components/shared/ContactUsText';
+import Search from 'components/trainings/search';
+import Image from 'next/image';
+import Link from 'next/link';
+import Contact from 'pages/contactez-nous';
+import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { fetchData } from 'services/index';
+import { cn, loaderProp } from 'utils/image-loader';
 
 function Hero() {
   const [isImageLoading, setLoading] = useState(true);
   const [searchBarEnabled, setSearchBarEnabled] = useState(false);
 
   const { isSuccess, data } = useQuery<any>({
-    queryKey: ["Entreprise", "homepage"],
+    queryKey: ['Entreprise', 'homepage'],
     queryFn: () =>
       fetchData({
-        path: "pages?filter[libelle][_eq]=Esic",
-        fields: "*",
+        path: 'pages?filter[libelle][_eq]=Esic',
+        fields: '*',
       }),
   });
 
   useEffect(() => {
     //To give the focus another time if loose
-    setSearchBarEnabled(false)
-  }, [searchBarEnabled])
+    setSearchBarEnabled(false);
+  }, [searchBarEnabled]);
 
   return (
     <>
@@ -34,10 +34,9 @@ function Hero() {
         <header className="bg-white">
           <div
             className={classNames(
-              "container relative !px-0",
+              'container relative !px-0',
               `bg-[url('/images/pages/footer-arc.svg')]`
-            )}
-          >
+            )}>
             <Image
               fill={true}
               src={`${process.env.API_URL}/assets/${data.data.data[0].image}?w=2000&h=1000fill=true`}
@@ -45,17 +44,16 @@ function Hero() {
               loader={loaderProp}
               unoptimized
               className={cn(
-                " absolute object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-xl",
+                ' absolute object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-xl',
                 isImageLoading
-                  ? "scale-110 blur-2xl grayscale"
-                  : "scale-100 blur-0 grayscale-0"
+                  ? 'scale-110 blur-2xl grayscale'
+                  : 'scale-100 blur-0 grayscale-0'
               )}
               onLoadingComplete={() => setLoading(false)}
             />
             <div
-              style={{ backgroundColor: "rgba(30, 58, 138, 0.8)" }}
-              className="relative pt-20 flex flex-col justify-center items-center text-white !rounded-xl text-center"
-            >
+              style={{ backgroundColor: 'rgba(30, 58, 138, 0.8)' }}
+              className="relative pt-20 flex flex-col justify-center items-center text-white !rounded-xl text-center">
               <div className="flex justify-center items-center">
                 <p className="relative">
                   <Image
@@ -66,10 +64,10 @@ function Hero() {
                     loader={loaderProp}
                     unoptimized
                     className={cn(
-                      "rounded-lg relative object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm",
+                      'rounded-lg relative object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm',
                       isImageLoading
-                        ? "scale-110 blur-2xl grayscale"
-                        : "scale-100 blur-0 grayscale-0"
+                        ? 'scale-110 blur-2xl grayscale'
+                        : 'scale-100 blur-0 grayscale-0'
                     )}
                     onLoadingComplete={() => setLoading(false)}
                   />
@@ -97,8 +95,7 @@ function Hero() {
                     /> */}
                   <button
                     onClick={() => setSearchBarEnabled(true)}
-                    className="uppercase px-8 py-3 rounded-lg relative bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white"
-                  >
+                    className="uppercase px-8 py-3 rounded-lg relative bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white">
                     S'INSCRIRE À UNE FORMATION
                   </button>
                 </div>
@@ -113,10 +110,10 @@ function Hero() {
                     loader={loaderProp}
                     unoptimized
                     className={cn(
-                      "rounded-lg relative object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm",
+                      'rounded-lg relative object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm',
                       isImageLoading
-                        ? "scale-110 blur-2xl grayscale"
-                        : "scale-100 blur-0 grayscale-0"
+                        ? 'scale-110 blur-2xl grayscale'
+                        : 'scale-100 blur-0 grayscale-0'
                     )}
                     onLoadingComplete={() => setLoading(false)}
                   />
