@@ -5,6 +5,7 @@ const onRequest = async (config: AxiosRequestConfig): Promise<AxiosRequestConfig
       ...config,
       baseURL: `${process.env.API_URL}/items`,
       headers: {
+        ...config.headers,
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.ACCES_TOKEN}`
@@ -14,7 +15,6 @@ const onRequest = async (config: AxiosRequestConfig): Promise<AxiosRequestConfig
 const onRequestError = (error: AxiosError): Promise<AxiosError> => {
     return Promise.reject(error);
 }
-
 const onResponse = (response: AxiosResponse): AxiosResponse => {
     return response;
 }
