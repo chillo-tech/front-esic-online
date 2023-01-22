@@ -11,6 +11,7 @@ import classNames from "classnames";
 import {BiMapPin } from "react-icons/bi";
 import AllTrainings from "components/shared/AllTrainings";
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
+import DisplayImage from "components/shared/DisplayImage";
 
 function Footer() {
   const {updateCompany} = useContext(ApplicationContext);
@@ -109,22 +110,14 @@ function Footer() {
                     (data?.data.data.certifications) ? 
                       <>
                         {data?.data.data.certifications.map((item: any) => (
-                          <div className="inline-block items-center md:-mt-44 w-60 h-32 relative overflow-hidden" key={`certifications-${item.id}`}>
-                              <Image
-                                fill={true}
-                                src={`${process.env.API_URL}/assets/${item.directus_files_id.filename_disk}`}
-                                alt={data?.data.data.libelle}
-                                loader={loaderProp}
-                                unoptimized
-                                className={cn(
-                                  'relative object-contain duration-700 ease-in-out group-hover:opacity-75 overflow-hidden',
-                                  isImageLoading
-                                    ? 'scale-110 blur-2xl grayscale'
-                                    : 'scale-100 blur-0 grayscale-0'
-                                )}
-                                onLoadingComplete={() => setLoading(false)}
-                              />
-                          </div> 
+                          <>
+                          <DisplayImage
+                            key={`certifications-${item.id}`}
+                            image={item.directus_files_id}
+                            libelle={`${item.directus_files_id.title}`} 
+                            classes="rounded-2xl !overflow-hidden"
+                          />
+                          </>
                         ))}
                       </>
                       : 

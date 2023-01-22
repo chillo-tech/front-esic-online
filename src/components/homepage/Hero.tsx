@@ -76,7 +76,7 @@ function Hero() {
               <h1 className="text-4xl md:text-6xl font-bold pt-5">
                 {data.data.data[0].libelle}, {data.data.data[0].souslibelle}
               </h1>
-              <div className="py-12 px-2 md:px-0">
+              <div className="py-12 px-2 md:px-0 md:w-4/5 mx-auto">
                 <Search isFocused={searchBarEnabled} />
               </div>
               <RenderHtmlContent content={data.data.data[0].description} classes="ext-xl md:text-2xl text-white hidden md:block" />
