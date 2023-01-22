@@ -1,10 +1,8 @@
 import classNames from "classnames";
-import AllTrainings from "components/shared/AllTrainings";
-import ContactUsText from "components/shared/ContactUsText";
+import RenderHtmlContent from "components/shared/RenderHtmlContent";
 import Search from "components/trainings/search";
 import Image from "next/image";
 import Link from "next/link";
-import Contact from "pages/contactez-nous";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
@@ -81,12 +79,7 @@ function Hero() {
               <div className="py-12 md:w-3/5">
                 <Search isFocused={searchBarEnabled} />
               </div>
-              <div
-                className="text-xl md:text-2xl text-white hidden md:block"
-                dangerouslySetInnerHTML={{
-                  __html: data.data.data[0].description,
-                }}
-              />
+              <RenderHtmlContent content={data.data.data[0].description} classes="ext-xl md:text-2xl text-white hidden md:block" />
               <div className="w-3/5 my-5 bg-no-repeat bg-[left-top]  bg-[length:110px_8-60px] bg-[url('/images/pages/hero-blue-arc.svg')]">
                 <div className="py-12 bg-[length:110px_8-60px] bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/hero-green-arc.svg')]">
                   {/* <AllTrainings 
@@ -99,7 +92,7 @@ function Hero() {
                     onClick={() => setSearchBarEnabled(true)}
                     className="uppercase px-8 py-3 rounded-lg relative bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white"
                   >
-                    S'INSCRIRE À UNE FORMATION
+                    S&apos;INSCRIRE À UNE FORMATION
                   </button>
                 </div>
               </div>

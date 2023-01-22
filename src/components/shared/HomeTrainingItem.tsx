@@ -12,33 +12,33 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
     <>
       <Link
         href={link}
-        className={classNames('block', classes)}
+        className={classNames('block flex flex-col justify-between', classes)}
         key={training.id}
       >
-      {
-        training.image ? (
-          <div className='relative w-full h-72 !rounded-t-lg overflow-hidden'>
-            <div className="rounded-lg bg-black bg-opacity-30 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
-            <Image
-              fill={true}
-              src={`${process.env.API_URL}/assets/${(training.image && training?.image.filename_disk) ? training?.image.filename_disk : training?.image}?w=300&h=200fill=true`}
-              alt={training.libelle}
-              loader={loaderProp}
-              unoptimized
-              className={cn(
-                'rounded-lg relative object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm',
-                isImageLoading
-                  ? 'scale-110 blur-2xl grayscale'
-                  : 'scale-100 blur-0 grayscale-0'
-              )}
-              onLoadingComplete={() => setLoading(false)}
-            />
-          </div>
-        ): 
-        null 
-      }
-      <div className="description p-4 flex flex-col">
-          <div className='flex justify-between mb-4 text-xl text-app-light-gray'>
+        <div>
+          {
+            training.image ? (
+              <div className='relative w-full h-72 !rounded-t-lg overflow-hidden'>
+                <div className="rounded-lg bg-black bg-opacity-30 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
+                <Image
+                  fill={true}
+                  src={`${process.env.API_URL}/assets/${(training.image && training?.image.filename_disk) ? training?.image.filename_disk : training?.image}?w=300&h=200fill=true`}
+                  alt={training.libelle}
+                  loader={loaderProp}
+                  unoptimized
+                  className={cn(
+                    'rounded-lg relative object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm',
+                    isImageLoading
+                      ? 'scale-110 blur-2xl grayscale'
+                      : 'scale-100 blur-0 grayscale-0'
+                  )}
+                  onLoadingComplete={() => setLoading(false)}
+                />
+              </div>
+            ): 
+            null 
+          }
+          <div className='flex justify-between mb-4 text-xl text-app-light-gray p-4'>
             {
               training.niveau ? 
                 <span style={{backgroundColor: 'rgba(0, 129, 0, 0.15)'}} className="flex py-1 mr-3 pl-3 pr-5 items-center rounded-lg">
@@ -60,52 +60,29 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
             }
           </div>
           {displayTitle ? (
-            <h2 className="my-10 title font-extrabold text-2xl min-h-16 text-app-light-gray">
+            <h2 className="my-10 px-4 title font-extrabold text-2xl min-h-16 text-app-light-gray">
               {capitalize(training.libelle)}
             </h2>) 
             : 
-          null }
-          <ul className="items-start flex text-xl text-app-gray opacity-50">
-              {
-                training.duree_en_jours || training.duree_en_heures  ? 
-                  <li className="flex items-center py-2 pr-3">
-                    {
-                      training.duree_en_jours ? 
-                      <span className="flex items-center pr-3">
-                        <span>{training.duree_en_jours} Jours</span>
-                      </span>
-                      : 
-                      null
-                    }{
-                      training.duree_en_heures ? 
-                      <span className="flex items-center pr-3">
-                        <span>{training.duree_en_heures} Heures</span>
-                      </span>
-                      : 
-                      null
-                    }
-                  </li>
-                  : 
-                  null
-                }
-
-              
-              {
-              (training.distanciel || training.presentiel) ? 
-                <li className="flex items-center py-1 pr-3">
-                  <GiPositionMarker className="mr-2 text-red-400 text-xl"/> 
-                  {training.distanciel ? 
-                    <span className="flex items-center mr-2">
-                      En ligne
-                    </span> 
+          null } 
+        </div>
+          
+        <ul className="items-start grid text-xl text-app-gray opacity-50 px-4">
+            {
+              training.duree_en_jours || training.duree_en_heures  ? 
+                <li className="flex items-center py-2 pr-3">
+                  {
+                    training.duree_en_jours ? 
+                    <span className="flex items-center pr-3">
+                      <span>{training.duree_en_jours} Jours</span>
+                    </span>
                     : 
                     null
-                  }
-                  {
-                    training.presentiel ? 
-                    <span className="flex items-center">
-                      dans nos locaux
-                    </span> 
+                  }{
+                    training.duree_en_heures ? 
+                    <span className="flex items-center pr-3">
+                      <span>{training.duree_en_heures} Heures</span>
+                    </span>
                     : 
                     null
                   }
@@ -113,16 +90,40 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
                 : 
                 null
               }
-              {
-              (training.prix && training.cpf ) ? 
-                <li className="flex items-center py-1 pr-3">
-                  Eligible au CPF
-                </li> 
-                : 
-                null
-              }
-          </ul>
-      </div>
+
+            
+            {
+            (training.distanciel || training.presentiel) ? 
+              <li className="flex items-center py-1 pr-3">
+                {/*<GiPositionMarker className="mr-2 text-red-400 text-xl"/> */}
+                {training.distanciel ? 
+                  <span className="flex items-center mr-2">
+                    En ligne
+                  </span> 
+                  : 
+                  null
+                }
+                {
+                  training.presentiel ? 
+                  <span className="flex items-center">
+                    dans nos locaux
+                  </span> 
+                  : 
+                  null
+                }
+              </li>
+              : 
+              null
+            }
+            {
+            (training.prix && training.cpf ) ? 
+              <li className="flex items-center py-1 pr-3">
+                Eligible au CPF
+              </li> 
+              : 
+              null
+            }
+        </ul>
       </Link>
     </>
   )

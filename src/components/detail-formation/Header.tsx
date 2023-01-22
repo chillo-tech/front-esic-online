@@ -1,6 +1,7 @@
 import AllTrainings from 'components/shared/AllTrainings'
 import RenderHtmlContent from 'components/shared/RenderHtmlContent'
 import React from 'react'
+import { slugify } from 'utils'
 
 function Header({training, toogleDownloadForm}: any) {
   return (
@@ -19,7 +20,7 @@ function Header({training, toogleDownloadForm}: any) {
               <div className="flex">
                 <AllTrainings 
                   icon= {false}
-                  link='/nos-formations/votre-candidature' 
+                  link={`/nos-formations/votre-candidature?formation=${slugify(training.libelle)}-${training.id}`}
                   text="Je m'inscris"
                   classes='mr-5 bg-white text-app-blue font-light px-20 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white'
                 />

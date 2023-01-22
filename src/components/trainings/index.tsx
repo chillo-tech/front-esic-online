@@ -44,7 +44,7 @@ function Trainings({title, limit = 10}: Params) {
               {
                 data.data.data.slice(0, 3).map((training: any) =>(
                   <HomeTrainingItem 
-                    classes="bg-slate-50 rounded-lg shadow-md" 
+                    classes="bg-slate-50 rounded-lg shadow-md pb-4" 
                     training={training} 
                     link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
                     key={training.id} 

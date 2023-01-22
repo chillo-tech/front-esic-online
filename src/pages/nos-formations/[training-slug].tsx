@@ -1,11 +1,6 @@
 import OpenedLayout from "containers/opened";
-import Head from "next/head";
-import Link from "next/link";
 import React, { useContext, useState } from "react";
-import { AiOutlineClockCircle } from "react-icons/ai";
-import { BsBarChart } from "react-icons/bs";
-import { BiCoinStack } from "react-icons/bi";
-import { GiPositionMarker,GiCancel } from "react-icons/gi";
+import {GiCancel } from "react-icons/gi";
 import { useMutation, useQuery } from "react-query";
 import { add, getDetail } from "services/index";
 import Image from "next/image";

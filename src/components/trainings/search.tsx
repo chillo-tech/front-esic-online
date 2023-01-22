@@ -45,7 +45,7 @@ function Search({ classes, isFocused }: Params) {
   const { onChange, onBlur, name, ref } = register("text", {
     onChange: handleInputChange,
   });
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   if (isFocused) inputRef?.current?.focus();
 
@@ -66,10 +66,10 @@ function Search({ classes, isFocused }: Params) {
           ref={inputRef}
           name={name}
         />
-        <GoSearch className='md:absolute right-5 top-6 text-4xl hidden' />
+        <GoSearch className='md:absolute md:block right-5 top-6 text-4xl hidden' />
       </form>
       <div className="results relative" style={{ height: "1px" }}>
-        {isSuccess && data?.data.data.length ? (
+        {(isSuccess && data?.data.data.length )? (
           <ul className="absolute left-0 top-0 right-0 z-50">
             {data?.data.data.map((item: any, index: any) => (
               <li key={`search-${index}-${item.id}`}>
