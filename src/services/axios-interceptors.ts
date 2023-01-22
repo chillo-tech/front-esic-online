@@ -11,7 +11,6 @@ const onRequest = async (config: AxiosRequestConfig): Promise<AxiosRequestConfig
       }
     };
 }
-
 const onRequestError = (error: AxiosError): Promise<AxiosError> => {
     return Promise.reject(error);
 }
