@@ -6,7 +6,6 @@ import { BsFillRecordFill } from 'react-icons/bs';
 
 function NousTrouver() {
   const {state} = useContext(ApplicationContext);
-  console.log(state)
 
   return (
     <section className="bg-white overflow-hidden py-20 relative">

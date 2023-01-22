@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
 import { ENTREPRISE_PARAMS, cn, loaderProp, slugify } from "utils/index";
-import { BsArrowRightShort, BsArrowUpCircle, BsPhone } from "react-icons/bs";
+import { BsArrowUpCircle, BsPhone } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { useState,useContext } from "react";
 import { ApplicationContext } from "context/ApplicationContext";
@@ -35,7 +35,7 @@ function Footer() {
       {
         isSuccess ? (
           <>
-            <div className="relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
+            <div className="container md:px-0 relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
                 <div className="container md:!px-0">
                   <article className="py-5 md:col-span-2 text-3xl">
                     <Link href={'/'} className="font-extrabold text-6xl mb-2">{data.data.data.libelle}</Link>

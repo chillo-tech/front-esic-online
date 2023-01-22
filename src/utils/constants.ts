@@ -149,7 +149,8 @@ const TRAINING_KEYS = [
   },
   {
     key: 'programme',
-    label: 'Programme de la formation'
+    label: 'Programme de la formation',
+    classes: 'programme'
   },
   {
     key: 'ressources',

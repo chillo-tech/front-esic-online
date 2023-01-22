@@ -75,21 +75,21 @@ function Training({ id, slug }: { id: string, slug: string }) {
   return (
     <OpenedLayout>
       <Metadata entry={training}/>
-      <main className="bg-white">
+      <main className="bg-white detail-formation">
         <Header training={training} toogleDownloadForm={toogleDownloadForm}/>
         <section className="bg-white py-10">
-          <div className="md:px-0 container border border-red-300 grid md:grid-cols-5 gap-5">
-            <div className="col-span-3">
+          <div className="md:px-0 container grid md:grid-cols-5 gap-5">
+            <div className="md:col-span-3">
               {TRAINING_KEYS.filter(item => training[item.key]).map(item => (
                 <article key={`${id}-${item.key}-${slugify(item.label)}`}
                   className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-10 rounded-lg mb-10">
                   <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">{item.label}</h2>
-                  <RenderHtmlContent content={training[item.key]} classes='text-gray-600 font-light text-lg py-4'/>
+                  <RenderHtmlContent content={training[item.key]} classes={`text-gray-600 font-light text-lg py-4 detail-formation ${item['classes'] ? item['classes']: ''}`}/>
                 </article>
               ))}
             </div>
-            <div className="col-span-2">
-              <div className="w-3/4 mx-auto">
+            <div className="md:col-span-2">
+              <div className="w-3/4 mx-auto shadow-md">
                 <HomeTrainingItem 
                   training={training} 
                   displayTitle={false} 
@@ -98,7 +98,7 @@ function Training({ id, slug }: { id: string, slug: string }) {
                 {
                   (training.sessions && training.sessions.length) ? 
                     (
-                      <div className="bg-app-light-green px-5">
+                      <div className="bg-app-light-green px-5 rounded-b-lg">
                         <div className="sessions py-2">
                           <h3 className="mt-2 font-semibold text-2xl mb-2">
                             Nos prochaines sessions

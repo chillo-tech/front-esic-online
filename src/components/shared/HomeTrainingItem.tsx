@@ -2,8 +2,7 @@ import classNames from 'classnames';
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { GiPositionMarker } from 'react-icons/gi';
-import { capitalize, cn, loaderProp, slugify  } from 'utils';
+import { capitalize, cn, loaderProp  } from 'utils';
 
 function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any) {
   const [isImageLoading, setLoading] = useState(true);
@@ -18,8 +17,8 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
         <div>
           {
             training.image ? (
-              <div className='relative w-full h-72 !rounded-t-lg overflow-hidden'>
-                <div className="rounded-lg bg-black bg-opacity-30 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
+              <div className='relative w-full h-56 !rounded-t-lg overflow-hidden'>
+                <div className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
                 <Image
                   fill={true}
                   src={`${process.env.API_URL}/assets/${(training.image && training?.image.filename_disk) ? training?.image.filename_disk : training?.image}?w=300&h=200fill=true`}
@@ -27,7 +26,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
                   loader={loaderProp}
                   unoptimized
                   className={cn(
-                    'rounded-lg relative object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm',
+                    'rounded-lg relative object-fill duration-700 ease-in-out !rounded-t-sm',
                     isImageLoading
                       ? 'scale-110 blur-2xl grayscale'
                       : 'scale-100 blur-0 grayscale-0'
@@ -98,7 +97,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
                 {/*<GiPositionMarker className="mr-2 text-red-400 text-xl"/> */}
                 {training.distanciel ? 
                   <span className="flex items-center mr-2">
-                    En ligne
+                    {capitalize("En ligne")}
                   </span> 
                   : 
                   null
@@ -106,7 +105,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
                 {
                   training.presentiel ? 
                   <span className="flex items-center">
-                    dans nos locaux
+                    {capitalize("dans nos locaux")}
                   </span> 
                   : 
                   null
@@ -118,7 +117,8 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
             {
             (training.prix && training.cpf ) ? 
               <li className="flex items-center py-1 pr-3">
-                Eligible au CPF
+               
+                {capitalize("Eligible au CPF")}
               </li> 
               : 
               null
