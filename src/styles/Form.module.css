@@ -1,9 +1,9 @@
 .form_control {
-  @apply block mb-2;
+  @apply block mb-2 my-4 mr-2;
 }
 
 .form_control__input {
-  @apply w-full border-gray-300 py-3 rounded-lg shadow-sm focus:border-indigo-500;
+  @apply w-full font-semibold pl-0 py-2 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-app-blue focus:outline-none focus:ring-0 focus:border-app-blue;
 }
 
 .form_control__error {
