@@ -100,7 +100,7 @@ export default function Contact() {
       <Head>
         <title> ESIC| Contactez nous </title>
       </Head>
-      <section className="bg-contact bg-center bg-cover bg-app-blue/50 backdrop-brightness-5 border-gray-400 p-4 pt-24 pb-20 mx-auto flex flex-wrap font-sans">
+      <section className="bg-left-top bg-origin-padding bg-no-repeat bg-white bg-contact bg-[length:100%_55%] border-gray-400 p-4 pt-24 pb-20 mx-auto flex flex-wrap font-sans">
         {/* <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">
           <h2 className="text-3xl sm:text-4xl font-bold">
             {contact.infos.title}
@@ -211,7 +211,7 @@ export default function Contact() {
             />
           </div>
         </div>
-        <aside className="w-full bg-white sm:p-6 mx-auto md:w-[85%] border rounded-3xl grid grid-cols-6 gap-4 md:p-4 md:pb-16">
+        <aside className="w-full bg-white sm:p-6 mx-auto md:w-[85%] border border-gray-200 shadow-lg rounded-3xl grid grid-cols-6 gap-4 md:p-4 md:pb-16">
           {mutation.isError ? (
             <Message
               type="error"
@@ -310,7 +310,7 @@ export default function Contact() {
                       {...register("profile")}
                       className={formStyles.form_control__input}
                     >
-                      <option value="">Veuillez sélectionner</option>
+                      <option value="">Vous êtes ?</option>
                       {USER_PROFILE.map((profile: any, index: number) => (
                         <option key={`profile-${index}`} value={profile.value}>
                           {profile.label}
