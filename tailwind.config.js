@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        contact: "url('/images/esic-image-5-blue.png')"
+      },
       container: {
         center: true,
         padding: {
