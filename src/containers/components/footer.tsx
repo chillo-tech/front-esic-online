@@ -49,7 +49,7 @@ function Footer() {
                       <AllTrainings
                         link="/contactez-nous"
                         text="Contactez nous"
-                       classes='bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue text-2l'/>
+                       classes='bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue md:!text-2l sm:!text-xl'/>
                     </p>
                   </article>
                 </div>

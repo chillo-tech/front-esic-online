@@ -8,9 +8,9 @@ function NousTrouver() {
   const {state} = useContext(ApplicationContext);
 
   return (
-    <section className="bg-white overflow-hidden py-20 relative">
+    <section className="bg-white overflow-hidden md:py-20 relative">
         <div className="container">
-            <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
+            <h2 className="hidden md:block font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
                 <span className='px-10 py-3'>
                   Où nous trouver ?
                 </span>

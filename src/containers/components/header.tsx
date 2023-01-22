@@ -10,6 +10,8 @@ import classNames from 'classnames';
 import { GiCancel } from 'react-icons/gi';
 import { useRouter } from 'next/router';
 import { MENU } from 'utils';
+import NavigationMobile from "containers/components/NavigationMobile";
+import AllTrainings from "components/shared/AllTrainings";
 
 function Header() {
   const router = useRouter();
@@ -93,17 +95,16 @@ function Header() {
               <GiCancel className='text-4xl'/>
             </button>
           </div>
-         <div className="container mx-auto flex flex-col">
-            {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
+         <div className="w-full h-full px-4 flex flex-col bg-app-light-blue">
+            {isSuccess && data?.data?.data ? <NavigationMobile items={data.data.data}/>: null}
+             <p className='py-16 flex items-center justify-center bg-app-light-blue'>
+                 <AllTrainings
+                     text={"Contactez nous"}
+                     link="/contactez-nous"
+                     classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
+                 />
+             </p>
          </div>
-         <p className='py-4 flex items-center justify-center'>
-          <Link
-            className="px-8 py-3 text-white bg-green-600 rounded-full  hover:bg-secondary/90 transition-colors"
-            href='/contactez-nous'
-          >
-            Contactez nous
-          </Link>
-         </p>
       </div>
     </>
   )

@@ -1,10 +1,14 @@
 import ContactUsText from "components/shared/ContactUsText";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
-import { ENTREPRISE_PARAMS } from "utils/index";
-import React, {useState} from "react";
+import {cn, ENTREPRISE_PARAMS, loaderProp} from "utils/index";
+import React, {useContext, useState} from "react";
 import {BiChevronRight, BiChevronLeft} from "react-icons/bi";
 import {BsFillRecordFill} from "react-icons/bs";
+import {ApplicationContext} from "context/ApplicationContext";
+import Image from "next/image";
+import DisplayImage from "components/shared/DisplayImage";
+import RenderHtmlContent from "components/shared/RenderHtmlContent";
 
 function AproposDeNous() {
   const {
@@ -18,17 +22,17 @@ function AproposDeNous() {
         fields: ENTREPRISE_PARAMS
       })  
    });
-
+    const {state} = useContext(ApplicationContext);
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
-        const newIndex = isFirstSlide ? data?.data.data.apropos.length - 1 : currentIndex - 1;
+        const newIndex = isFirstSlide ? state?.company.apropos.length - 1 : currentIndex - 1;
         setCurrentIndex(newIndex);
     };
 
     const nextSlide = () => {
-        const isLastSlide = currentIndex === data?.data.data.apropos.length - 1;
+        const isLastSlide = currentIndex === state?.company.apropos.length - 1;
         const newIndex = isLastSlide ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
     };
@@ -39,46 +43,55 @@ function AproposDeNous() {
 
   return (
     <>
-    {(isSuccess && data?.data.data.apropos)? (
+    {(state?.company?.apropos)? (
       <section className="clear-both py-16 bg-app-light-blue">
         <div className="container mx-auto px-2">
             <ul
-                className="list-none flex lg:mx-16 md:mb-8"
+                className="list-none lg:mx-16 md:mb-8 hidden md:flex"
                 style={{justifyContent: 'space-between'}}
             >
-                {data?.data.data.apropos.map((item: any, index:number) => (
-                    <li className="flex items-center" key={index}>
-                        <span className={"mr-2 sm:text-xl md:text-2xl lg:text-3xl sm:h-4 sm:w-4 md:h-6 md:w-6 lg:h-10 lg:w-10 border-2 rounded-full flex "+ (index == currentIndex ? "border-blue-400 " : "border-gray-400 ")} style={{justifyContent: 'center',alignItems: 'center'}}>
+                {state?.company.apropos.map((item: any, index:number) => (
+                    <li className="flex items-center cursor-pointer" key={index} onClick={() => {
+                        goToSlide(index)
+                    }}>
+                        <button type="button" className={"mr-2 sm:text-xl md:text-2xl lg:text-3xl sm:h-4 sm:w-4 md:h-6 md:w-6 lg:h-10 lg:w-10 border-2 rounded-full flex "+ (index == currentIndex ? "border-blue-400 " : "border-gray-400 ")} style={{justifyContent: 'center',alignItems: 'center'}}>
                             <BsFillRecordFill className={`sm:text-xl md:text-2xl lg:text-3xl sm:h-4 sm:w-4 lg:h-8 lg:w-8 ${(index == currentIndex ? 'text-app-blue' : 'text-app-gray-400')}`}/>
-                        </span>
+                        </button>
                         <h3 className="title sm:text-xl md:text-2xl lg:text-3xl text-app-light-gray">{item.libelle}</h3>
                     </li>
                 ))}
             </ul>
-            <div className='max-w-[1400px] w-full m-auto px-4 relative group'>
+            <div className='w-full m-auto px-4 relative group'>
+                <div className="flex items-center cursor-pointer md:hidden mb-8 justify-center" >
+                        <button type="button" className={"mr-2 sm:text-xl text-3xl sm:h-4 sm:w-4 md:h-6 md:w-6 lg:h-10 lg:w-10 border-2 rounded-full flex border-blue-400 justify-center items-center"}>
+                            <BsFillRecordFill className={`sm:text-xl text-3xl sm:h-4 sm:w-4 lg:h-8 lg:w-8 text-app-blue`}/>
+                        </button>
+                    <h3 className="title sm:text-xl text-3xl text-app-light-gray">{state?.company.apropos[currentIndex].libelle}</h3>
+                </div>
                 <article
-                    key={`about_ov${data?.data.data.apropos[currentIndex].id}`}
-                    className="py-8 md:px-16 relative text-slate-700 duration-50 flex justify-center lg:mx-20 mb-8"
+                    className="grid md:grid-cols-6 gap-8 md:w-3/5 mx-auto justify-center items-center text-slate-700 text-center md:text-left"
                 >
-                    <div
-                        style={{ backgroundImage: `url(${data?.data.data.apropos[currentIndex].image})`,width: '30%' }}
-                        className='rounded-xl bg-center bg-cover duration-500 hidden lg:block'
-                    ></div>
-                    <div
-                        className="w-full lg:w-3/4 lg:ml-20 text-justfy"
-                        style={{textAlign: 'justify'}}
-                        dangerouslySetInnerHTML={{ __html: data?.data.data.apropos[currentIndex].description }}
-                    ></div>
+                    { state?.company.apropos[currentIndex].image &&
+                        <DisplayImage
+                            image={state?.company.apropos[currentIndex].image}
+                            libelle={state?.company.apropos[currentIndex].libelle}
+                            classes="md:col-span-2 !h-48 hidden md:block"
+                        />
+                    }
+                    <RenderHtmlContent
+                        classes={`md:col-span-${state?.company.apropos[currentIndex].image ? 4 : 6}`}
+                        content={state?.company.apropos[currentIndex].description}
+                    />
                 </article>
-                <div className='hidden md:block absolute top-[50%] -translate-x-0 translate-y-[-50%] md:left-0 lg:left-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
+                <div className="block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-0 md:left-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer">
                     <BiChevronLeft onClick={prevSlide} size={70} />
                 </div>
                 {/* Right Arrow */}
-                <div className='hidden md:block absolute top-[50%] -translate-x-0 translate-y-[-50%] md:right-0 lg:right-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-0 md:right-5 text-2xl rounded-full p-2 text-app-blue cursor-pointer'>
                     <BiChevronRight onClick={nextSlide} size={70} />
                 </div>
                 <div className='flex top-4 justify-center mt-8 -mb-8'>
-                    {data?.data.data.apropos
+                    {state?.company.apropos
                         .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
                         .map((item: any, index: number) => (
                         <div

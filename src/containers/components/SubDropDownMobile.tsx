@@ -2,14 +2,15 @@ import Link from 'next/link'
 import React from 'react'
 import { slugify } from 'utils/slugify'
 
-function SubDropDown({dropdown, parent, grandparent, souscategories, cols}: any) {
+function SubDropDownMobile({isShowing, parent, grandparent, souscategories, cols}: any) {
 
   return (
       <div
-          className={`${dropdown ? "rounded-md shadow-2xl absolute z-50 top-2.5 left-full bg-white" : "hidden"}`}>
+          className={`border-t border-gray-400 pt-4 mt-4 font-normal uppercase text-gray-700 ${isShowing ? 'block' : 'hidden'}`}>
+          {/*className={`${dropdown ? "rounded-md shadow-2xl absolute z-50 top-2.5 left-full bg-white" : "hidden"}`}>*/}
         {
           (souscategories && souscategories.length > 0) ? (
-              <ul className={`dropdown ${cols > 8 ? ' grid grid-rows-8  grid-flow-col gap-1' : ''}`}>
+              <ul className={`dropdown`}>
                 {souscategories
                     .filter((a: any) => { return (a !== null && a.souscategories_id !== null) } )
                     .sort((a: any, b: any) => { return a.souscategories_id.libelle.toLowerCase().localeCompare(b.souscategories_id.libelle.toLowerCase()) })
@@ -19,7 +20,7 @@ function SubDropDown({dropdown, parent, grandparent, souscategories, cols}: any)
                           href={`/${grandparent}/${parent}/${slugify(
                               souscategorie?.souscategories_id?.libelle
                           )}-${souscategorie.souscategories_id?.id}`}
-                          className="py-2 block text-sm whitespace-nowrap px-4"
+                          className="py-2 block text-md whitespace-nowrap px-4"
                           title={souscategorie?.souscategories_id?.libelle}>
                         {souscategorie?.souscategories_id?.libelle}
                       </Link>
@@ -32,4 +33,4 @@ function SubDropDown({dropdown, parent, grandparent, souscategories, cols}: any)
   )
 }
 
-export default SubDropDown
+export default SubDropDownMobile

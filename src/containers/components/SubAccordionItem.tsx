@@ -1,18 +1,19 @@
 import Link from 'next/link'
 import React, {useEffect, useRef, useState} from 'react'
-import {BiChevronRight} from 'react-icons/bi';
+import {BiChevronDown, BiChevronRight, BiChevronUp} from 'react-icons/bi';
 import {slugify} from 'utils/slugify'
 import SubDropDown from "containers/components/SubDropDown";
+import SubDropDownMobile from "containers/components/SubDropDownMobile";
 
-function SubMenuItem({item, grandparent, parent}: any) {
-  const [dropdown, setDropdown] = useState(false);
+function SubAccordionItem({item, grandparent, parent}: any) {
+  const [isShowing, setIsShowing] = useState(false);
 
   let ref = useRef<HTMLLIElement>(null)
 
   useEffect(() => {
     const handler = (event: any) => {
-      if (dropdown && ref.current && !ref.current.contains(event.target)) {
-        setDropdown(false);
+      if (isShowing && ref.current && !ref.current.contains(event.target)) {
+        setIsShowing(false);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -22,21 +23,23 @@ function SubMenuItem({item, grandparent, parent}: any) {
       document.removeEventListener("mousedown", handler);
       document.removeEventListener("touchstart", handler);
     };
-  }, [dropdown]);
+  }, [isShowing]);
 
   return (
-    <li className='relative border-red-10' ref={ref}>
+    <li className='relative text-left w-full pt-4' ref={ref}>
       {(item.souscategories && item.souscategories.length > 0) ? (
           <div className="whitespace-nowrap">
             <button type="button" aria-haspopup="menu"
-                    aria-expanded={dropdown ? "true" : "false"}
-                    onClick={() => setDropdown((prev) => !prev)}
-                    className={`flex w-56 justify-between whitespace-nowrap items-center uppercase block py-2 px-4 text-sm ${dropdown ? 'text-app-blue': 'text-gray-700'}`}>
-              <span className='mr-1'>{item.libelle}</span>
-              <BiChevronRight className='text-xl'/>
+                    aria-expanded={isShowing ? "true" : "false"}
+                    onClick={() => setIsShowing((prev) => !prev)}
+                    className={`flex w-full justify-between whitespace-nowrap uppercase block text-2xl ${isShowing ? 'text-app-blue': 'text-gray-700'}`}>
+              <span className=''>{item.libelle}</span>
+              {
+                isShowing ? <BiChevronUp className='text-2xl'/> : <BiChevronDown className='text-2xl'/>
+              }
             </button>
-            <SubDropDown
-                dropdown={dropdown}
+            <SubDropDownMobile
+                isShowing={isShowing}
                 grandparent={grandparent}
                 parent={parent}
                 souscategories={item.souscategories}
@@ -46,7 +49,7 @@ function SubMenuItem({item, grandparent, parent}: any) {
       ) : (
           <Link href={`/${slugify(item.libelle)}-${item.id}`}
                 title={item.libelle}
-                className="block py-6 px-4 text-gray-700 text-sm text-center">
+                className="block text-2xl font-medium uppercase text-gray-700">
             {item.libelle}
           </Link>
       )}
@@ -54,4 +57,4 @@ function SubMenuItem({item, grandparent, parent}: any) {
   )
 }
 
-export default SubMenuItem
+export default SubAccordionItem

@@ -5,7 +5,6 @@ type Params = {
   items: any[]
 }
 function Navigation({items}: Params) {
-  console.log({navigationItem:items});
   return (
 
     <>
