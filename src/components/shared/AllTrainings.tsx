@@ -1,15 +1,18 @@
 import classNames from 'classnames';
 import Link from 'next/link'
 import React from 'react'
-import { BsArrowRightCircle, BsArrowRightShort } from 'react-icons/bs'
+import { BsArrowRightShort } from 'react-icons/bs';
+import {capitalize} from 'utils'
 interface Params {
   text?: string;
   link?: string;
   icon?: boolean;
+  uppercase?: boolean;
   classes?:string
 }
 function AllTrainings({
   icon= true,
+  uppercase = true,
   link="/nos-formations",
   text="Voir toutes nos formations", 
   classes
@@ -19,9 +22,9 @@ function AllTrainings({
     <span className={classNames('flex justify-center items-center')}>
       <Link href={link} className={
           classNames(
-            'flex justify-center items-center uppercase px-8 py-3 rounded-lg relative', classes)
+            'flex justify-center items-center px-8 py-3 rounded-lg relative', classes, {'uppercase': uppercase})
         }>
-        <span>{text}</span>                    
+        <span>{capitalize(text)}</span>                    
         {icon && <BsArrowRightShort className="text-4xl ml-5"/> }
       </Link>  
     </span>

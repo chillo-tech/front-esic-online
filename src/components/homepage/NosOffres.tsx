@@ -1,5 +1,6 @@
 import AllTrainings from "components/shared/AllTrainings";
 import ContactUsText from "components/shared/ContactUsText";
+import RenderHtmlContent from "components/shared/RenderHtmlContent";
 import Image from "next/image";
 import { useState } from "react";
 import { useQuery } from "react-query";
@@ -53,11 +54,10 @@ export default function NosOffres() {
                         {item.libelle}
                       </h3>
                       {/* <h4>{item.subtitle}</h4> */}
-                      <div
-                        className="mt-4 !font-extralight text-xl"
-                        dangerouslySetInnerHTML={{ __html: item.description }}
-                      >
-                      </div>
+                      <RenderHtmlContent 
+                        content={item.description}
+                        classes="mt-4 !font-extralight text-xl"
+                      />
                     </article>
                   ))}
             </div> 

@@ -5,7 +5,6 @@ import {slugify} from 'utils/slugify'
 import DropDown from './DropDown';
 
 function MenuItem({item}: any) {
-    // console.log({item});
     const [dropdown, setDropdown] = useState(false);
 
     let ref = useRef<HTMLLIElement>(null)

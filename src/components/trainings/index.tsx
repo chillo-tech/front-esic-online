@@ -5,11 +5,13 @@ import { fetchData } from 'services';
 import { slugify } from '../../utils/slugify';
 import HoverCard from 'components/shared/HoverCard';
 import TrainingTable from './TrainingTable';
+import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 
 interface Params {
-  title: string
+  title: string,
+  limit?: number
 }
-function Trainings(params: Params) {
+function Trainings({title, limit = 10}: Params) {
 
   const base = 'status,id,libelle,souslibelle,prix,presentiel,distanciel,niveau,cpf,heures,jours,image';
   const images = 'image.*';
@@ -25,7 +27,7 @@ function Trainings(params: Params) {
     fetchData({
         fields: base,
         path: trainingsParams.path,
-        limit: 10
+        limit
       })  
    });
   
@@ -34,22 +36,20 @@ function Trainings(params: Params) {
     {
       isSuccess ? (
         <section className=''>
-          <div className="container pt-10 mx-auto">
+          <div className="container pt-10 mx-auto md:px-0">
             <h2 className="text-2xl md:text-4xl font-extrabold">
-                {params.title}
+                {title}
             </h2>
             <div className="grid gap-4 md:py-6 md:grid-cols-3">
               {
                 data.data.data.slice(0, 3).map((training: any) =>(
-                  <HoverCard
-                      id={training.id}
-                      title={training.libelle}
-                      subtitle={training.subtitle}
-                      image={training.image ? `${process.env.API_URL}/assets/${training.image}?w=300&h=200fill=true` : "/images/esic-image-5.jpg"}
-                      key={`${training.id}`}
-                      others={training}
-                      link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
-                    />
+                  <HomeTrainingItem 
+                    classes="bg-slate-50 rounded-lg shadow-md pb-4" 
+                    training={training} 
+                    link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
+                    key={training.id} 
+                  /> 
+                  
                 ))
               }
             </div>

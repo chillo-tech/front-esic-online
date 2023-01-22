@@ -1,9 +1,11 @@
+import Page from "components/pages";
 import PageHeader from "components/shared/PageHeader";
+import RenderHtmlContent from "components/shared/RenderHtmlContent";
 import OpenedLayout from "containers/opened";
 import Head from "next/head";
 import React from "react";
 import { useQuery } from "react-query";
-import { getCertificationCategory } from "services";
+import { fetchData } from "services";
 
 function CertificationCategory({
   id}: {
@@ -13,28 +15,21 @@ function CertificationCategory({
 }) {
   const { isSuccess, isLoading, data } = useQuery<any>({
     queryFn: () =>
-      getCertificationCategory({
-        id,
-      })
+    fetchData({
+      path: `pages/${id}`,
+      fields: "*"
+    })
   });
+  
   return (
-    <OpenedLayout>
-      {isSuccess ? (
-        <Head>
-          <title>{data.data.data.libelle}</title>
-          <meta name="description" content={data.data.data.description} />
-        </Head>
-      ) : null}
-      {isSuccess ? (
-        <>
-          <PageHeader
-            data={data.data.data}
-          />
-          <main className="container mx-auto pt-5 pb-10"></main>
-        </>
-      ) : null}
-    </OpenedLayout>
-  );
+    <>
+      {
+        isSuccess ? (
+         <Page data={data?.data.data}/>
+        ) : null
+      }
+    </>
+  )
 }
 
 export default CertificationCategory;

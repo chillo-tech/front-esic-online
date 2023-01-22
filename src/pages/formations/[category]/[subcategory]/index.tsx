@@ -6,6 +6,8 @@ import { slugify } from "utils/slugify";
 import HoverCard from "components/shared/HoverCard";
 import PageHeader from 'components/shared/PageHeader';
 import classNames from "classnames";
+import HomeTrainingItem from "components/shared/HomeTrainingItem";
+import React from "react";
 function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
   const { isSuccess, isLoading, data } = useQuery<any>({
     queryKey: ["SousCategories", subcategoryid],
@@ -29,14 +31,12 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
               <section className="grid md:grid-cols-3 gap-6">
                 {data.data.data.formations.map((formation: any, index: number) => (
                   <>
-                  <HoverCard
-                    id={formation.formations_id.id}
-                    title={formation.formations_id.libelle}
-                    subtitle={formation.formations_id.subtitle}
-                    image={formation.formations_id.image ? `${process.env.API_URL}/assets/${ formation.formations_id.image}`: "/images/esic-image-5.jpg"}
-                    key={`${formation.id}-${index}`}
-                    link={`/nos-formations/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
-                  />
+                    <HomeTrainingItem
+                        classes="bg-slate-50 rounded-lg shadow-md"
+                        training={formation.formations_id}
+                        link={`/nos-formations/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
+                        key={`${formation.formations_id.id}-${index}`}
+                    />
                   </>
                 ))}
               </section>

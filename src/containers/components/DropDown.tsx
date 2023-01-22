@@ -5,8 +5,6 @@ import MenuItem from "containers/components/MenuItem";
 import SubMenuItem from "containers/components/SubMenuItem";
 
 function DropDown({dropdown, parent, categories, pages}: any) {
-  console.log({categories, pages});
-
   return (
     <div className={`${dropdown ? "rounded-md shadow-2xl absolute z-50 -ml-20 left-1/2 bg-white" : "hidden"}`}>
       {
