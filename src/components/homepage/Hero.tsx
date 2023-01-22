@@ -52,7 +52,7 @@ function Hero() {
             />
             <div
               style={{ backgroundColor: "rgba(30, 58, 138, 0.8)" }}
-              className="relative pt-20 flex flex-col justify-center items-center text-white !rounded-xl text-center"
+              className="relative pt-20 flex flex-col justify-center md:items-center text-white !rounded-xl text-center"
             >
               <div className="flex justify-center items-center">
                 <p className="relative">
@@ -76,11 +76,11 @@ function Hero() {
               <h1 className="text-4xl md:text-6xl font-bold pt-5">
                 {data.data.data[0].libelle}, {data.data.data[0].souslibelle}
               </h1>
-              <div className="py-12 md:w-3/5">
+              <div className="py-12 px-2 md:px-0">
                 <Search isFocused={searchBarEnabled} />
               </div>
               <RenderHtmlContent content={data.data.data[0].description} classes="ext-xl md:text-2xl text-white hidden md:block" />
-              <div className="w-3/5 my-5 bg-no-repeat bg-[left-top]  bg-[length:110px_8-60px] bg-[url('/images/pages/hero-blue-arc.svg')]">
+              <div className="md:w-3/5 my-5 bg-no-repeat bg-[left-top]  bg-[length:110px_8-60px] bg-[url('/images/pages/hero-blue-arc.svg')]">
                 <div className="py-12 bg-[length:110px_8-60px] bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/hero-green-arc.svg')]">
                   {/* <AllTrainings 
                       icon= {false}

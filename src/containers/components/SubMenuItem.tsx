@@ -5,7 +5,6 @@ import {slugify} from 'utils/slugify'
 import SubDropDown from "containers/components/SubDropDown";
 
 function SubMenuItem({item, grandparent, parent}: any) {
-  console.log({item, parent, grandparent});
   const [dropdown, setDropdown] = useState(false);
 
   let ref = useRef<HTMLLIElement>(null)

@@ -6,7 +6,6 @@ type Params = {
   items: any[]
 }
 function NavigationMobile({items}: Params) {
-  console.log({navigationItem:items});
   return (
 
     <>

@@ -3,8 +3,7 @@ import React, { useContext } from 'react'
 
 function Carte() {
   const {state} = useContext(ApplicationContext);
-  console.log(state);
-  
+
   return (
     <section className='bg-app-white overflow-hidden lg:ml-10'>
      <div className="mapouter !w-screen">

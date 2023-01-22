@@ -3,7 +3,6 @@ import React from 'react'
 import { slugify } from 'utils/slugify'
 
 function SubDropDownMobile({isShowing, parent, grandparent, souscategories, cols}: any) {
-  console.log({souscategories, isShowing, cols});
 
   return (
       <div

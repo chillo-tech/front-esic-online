@@ -97,14 +97,14 @@ function Header() {
           </div>
          <div className="w-full h-full px-4 flex flex-col bg-app-light-blue">
             {isSuccess && data?.data?.data ? <NavigationMobile items={data.data.data}/>: null}
+             <p className='py-16 flex items-center justify-center bg-app-light-blue'>
+                 <AllTrainings
+                     text={"Contactez nous"}
+                     link="/contactez-nous"
+                     classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
+                 />
+             </p>
          </div>
-         <p className='py-4 flex items-center justify-center bg-app-light-blue'>
-             <AllTrainings
-                 text={"Contactez nous"}
-                 link="/contactez-nous"
-                 classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
-             />
-         </p>
       </div>
     </>
   )

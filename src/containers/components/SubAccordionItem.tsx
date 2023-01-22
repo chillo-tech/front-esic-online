@@ -6,7 +6,6 @@ import SubDropDown from "containers/components/SubDropDown";
 import SubDropDownMobile from "containers/components/SubDropDownMobile";
 
 function SubAccordionItem({item, grandparent, parent}: any) {
-  console.log({item, parent, grandparent});
   const [isShowing, setIsShowing] = useState(false);
 
   let ref = useRef<HTMLLIElement>(null)

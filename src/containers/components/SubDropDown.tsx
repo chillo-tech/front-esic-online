@@ -3,7 +3,6 @@ import React from 'react'
 import { slugify } from 'utils/slugify'
 
 function SubDropDown({dropdown, parent, grandparent, souscategories, cols}: any) {
-  console.log({souscategories, dropdown, cols});
 
   return (
       <div
