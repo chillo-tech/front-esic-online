@@ -78,7 +78,7 @@ function Training({ id, slug }: { id: string, slug: string }) {
       <main className="bg-white">
         <Header training={training} toogleDownloadForm={toogleDownloadForm}/>
         <section className="bg-white py-10">
-          <div className="md:px-0 container border border-red-300 grid md:grid-cols-5 gap-5">
+          <div className="md:px-0 container grid md:grid-cols-5 gap-5">
             <div className="col-span-3">
               {TRAINING_KEYS.filter(item => training[item.key]).map(item => (
                 <article key={`${id}-${item.key}-${slugify(item.label)}`}
