@@ -6,12 +6,14 @@ import classNames from "classnames";
 
 
 function DisplayImage({image, libelle, classes}: any) {
+    console.log({image, libelle});
+    
     const [isImageLoading, setLoading] = useState(true);
     return (
         <>
             {
                 image ? (
-                        <div className={classNames('relative w-full h-72 !rounded-t-lg overflow-hidden', classes)}>
+                        <div className={classNames('relative w-full min-h-72 !rounded-t-lg overflow-hidden', classes)}>
                             <div
                                 className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm"/>
                             <Image
@@ -21,7 +23,7 @@ function DisplayImage({image, libelle, classes}: any) {
                                 loader={loaderProp}
                                 unoptimized
                                 className={cn(
-                                    'rounded-lg relative object-contain duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm',
+                                    'rounded-lg relative object-cover duration-700 ease-in-out group-hover:opacity-75 !rounded-t-sm',
                                     isImageLoading
                                         ? 'scale-110 blur-2xl grayscale'
                                         : 'scale-100 blur-0 grayscale-0'

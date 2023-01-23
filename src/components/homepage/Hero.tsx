@@ -1,29 +1,18 @@
 import classNames from 'classnames';
-import AllTrainings from 'components/shared/AllTrainings';
-import ContactUsText from 'components/shared/ContactUsText';
 import Search from 'components/trainings/search';
 import Image from 'next/image';
 import Link from 'next/link';
-import Contact from 'pages/contactez-nous';
-import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import { fetchData } from 'services/index';
+import React, { useContext, useEffect, useState } from 'react';
+import { ApplicationContext } from 'context/ApplicationContext'
 import { cn, loaderProp } from 'utils/image-loader';
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
+import DisplayImage from "components/shared/DisplayImage";
 
 function Hero() {
   const [isImageLoading, setLoading] = useState(true);
   const [searchBarEnabled, setSearchBarEnabled] = useState(false);
 
-  const { isSuccess, data } = useQuery<any>({
-    queryKey: ['Entreprise', 'homepage'],
-    queryFn: () =>
-      fetchData({
-        path: 'pages?filter[libelle][_eq]=Esic',
-        fields: '*',
-      }),
-  });
-
+  const {state} = useContext(ApplicationContext);
   useEffect(() => {
     //To give the focus another time if loose
     setSearchBarEnabled(false);
@@ -31,17 +20,17 @@ function Hero() {
 
   return (
     <>
-      {isSuccess ? (
+      {state && state.company ? (
         <header className="bg-white">
-          <div
+        <div
             className={classNames(
               'container relative !px-0',
               `bg-[url('/images/pages/footer-arc.svg')]`
             )}>
             <Image
               fill={true}
-              src={`${process.env.API_URL}/assets/${data.data.data[0].image}?w=2000&h=1000fill=true`}
-              alt={data.data.data[0].description}
+              src={`${process.env.API_URL}/assets/${state.company.couverture.filename_disk}?w=2000&h=1000fill=true`}
+              alt={state.company.description}
               loader={loaderProp}
               unoptimized
               className={cn(
@@ -61,7 +50,7 @@ function Hero() {
                     width={70}
                     height={70}
                     src={`/images/pages/hero-book.svg`}
-                    alt={`${data.data.data[0].libelle} ${data.data.data[0].souslibelle}`}
+                    alt={`${state.company.libelle} ${state.company.souslibelle}`}
                     loader={loaderProp}
                     unoptimized
                     className={cn(
@@ -75,12 +64,12 @@ function Hero() {
                 </p>
               </div>
               <h1 className="text-4xl md:text-6xl font-bold pt-5">
-                {data.data.data[0].libelle}, {data.data.data[0].souslibelle}
+                {state.company.libelle}, {state.company.souslibelle}
               </h1>
               <div className="py-12 px-2 md:px-0 md:w-4/5 mx-auto">
                 <Search isFocused={searchBarEnabled} />
               </div>
-              <RenderHtmlContent content={data.data.data[0].description} classes="ext-xl md:text-2xl text-white hidden md:block" />
+              <RenderHtmlContent content={state.company.description} classes="ext-xl md:text-2xl text-white hidden md:block" />
               <div className="md:w-3/5 my-5 bg-no-repeat bg-[left-top]  bg-[length:110px_8-60px] bg-[url('/images/pages/hero-blue-arc.svg')]">
                 <div className="py-12 bg-[length:110px_8-60px] bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/hero-green-arc.svg')]">
                   {/* <AllTrainings 
@@ -103,7 +92,7 @@ function Hero() {
                     width={80}
                     height={80}
                     src={`/images/pages/hero-scroll.svg`}
-                    alt={`${data.data.data[0].libelle} ${data.data.data[0].souslibelle}`}
+                    alt={`${state.company.libelle} ${state.company.souslibelle}`}
                     loader={loaderProp}
                     unoptimized
                     className={cn(
@@ -119,20 +108,21 @@ function Hero() {
             </div>
           </div>
 
+
           {/*
         <header className='relative hero'>
         <div className="absolute z-20 bg-gray-900 opacity-40 top-0 bottom-0 left-0 right-0" />
         <div className="absolute top-0 bottom-0 left-0 right-0 z-30">
         <aside className="container absolute top-0 bottom-0 right-0 left-0 z-40 flex flex-col justify-center">
             <div className="text-4xl md:text-6xl font-extrabold text-center md:text-left md:w-3/4 flex flex-col">
-              <h1 className="text-green-400 inline">{data.data.data[0].libelle}</h1>
-              <h1 className="inline">{data.data.data[0].souslibelle}</h1>
+              <h1 className="text-green-400 inline">{state.company.libelle}</h1>
+              <h1 className="inline">{state.company.souslibelle}</h1>
             </div>
             <div className="py-10 md:w-3/5">
               <Search />
             </div>
             <div className="text-xl md:text-2xl text-white text-center md:text-left md:w-1/2 hidden md:block"
-              dangerouslySetInnerHTML={{__html: data.data.data[0].description}}
+              dangerouslySetInnerHTML={{__html: state.company.description}}
             />
             <p className='text-blue-600'>
               <ContactUsText text='Une question ? contactez nous' classes='text-green-500 text-2xl'/>

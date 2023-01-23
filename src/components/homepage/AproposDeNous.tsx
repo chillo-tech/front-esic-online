@@ -66,20 +66,20 @@ function AproposDeNous() {
                         <button type="button" className={"mr-2 sm:text-xl text-3xl sm:h-4 sm:w-4 md:h-6 md:w-6 lg:h-10 lg:w-10 border-2 rounded-full flex border-blue-400 justify-center items-center"}>
                             <BsFillRecordFill className={`sm:text-xl text-3xl sm:h-4 sm:w-4 lg:h-8 lg:w-8 text-app-blue`}/>
                         </button>
-                    <h3 className="title sm:text-xl text-3xl text-app-light-gray">{state?.company.apropos[currentIndex].libelle}</h3>
+                    <h3 className="title text-2xl md:text-3xl text-app-light-gray">{state?.company.apropos[currentIndex].libelle}</h3>
                 </div>
                 <article
-                    className="grid md:grid-cols-6 gap-8 md:w-3/5 mx-auto justify-center items-center text-slate-700 text-center md:text-left"
+                    className="grid md:grid-cols-6 gap-8 md:w-4/5 mx-auto justify-center items-center text-slate-700 text-center md:text-left"
                 >
                     { state?.company.apropos[currentIndex].image &&
                         <DisplayImage
                             image={state?.company.apropos[currentIndex].image}
                             libelle={state?.company.apropos[currentIndex].libelle}
-                            classes="md:col-span-2 !h-48 hidden md:block"
+                            classes="md:col-span-2 !h-72 hidden md:block rounded-xl overflow-hidden"
                         />
                     }
                     <RenderHtmlContent
-                        classes={`md:col-span-${state?.company.apropos[currentIndex].image ? 4 : 6}`}
+                        classes={`text-xl md:col-span-${state?.company.apropos[currentIndex].image ? 4 : 6}`}
                         content={state?.company.apropos[currentIndex].description}
                     />
                 </article>
