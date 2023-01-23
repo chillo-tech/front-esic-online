@@ -13,22 +13,20 @@ import {
   PHONE_ERROR_MESSAGE,
   USER_PROFILE,
   USER_PROFILE_OPTIONS,
-  ENTREPRISE_PARAMS,
   cn,
   loaderProp,
 } from '../utils/index';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';
-import { add, fetchData } from '../services/index';
+import { add } from '../services/index';
 import formStyles from 'styles/Form.module.css';
 import Message from 'components/shared/Message';
-import Link from 'next/link';
 import { useState, useContext } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
-import { HiOutlineMail } from 'react-icons/hi';
 import { BsPhone } from 'react-icons/bs';
 import Image from 'next/image';
 import classNames from 'classnames';
+import DisplayImage from 'components/shared/DisplayImage';
 
 export type Message = {
   name: string;
@@ -70,7 +68,7 @@ const schema = yup
 
 export default function Contact() {
   const { state } = useContext(ApplicationContext);
-  console.log("Contact",state)
+  console.log('Contact', state);
   const [isImageLoading, setLoading] = useState(true);
   const mutation = useMutation({
     mutationFn: (message: any) => add('/contacts', message),
@@ -108,102 +106,19 @@ export default function Contact() {
         className={classNames(
           `${formStyles.bg_slices_container} relative w-full !px-0`
         )}>
-        <Image
-          fill={true}
-          src={`${process.env.API_URL}/assets/${state?.company?.couverture?.filename_disk}?w=2000&h=1000fill=true`}
-          loader={loaderProp}
-          alt="None"
-          unoptimized
-          className={cn(
-            ' absolute object-cover duration-700 ease-in-out group-hover:opacity-75 w-full',
-            isImageLoading
-              ? 'scale-110 blur-2xl grayscale'
-              : 'scale-100 blur-0 grayscale-0'
-          )}
-          onLoadingComplete={() => setLoading(false)}
+        <DisplayImage
+          positionRelative={false}
+          image={state?.company?.couverture}
+          libelle={state?.company?.couverture?.libelle}
         />
         <div
           style={{ backgroundColor: 'rgba(30, 58, 138, 0.8)' }}
-          className={classNames(`${formStyles.bg_slices} relative flex flex-col justify-center items-center w-full text-gray-500`)}>
+          className={classNames(
+            `${formStyles.bg_slices} relative flex flex-col justify-center items-center w-full text-gray-500`
+          )}>
           <section className="z-30 bg-left-top bg-origin-padding bg-no-repeat bg-[length:100%_55%] border-gray-400 p-4 pt-24 pb-20 mx-auto flex flex-wrap font-sans">
-            {/* <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            {contact.infos.title}
-          </h2>
-          <>
-          {
-            (state && state.company) ? (
-              <article className="py-5 md:col-span-2">
-              <Link href={'/'} className="font-extrabold text-4xl">{state.company.libelle}</Link>
-              {
-                 (state.company.description) ? 
-                    <div className="py-3" dangerouslySetInnerHTML={{__html: state.company.description}}/>
-                  : 
-                  null
-                }
-                {
-                 (state.company.telephone) ? 
-                  <li className="flex items-center py-2 pr-3">
-                    <BsPhone className="mr-2 text-white text-3xl"/> 
-                    {state.company.telephone}
-                  </li> 
-                  : 
-                  null
-                }
-                {
-                 (state.company.email) ? 
-                  <li className="flex items-center py-2 pr-3">
-                    <HiOutlineMail className="mr-2 text-white text-3xl"/> 
-                    {state.company.email}
-                  </li> 
-                  : 
-                  null
-                }
-                {
-                  (state.company.adresses) ? 
-                  (
-                    <p>
-                      {state.company.adresses[0].rue}, {state.company.adresses[0].codepostal}
-                      <span className="uppercase ml-1">{state.company.adresses[0].ville}</span>
-                    </p>
-                  )
-                  :null
-                }
-                {
-                 (state.company.liens) ? 
-                  <p className="flex py-4">
-                    {state.company.liens.map((item: any, index: number) => (
-                      <Link href={item.lien} className="inline-block mr-5 items-center py-2 px-3 w-12 h-12 relative" key={`contact-${index}-${item.id}`}>
-                         <Image
-                            fill={true}
-                            src={`${process.env.API_URL}/assets/${item.image.filename_disk}`}
-                            alt={state.company.libelle}
-                            loader={loaderProp}
-                            unoptimized
-                            className={cn(
-                              'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
-                              isImageLoading
-                                ? 'scale-110 blur-2xl grayscale'
-                                : 'scale-100 blur-0 grayscale-0'
-                            )}
-                            onLoadingComplete={() => setLoading(false)}
-                          />
-                      </Link> 
-                    ))}
-                  </p>
-                 
-                  : 
-                  null
-                }
-              </article>
-            ): null
-          }
-         </>
-        </aside> */}
-
             <div className="w-full text-white text-center mb-5">
               <div className="md:px-20">
-                {/* Icone de test */}
                 <BsPhone color="white" className=" w-12 h-12 mb-4 mx-auto" />
                 <h3 className="text-3xl sm:text-4xl font-bold">
                   {contact.form.title}
@@ -264,12 +179,6 @@ export default function Contact() {
                   <div className="grid md:grid-cols-2 md:gap-6">
                     <div className={formStyles.form_control}>
                       <div className={formStyles.form_control}>
-                        {/* <label
-                    htmlFor="name"
-                    className={formStyles.form_control__label}
-                  >
-                    <span className="text-black">Votre nom</span>
-                  </label> */}
                         <input
                           type="text"
                           id="name"
@@ -284,12 +193,6 @@ export default function Contact() {
                     </div>
                     <div className={formStyles.form_control}>
                       <div className={formStyles.form_control}>
-                        {/* <label
-                    htmlFor="email"
-                    className={formStyles.form_control__label}
-                  >
-                    <span className="text-black">Votre email</span>
-                  </label> */}
                         <input
                           type="text"
                           id="email"
@@ -306,12 +209,6 @@ export default function Contact() {
                   <div className="grid md:grid-cols-2 md:gap-6">
                     <div className={formStyles.form_control}>
                       <div className={formStyles.form_control}>
-                        {/* <label
-                    htmlFor="phone"
-                    className={formStyles.form_control__label}
-                  >
-                    <span className="text-black">Votre téléphone</span>
-                  </label> */}
                         <input
                           type="text"
                           id="phone"
@@ -326,12 +223,6 @@ export default function Contact() {
                     </div>
                     <div className={formStyles.form_control}>
                       <div className={formStyles.form_control}>
-                        {/* <label
-                    htmlFor="phone"
-                    className={formStyles.form_control__label}
-                  >
-                    <span className="text-black">Vous êtes</span>
-                  </label> */}
                         <select
                           {...register('profile')}
                           className={formStyles.form_control__input}>
@@ -353,12 +244,6 @@ export default function Contact() {
                   {profile ? (
                     <div className={formStyles.form_control}>
                       <div className={formStyles.form_control}>
-                        {/* <label
-                      htmlFor="phone"
-                      className={formStyles.form_control__label}
-                    >
-                      <span className="text-black">Votre demande concerne</span>
-                    </label> */}
                         <select
                           {...register('subject')}
                           className={formStyles.form_control__input}>
@@ -393,12 +278,6 @@ export default function Contact() {
                     </div>
                   ) : null}
                   <div className={formStyles.form_control}>
-                    {/* <label
-                  htmlFor="message"
-                  className={formStyles.form_control__label}
-                >
-                  <span className="text-black">Votre message</span>
-                </label> */}
                     <textarea
                       placeholder="Nous sommes à votre écoute, dites nous tout."
                       id="message"
@@ -446,22 +325,6 @@ export default function Contact() {
                       </p>
                     </div>
                   </div>
-                  {/* <div className="font-extralight mb-2 text-center text-sm">
-                <p className="mb-1">
-                  Esic a besoin de vos informations personnelles pour vous
-                  contacter au sujet de ses produits et services.
-                </p>
-                <p className="mb-1">
-                  Vous pouvez vous désabonner de ces communications à tout
-                  moment.{" "}
-                </p>
-                <p className="mb-1">
-                  Consultez notre Politique de confidentialité pour en savoir
-                  plus sur nos modalités de désabonnement, ainsi que sur nos
-                  politiques de confidentialité et sur notre engagement
-                  vis-à-vis de la protection et de la vie privée.
-                </p>
-              </div> */}
                   <div className="w-full flex justify-center mt-12">
                     <button
                       type="submit"

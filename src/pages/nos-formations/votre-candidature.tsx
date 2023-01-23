@@ -3,20 +3,13 @@ import OpenedLayout from 'containers/opened';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
 import {
-  contact,
   CONTACT_CHANNEL,
   EMAIL_PATTERN,
   REQUIRED_ERROR_MESSAGE,
   EMAIL_ERROR_MESSAGE,
   PHONE_ERROR_MESSAGE,
   USER_PROFILE,
-  USER_PROFILE_OPTIONS,
-  ENTREPRISE_PARAMS,
-  cn,
-  loaderProp,
-  EMPTY_SESSION,
   getDisplayedDate,
 } from 'utils/index';
 import { useMutation, useQuery } from 'react-query';
@@ -24,11 +17,8 @@ import { useRouter } from 'next/router';
 import { add, getDetail } from 'services/index';
 import formStyles from 'styles/Form.module.css';
 import Message from 'components/shared/Message';
-import Link from 'next/link';
-import { HiOutlineMail } from 'react-icons/hi';
 import { BsPhone } from 'react-icons/bs';
-import Image from 'next/image';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
 
 export type Message = {
@@ -77,7 +67,6 @@ const schema = yup
 
 function Candidature({ params }: any) {
   const { state, updateLastTraining } = useContext(ApplicationContext);
-  const [isImageLoading, setLoading] = useState(true);
   const router = useRouter();
 
   const onSubmit = (message: Message) => {
@@ -157,82 +146,8 @@ function Candidature({ params }: any) {
         <title> ESIC| {data?.data.data.libelle} </title>
       </Head>
       <section className="bg-app-blue p-4 pt-24 pb-20 mx-auto flex flex-wrap font-sans">
-        {/* <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">
-          <h2 className="text-3xl sm:text-4xl font-bold">
-            {contact.infos.title}
-          </h2>
-          <>
-          {
-            state && state.company ? (
-              <article className="py-5 md:col-span-2">
-              <Link href={'/'} className="font-extrabold text-4xl">{state.company.libelle}</Link>
-              {
-                 (state.company.description) ? 
-                    <div className="py-3" dangerouslySetInnerHTML={{__html: state.company.description}}/>
-                  : 
-                  null
-                }
-                {
-                 (state.company.telephone) ? 
-                  <li className="flex items-center py-2 pr-3">
-                    <BsPhone className="mr-2 text-white text-3xl"/> 
-                    {state.company.telephone}
-                  </li> 
-                  : 
-                  null
-                }
-                {
-                 (state.company.email) ? 
-                  <li className="flex items-center py-2 pr-3">
-                    <HiOutlineMail className="mr-2 text-white text-3xl"/> 
-                    {state.company.email}
-                  </li> 
-                  : 
-                  null
-                }
-                {
-                  (state.company.adresses) ? 
-                  (
-                    <p>
-                      {state.company.adresses[0].rue}, {state.company.adresses[0].codepostal}
-                      <span className="uppercase ml-1">{state.company.adresses[0].ville}</span>
-                    </p>
-                  )
-                  :null
-                }
-                {
-                 (state.company.liens) ? 
-                  <p className="flex py-4">
-                    {state.company.liens.map((item: any, index: number) => (
-                      <Link href={item.lien} className="inline-block mr-5 items-center py-2 px-3 w-12 h-12 relative" key={`candidature-${index}-${item.id}`}>
-                         <Image
-                            fill={true}
-                            src={`${process.env.API_URL}/assets/${item.image.filename_disk}`}
-                            alt={state.company.libelle}
-                            loader={loaderProp}
-                            unoptimized
-                            className={cn(
-                              'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
-                              isImageLoading
-                                ? 'scale-110 blur-2xl grayscale'
-                                : 'scale-100 blur-0 grayscale-0'
-                            )}
-                            onLoadingComplete={() => setLoading(false)}
-                          />
-                      </Link> 
-                    ))}
-                  </p>
-                  : 
-                  null
-                }
-              </article>
-            ): null
-          }
-         </>
-        </aside> */}
         <div className="w-full text-white text-center mb-5">
           <div className="md:px-20">
-            {/* Icone de test */}
             <BsPhone color="white" className=" w-12 h-12 mb-4 mx-auto" />
             <h3 className="text-3xl sm:text-4xl font-bold">
               Rejoignez un cours
@@ -292,12 +207,6 @@ function Candidature({ params }: any) {
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className={formStyles.form_control}>
                   <div className={formStyles.form_control}>
-                    {/* <label
-                      htmlFor="name"
-                      className={formStyles.form_control__label}
-                    >
-                      <span className="text-black">Votre nom</span>
-                    </label> */}
                     <input
                       type="text"
                       id="name"
@@ -312,12 +221,6 @@ function Candidature({ params }: any) {
                 </div>
                 <div className={formStyles.form_control}>
                   <div className={formStyles.form_control}>
-                    {/* <label
-                      htmlFor="email"
-                      className={formStyles.form_control__label}
-                    >
-                      <span className="text-black">Votre email</span>
-                    </label> */}
                     <input
                       type="text"
                       id="email"
@@ -334,12 +237,6 @@ function Candidature({ params }: any) {
               <div className="grid md:grid-cols-2 md:gap-6">
                 <div className={formStyles.form_control}>
                   <div className={formStyles.form_control}>
-                    {/* <label
-                      htmlFor="phone"
-                      className={formStyles.form_control__label}
-                    >
-                      <span className="text-black">Votre téléphone</span>
-                    </label> */}
                     <input
                       type="text"
                       id="phone"
@@ -354,12 +251,6 @@ function Candidature({ params }: any) {
                 </div>
                 <div className={formStyles.form_control}>
                   <div className={formStyles.form_control}>
-                    {/* <label
-                      htmlFor="phone"
-                      className={formStyles.form_control__label}
-                    >
-                      <span className="text-black">Vous êtes</span>
-                    </label> */}
                     <select
                       {...register('profile')}
                       className={formStyles.form_control__input}>
@@ -404,10 +295,9 @@ function Candidature({ params }: any) {
                             ${
                               sessions &&
                               sessions.indexOf(session.sessions_id.id) > -1
-                                ? "bg-app-blue text-white"
-                                : "text-app-blue"
-                            }`}
-                        >
+                                ? 'bg-app-blue text-white'
+                                : 'text-app-blue'
+                            }`}>
                           <input
                             type="checkbox"
                             id={`session-${session.sessions_id.id}-${index}`}
@@ -434,11 +324,10 @@ function Candidature({ params }: any) {
                             rounded-md font-extralight cursor-pointer 
                             hover:!bg-app-blue hover:!text-white
                             ${
-                              sessions && sessions.indexOf("Aucune") > -1
-                              ? "bg-app-blue text-white"
-                              : "text-app-blue"
-                            }`}
-                    >
+                              sessions && sessions.indexOf('Aucune') > -1
+                                ? 'bg-app-blue text-white'
+                                : 'text-app-blue'
+                            }`}>
                       <input
                         type="checkbox"
                         id="any"
@@ -452,12 +341,6 @@ function Candidature({ params }: any) {
                 </div>
               ) : null}
               <div className={formStyles.form_control}>
-                {/* <label
-                  htmlFor="message"
-                  className={formStyles.form_control__label}
-                >
-                  <span className="text-black">Votre message</span>
-                </label> */}
                 <textarea
                   placeholder="Votre message"
                   id="message"
