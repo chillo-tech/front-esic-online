@@ -1,4 +1,5 @@
 import React from 'react'
+
 type Params = {
   type: string,
   firstMessage: string,
@@ -21,7 +22,7 @@ const classByType = (type: string) => {
 
 function Message({type, firstMessage, secondMessage, actionLabel,action}: Params) {
   return (
-    <div className='text-center flex flex-col justify-center items-center h-80'>
+    <div className='col-span-6 text-center flex flex-col justify-center items-center h-80'>
       <h2 className={`text-lg text-center ${classByType(type)}`}>{firstMessage}</h2>
       <div className={`text-lg text-center my-5 ${classByType(type)}`}>{secondMessage}</div>
       {
