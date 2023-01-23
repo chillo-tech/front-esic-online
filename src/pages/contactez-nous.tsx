@@ -70,7 +70,7 @@ const schema = yup
 
 export default function Contact() {
   const { state } = useContext(ApplicationContext);
-  console.log(state)
+  console.log("Contact",state)
   const [isImageLoading, setLoading] = useState(true);
   const mutation = useMutation({
     mutationFn: (message: any) => add('/contacts', message),
@@ -110,7 +110,7 @@ export default function Contact() {
         )}>
         <Image
           fill={true}
-          src={`${process.env.API_URL}/assets/160db8da-354d-4a8a-b82b-385acb58b967?w=2000&h=1000fill=true`}
+          src={`${process.env.API_URL}/assets/${state?.company?.couverture?.filename_disk}?w=2000&h=1000fill=true`}
           loader={loaderProp}
           alt="None"
           unoptimized

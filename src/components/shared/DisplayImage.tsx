@@ -13,7 +13,7 @@ function DisplayImage({image, libelle, classes}: any) {
         <>
             {
                 image ? (
-                        <div className={classNames('relative w-full min-h-72 !rounded-t-lg overflow-hidden', classes)}>
+                        <div className={classNames('relative w-full h-full min-h-72 !rounded-t-lg overflow-hidden', classes)}>
                             <div
                                 className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm"/>
                             <Image

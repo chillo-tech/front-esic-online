@@ -29,7 +29,7 @@ function Hero() {
             )}>
             <Image
               fill={true}
-              src={`${process.env.API_URL}/assets/${state.company.couverture.filename_disk}?w=2000&h=1000fill=true`}
+              src={`${process.env.API_URL}/assets/${state?.company?.couverture?.filename_disk}?w=2000&h=1000fill=true`}
               alt={state.company.description}
               loader={loaderProp}
               unoptimized
