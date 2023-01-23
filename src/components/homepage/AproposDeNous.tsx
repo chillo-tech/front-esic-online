@@ -7,7 +7,7 @@ import {BiChevronRight, BiChevronLeft} from "react-icons/bi";
 import {BsFillRecordFill} from "react-icons/bs";
 import {ApplicationContext} from "context/ApplicationContext";
 import Image from "next/image";
-import DisplayImage from "components/shared/";
+import DisplayImage from "components/shared/DisplayImage";
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
 
 function AproposDeNous() {
