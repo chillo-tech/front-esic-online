@@ -21,7 +21,7 @@ function Footer() {
     isSuccess,
     data,
   } = useQuery<any>({
-    queryKey: ["Entreprise-data"],
+    queryKey: ["Entreprise-data-ddd"],
     queryFn: () =>
       fetchData({
         path: "Entreprise",
@@ -110,14 +110,12 @@ function Footer() {
                     (data?.data.data.certifications) ? 
                       <>
                         {data?.data.data.certifications.map((item: any) => (
-                          <>
                           <DisplayImage
                             key={`certifications-${item.id}`}
                             image={item.directus_files_id}
                             libelle={`${item.directus_files_id.title}`} 
                             classes="rounded-2xl !overflow-hidden"
                           />
-                          </>
                         ))}
                       </>
                       : 
