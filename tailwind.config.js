@@ -18,10 +18,17 @@ module.exports = {
           '2xl': '2rem',
         },
       },
-      colors: {
-        white: '#ffffff',
-        primary: '#2C7CBB',
-        secondary: '#418106',
+      gridTemplateRows: {
+        // Simple 8 row grid
+        '8': 'repeat(8, minmax(0, 1fr))',
+
+        // Complex site-specific row configuration
+        'layout': '200px minmax(900px, 1fr) 100px',
+      },
+      colors: {      
+        'white': '#ffffff',
+        primary: "#2C7CBB",
+        secondary: "#418106",
         'app-blue': '#207CBB',
         'app-light-blue': '#EEF5FA',
         'app-light-green': '#EAEDEE',

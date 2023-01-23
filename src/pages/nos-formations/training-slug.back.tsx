@@ -1,7 +1,7 @@
 import OpenedLayout from "containers/opened";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsBarChart } from "react-icons/bs";
 import { BiCoinStack } from "react-icons/bi";
@@ -14,10 +14,13 @@ import { getDisplayedDate } from "utils/DateFormat";
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { EMAIL_ERROR_MESSAGE, EMAIL_PATTERN } from "utils/index";
+import { EMAIL_ERROR_MESSAGE, EMAIL_PATTERN, EMPTY_SESSION, slugify, TRAINING_KEYS } from "utils/index";
 import { useRouter } from "next/router";
-import Message from "components/shared/Message";
 import formStyles from 'styles/Form.module.css';
+import ContactUsText from "components/shared/ContactUsText";
+import Message from "components/shared/Message";
+import { ApplicationContext } from "context/ApplicationContext";
+import Header from "components/detail-formation/Header";
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
 var classNames = require('classnames');
 
@@ -34,7 +37,9 @@ const schema = yup.object({
               .matches(EMAIL_PATTERN, {message: EMAIL_ERROR_MESSAGE}),
 }).required();
 
-function Training({ id }: { id: string }) {
+function Training({ id, slug }: { id: string, slug: string }) {
+  const [training, setTraining] = useState<any>({})
+  const {updateLastTraining} = useContext(ApplicationContext);
   const mutation = useMutation({mutationFn: ((message:Message) => add("/telechargements", message))});
   const router = useRouter();
 	const {register, handleSubmit, formState: {errors}} = useForm<Message>({
@@ -45,15 +50,21 @@ function Training({ id }: { id: string }) {
   const [isImageLoading, setLoading] = useState(true);
   const [displayDownloadForm, setDisplayDownloadForm] = useState(false);
   const { data } = useQuery<any>({
-    queryKey: ["formations", "detail", id],
+    queryKey: ["formations", "detail",  slug, id],
     queryFn: () =>
       getDetail({
         id,
       }),
-    refetchOnWindowFocus: false,
-    staleTime: 3600000, //1jour
-    cacheTime: 3600000, //1jour
+    onSuccess: (data: any) => {
+      setTraining(data.data.data);
+      updateLastTraining(data.data.data);
+    },
+    onError: () => {
+      router.push('/page-inconnue')
+    }
   });
+
+  const toogleDownloadForm =  () => setDisplayDownloadForm(!displayDownloadForm)
   const onSubmit = (formData: Message) => {
     mutation.mutate({...formData, libelle_formation: data?.data.data.libelle, formation: data?.data.data.id, fichier: data?.data.data.programmepdf  });
 	};
@@ -65,20 +76,39 @@ function Training({ id }: { id: string }) {
   return (
     <OpenedLayout>
       <Head>
-        <title>{data?.data.data.libelle} </title>
-        <meta name="description" content={`${data?.data.data.description}`} />
+        <title>{training?.libelle}</title>
+        <meta name="titre" content={`${training.metadonnees && training.metadonnees?.titre} ? ${training.metadonnees?.titre} : ${training.titre}`} />
+        <meta name="description" content={`${training.metadonnees && training.metadonnees?.description} ? ${training.metadonnees?.description} : ${training.description}`} />
       </Head>
-      <main>
+      <main className="bg-white">
+        <Header training={training} toogleDownloadForm={toogleDownloadForm}/>
+        <section className="bg-white py-10">
+          <div className="md:px0 container">
+            {TRAINING_KEYS.map(item=> (
+              <>
+              {
+                training[item.key] ? (
+                <article key={`${id}-${item.key}-${slugify(item.label)}`}
+                  className="bg-white shadow-[0_5px_35px_-18px_rgba(0,0,0,0.3)] p-10 rounded-lg mb-10 w-3/5">
+                  <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">{item.label}</h2>
+                  <RenderHtmlContent content={training[item.key]} classes='text-gray-600 font-light text-lg py-4'/>
+                </article>
+              ) : null
+              }
+              </>
+            ))}
+          </div>
+        </section>
         <section className="w-full bg-cover bg-cente relative">
           <div className="bg-gradient-to-r from-sky-900 bg-black/50 h-full px-4">
           {
             data?.data.data.image ? (
               <>
-                <div className="bg-black/10 bg-gradient-to-r from-black/80 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20" />
+                <div className="bg-slate/10 bg-gradient-to-r from-black/90 w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20" />
                 <Image
                   fill={true}
-                  src={`${process.env.API_URL}/assets/${data?.data.data.image.filename_disk}`}
-                  alt={data?.data.data.libelle}
+                  src={`${process.env.API_URL}/assets/${training?.image.filename_disk}`}
+                  alt={training?.libelle}
                   loader={loaderProp}
                   unoptimized
                   className={cn(
@@ -93,32 +123,52 @@ function Training({ id }: { id: string }) {
             ): 
             null 
           }
-            <div className="container mx-auto flex relative z-20">
-              <div className="max-w-4xl md:py-16 md:pt-24 text-white">
-                <h2 className="text-4xl mt-10 md:text-5xl font-extrabold">
-                  {data?.data.data.libelle}
+            <div className="md:px0 container flex relative z-20">
+              <div className="max-w-4xl md:py-16 md:pt-24 text-white pt-10">
+                <h4 className="flex">
+                  {training?.souslibelle}
+                </h4>
+                <h2 className="text-2xl md:text-5xl font-extrabold">
+                  {training?.libelle}
                 </h2>
-                <div className="flex">
-                  {data?.data.data.souslibelle}
-                </div>
-                <RenderHtmlContent content={data?.data.data.short_description} classes="my-10"/>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data?.data.data.short_description,
+                  }}
+                  className="my-10"
+                ></div>
                 <ul className="mt-8 items-start flex flex-col md:flex-row">
                   {
                    data?.data.data.niveau ? 
                     <li className="flex items-end py-2 mr-3">
                       <BsBarChart className="mr-2 text-green-600 text-3xl"/> 
-                      <span className="text-xl">{data?.data.data.niveau === "BEGINNER" ? 'Débutant': null}</span>
-                      <span className="text-xl">{data?.data.data.niveau === "INTERMEDIARY" ? 'Intermediaire': null}</span>
-                      <span className="text-xl">{data?.data.data.niveau === "ADVANCED" ? 'Avancé': null}</span>
+                      <span className="text-xl">{training?.niveau === "BEGINNER" ? 'Débutant': null}</span>
+                      <span className="text-xl">{training?.niveau === "INTERMEDIARY" ? 'Intermediaire': null}</span>
+                      <span className="text-xl">{training?.niveau === "ADVANCED" ? 'Avancé': null}</span>
                     </li> 
                     : 
                     null
                   }
                   {
-                   data?.data.data.duree ? 
+                   data?.data.data.jours || data?.data.data.heures  ? 
                     <li className="flex items-center py-2 pr-3">
-                      <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
-                      <span>{data?.data.data.duree }</span>
+                      {
+                        data?.data.data.jours ? 
+                        <span className="flex items-center pr-3">
+                          <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
+                          <span>{training?.jours} Jours</span>
+                        </span>
+                        : 
+                        null
+                      }{
+                        data?.data.data.heures && !data?.data.data.jours ? 
+                        <span className="flex items-center pr-3">
+                          <AiOutlineClockCircle className="mr-2 text-green-600 text-3xl" />
+                          <span>{training?.heures} Heures</span>
+                        </span>
+                        : 
+                        null
+                      }
                     </li>
                     : 
                     null
@@ -127,17 +177,18 @@ function Training({ id }: { id: string }) {
                    (data?.data.data.distanciel || data?.data.data.presentiel) ? 
                     <li className="flex items-center py-2 pr-3">
                       <GiPositionMarker className="text-red-400 text-3xl"/> 
-                      {data?.data.data.distanciel ? 
-                        <span className="flex items-center mr-2">
+                      {training?.distanciel ? 
+                        <span className="flex items-center">
                           En ligne
-                        </span> 
-                        : 
+                        </span>
+                        :
                         null
                       }
+                      {(data?.data.data.distanciel && data?.data.data.presentiel) ? (<span className="ml-1">ou</span>) : null}
                       {
                         data?.data.data.presentiel ? 
-                        <span className="flex items-center">
-                          dans nos locaux
+                        <span className="flex items-center ml-1">
+                          Dans nos locaux
                         </span> 
                         : 
                         null
@@ -157,9 +208,9 @@ function Training({ id }: { id: string }) {
                   }
                 </ul>
 
-                <div className="text-md grid gap-3 justify-center items-center py-4 md:grid-cols-3 md:gap">
+                <div className="text-md grid gap-3 items-center py-4 md:grid-cols-3 md:gap">
                   <Link
-                    href="/contactez-nous"
+                    href={{ pathname: '/nos-formations/votre-candidature', query: { formation: `${slugify(data?.data.data.libelle)}-${training?.id}` } }}
                     className="p-3 text-white text-center bg-secondary rounded-full"
                   >
                     Je candidate
@@ -180,7 +231,7 @@ function Training({ id }: { id: string }) {
             </div>
           </div>
         </section>
-        <section className="container mx-auto py-6 px-4 grid md:py-12 md:grid-cols-10">
+        <section className="md:px-0 container mx-auto py-6 px-4 grid md:py-12 md:grid-cols-10">
           <section className="md:col-span-6">
             {
               data?.data.data.contenu ? 
@@ -191,17 +242,17 @@ function Training({ id }: { id: string }) {
               data?.data.data.objectifs ? 
               (
                 <article className="mt-5" id="objectifs">
-                <h3 className="text-2xl font-semibold">
-                  Objectifs de la formation
-                  <span className="bg-secondary block h-1 w-36 my-2"></span>
-                </h3>
-                <div
-                  className="mt-4"
-                  dangerouslySetInnerHTML={{
-                    __html: data?.data.data.objectifs,
-                  }}
-                ></div>
-              </article>
+                  <h3 className="text-2xl font-semibold">
+                    Objectifs de la formation
+                    <span className="bg-secondary block h-1 w-24 my-2"></span>
+                  </h3>
+                  <div
+                    className="mt-4"
+                    dangerouslySetInnerHTML={{
+                      __html: data?.data.data.objectifs,
+                    }}
+                  ></div>
+                </article>
               )
               : null
             }
@@ -214,7 +265,7 @@ function Training({ id }: { id: string }) {
                   <span className="bg-secondary block h-1 w-36 my-2"></span>
                 </h3>
                 <div
-                  className="mt-4"
+                  className="mt-4 ck-content"
                   dangerouslySetInnerHTML={{
                     __html: data?.data.data.programme,
                   }}
@@ -224,7 +275,7 @@ function Training({ id }: { id: string }) {
               : null
             }
             {
-              data?.data.data.etudiants ? 
+              data?.data.data.prerequis ? 
               (
                 <article className="mt-5" id="pre-requis">
                 <h3 className="text-2xl font-semibold">
@@ -234,7 +285,7 @@ function Training({ id }: { id: string }) {
                 <div
                   className="mt-4"
                   dangerouslySetInnerHTML={{
-                    __html: data?.data.data.etudiants,
+                    __html: data?.data.data.prerequis,
                   }}
                 ></div>
               </article>
@@ -260,21 +311,21 @@ function Training({ id }: { id: string }) {
               : null
             }
           </section>
-          <aside className="md:col-span-4">
+          <aside className="md:col-span-4 mt-10 md:mt-0">
             {/* xs:hidden md:block w-[300px] rounded-md shadow-2xl fixed top-[200px] z-30 sm:left-[70%] 2xl:left-[65%]  */}
-              <div id="formation-panel" className="font-sans bg-white w-2/3 mx-auto md:shadow-2xl rounded-lg" >
-                <div className="py-4 space-y-3 px-8 bg-secondary text-white rounded-t-lg">
+              <div id="formation-panel" className="font-sans bg-white md:w-2/3 mx-auto md:shadow-2xl rounded-lg" >
+                <div className="py-4 space-y-3 px-4 bg-secondary text-white rounded-t-lg">
                   <div className="text-3xl font-bold mt-4">
-                    {data?.data.data.prix}
+                    {training?.prix}
                   </div>
                   {
-                    data?.data.data.sessions ? 
+                    (data?.data.data.sessions && data?.data.data.sessions.length) ? 
                       (
                         <div className="sessions py-2">
                           <h3 className="mt-2 font-semibold text-2xl mb-2">
-                            Nos prochaines
+                            Nos prochaines sessions
                           </h3>
-                          {data?.data.data.sessions.map((item: any, index: number) => (
+                          {training?.sessions.map((item: any, index: number) => (
                             <div key={`session-${id}-${index}`} className="bg-slate-50 text-slate-600 mb-3 rounded-md p-2">
                               <p className="mb-0">Du {getDisplayedDate(item.sessions_id.debut)}</p>
                               <p className="mb-0">Au {getDisplayedDate(item.sessions_id.fin)}</p> 
@@ -282,12 +333,17 @@ function Training({ id }: { id: string }) {
                           ))}
                         </div>
                       )
-                    : null 
+                    : (
+                      <div>
+                        <p className="text-center">{EMPTY_SESSION}</p>
+                        <ContactUsText classes="justify-center" />
+                      </div>
+                    ) 
                   }
                 </div>
                 <ul className="mt-4  px-8 pb-8 rounded-b-lg">
                   {[
-                    { label: "Financements", target: "/financements" },
+                    { label: "Financements", target: "/financements-cpf" },
                     { label: "Pré-requis", target: "#pre-requis" },
                     { label: "Programme", target: "#programme" },
                     { label: "Notre equipe", target: "#notre-equipe" },
@@ -304,7 +360,7 @@ function Training({ id }: { id: string }) {
           </aside>
         </section>
       </main>
-      <section className={classNames({ 'fixed': displayDownloadForm, 'hidden': !displayDownloadForm },`text-white h-screen overflow-hidden bg-gray-700 fixed left-0 top-0 right-0 bottom-0 z-50 font-sans flex flex-col justify-between items-center`)}>
+      <section className={classNames({ 'fixed': displayDownloadForm, 'hidden': !displayDownloadForm },`text-white h-screen overflow-hidden bg-app-blue fixed left-0 top-0 right-0 bottom-0 z-50 font-sans flex flex-col justify-between items-center`)}>
          <p className="pdf-form container mx-auto flex justify-end pt-7 px-2">
           <button type="button" onClick={() => {setDisplayDownloadForm(false); mutation.reset();}}>
             <GiCancel className="text-4xl" />
@@ -334,9 +390,10 @@ function Training({ id }: { id: string }) {
               mutation.isIdle 
               ? (
                 <>
-                <h2 className="text-center text-3xl md:text-4xl leading-10 font-extralight mt-4 flex flex-col items-center">
+                <h2 className="text-center text-xl md:text-4xl leading-10 font-extralight mt-4 flex flex-col items-center">
                   Téléchargez le programme de la formation 
-                  <span className="text-green-600 block md:mt-2">{data?.data.data.libelle}</span>
+                  <span className='text-white text-3xl py-3 font-bold mb-0 pb-0'>{training?.libelle}</span>
+
                 </h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-6 grid md:px-20 px-2 !font-extralight">
                   <label htmlFor="email" className={formStyles.form_control__label}>
@@ -371,5 +428,5 @@ export default Training;
 export async function getServerSideProps(context: any) {
   const { params } = context;
   const id = params['training-slug'].substring(params['training-slug'].lastIndexOf("-") + 1);
-  return { props: { ...params, id } };
+  return { props: { ...params, id, slug: params['training-slug'] } };
 }

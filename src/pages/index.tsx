@@ -7,6 +7,7 @@ import NosOffres from 'components/homepage/NosOffres';
 import Statistiques from 'components/homepage/Statistiques';
 import OpenedLayout from 'containers/opened';
 import Head from 'next/head';
+import NousTrouver from "components/homepage/NousTrouver";
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
       <AproposDeNous />
       <NosOffres />
       <Statistiques />
-      <Carte />
+      <NousTrouver />
       <NosClients />
     </OpenedLayout>
   );

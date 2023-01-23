@@ -26,7 +26,7 @@ function NosClients() {
                   {data?.data.data[0].clients
                   .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
                   .map((training:any)=> (
-                      <article className='w-80' key={training.id}>
+                      <article className='w-80 md:w-48 lg:w-80' key={training.id}>
                         {
                           training.image ? (
                             <div className='border border-red-600 relative w-full h-44 border border-app-light-green !rounded-2xl overflow-hidden'>

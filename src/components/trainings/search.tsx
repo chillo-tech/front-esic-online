@@ -45,19 +45,17 @@ function Search({ classes, isFocused }: Params) {
   const { onChange, onBlur, name, ref } = register("text", {
     onChange: handleInputChange,
   });
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   if (isFocused) inputRef?.current?.focus();
 
   return (
-    <div
-      className={classNames("search", {
-        "search-empty": !isSuccess || (isSuccess && !data?.data.data.length),
-        "search-list": isSuccess && data?.data.data.length,
-      })}
-    >
-      <form action="" className="flex relative">
-        <input
+    <div className={classNames('search w-full', {
+      'search-empty': !isSuccess || (isSuccess && !data?.data.data.length),
+      'search-list': (isSuccess && data?.data.data.length)
+    })}>
+      <form action="" className='flex relative'>
+        <input 
           placeholder="Rechercher une formation, e.g: Introduction à python"
           className={classNames(
             "placeholder:text-white !bg-transparent text-xl w-full rounded-t-2xl py-6 border-t-4 border-l-4 border-r-4 text-white border-gray-300 !focus:!border-gray-300 px-5",
@@ -68,10 +66,10 @@ function Search({ classes, isFocused }: Params) {
           ref={inputRef}
           name={name}
         />
-        <GoSearch className="absolute right-5 top-6 text-4xl" />
+        <GoSearch className='md:absolute md:block right-5 top-6 text-4xl hidden' />
       </form>
       <div className="results relative" style={{ height: "1px" }}>
-        {isSuccess && data?.data.data.length ? (
+        {(isSuccess && data?.data.data.length )? (
           <ul className="absolute left-0 top-0 right-0 z-50">
             {data?.data.data.map((item: any, index: any) => (
               <li key={`search-${index}-${item.id}`}>

@@ -397,15 +397,17 @@ function Candidature({ params }: any) {
                           key={`session-${session.sessions_id.id}-${index}`}
                           htmlFor={`session-${session.sessions_id.id}-${index}`}
                           className={`
-                            border flex flex-col py-3 
+                            border flex flex-col py-2 
                             border-app-blue text-center 
                             rounded-md font-extralight cursor-pointer 
+                            hover:!bg-app-blue hover:!text-white
                             ${
                               sessions &&
                               sessions.indexOf(session.sessions_id.id) > -1
-                                ? 'bg-app-blue text-white'
-                                : ''
-                            }`}>
+                                ? "bg-app-blue text-white"
+                                : "text-app-blue"
+                            }`}
+                        >
                           <input
                             type="checkbox"
                             id={`session-${session.sessions_id.id}-${index}`}
@@ -426,15 +428,17 @@ function Candidature({ params }: any) {
                       key={`any`}
                       htmlFor="any"
                       className={`
+                            border flex flex-col py-2 
                             items-center justify-center
-                            border flex flex-col py-3 
                             border-app-blue text-center 
                             rounded-md font-extralight cursor-pointer 
+                            hover:!bg-app-blue hover:!text-white
                             ${
-                              sessions && sessions.indexOf('Aucune') > -1
-                                ? 'bg-app-blue text-white'
-                                : ''
-                            }`}>
+                              sessions && sessions.indexOf("Aucune") > -1
+                              ? "bg-app-blue text-white"
+                              : "text-app-blue"
+                            }`}
+                    >
                       <input
                         type="checkbox"
                         id="any"

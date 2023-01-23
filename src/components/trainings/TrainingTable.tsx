@@ -7,10 +7,10 @@ import Link from 'next/link';
 function TrainingTable({data, link}: any) {
   return (
     <Link href={`${link}`} title={data.libelle}>
-      <article className="items-center mb-3 bg-gray-200 px-6 py-5 grid md:grid-cols-7 rounded-lg text-gray-700">
-        <div className='col-span-4 md:py-2'>
+      <article className="items-center my-2 bg-gray-200 px-6 py-5 grid md:grid-cols-7 rounded-lg text-gray-700">
+        <div className='md:col-span-4 md:py-2 flex flex-col'>
           <h2 className="text-2xl font-extrabold pb-2 md:pr-10">{data.libelle}</h2>
-          <p className="flex">
+          <p className="flex justify-between md:justify-start">
           {
               data.jours ? 
               <span className="flex items-center py-2 pr-3">
@@ -30,7 +30,7 @@ function TrainingTable({data, link}: any) {
             }
           </p>
         </div>
-        <div className='col-span-2'>
+        <div className='md:col-span-2'>
         {
           (data.cpf) ? 
           <p className="flex items-center pr-3">
@@ -49,12 +49,12 @@ function TrainingTable({data, link}: any) {
           </span>
         </p> 
         </div>
-        <div className='flex-col flex justify-between text-center'>
-          <div>
-            <p>{data.presentiel ? 'Présentiel': null}</p>
+        <div className='md:flex-col flex justify-between text-center'>
+          <div className='md:flex-col flex'>
+            <p className='mr-3 md:mr-0'>{data.presentiel ? 'Présentiel': null}</p>
             <p>{data.distanciel ? 'Classe à distance': null}</p>
           </div>
-          {data.prix ?(<p className='font-extrabold mt-5 text-center'> {data.prix} </p>): null}
+          {data.prix ?(<p className='font-extrabold md:mt-5 text-center'> {data.prix} </p>): null}
         </div>
       </article>
     </Link>

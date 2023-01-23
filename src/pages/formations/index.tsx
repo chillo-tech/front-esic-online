@@ -15,7 +15,7 @@ function Formations({id}: any) {
     isSuccess,
     data,
   } = useQuery<any>({
-    queryKey: ["menus", "formatios", id],
+    queryKey: ["menus", "formations", id],
     queryFn: () =>
       fetchData({
         path: `menus/${id}`,
@@ -61,6 +61,26 @@ function Formations({id}: any) {
 
 export default Formations;
 export async function getServerSideProps(context: any) {
-  const { query: {id} } = context;
-  return { props: { id } };
+  const {query} = context;
+  let params: any = {}
+
+  if (!query) {
+    return {
+      notFound: true,
+    }
+  }
+  if (!query.id) {
+    return {
+      notFound: true,
+    }
+  }
+
+  if (query.id) {
+    params = {
+      id: query.id[0],
+      "type": "formation"
+    }
+  }
+
+  return {props: {params}};
 }

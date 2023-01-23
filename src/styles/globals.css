@@ -27,10 +27,23 @@
   .hero {
     @apply bg-gray-100  h-[calc(100vh-90px)] overflow-auto
   }
+
+ 
 }
 /*==== FIN Testing des polices ===*/
-#home-police-1 {
-  font-family: "Source Sans Pro", sans-serif;
+
+.detail-formation .programme > h3,
+.detail-formation .programme > h5,
+.detail-formation .programme > h5,
+.detail-formation .programme > h6
+{
+  @apply my-4 text-2xl font-bold
+}
+
+.detail-formation .programme p,
+.detail-formation .programme ul
+{
+  @apply ml-4 text-lg !font-normal ml-4
 }
 
 #home-police-2 {
@@ -95,10 +108,6 @@
 
 header h2 {
   @apply text-4xl font-bold sm:text-5xl text-gray-900;
-}
-
-header p {
-  @apply text-gray-700 text-xl mt-3 sm:mt-4;
 }
 
 .menu-item:hover .menu-item-sub {

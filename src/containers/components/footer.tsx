@@ -3,13 +3,15 @@ import Image from "next/image";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
 import { ENTREPRISE_PARAMS, cn, loaderProp, slugify } from "utils/index";
-import { BsArrowRightShort, BsArrowUpCircle, BsPhone } from "react-icons/bs";
+import { BsArrowUpCircle, BsPhone } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { useState,useContext } from "react";
 import { ApplicationContext } from "context/ApplicationContext";
 import classNames from "classnames";
 import {BiMapPin } from "react-icons/bi";
 import AllTrainings from "components/shared/AllTrainings";
+import RenderHtmlContent from "components/shared/RenderHtmlContent";
+import DisplayImage from "components/shared/DisplayImage";
 
 function Footer() {
   const {updateCompany} = useContext(ApplicationContext);
@@ -34,13 +36,13 @@ function Footer() {
       {
         isSuccess ? (
           <>
-            <div className="relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
+            <div className="container md:px-0 relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
                 <div className="container md:!px-0">
                   <article className="py-5 md:col-span-2 text-3xl">
                     <Link href={'/'} className="font-extrabold text-6xl mb-2">{data.data.data.libelle}</Link>
                     {
                         (data?.data.data.description) ? 
-                          <div className="py-3 leading-10" dangerouslySetInnerHTML={{__html: data.data.data.description}}/>
+                          <RenderHtmlContent content={data.data.data.description} classes="py-3 leading-10" />
                         : 
                         null
                       }
@@ -48,11 +50,11 @@ function Footer() {
                       <AllTrainings
                         link="/contactez-nous"
                         text="Contactez nous"
-                       classes='bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue text-2l'/>
+                       classes='bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue md:!text-2l sm:!text-xl'/>
                     </p>
                   </article>
                 </div>
-                <div className="container my-10 grid md:grid-cols-3 md:!px-0">
+                <div className="container my-10 grid md:grid-cols-3 md:!px-4 md:!max-w-full">
                   <article>
                     <h3 className="text-app-white text-left mb-6 text-4xl font-bold">Nous contacter</h3>
                       {
@@ -90,7 +92,6 @@ function Footer() {
                               <span className="uppercase ml-1">{data?.data.data.adresses[0].codepostal} {data?.data.data.adresses[0].ville}</span>
                             </p>  
                           </article>
-                          
                         )
                         :null
                       }
@@ -98,7 +99,7 @@ function Footer() {
                   <article className="flex flex-col text-left my-10 md:my-0 md:px-10">
                     <h3 className="text-app-white text-left mb-6 text-4xl font-bold">Nous connaitre</h3>
                     {data?.data.data.pages.map((item: any) => (
-                      <Link href={`a-propos-de-nous/${slugify(item.libelle)}-${item.id}`} key={`pages-${item.id}`}
+                      <Link href={`/${slugify(item.libelle)}-${item.id}`} key={`pages-${item.id}`}
                             className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
                         {item.libelle}
                       </Link> 
@@ -109,22 +110,14 @@ function Footer() {
                     (data?.data.data.certifications) ? 
                       <>
                         {data?.data.data.certifications.map((item: any) => (
-                          <div className="inline-block items-center w-60 h-32 relative overflow-hidden" key={`certifications-${item.id}`}>
-                              <Image
-                                fill={true}
-                                src={`${process.env.API_URL}/assets/${item.directus_files_id.filename_disk}`}
-                                alt={data?.data.data.libelle}
-                                loader={loaderProp}
-                                unoptimized
-                                className={cn(
-                                  'relative object-contain duration-700 ease-in-out group-hover:opacity-75 overflow-hidden',
-                                  isImageLoading
-                                    ? 'scale-110 blur-2xl grayscale'
-                                    : 'scale-100 blur-0 grayscale-0'
-                                )}
-                                onLoadingComplete={() => setLoading(false)}
-                              />
-                          </div> 
+                          <>
+                          <DisplayImage
+                            key={`certifications-${item.id}`}
+                            image={item.directus_files_id}
+                            libelle={`${item.directus_files_id.title}`} 
+                            classes="rounded-2xl !overflow-hidden"
+                          />
+                          </>
                         ))}
                       </>
                       : 

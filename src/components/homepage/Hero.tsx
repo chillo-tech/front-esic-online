@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { fetchData } from 'services/index';
 import { cn, loaderProp } from 'utils/image-loader';
+import RenderHtmlContent from "components/shared/RenderHtmlContent";
 
 function Hero() {
   const [isImageLoading, setLoading] = useState(true);
@@ -76,16 +77,11 @@ function Hero() {
               <h1 className="text-4xl md:text-6xl font-bold pt-5">
                 {data.data.data[0].libelle}, {data.data.data[0].souslibelle}
               </h1>
-              <div className="py-12 md:w-3/5">
+              <div className="py-12 px-2 md:px-0 md:w-4/5 mx-auto">
                 <Search isFocused={searchBarEnabled} />
               </div>
-              <div
-                className="text-xl md:text-2xl text-white hidden md:block"
-                dangerouslySetInnerHTML={{
-                  __html: data.data.data[0].description,
-                }}
-              />
-              <div className="w-3/5 my-5 bg-no-repeat bg-[left-top]  bg-[length:110px_8-60px] bg-[url('/images/pages/hero-blue-arc.svg')]">
+              <RenderHtmlContent content={data.data.data[0].description} classes="ext-xl md:text-2xl text-white hidden md:block" />
+              <div className="md:w-3/5 my-5 bg-no-repeat bg-[left-top]  bg-[length:110px_8-60px] bg-[url('/images/pages/hero-blue-arc.svg')]">
                 <div className="py-12 bg-[length:110px_8-60px] bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/hero-green-arc.svg')]">
                   {/* <AllTrainings 
                       icon= {false}
@@ -95,8 +91,9 @@ function Hero() {
                     /> */}
                   <button
                     onClick={() => setSearchBarEnabled(true)}
-                    className="uppercase px-8 py-3 rounded-lg relative bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white">
-                    S'INSCRIRE À UNE FORMATION
+                    className="uppercase px-8 py-3 rounded-lg relative bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white"
+                  >
+                    S&apos;INSCRIRE À UNE FORMATION
                   </button>
                 </div>
               </div>
