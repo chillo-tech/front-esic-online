@@ -123,8 +123,8 @@ export default function Contact() {
         />
         <div
           style={{ backgroundColor: 'rgba(30, 58, 138, 0.8)' }}
-          className={classNames(`${formStyles.bg_slices} relative flex flex-col justify-center items-center text-white w-full text-center`)}>
-          <section className="bg-left-top bg-origin-padding bg-no-repeat bg-[length:100%_55%] border-gray-400 p-4 pt-24 pb-20 mx-auto flex flex-wrap font-sans">
+          className={classNames(`${formStyles.bg_slices} relative flex flex-col justify-center items-center w-full text-gray-500`)}>
+          <section className="z-30 bg-left-top bg-origin-padding bg-no-repeat bg-[length:100%_55%] border-gray-400 p-4 pt-24 pb-20 mx-auto flex flex-wrap font-sans">
             {/* <aside className="w-full md:w-[35%] bg-secondary text-white p-3 py-8 md:p-8 hidden md:block">
           <h2 className="text-3xl sm:text-4xl font-bold">
             {contact.infos.title}
