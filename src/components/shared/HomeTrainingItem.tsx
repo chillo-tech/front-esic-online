@@ -17,7 +17,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
         <div>
           {
             training.image ? (
-              <div className='relative w-full h-56 !rounded-t-lg overflow-hidden'>
+              <div className='relative w-full h-64 !rounded-t-lg overflow-hidden'>
                 <div className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
                 <Image
                   fill={true}
@@ -37,29 +37,33 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
             ): 
             null 
           }
-          <div className='flex justify-between mb-4 text-xl text-app-light-gray p-4'>
-            {
-              training.niveau ? 
-                <span style={{backgroundColor: 'rgba(0, 129, 0, 0.15)'}} className="flex py-1 mr-3 pl-3 pr-5 items-center rounded-lg">
-                  <span className='mr-3 bg-app-green w-4 h-4 rounded-full'></span>
-                  <span>{training.niveau === "BEGINNER" ? 'Débutant': null}</span>
-                  <span>{training.niveau === "INTERMEDIARY" ? 'Intermediaire': null}</span>
-                  <span>{training.niveau === "ADVANCED" ? 'Avancé': null}</span>
-                </span> 
-                : 
-                null
-            }
-            {
-              training.prix ? 
-                <span className="flex items-center py-1 pr-3 text-app-blue font-bold">
-                  <span>{training.prix }</span>
-                </span>
-                : 
-                null
-            }
-          </div>
+          <>
+           {(training.niveau || training.prix )? (
+            <div className='flex justify-between text-xl text-app-light-gray pt-4 px-4'>
+              {
+                training.niveau ? 
+                  <span style={{backgroundColor: 'rgba(0, 129, 0, 0.15)'}} className="flex py-1 mr-3 pl-3 pr-5 items-center rounded-lg">
+                    <span className='mr-3 bg-app-green w-4 h-4 rounded-full'></span>
+                    <span>{training.niveau === "BEGINNER" ? 'Débutant': null}</span>
+                    <span>{training.niveau === "INTERMEDIARY" ? 'Intermediaire': null}</span>
+                    <span>{training.niveau === "ADVANCED" ? 'Avancé': null}</span>
+                  </span> 
+                  : 
+                  null
+              }
+              {
+                training.prix ? 
+                  <span className="flex items-center py-1 pr-3 text-app-blue font-bold">
+                    <span>{training.prix }</span>
+                  </span>
+                  : 
+                  null
+              }
+            </div>
+          ): null }
+          </>
           {displayTitle ? (
-            <h2 className="my-10 px-4 title font-extrabold text-2xl min-h-16 text-app-light-gray">
+            <h2 className="my-6 px-4 title font-extrabold text-2xl text-app-light-gray">
               {capitalize(training.libelle)}
             </h2>) 
             : 
@@ -115,7 +119,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
               null
             }
             {
-            (training.prix && training.cpf ) ? 
+            (training?.cpf && training?.cpf.length) ? 
               <li className="flex items-center py-1 pr-3">
                
                 {capitalize("Eligible au CPF")}

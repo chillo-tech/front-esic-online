@@ -3,7 +3,8 @@ import
   INITIAL_STATE, 
   UPDATE_LAST_TRAINING,
   UPDATE_SEARCH_TRAINING_PARAMS,
-  UPDATE_COMPANY
+  UPDATE_COMPANY,
+  DISPLAY_INSCRIPTION_BUTTON
 } from '../utils';
 
 const ApplicationReducer = (state: any = INITIAL_STATE, action: any) => {
@@ -18,6 +19,11 @@ const ApplicationReducer = (state: any = INITIAL_STATE, action: any) => {
         return {
           ...state,
           lastTraining: data
+        };
+    case DISPLAY_INSCRIPTION_BUTTON:
+        return {
+          ...state,
+          displayInscriptionButton: data
         };
     case UPDATE_COMPANY:
         return {

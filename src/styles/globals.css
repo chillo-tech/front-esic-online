@@ -32,20 +32,25 @@
 }
 /*==== FIN Testing des polices ===*/
 
+.detail-formation .programme > h1,
+.detail-formation .programme > h2,
 .detail-formation .programme > h3,
-.detail-formation .programme > h5,
+.detail-formation .programme > h4,
 .detail-formation .programme > h5,
 .detail-formation .programme > h6
 {
-  @apply my-4 text-2xl font-bold
+  @apply my-4 text-xl font-bold
 }
 
 .detail-formation .programme p,
 .detail-formation .programme ul
 {
-  @apply ml-4 text-lg !font-normal ml-4
+  @apply ml-4 text-lg !font-normal ml-10
 }
 
+.detail-formation .programme ul{
+  @apply list-disc
+}
 #home-police-2 {
   font-family: "Open Sans", sans-serif;
 }

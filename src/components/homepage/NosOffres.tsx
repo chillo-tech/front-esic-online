@@ -12,7 +12,7 @@ export default function NosOffres() {
   return (
     <>
     {state?.company?.offres ? (
-      <section className="bg-app-blue text-white bg-no-repeat bg-left bg-contain bg-[url('/images/pages/offers-left-arc.svg')]">
+      <section className="bg-app-blue bg-no-repeat bg-left bg-contain bg-[url('/images/pages/offers-left-arc.svg')]">
         <section className="py-16 bg-[length:1000px_230px] border border-red-3 bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/offers-bottom-arc.svg')]">
           <div className="container mx-auto px-2 flex flex-col justity-center">
             <div className="grid gap-4 md:grid-cols-3">

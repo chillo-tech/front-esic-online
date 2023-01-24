@@ -12,12 +12,17 @@ import { getDisplayedDate } from 'utils/DateFormat'
 function Page({data,sessions, displayTrainings = false}: any) {
     return (
         <OpenedLayout>
-            <section className="bg-green-800 bg-opacity-10">
+            <section className="bg-white">
                 <PageHeader data={data}/>
                 {
                     (data.description)? (
                             <div className='container'>
-                                <RenderHtmlContent classes='text-xl mb-4 py-14' content={data.description}/>
+                                <RenderHtmlContent classes='text-lg py-6' content={data.description}/>
+                                <AllTrainings
+                                    text={"Contactez nous"}
+                                    link="/contactez-nous"
+                                    classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
+                                />
                             </div>
                         )
                         : null
@@ -46,34 +51,39 @@ function Page({data,sessions, displayTrainings = false}: any) {
                     sessions && sessions.length
                         ? (
                             <>
-                                <section className='px-2 mx-auto container py-10'>
-                                    <h2 className="text-2xl md:text-4xl font-extrabold mb-4">
+                                <section className='px-2 mx-auto py-10 bg-app-blue'>
+                                  <div className="container">
+                                    <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
+                                      <span className='px-10 py-3 text-white'>
                                         Toutes nos sessions
+                                      </span>
+                                      <span className='border-b-2 border-white px-10 w-64 mt-2'/>
                                     </h2>
-                                    {
-                                        sessions.map((session: any) => (
-                                            <article key={session.id} className=" md:py-5 py-10 text-lg grid items-center mb-3 bg-white px-6 md:grid-cols-7 rounded-lg text-gray-700">
-                                                <h2 className='py-2 text-green-700 md:col-span-4 font-extrabold text-center md:text-left'>{session.libelle}</h2>
-                                                <div className="py-2 dates md:col-span-2 items-center md:items-start flex flex-col">
-                                                    <p className='flex items-center'><AiOutlineCalendar className="mr-1" />Du {getDisplayedDate(session.debut)}</p>
-                                                    <p className='flex items-center'><AiOutlineCalendar className="mr-1" />Au {getDisplayedDate(session.fin)}</p>
-                                                </div>
-                                                <p className='py-2 items-center justify-center flex'>
-                                                    <Link
-                                                        href="/contactez-nous"
-                                                        className="py-3 px-2 text-white text-center bg-secondary rounded-full"
-                                                    >
-                                                        Je suis intéressé(e)
-                                                    </Link>
-                                                </p>
-                                            </article>
-                                        ))
-                                    }
-                                    <AllTrainings
-                                        text={"Contactez nous"}
-                                        link="/contactez-nous"
-                                        classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
-                                    />
+                                      {
+                                          sessions.map((session: any) => (
+                                              <article key={session.id} className=" md:py-5 py-10 text-lg grid items-center mb-3 bg-white px-6 md:grid-cols-7 rounded-lg text-gray-700">
+                                                  <h2 className='py-2 text-green-700 md:col-span-4 font-extrabold text-center md:text-left'>{session.libelle}</h2>
+                                                  <div className="py-2 dates md:col-span-2 items-center md:items-start flex flex-col">
+                                                      <p className='flex items-center'><AiOutlineCalendar className="mr-1" />Du {getDisplayedDate(session.debut)}</p>
+                                                      <p className='flex items-center'><AiOutlineCalendar className="mr-1" />Au {getDisplayedDate(session.fin)}</p>
+                                                  </div>
+                                                  <p className='py-2 items-center justify-center flex'>
+                                                      <Link
+                                                          href="/contactez-nous"
+                                                          className="py-3 px-2 text-white text-center bg-secondary rounded-full"
+                                                      >
+                                                          Je suis intéressé(e)
+                                                      </Link>
+                                                  </p>
+                                              </article>
+                                          ))
+                                      }
+                                      <AllTrainings
+                                          text={"Contactez nous"}
+                                          link="/contactez-nous"
+                                          classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
+                                      />
+                                  </div>
                                 </section>
                             </>
                         ): null

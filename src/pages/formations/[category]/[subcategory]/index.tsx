@@ -1,9 +1,7 @@
-import Head from "next/head";
 import OpenedLayout from "containers/opened";
 import { useQuery } from "react-query";
 import { getSubCategories } from "services/index";
 import { slugify } from "utils/slugify";
-import HoverCard from "components/shared/HoverCard";
 import PageHeader from 'components/shared/PageHeader';
 import classNames from "classnames";
 import HomeTrainingItem from "components/shared/HomeTrainingItem";
@@ -13,9 +11,7 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
     queryKey: ["SousCategories", subcategoryid],
     queryFn: () =>
       getSubCategories({
-        id: subcategoryid as string,
-        fields:
-          "id,libelle,description,formations.formations_id.id,formations.formations_id.libelle,formations.formations_id.description",
+        id: subcategoryid as string
       })
   });
   return (

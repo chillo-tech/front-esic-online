@@ -32,7 +32,14 @@ const getTopTrainings = ({limit = 3}: {limit?: number}) => {
 
 const getSubCategories = ({id}: {id: string | string[]; fields?: string}) => {
   const base = "id,libelle,description,image";
-  const formations = "formations.formations_id.souslibelle,formations.formations_id.libelle,formations.formations_id.description,formations.formations_id.image,formations.formations_id.id";
+  const formations = `
+        formations.formations_id.souslibelle,
+        formations.formations_id.libelle,
+        formations.formations_id.description,
+        formations.formations_id.image,
+        formations.formations_id.prix,
+        formations.formations_id.niveau,
+        formations.formations_id.id`;
   const fields = `${base},${formations}`;
   return axiosInstance.get(`souscategories/${id}?fields=${fields}`);
 };

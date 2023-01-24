@@ -1,10 +1,8 @@
 import OpenedLayout from "containers/opened";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {GiCancel } from "react-icons/gi";
 import { useMutation, useQuery } from "react-query";
 import { add, getDetail } from "services/index";
-import Image from "next/image";
-import { cn, loaderProp } from "utils/image-loader";
 import { getDisplayedDate } from "utils/DateFormat";
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
@@ -38,7 +36,7 @@ const schema = yup.object({
 
 function Training({ id, slug }: { id: string, slug: string }) {
   const [training, setTraining] = useState<any>({})
-  const {updateLastTraining} = useContext(ApplicationContext);
+  const {updateLastTraining, displayInscriptionButton} = useContext(ApplicationContext);
   const mutation = useMutation({mutationFn: ((message:Message) => add("/telechargements", message))});
   const router = useRouter();
 	const {register, handleSubmit, formState: {errors}} = useForm<Message>({
@@ -63,6 +61,10 @@ function Training({ id, slug }: { id: string, slug: string }) {
     }
   });
 
+  useEffect(() => {
+    displayInscriptionButton(true)
+  }, [])
+
   const toogleDownloadForm =  () => setDisplayDownloadForm(!displayDownloadForm)
   const onSubmit = (formData: Message) => {
     mutation.mutate({...formData, libelle_formation: data?.data.data.libelle, formation: data?.data.data.id, fichier: data?.data.data.programmepdf  });
@@ -79,7 +81,7 @@ function Training({ id, slug }: { id: string, slug: string }) {
         <Header training={training} toogleDownloadForm={toogleDownloadForm}/>
         <section className="bg-white py-10">
           <div className="md:px-0 container grid md:grid-cols-5 gap-5">
-            <div className="col-span-3">
+            <div className="md:col-span-3 col-span-5">
               {TRAINING_KEYS.filter(item => training[item.key]).map(item => (
                 <article key={`${id}-${item.key}-${slugify(item.label)}`}
                   className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-10 rounded-lg mb-10">
@@ -88,17 +90,17 @@ function Training({ id, slug }: { id: string, slug: string }) {
                 </article>
               ))}
             </div>
-            <div className="md:col-span-2">
-              <div className="w-3/4 mx-auto shadow-md">
+            <div className="md:col-span-2 col-span-5 md:relative md:top-[-16%] md:right-3">
+              <div className="md:w-[80%] w-full mx-auto rounded-lg shadow-md">
                 <HomeTrainingItem 
                   training={training} 
                   displayTitle={false} 
-                  classes="bg-app-light-green"
+                  classes="bg-app-light-green rounded-t-lg"
                 />
                 {
                   (training.sessions && training.sessions.length) ? 
                     (
-                      <div className="bg-app-light-green px-5 rounded-b-lg">
+                      <div className="bg-app-light-green px-5 ">
                         <div className="sessions py-2">
                           <h3 className="mt-2 font-semibold text-2xl mb-2">
                             Nos prochaines sessions
