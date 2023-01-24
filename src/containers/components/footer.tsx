@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
-import { ENTREPRISE_PARAMS, cn, loaderProp, slugify } from "utils/index";
-import { BsArrowUpCircle, BsPhone } from "react-icons/bs";
+import { ENTREPRISE_PARAMS, cn, loaderProp, slugify, capitalize } from "utils/index";
+import { BsArrowRightShort, BsArrowUpCircle, BsPhone } from "react-icons/bs";
 import { HiOutlineMail } from "react-icons/hi";
 import { useState,useContext } from "react";
 import { ApplicationContext } from "context/ApplicationContext";
@@ -14,7 +14,7 @@ import RenderHtmlContent from "components/shared/RenderHtmlContent";
 import DisplayImage from "components/shared/DisplayImage";
 
 function Footer() {
-  const {updateCompany} = useContext(ApplicationContext);
+  const {state, updateCompany} = useContext(ApplicationContext);
   const [isImageLoading, setLoading] = useState(true);
 
   const {
@@ -161,6 +161,16 @@ function Footer() {
             </div> 
           </>
        ): null
+      }
+      {
+        state.displayInscriptionButton && <Link
+        href={"#accueil"}
+        className={classNames(
+          'md:hidden flex justify-center items-center bg-app-blue w-full uppercase px-8 py-4 relative',
+        )}>
+        <span className={classNames(
+'text-app-blue bg-white rounded-lg px-10 py-3'        )}>{capitalize("S'INSCRIRE")}</span>
+      </Link>
       }
     </footer>
   );

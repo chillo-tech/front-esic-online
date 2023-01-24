@@ -17,17 +17,18 @@ function Header({training, toogleDownloadForm}: any) {
                   <RenderHtmlContent content={training?.contenu} classes='text-white font-light text-lg py-8'/>
                 ) : null
               }
-              <div className="flex">
+              <div className="flex flex-col md:flex-row md:justify-center md:items-end">
                 <AllTrainings 
+                  training={training}
                   icon= {false}
                   link={`/nos-formations/votre-candidature?formation=${slugify(training.libelle)}-${training.id}`}
                   text="Je m'inscris"
-                  classes='mr-5 bg-white text-app-blue font-light px-20 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white'
+                  classes='mr-5 bg-white flex-1 text-app-blue font-light px-20 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white'
                 />
                 {
                    (training.programmepdf ) ? 
                       <button type="button" onClick={toogleDownloadForm}
-                        className="text-white flex justify-center items-center uppercase px-8 py-3 rounded-lg relative border border-app-white hover:bg-white hover:text-app-blue"
+                        className="text-white mt-4 md:mt-0 flex-1 max-h-20 justify-center items-center uppercase px-8 py-3 rounded-lg relative border border-app-white hover:bg-white hover:text-app-blue"
                       >
                         Je télécharge le programme
                       </button>
