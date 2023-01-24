@@ -8,6 +8,7 @@ import Statistiques from 'components/homepage/Statistiques';
 import OpenedLayout from 'containers/opened';
 import Head from 'next/head';
 import NousTrouver from "components/homepage/NousTrouver";
+import AvisUtilisateurs from 'components/homepage/AvisUtilisateurs';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <Statistiques />
       <NousTrouver />
       <NosClients />
+      <AvisUtilisateurs />
     </OpenedLayout>
   );
 }

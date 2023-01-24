@@ -69,7 +69,7 @@ function Hero() {
               <div className="py-12 px-2 md:px-0 md:w-4/5 mx-auto">
                 <Search isFocused={searchBarEnabled} />
               </div>
-              <RenderHtmlContent content={state.company.description} classes="ext-xl md:text-2xl text-white hidden md:block" />
+              <RenderHtmlContent content={state.company.description} classes="mx-auto md:w-3/5 text-xl md:text-2xl text-white hidden md:block" />
               <div className="md:w-3/5 my-5 bg-no-repeat bg-[left-top]  bg-[length:110px_8-60px] bg-[url('/images/pages/hero-blue-arc.svg')]">
                 <div className="py-12 bg-[length:110px_8-60px] bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/hero-green-arc.svg')]">
                   {/* <AllTrainings 

@@ -1,45 +1,64 @@
-import {ApplicationContext} from 'context/ApplicationContext'
-import React, {useContext} from 'react'
-import {GoogleMap, Marker, withGoogleMap, withScriptjs} from "react-google-maps"
 
+import { useLoadScript, GoogleMap,MarkerF } from '@react-google-maps/api';
+import { useMemo } from 'react';
 
-const MyMapComponent = withScriptjs(withGoogleMap((props: { isMarkerShown: any; }) =>
-    <GoogleMap
-        defaultZoom={8}
-        defaultCenter={{lat: -34.397, lng: 150.644}}
-    >
-        {props.isMarkerShown && <Marker position={{lat: -34.397, lng: 150.644}}/>}
-    </GoogleMap>
-))
+const Carte = ({adresses = []}: {adresses: any[]}) => {
+  const libraries = useMemo(() => ['places'], []);
+  const mapCenter = useMemo(
+    () => ({ lat: 46.71109, lng: 1.7191036}),
+    []
+  );
 
-function Carte() {
-    const {state} = useContext(ApplicationContext);
+  const mapOptions = useMemo<google.maps.MapOptions>(
+    () => ({
+      disableDefaultUI: true,
+      clickableIcons: true,
+      scrollwheel: false,
+      zoom: 6
+    }),
+    []
+  );
 
-    return (
-        <>
-            <MyMapComponent
-                isMarkerShown
-                // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO8jbdTf30mE9Bg4bknk19JV2k90O4C-w&libraries=geometry,drawing,places&callback=Function.prototype"
-                googleMapURL="http://maps.googleapis.com/maps/api/js?key=AIzaSyDO8jbdTf30mE9Bg4bknk19JV2k90O4C-w&callback=Function.prototype"
-                // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry&callback=Function.prototype"
-                loadingElement={<div style={{height: `100%`}}/>}
-                containerElement={<div style={{height: `400px`}}/>}
-                mapElement={<div style={{height: `100%`}}/>}
-            />
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
+    libraries: libraries as any,
+  });
 
-            {/*<section className='bg-app-white overflow-hidden lg:ml-10'>*/}
-            {/*    <div className="mapouter !w-screen">*/}
-            {/*        <div className="gmap_canvas !w-screen">*/}
-            {/*            <iframe width="2000" height="458" id="gmap_canvas"*/}
-            {/*                    src="https://maps.google.com/maps?q=36%20Av.%20Pierre%20Brossolette,%2092240%20Malakoff&t=&z=11&ie=UTF8&iwloc=&output=embed"*/}
-            {/*                    frameBorder="0"></iframe>*/}
-            {/*            <a href="https://123movies-to.org">123movies</a><br/>*/}
-            {/*            <a href="https://www.embedgooglemap.net">embed custom google map</a>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</section>*/}
-        </>
-    )
-}
+  if (!isLoaded) {
+    return <p>Loading...</p>;
+  }
 
-export default Carte
+  return (
+    <>
+    {
+      adresses ? (
+        <div className='flex justify-center items-center relative'>
+          <div className="h-96 rounded-xl overflow-hidden">
+            <GoogleMap
+              options={mapOptions}
+              zoom={14}
+              center={mapCenter}
+              mapTypeId={google.maps.MapTypeId.ROADMAP}
+              mapContainerStyle={{ width: '800px', height: '384px' }}
+            >
+              <>
+              {
+                  adresses.map((adresse: any, index: number) => (
+                      <MarkerF 
+                        key={`adresse-${adresse.id}-${index}`} 
+                        position={{ lat: parseFloat(adresse.latitude), lng: parseFloat(adresse.longitude)}}
+                      />
+                  ))
+              }
+              </>
+                
+            </GoogleMap>
+          </div>
+        </div>
+      ) :null
+    }
+    </>
+  );
+};
+
+export default Carte;

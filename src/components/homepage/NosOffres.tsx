@@ -2,31 +2,21 @@ import AllTrainings from "components/shared/AllTrainings";
 import ContactUsText from "components/shared/ContactUsText";
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
 import Image from "next/image";
-import { useState } from "react";
-import { useQuery } from "react-query";
-import { fetchData } from "services/index";
+import React, { useContext , useState } from "react";
 import { cn, loaderProp } from "utils/image-loader";
+import {ApplicationContext} from "context/ApplicationContext";
 
 export default function NosOffres() {
+  const {state} = useContext(ApplicationContext);
   const [isLoading, setLoading] = useState(true);
-  const {
-    isSuccess,
-    data
-  } = useQuery<any>({
-    queryKey: ["nosoffres"],
-    queryFn: () => fetchData({
-      path: 'nosoffres',
-      fields: 'libelle,articles.*'
-    })
-  });
   return (
     <>
-    {isSuccess ? (
+    {state?.company?.offres ? (
       <section className="bg-app-blue text-white bg-no-repeat bg-left bg-contain bg-[url('/images/pages/offers-left-arc.svg')]">
         <section className="py-16 bg-[length:1000px_230px] border border-red-3 bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/offers-bottom-arc.svg')]">
           <div className="container mx-auto px-2 flex flex-col justity-center">
             <div className="grid gap-4 md:grid-cols-3">
-              {data?.data.data[0].articles
+              {state.company.offres
                   .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
                   .slice(0, 3)
                   .map((item: any) => (

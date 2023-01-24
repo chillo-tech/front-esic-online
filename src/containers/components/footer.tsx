@@ -115,6 +115,7 @@ function Footer() {
                             image={item.directus_files_id}
                             libelle={`${item.directus_files_id.title}`} 
                             classes="rounded-2xl !overflow-hidden"
+                            imageClasses="object-contain rounded-2xl overflow-hidden"
                           />
                         ))}
                       </>

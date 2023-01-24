@@ -1,12 +1,10 @@
-import ContactUsText from "components/shared/ContactUsText";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
-import {cn, ENTREPRISE_PARAMS, loaderProp} from "utils/index";
+import {ENTREPRISE_PARAMS} from "utils/index";
 import React, {useContext, useState} from "react";
 import {BiChevronRight, BiChevronLeft} from "react-icons/bi";
 import {BsFillRecordFill} from "react-icons/bs";
 import {ApplicationContext} from "context/ApplicationContext";
-import Image from "next/image";
 import DisplayImage from "components/shared/DisplayImage";
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
 
@@ -69,17 +67,17 @@ function AproposDeNous() {
                     <h3 className="title text-2xl md:text-3xl text-app-light-gray">{state?.company.apropos[currentIndex].libelle}</h3>
                 </div>
                 <article
-                    className="grid md:grid-cols-6 gap-8 md:w-4/5 mx-auto justify-center items-center text-slate-700 text-center md:text-left"
+                    className="grid py-5 md:grid-cols-6 gap-8 md:w-4/5 mx-auto justify-center items-center text-slate-700 text-center md:text-left"
                 >
                     { state?.company.apropos[currentIndex].image &&
                         <DisplayImage
                             image={state?.company.apropos[currentIndex].image}
                             libelle={state?.company.apropos[currentIndex].libelle}
-                            classes="md:col-span-2 !h-72 hidden md:block rounded-xl overflow-hidden"
+                            classes="md:col-span-3 !h-72 hidden md:block rounded-xl overflow-hidden"
                         />
                     }
                     <RenderHtmlContent
-                        classes={`text-xl md:col-span-${state?.company.apropos[currentIndex].image ? 4 : 6}`}
+                        classes={`text-xl md:col-span-${state?.company.apropos[currentIndex].image ? 3 : 6}`}
                         content={state?.company.apropos[currentIndex].description}
                     />
                 </article>

@@ -30,7 +30,7 @@ function Statistiques() {
                 </span>
               </h2>
               <div className="flex justify-center">
-                <div className={`grid gap-2 md:grid-cols-3 items-center`}>
+                <div className={`grid gap-8 md:grid-cols-3 items-center`}>
                   {data?.data.data.articles
                   .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
                   .map((item:any)=> (
