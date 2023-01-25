@@ -14,6 +14,10 @@ const nextConfig = {
         destination: "/nos-formations",
       },
       {
+        source: '/financements',
+        destination: "/financements-cpf",
+      },
+      {
         source: '/formations-:id*',
         destination: "/formations",
       },
