@@ -140,7 +140,7 @@ function Header({ training, toogleDownloadForm }: any) {
 
               <CPFLink data={training.cpf} />
 
-              <div className="text-white mt-4 text-xs md:text-lg font-semibold flex items-center justify-evenly w-full">
+              <div className="md:hidden text-white mt-4 text-xs md:text-lg font-semibold flex items-center justify-evenly w-full">
                 <span className="block border-b-2 border-white">
                   Nos prochaines sessions
                 </span>

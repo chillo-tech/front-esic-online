@@ -121,8 +121,8 @@ function Training({ id, slug }: { id: string; slug: string }) {
                 )
               )}
             </div>
-            <div className="md:col-span-2 col-span-5 md:relative md:top-[-16%] md:right-3">
-              <div className="md:w-[80%] w-full mx-auto rounded-lg shadow-md">
+            <div className="w-full col-span-5 mx-auto md:fixed scrollbar-hide md:w-96 md:z-30 md:h-screen md:pb-40 md:top-28 md:right-16 md:overflow-y-scroll md:overflow-scroll scroll-smooth">
+              <div className=" w-full mx-auto bg-white rounded-lg shadow-md">
                 <HomeTrainingItem
                   training={training}
                   displayTitle={false}

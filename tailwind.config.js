@@ -5,6 +5,7 @@ module.exports = {
     './src/pages/**/*.{html,js,tsx,ts}',
     './src/components/**/*.{html,js,tsx,ts}',
     './src/containers/**/*.{html,js,tsx,ts}',
+    'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
     extend: {
@@ -39,5 +40,9 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms')],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('tailwind-scrollbar-hide'),
+    require('flowbite/plugin'),
+  ],
 };
