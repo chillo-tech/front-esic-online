@@ -49,7 +49,11 @@ function Search({ classes, isFocused }: Params) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   if (isFocused) inputRef?.current?.focus();
-
+  const getHighlightedText = (text: string) =>{
+    // Split text on highlight term, include term itself into parts, ignore case
+    const parts = text.split(new RegExp(`(${value})`, 'gi'));
+    return <span>{parts.map((part:string) => part.toLowerCase() === value.toLowerCase() ? (<span className="font-extrabold" key={slugify(part)}>{part}</span> ): part)}</span>;
+  }
   return (
     <div className={classNames('search w-full', {
       'search-empty': !isSuccess || (isSuccess && !data?.data.data.length),
@@ -78,9 +82,9 @@ function Search({ classes, isFocused }: Params) {
                 <Link
                   href={`/nos-formations/${slugify(item.libelle)}-${item.id}`}
                   title={item.libelle}
-                  className="block bg-white py-1 px-4 text-gray-700 text-md text-left"
+                  className="block bg-white py-2 px-2 text-gray-700 text-md text-left"
                 >
-                  {capitalize(item.libelle)}
+                  {getHighlightedText(item.libelle)}
                 </Link>
               </li>
             ))}
