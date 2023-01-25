@@ -15,7 +15,7 @@ function POE({id}: {id: string}) {
     isSuccess,
     data,
   } = useQuery<any>({
-    queryKey: ["POE==", id],
+    queryKey: ["description", id],
     queryFn: () => fetchData({path: `pages/${id}`, fields}), 
     onSuccess: ({data}: any) => {
       const pages = data?.data;
@@ -41,12 +41,11 @@ export default POE
 
 export async function getServerSideProps(context: any) {
   const { params } = context;
-  console.log(params);
   
-  const id = params['page-poe'].substring(params['page-poe'].lastIndexOf("-") + 1);
-  const libelle = params['page-poe'].substring(
+  const id = params['description'].substring(params['description'].lastIndexOf("-") + 1);
+  const libelle = params['description'].substring(
     0,
-    params['page-poe'].lastIndexOf("-")
+    params['description'].lastIndexOf("-")
   );
-  return { props: { ...params, id, libelle, link: params['page-poe'] } };
+  return { props: { ...params, id, libelle, link: params['description'] } };
 }

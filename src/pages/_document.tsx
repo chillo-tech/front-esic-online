@@ -11,7 +11,7 @@ class AppDocument extends Document {
     return (
         <Html className="scroll-smooth" style={{scrollBehavior:'smooth'}} lang="fr">
           <Head />
-          <body className='font-sans font-extralight bg-slate-100'>
+          <body className='font-sans font-extralight bg-slate-100' id="accueil">
             <Main />
             <NextScript />
           </body>

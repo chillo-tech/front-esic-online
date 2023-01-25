@@ -20,6 +20,7 @@ import Message from 'components/shared/Message';
 import { BsPhone } from 'react-icons/bs';
 import { useContext } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
+import { GoSearch } from 'react-icons/go';
 
 export type Message = {
   name: string;
@@ -143,17 +144,17 @@ function Candidature({ params }: any) {
   return (
     <OpenedLayout>
       <Head>
-        <title> ESIC| {data?.data.data.libelle} </title>
+        <title> ESIC|inscrivez vous à une formation</title>
       </Head>
       <section className="bg-app-blue p-4 pt-24 pb-20 mx-auto flex flex-wrap font-sans">
         <div className="w-full text-white text-center mb-5">
           <div className="md:px-20">
             <BsPhone color="white" className=" w-12 h-12 mb-4 mx-auto" />
             <h3 className="text-3xl sm:text-4xl font-bold">
-              Rejoignez un cours
+              Inscrivez vous à un cours
             </h3>
           </div>
-          <div className="w-full row relative">
+          <div className="w-full row relative hidden md:block">
             <BsPhone
               color="white"
               className="w-12 h-12 mb-4 mx-auto absolute bottom-[-15%] left-[16%]"
@@ -181,7 +182,7 @@ function Candidature({ params }: any) {
             />
           </div>
         </div>
-        <aside className="w-full bg-white sm:p-6 mx-auto md:w-[85%] border rounded-3xl grid grid-cols-6 gap-4 md:p-4 md:pb-16">
+        <aside className="w-full bg-white mx-auto md:w-[70%] border rounded-xl md:rounded-3xl grid grid-cols-6 gap-4 md:p-4 md:pb-16">
           {mutation.isError ? (
             <Message
               type="error"
@@ -203,9 +204,9 @@ function Candidature({ params }: any) {
           {mutation.isIdle ? (
             <form
               onSubmit={handleSubmit(onSubmit, onError)}
-              className=" w-full mt-2 col-span-6 px-6 pb-6">
+              className=" w-full mt-2 col-span-6 px-3 md:px-6 pb-6">
               <div className="grid md:grid-cols-2 md:gap-6">
-                <div className={formStyles.form_control}>
+                <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                   <div className={formStyles.form_control}>
                     <input
                       type="text"
@@ -219,7 +220,7 @@ function Candidature({ params }: any) {
                     </p>
                   </div>
                 </div>
-                <div className={formStyles.form_control}>
+                <div  className={`${formStyles.form_control} !mr-0 !mt-0`}>
                   <div className={formStyles.form_control}>
                     <input
                       type="text"
@@ -235,7 +236,7 @@ function Candidature({ params }: any) {
                 </div>
               </div>
               <div className="grid md:grid-cols-2 md:gap-6">
-                <div className={formStyles.form_control}>
+                <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                   <div className={formStyles.form_control}>
                     <input
                       type="text"
@@ -249,7 +250,7 @@ function Candidature({ params }: any) {
                     </p>
                   </div>
                 </div>
-                <div className={formStyles.form_control}>
+                <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                   <div className={formStyles.form_control}>
                     <select
                       {...register('profile')}
@@ -269,7 +270,35 @@ function Candidature({ params }: any) {
                   </div>
                 </div>
               </div>
+              {/**
+              <div className='grid md:grid-cols-2 md:gap-6 py-4'>
+                <div  className={`${formStyles.form_control} !mr-0 !mt-0`}>
+                <div className={`${formStyles.form_control} !mr-0 !mt-0 relative`}>
+                    <GoSearch className='absolute right-0 inset-y-2 text-xl text-app-white' />
 
+                    <input
+                      type="text"
+                      id="formation"
+                      placeholder="Recherchez une formation"
+                      className={formStyles.form_control__input}
+                      {...register('formation')}
+                    />
+                    <p className={formStyles.form_control__error}>
+                      {errors.formation?.message}
+                    </p>
+                  </div>
+                </div>
+                <div className="sessions">
+                    <label
+                      htmlFor="formation"
+                      className="text-black font-semibold">
+                      <span className="text-gray-500 font-semibold">
+                        Quelle session pourrait vous convenir
+                      </span>
+                    </label>
+                </div>
+              </div>
+               */}
               {data?.data.data.sessions && data?.data.data.sessions.length ? (
                 <div className="sessions py-2">
                   <label
