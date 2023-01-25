@@ -54,7 +54,7 @@ function Footer() {
                   <AllTrainings
                     link="/contactez-nous"
                     text="Contactez nous"
-                    classes="text-sm md:text-md bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue md:!text-md sm:!text-xl"
+                    classes="md:w-1/5 text-sm md:text-md bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue md:!text-md sm:!text-xl"
                   />
                 </p>
               </article>
@@ -177,7 +177,7 @@ function Footer() {
           )}>
           <span
             className={classNames(
-              'text-app-blue bg-white rounded-lg px-10 py-3'
+              'text-app-blue bg-white rounded-lg px-20 py-6 text-lg font-semibold'
             )}>
             {capitalize("S'INSCRIRE")}
           </span>
