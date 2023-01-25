@@ -78,9 +78,10 @@ const getDetail = ({
   const cpf = 'cpf.*';
   const metadonnees = 'metadonnees.*';
   const programmepdf = 'programmepdf.*';
+  const souscategories = 'souscategories.souscategories_id.*';
   const images = 'image.*';
   const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut,sessions.sessions_id.id,sessions.sessions_id.libelle';
-  const fields = `${base},${programmepdf},${images},${sessions},${sessions},${cpf},${metadonnees}`;
+  const fields = `${base},${programmepdf},${images},${sessions},${sessions},${cpf},${metadonnees},${souscategories}`;
   return axiosInstance.get(`formations/${id}`, {
     params: { ...(fields ? { fields } : {}) },
   });
