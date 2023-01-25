@@ -19,11 +19,11 @@ function AllTrainings({
   classes
 }: Params) {
   return (
-    <span className={classNames('flex flex-col w-full justify-center items-center')}>
+    <span className={classNames('flex flex-col justify-center items-center')}>
       <Link
         href={link}
         className={classNames(
-          'flex justify-center items-center text-xs md:text-sm w-full px-8 py-3 rounded-lg relative',
+          'flex justify-center items-center text-xs md:text-sm px-8 py-3 rounded-lg relative',
           classes,
           { uppercase: uppercase }
         )}>

@@ -11,7 +11,7 @@ import {
 } from 'utils/index';
 import { BsArrowRightShort, BsArrowUpCircle, BsPhone } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
 import classNames from 'classnames';
 import { BiMapPin } from 'react-icons/bi';
@@ -52,9 +52,9 @@ function Footer() {
                 ) : null}
                 <p className="py-12 flex items-center justify-center relative">
                   <AllTrainings
-                    link="/contactez-nous"
-                    text="Contactez nous"
-                    classes="md:w-1/5 text-sm md:text-md bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue md:!text-md sm:!text-xl"
+                      text={"Contactez nous"}
+                      link="/contactez-nous"
+                      classes='flex justify-center items-center text-xs md:text-sm px-8 py-3 rounded-lg relative border border-app-white text-app-white hover:bg-white hover:text-app-blue uppercase'
                   />
                 </p>
               </article>

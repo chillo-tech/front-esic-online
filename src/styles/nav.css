@@ -1,0 +1,16 @@
+ul.dropdown.caret-up-before:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    top: -11px;
+    left: 35%;
+    position: absolute;
+    transform: rotate(45deg);
+    box-shadow: -1px -1px #e5e7eb;
+}
+ul.dropdown.caret-up-before {
+    position: relative;
+    box-shadow: -1px -1px #3b82f614;
+    border-radius: 12px;
+}
