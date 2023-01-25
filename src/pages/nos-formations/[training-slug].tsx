@@ -129,7 +129,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                   classes="bg-app-light-green rounded-t-lg"
                 />
                 {training.sessions && training.sessions.length ? (
-                  <div className=" md:block bg-app-light-green px-5 ">
+                  <div className="hidden md:block bg-app-light-green px-5 ">
                     <div className="sessions py-2">
                       <h3 className="mt-2 font-semibold text-2xl mb-2">
                         Nos prochaines sessions
