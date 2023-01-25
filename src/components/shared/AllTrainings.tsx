@@ -23,7 +23,7 @@ function AllTrainings({
       <Link
         href={link}
         className={classNames(
-          'flex justify-center items-center w-full px-8 py-3 rounded-lg relative',
+          'flex justify-center items-center text-xs md:text-sm w-full px-8 py-3 rounded-lg relative',
           classes,
           { uppercase: uppercase }
         )}>
