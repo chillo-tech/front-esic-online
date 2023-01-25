@@ -66,7 +66,7 @@ function Hero() {
               <h1 className="text-4xl md:text-6xl font-bold pt-5">
                 {state.company.libelle}, {state.company.souslibelle}
               </h1>
-              <div className="py-12 px-2 md:px-0 md:w-4/5 mx-auto">
+              <div className="py-12 px-2 md:px-0 md:w-4/5 w-full mx-auto">
                 <Search isFocused={searchBarEnabled} />
               </div>
               <RenderHtmlContent content={state.company.description} classes="mx-auto md:w-3/5 text-xl md:text-2xl text-white hidden md:block" />

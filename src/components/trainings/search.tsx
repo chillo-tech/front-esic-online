@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { GoSearch } from "react-icons/go";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
+import { capitalize } from "utils/capitalize";
 import { slugify } from "utils/slugify";
 type FormData = {
   text: string;
@@ -58,7 +59,8 @@ function Search({ classes, isFocused }: Params) {
         <input 
           placeholder="Rechercher une formation, e.g: Introduction à python"
           className={classNames(
-            "placeholder:text-white !bg-transparent text-xl w-full rounded-t-2xl py-6 border-t-4 border-l-4 border-r-4 text-white border-gray-300 !focus:!border-gray-300 px-5",
+            "!focus:!border-white focus:bg-white focus:shadow-xl focus:text-gray-700",
+            "placeholder:text-white bg-transparent text-xl w-full rounded-t-2xl py-4 border-t-4 border-l-4 border-r-4 text-white border-gray-300 px-5",
             { [`${classes}`]: true }
           )}
           onChange={onChange}
@@ -76,9 +78,9 @@ function Search({ classes, isFocused }: Params) {
                 <Link
                   href={`/nos-formations/${slugify(item.libelle)}-${item.id}`}
                   title={item.libelle}
-                  className="block bg-white py-4 px-4 border-b border-gray-400 text-gray-700 text-xl"
+                  className="block bg-white py-1 px-4 text-gray-700 text-md text-left"
                 >
-                  {item.libelle}
+                  {capitalize(item.libelle)}
                 </Link>
               </li>
             ))}
