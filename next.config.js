@@ -25,10 +25,6 @@ const nextConfig = {
         source: '/certifications-:id*',
         destination: "/certifications",
       
-      },
-      {
-        source: '/financements-cpf-:id*',
-        destination: "/financements-cpf",
       }
     ]
   },
