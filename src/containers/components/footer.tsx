@@ -177,7 +177,7 @@ function Footer() {
           )}>
           <span
             className={classNames(
-              'text-app-blue bg-white rounded-lg px-10 py-3'
+              'text-app-blue bg-white rounded-lg px-20 py-6 text-lg font-semibold'
             )}>
             {capitalize("S'INSCRIRE")}
           </span>

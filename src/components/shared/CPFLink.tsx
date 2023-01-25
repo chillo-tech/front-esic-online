@@ -17,10 +17,10 @@ function CPFLink({data}: any) {
             <span className="font-bold text-left w-full items-center text-2xl">
               {capitalize('Cliquez ici')}
             </span>
-            <span className="text-left w-full items-center text-xl">
+            <span className="text-left w-full items-center md:text-xl">
               {capitalize('Inscrivez-vous à cette formation')}
             </span>
-            <span className="text-left w-full items-center text-xl">
+            <span className="text-left w-full items-center md:text-xl">
               {capitalize('en 2 minutes et avec votre CPF')}
             </span>
         </Link>
