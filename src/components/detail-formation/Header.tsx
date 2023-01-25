@@ -1,4 +1,5 @@
 import AllTrainings from 'components/shared/AllTrainings'
+import CPFLink from 'components/shared/CPFLink'
 import RenderHtmlContent from 'components/shared/RenderHtmlContent'
 import Link from 'next/link'
 import React from 'react'
@@ -18,17 +19,6 @@ function Header({training, toogleDownloadForm}: any) {
                   <RenderHtmlContent content={training?.contenu} classes='text-white font-light text-lg py-8'/>
                 ) : null
               }
-              {(training?.cpf && training?.cpf.length) ? (
-                 <Link href={training?.cpf.lien} className="flex flex-col items-center justify-center bg-[length:150px_150px] bg-no-repeat bg-[right_center] bg-[url('/images/logo-cpf.png')] h-36">
-                  <span className="text-white text-left w-full items-center text-xl">
-                    {capitalize('Inscrivez-vous à cette formation')}
-                  </span>
-                  <span className="text-white text-left w-full items-center text-xl">
-                    {capitalize('en 2 minutes et avec votre CPF')}
-                  </span>
-                 </Link>
-                 
-                ) : null}
               <div className="flex flex-col md:flex-row md:items-end">
                 <AllTrainings 
                   training={training}
@@ -48,6 +38,8 @@ function Header({training, toogleDownloadForm}: any) {
                     null
                   }
               </div>
+
+             <CPFLink data={training.cpf}/>
             </div>
             <span />
           </div>

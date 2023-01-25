@@ -44,7 +44,6 @@ function Training({ id, slug }: { id: string, slug: string }) {
 		resolver: yupResolver(schema)
 	});
   
-  const [isImageLoading, setLoading] = useState(true);
   const [displayDownloadForm, setDisplayDownloadForm] = useState(false);
   const { data } = useQuery<any>({
     queryKey: ["formations", "detail",  slug, id],

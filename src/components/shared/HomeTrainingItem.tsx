@@ -17,7 +17,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
         <div>
           {
             training.image ? (
-              <div className='relative w-full h-64 !rounded-t-lg overflow-hidden'>
+              <div className='relative w-full h-42 md:h-64 !rounded-t-lg overflow-hidden'>
                 <div className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
                 <Image
                   fill={true}
@@ -70,7 +70,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
           null } 
         </div>
           
-        <ul className="items-start grid text-xl text-app-gray opacity-50 px-4">
+        <ul className="items-start grid text-xl text-app-gray opacity-50 px-4 pb-5">
             {
               training.duree_en_jours || training.duree_en_heures  ? 
                 <li className="flex items-center py-2 pr-3">
@@ -94,18 +94,18 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
                 null
               }
 
-            
             {
             (training.distanciel || training.presentiel) ? 
               <li className="flex items-center py-1 pr-3">
                 {/*<GiPositionMarker className="mr-2 text-red-400 text-xl"/> */}
                 {training.distanciel ? 
-                  <span className="flex items-center mr-2">
+                  <span className="flex items-center">
                     {capitalize("En ligne")}
                   </span> 
                   : 
                   null
                 }
+                {(training.distanciel && training.presentiel) ? (<span className='px-1'>ou</span>): null }
                 {
                   training.presentiel ? 
                   <span className="flex items-center">
@@ -121,7 +121,6 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
             {
             (training?.cpf && training?.cpf.length) ? 
               <li className="flex items-center py-1 pr-3">
-               
                 {capitalize("Eligible au CPF")}
               </li> 
               : 

@@ -39,6 +39,9 @@ const getSubCategories = ({id}: {id: string | string[]; fields?: string}) => {
         formations.formations_id.image,
         formations.formations_id.prix,
         formations.formations_id.niveau,
+        formations.formations_id.presentiel,
+        formations.formations_id.distanciel,
+        formations.formations_id.cpf.*,
         formations.formations_id.id`;
   const fields = `${base},${formations}`;
   return axiosInstance.get(`souscategories/${id}?fields=${fields}`);
@@ -72,11 +75,12 @@ const getDetail = ({
   fields?: string;
 }) => {
   const base = '*';
+  const cpf = 'cpf.*';
   const metadonnees = 'metadonnees.*';
   const programmepdf = 'programmepdf.*';
   const images = 'image.*';
   const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut,sessions.sessions_id.id,sessions.sessions_id.libelle';
-  const fields = `${base},${programmepdf},${images},${sessions},${sessions}`;
+  const fields = `${base},${programmepdf},${images},${sessions},${sessions},${cpf},${metadonnees}`;
   return axiosInstance.get(`formations/${id}`, {
     params: { ...(fields ? { fields } : {}) },
   });

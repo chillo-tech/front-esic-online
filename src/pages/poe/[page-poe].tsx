@@ -1,14 +1,7 @@
 import Page from 'components/pages';
-import ContactUsText from 'components/shared/ContactUsText';
-import PageHeader from 'components/shared/PageHeader';
-import RenderHtmlContent from 'components/shared/RenderHtmlContent';
-import OpenedLayout from 'containers/opened'
-import Link from 'next/link';
 import React, { useState } from 'react'
-import { AiOutlineCalendar } from 'react-icons/ai';
 import { useQuery } from 'react-query';
 import { fetchData } from 'services/index';
-import { getDisplayedDate } from 'utils/DateFormat';
 
 function POE({id}: {id: string}) {
   const base = 'id,libelle,souslibelle,ordre,image,description,abstrait,*';

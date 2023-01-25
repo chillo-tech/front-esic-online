@@ -16,8 +16,7 @@ function AllTrainings({
   uppercase = true,
   link = '/nos-formations',
   text = 'Voir toutes nos formations',
-  classes,
-  training
+  classes
 }: Params) {
   return (
     <span className={classNames('flex flex-col justify-center items-center')}>

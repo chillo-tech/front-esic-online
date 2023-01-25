@@ -16,8 +16,8 @@ function Page({data,sessions, displayTrainings = false}: any) {
                 <PageHeader data={data}/>
                 {
                     (data.description)? (
-                            <div className='container'>
-                                <RenderHtmlContent classes='text-lg py-6' content={data.description}/>
+                            <div className='container py-10'>
+                                <RenderHtmlContent classes='text-lg mb-6' content={data.description}/>
                                 <AllTrainings
                                     text={"Contactez nous"}
                                     link="/contactez-nous"
@@ -68,12 +68,11 @@ function Page({data,sessions, displayTrainings = false}: any) {
                                                       <p className='flex items-center'><AiOutlineCalendar className="mr-1" />Au {getDisplayedDate(session.fin)}</p>
                                                   </div>
                                                   <p className='py-2 items-center justify-center flex'>
-                                                      <Link
-                                                          href="/contactez-nous"
-                                                          className="py-3 px-2 text-white text-center bg-secondary rounded-full"
-                                                      >
-                                                          Je suis intéressé(e)
-                                                      </Link>
+                                                      <AllTrainings 
+                                                        text={"Je suis intéressé(e)"}
+                                                        link="/contactez-nous"
+                                                        icon={false}
+                                                        classes='!text-center !text-xs border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'/>
                                                   </p>
                                               </article>
                                           ))
@@ -81,7 +80,7 @@ function Page({data,sessions, displayTrainings = false}: any) {
                                       <AllTrainings
                                           text={"Contactez nous"}
                                           link="/contactez-nous"
-                                          classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
+                                          classes='border border-white text-white hover:bg-transparent hover:bg-white hover:text-app-blue hover:border hover:border-white'
                                       />
                                   </div>
                                 </section>

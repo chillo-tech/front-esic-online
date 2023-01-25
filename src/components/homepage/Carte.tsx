@@ -13,8 +13,8 @@ const Carte = ({adresses = []}: {adresses: any[]}) => {
     () => ({
       disableDefaultUI: true,
       clickableIcons: true,
-      scrollwheel: false,
-      zoom: 6
+      scrollwheel: true,
+      zoom: 4
     }),
     []
   );
