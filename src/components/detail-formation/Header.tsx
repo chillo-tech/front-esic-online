@@ -18,7 +18,7 @@ function Header({ training, toogleDownloadForm }: any) {
           <div className="md:px-0 container grid md:grid-cols-2">
             <div className="title">
               <div className="w-full mb-4">
-                <h1 className="text-gray-300 text-sm md:text-3xl font-bold mb-2">
+                <h1 className="text-gray-300 text-sm md:text-2xl font-bold mb-2">
                   Formations {'>'}{' '}
                   {training?.souscategories &&
                     training?.souscategories[0]?.souscategories_id?.libelle}
