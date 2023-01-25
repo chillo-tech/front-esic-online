@@ -171,7 +171,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   </span>
                 </Accordion.Title>
                 <Accordion.Content className='px-0 focus:ring-transparent focus:ring-0 focus:border-none bg-transparent'>
-                  {training?.sessions.map((item: any, index: number) =>
+                  {training?.sessions?.map((item: any, index: number) =>
                     Date.parse(item?.sessions_id.debut) >= Date.now() ? (
                       <div
                         className="bg-white py-2 w-full shadow-xs text-slate-600 mb-3 px-2 border-l-8 border-[rgba(1,129,0)]"

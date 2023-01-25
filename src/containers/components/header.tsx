@@ -40,7 +40,7 @@ function Header() {
   return (
     <>
       <header className='bg-white w-full top-0 relative z-40 pb-2 pt-3'>
-        <div className="container !px-0 hidden lg:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
+        <div className="container hidden lg:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
             <Link href={"/"} className="">
               <Image
                 src={"/images/logo.png"}
@@ -53,7 +53,7 @@ function Header() {
             <div className='flex items-center'>
               {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
               <Link
-                className="px-8 py-2 text-app-blue rounded-lg border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
+                className="px-8 py-2 rounded-lg border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
                 href='/contactez-nous'
               >
                 Contactez nous
