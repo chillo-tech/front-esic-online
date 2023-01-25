@@ -1,11 +1,12 @@
 import AllTrainings from 'components/shared/AllTrainings';
 import CPFLink from 'components/shared/CPFLink';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
+import { Accordion } from 'flowbite-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
-import { capitalize, cn, loaderProp, slugify } from 'utils';
+import { capitalize, cn, getDisplayedDate, loaderProp, slugify } from 'utils';
 
 function Header({ training, toogleDownloadForm }: any) {
   console.log(training);
@@ -67,20 +68,19 @@ function Header({ training, toogleDownloadForm }: any) {
                 <div className="flex items-center">
                   <AiFillStar
                     className="text-2xl text-yellow-400"
-                    key={`moyenne-5`}
+                    key={`moyenne-1`}
                   />
                   <AiFillStar
                     className="text-2xl text-yellow-400"
-                    key={`moyenne-5`}
+                    key={`moyenne-2`}
                   />
                   <AiFillStar
                     className="text-2xl text-yellow-400"
-                    key={`moyenne-5`}
+                    key={`moyenne-3`}
                   />
                   <AiFillStar
                     className="text-2xl text-yellow-400"
-                    values={'4'}
-                    key={`moyenne-5`}
+                    key={`moyenne-4`}
                   />
                   <AiFillStar
                     className="text-2xl text-yellow-400"
@@ -140,10 +140,7 @@ function Header({ training, toogleDownloadForm }: any) {
 
               <CPFLink data={training.cpf} />
 
-              <div className="md:hidden text-white mt-4 text-xs md:text-lg font-semibold flex items-center justify-evenly w-full">
-                <span className="block border-b-2 border-white">
-                  Nos prochaines sessions
-                </span>
+              <div className="md:hidden relative text-white mt-4 text-sm md:text-lg font-semibold flex items-center justify-start w-full">
                 <span className="block border-b-2 border-white">
                   <Link href={'/contactez-nous'}>
                     <span>Comment financer la formation ?</span>
@@ -152,6 +149,45 @@ function Header({ training, toogleDownloadForm }: any) {
               </div>
             </div>
             <span />
+          </div>
+          <div className="md:hidden w-[90%] mx-auto mt-4">
+            <Accordion
+              arrowIcon={() => null}
+              alwaysOpen={true}
+              className="bg-transparent border-none focus:border-none outline-none">
+              <Accordion.Panel className="bg-transparent px-0 border-none focus:border-none">
+                <Accordion.Title
+                  color="white"
+                  className="px-0 focus:ring-transparent focus:ring-0 focus:border-none text-center"
+                  style={{
+                    height: '1rem',
+                    border: 'none',
+                    backgroundColor: 'transparent',
+                    alignItems: 'center',
+                    fontSize: '1rem',
+                  }}>
+                  <span className="block border-b-2 border-white mx-0 px-0 h-full text-white text-sm">
+                    Nos prochaines sessions
+                  </span>
+                </Accordion.Title>
+                <Accordion.Content className='px-0 focus:ring-transparent focus:ring-0 focus:border-none bg-transparent'>
+                  {training?.sessions.map((item: any, index: number) =>
+                    Date.parse(item?.sessions_id.debut) >= Date.now() ? (
+                      <div
+                        className="bg-white py-2 w-full shadow-xs text-slate-600 mb-3 px-2 border-l-8 border-[rgba(1,129,0)]"
+                        key={`session-${index}`}>
+                        <p className="mb-0">
+                          Du {getDisplayedDate(item.sessions_id.debut)}
+                        </p>
+                        <p className="mb-0">
+                          Au {getDisplayedDate(item.sessions_id.fin)}
+                        </p>
+                      </div>
+                    ) : null
+                  )}
+                </Accordion.Content>
+              </Accordion.Panel>
+            </Accordion>
           </div>
         </header>
       ) : null}

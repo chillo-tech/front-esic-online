@@ -11,7 +11,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
     <>
       <Link
         href={link}
-        className={classNames('block flex flex-col justify-between', classes)}
+        className={classNames('flex flex-col justify-between', classes)}
         key={training.id}
       >
         <div>
