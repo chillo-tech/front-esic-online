@@ -58,7 +58,7 @@ function Footer() {
                     text="Contactez nous"
                     classes={`
                       flex justify-center items-center px-8
-                      py-3 rounded-lg !text-2xl
+                      py-3 rounded-lg !text-xl md:!text-2xl
                       border border-app-blue bg-app-blue text-white
                       hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase`
                     }
@@ -186,7 +186,7 @@ function Footer() {
           )}>
           <span
             className={classNames(
-              'text-app-blue bg-white rounded-lg px-20 py-6 text-lg font-semibold'
+              'text-app-blue bg-white rounded-lg px-20 py-3 text-lg font-semibold'
             )}>
             {capitalize("S'INSCRIRE")}
           </span>
