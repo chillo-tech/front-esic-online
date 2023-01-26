@@ -9,9 +9,9 @@ import { AiFillStar } from 'react-icons/ai';
 import { capitalize, cn, getDisplayedDate, loaderProp, slugify } from 'utils';
 
 function Header({ training, toogleDownloadForm }: any) {
-  console.log(training);
   const [isImageLoading, setLoading] = useState(true);
 
+  console.log(training)
   return (
     <>
       {training ? (
@@ -20,7 +20,7 @@ function Header({ training, toogleDownloadForm }: any) {
             <div className="title">
               <div className="w-full mb-4">
                 <h1 className="text-gray-300 text-sm md:text-2xl font-bold mb-2">
-                  Formations {'>'}{' '}
+                  Formations {'>'}
                   {training?.souscategories &&
                     training?.souscategories[0]?.souscategories_id?.libelle}
                 </h1>
@@ -118,7 +118,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   </div>
                 ) : null}
               </div>
-              <div className="flex items-center flex-row gap-2 md:items-end">
+              <div className="grid grid-cols-2 gap-2 md:items-end">
                 <AllTrainings
                   training={training}
                   icon={false}
@@ -126,7 +126,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     training.libelle
                   )}-${training.id}`}
                   text="Je m'inscris"
-                  classes=" bg-white w-full text-app-blue font-light md:px-20 py-3 border hover:bg-transparent hover:text-white hover:border hover:border-white"
+                  classes=" bg-white w-full text-app-blue font-light border hover:bg-transparent hover:text-white hover:border hover:border-white"
                 />
                 {training.programmepdf ? (
                   <button
