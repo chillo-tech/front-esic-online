@@ -10,16 +10,17 @@ import { capitalize, cn, getDisplayedDate, loaderProp, slugify } from 'utils';
 
 function Header({ training, toogleDownloadForm }: any) {
   console.log(training);
+  const [hideSessions, setHideSessions] = useState(true)
   const [isImageLoading, setLoading] = useState(true);
 
   return (
     <>
       {training ? (
-        <header className="bg-app-blue py-2 md:py-12">
+        <header className="bg-app-blue py-2 pb-0 md:py-12">
           <div className="md:px-0 container grid md:grid-cols-2">
             <div className="title">
               <div className="w-full mb-4">
-                <h1 className="text-gray-300 text-sm md:text-2xl font-bold mb-2">
+                <h1 className="text-gray-300 text-sm md:text-2xl font-extralight mb-2">
                   Formations {'>'}{' '}
                   {training?.souscategories &&
                     training?.souscategories[0]?.souscategories_id?.libelle}
@@ -126,7 +127,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     training.libelle
                   )}-${training.id}`}
                   text="Je m'inscris"
-                  classes=" bg-white w-full text-app-blue font-light md:px-20 py-3 border hover:bg-transparent hover:text-white hover:border hover:border-white"
+                  classes="flex-1 bg-white w-full text-app-blue font-light md:px-20 py-3 border hover:bg-transparent hover:text-white hover:border hover:border-white"
                 />
                 {training.programmepdf ? (
                   <button
@@ -140,7 +141,7 @@ function Header({ training, toogleDownloadForm }: any) {
 
               <CPFLink data={training.cpf} />
 
-              <div className="md:hidden relative text-white mt-4 text-sm md:text-lg font-semibold flex items-center justify-start w-full">
+              <div className="md:hidden relative text-white mt-4 text-lg font-semibold flex items-center justify-center w-full">
                 <span className="block border-b-2 border-white">
                   <Link href={'/contactez-nous'}>
                     <span>Comment financer la formation ?</span>
@@ -150,27 +151,37 @@ function Header({ training, toogleDownloadForm }: any) {
             </div>
             <span />
           </div>
-          <div className="md:hidden w-[90%] mx-auto mt-4">
+          <div className="md:hidden h-full mb-0 w-full mx-auto mt-4">
             <Accordion
               arrowIcon={() => null}
               alwaysOpen={true}
               className="bg-transparent border-none focus:border-none outline-none">
-              <Accordion.Panel className="bg-transparent px-0 border-none focus:border-none">
+              <Accordion.Panel isOpen={false} className="bg-transparent px-0 border-none focus:border-none">
                 <Accordion.Title
+                onClick={() => setHideSessions(!hideSessions)}
                   color="white"
                   className="px-0 focus:ring-transparent focus:ring-0 focus:border-none text-center"
                   style={{
                     height: '1rem',
                     border: 'none',
+                    borderBottom: 'none',
+                    borderRadius: 0,
                     backgroundColor: 'transparent',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     fontSize: '1rem',
                   }}>
-                  <span className="block border-b-2 border-white mx-0 px-0 h-full text-white text-sm">
+                  <span className="block border-b-2 border-white mx-0 px-0 h-full w-full justify-center text-white text-lg">
                     Nos prochaines sessions
                   </span>
                 </Accordion.Title>
-                <Accordion.Content className='px-0 focus:ring-transparent focus:ring-0 focus:border-none bg-transparent'>
+                <Accordion.Content
+                hidden={hideSessions}
+                  style={{
+                    borderRadius: 0,
+                    border: 'none',
+                  }}
+                  className="px-2 h-full focus:ring-transparent focus:ring-0 focus:border-none bg-white">
                   {training?.sessions?.map((item: any, index: number) =>
                     Date.parse(item?.sessions_id.debut) >= Date.now() ? (
                       <div
