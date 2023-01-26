@@ -9,11 +9,9 @@ import { AiFillStar } from 'react-icons/ai';
 import { capitalize, cn, getDisplayedDate, loaderProp, slugify } from 'utils';
 
 function Header({ training, toogleDownloadForm }: any) {
-  console.log(training);
   const [hideSessions, setHideSessions] = useState(true)
   const [isImageLoading, setLoading] = useState(true);
 
-  console.log(training)
   return (
     <>
       {training ? (

@@ -41,7 +41,6 @@ export default POE
 
 export async function getServerSideProps(context: any) {
   const { params } = context;
-  console.log(params);
   
   const id = params['page-poe'].substring(params['page-poe'].lastIndexOf("-") + 1);
   const libelle = params['page-poe'].substring(

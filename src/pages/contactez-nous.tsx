@@ -68,7 +68,6 @@ const schema = yup
 
 export default function Contact() {
   const { state } = useContext(ApplicationContext);
-  console.log('Contact', state);
   const [isImageLoading, setLoading] = useState(true);
   const mutation = useMutation({
     mutationFn: (message: any) => add('/contacts', message),

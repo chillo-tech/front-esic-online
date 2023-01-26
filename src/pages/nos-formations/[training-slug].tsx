@@ -25,6 +25,7 @@ import Metadata from 'components/metadata';
 import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import AllTrainings from 'components/shared/AllTrainings';
 import Trainings from 'components/trainings';
+import { Spinner } from 'flowbite-react';
 var classNames = require('classnames');
 
 export type Message = {
@@ -44,7 +45,7 @@ const schema = yup
   .required();
 
 function Training({ id, slug }: { id: string; slug: string }) {
-  const [training, setTraining] = useState<any>({});
+  const [training, setTraining] = useState<any>(null);
   const { updateLastTraining, displayInscriptionButton } =
     useContext(ApplicationContext);
   const mutation = useMutation({
@@ -99,75 +100,89 @@ function Training({ id, slug }: { id: string; slug: string }) {
     <OpenedLayout>
       <Metadata entry={training} />
       <main className="bg-white detail-formation">
-        <Header training={training} toogleDownloadForm={toogleDownloadForm} />
-        <section className="bg-white py-10">
-          <div className="md:px-0 container grid md:grid-cols-5 gap-5">
-            <div className="md:col-span-3 col-span-5">
-              {TRAINING_KEYS.filter((item) => training[item.key]).map(
-                (item) => (
-                  <article
-                    key={`${id}-${item.key}-${slugify(item.label)}`}
-                    className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-10">
-                    <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">
-                      {item.label}
-                    </h2>
-                    <RenderHtmlContent
-                      content={training[item.key]}
-                      classes={`text-gray-600 font-light text-lg py-4 detail-formation descrioption ${
-                        item['classes'] ? item['classes'] : 'programme'
-                      }`}
+        {training ? (
+          <>
+            <Header
+              training={training}
+              toogleDownloadForm={toogleDownloadForm}
+            />
+            <section className="bg-white py-10">
+              <div className="md:px-0 container grid md:grid-cols-5 gap-5">
+                <div className="md:col-span-3 col-span-5">
+                  {TRAINING_KEYS.filter((item) => training[item.key]).map(
+                    (item) => (
+                      <article
+                        key={`${id}-${item.key}-${slugify(item.label)}`}
+                        className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-10">
+                        <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">
+                          {item.label}
+                        </h2>
+                        <RenderHtmlContent
+                          content={training[item.key]}
+                          classes={`text-gray-600 font-light text-lg py-4 detail-formation descrioption ${
+                            item['classes'] ? item['classes'] : 'programme'
+                          }`}
+                        />
+                      </article>
+                    )
+                  )}
+                </div>
+                <div className="w-full col-span-5 mx-auto md:fixed scrollbar-hide md:w-96 md:z-30 md:h-screen md:pb-40 md:top-28 md:right-24 md:overflow-y-scroll md:overflow-scroll scroll-smooth">
+                  <div className=" w-full mx-auto bg-white rounded-lg shadow-md">
+                    <HomeTrainingItem
+                      training={training}
+                      displayTitle={false}
+                      classes="bg-app-light-green rounded-t-lg"
                     />
-                  </article>
-                )
-              )}
-            </div>
-            <div className="w-full col-span-5 mx-auto md:fixed scrollbar-hide md:w-96 md:z-30 md:h-screen md:pb-40 md:top-28 md:right-24 md:overflow-y-scroll md:overflow-scroll scroll-smooth">
-              <div className=" w-full mx-auto bg-white rounded-lg shadow-md">
-                <HomeTrainingItem
-                  training={training}
-                  displayTitle={false}
-                  classes="bg-app-light-green rounded-t-lg"
-                />
-                {training.sessions && training.sessions.length ? (
-                  <div className="hidden md:block bg-app-light-green px-5 ">
-                    <div className="sessions py-2">
-                      <h3 className="mt-2 font-semibold text-2xl mb-2">
-                        Nos prochaines sessions
-                      </h3>
-                      {training?.sessions.map((item: any, index: number) =>
-                        Date.parse(item?.sessions_id.debut) >= Date.now() ? (
-                          <div
-                            className="bg-white py-2 shadow-xs text-slate-600 mb-3 px-2 border-l-8 border-[rgba(1,129,0)]"
-                            key={`session-${id}-${index}`}>
-                            <p className="mb-0">
-                              Du {getDisplayedDate(item.sessions_id.debut)}
-                            </p>
-                            <p className="mb-0">
-                              Au {getDisplayedDate(item.sessions_id.fin)}
-                            </p>
-                          </div>
-                        ) : null
-                      )}
-                    </div>
+                    {training.sessions && training.sessions.length ? (
+                      <div className="hidden md:block bg-app-light-green px-5 ">
+                        <div className="sessions py-2">
+                          <h3 className="mt-2 font-semibold text-2xl mb-2">
+                            Nos prochaines sessions
+                          </h3>
+                          {training?.sessions.map((item: any, index: number) =>
+                            Date.parse(item?.sessions_id.debut) >=
+                            Date.now() ? (
+                              <div
+                                className="bg-white py-2 shadow-xs text-slate-600 mb-3 px-2 border-l-8 border-[rgba(1,129,0)]"
+                                key={`session-${id}-${index}`}>
+                                <p className="mb-0">
+                                  Du {getDisplayedDate(item.sessions_id.debut)}
+                                </p>
+                                <p className="mb-0">
+                                  Au {getDisplayedDate(item.sessions_id.fin)}
+                                </p>
+                              </div>
+                            ) : null
+                          )}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="bg-app-light-green px-5">
+                        <p className="text-center">{EMPTY_SESSION}</p>
+                        <ContactUsText classes="justify-center" />
+                      </div>
+                    )}
+                    <AllTrainings
+                      uppercase={false}
+                      icon={false}
+                      link="/contactez-nous"
+                      text="Comment financer la formation ?"
+                      classes="bg-none text-app-blue font-bold md:text-xl py-4"
+                    />
                   </div>
-                ) : (
-                  <div className="bg-app-light-green px-5">
-                    <p className="text-center">{EMPTY_SESSION}</p>
-                    <ContactUsText classes="justify-center" />
-                  </div>
-                )}
-                <AllTrainings
-                  uppercase={false}
-                  icon={false}
-                  link="/contactez-nous"
-                  text="Comment financer la formation ?"
-                  classes="bg-none text-app-blue font-bold md:text-xl py-4"
-                />
+                </div>
               </div>
+            </section>
+            <Trainings title="Autres formations" limit={3} />
+          </>
+        ) : (
+          <div className="h-screen text-center flex justify-center items-center">
+            <div>
+              <Spinner color="info" aria-label="Loading..." size="xl" />
             </div>
           </div>
-        </section>
-        <Trainings title="Autres formations" limit={3} />
+        )}
       </main>
       <section
         className={classNames(
