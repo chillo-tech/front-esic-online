@@ -117,7 +117,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                         item['classes'] ? item['classes'] : 'programme'
                       }`}
                     />
-                  </article>
+                  </arti</>cle>
                 )
               )}
             </div>
