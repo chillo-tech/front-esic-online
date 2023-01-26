@@ -23,6 +23,8 @@ function Footer() {
   const { state, updateCompany } = useContext(ApplicationContext);
   const [isImageLoading, setLoading] = useState(true);
 
+  const training = state?.displayInscriptionButton
+
   const { isSuccess, data } = useQuery<any>({
     queryKey: ['Entreprise-data-ddd'],
     queryFn: () =>
@@ -56,7 +58,7 @@ function Footer() {
                     text="Contactez nous"
                     classes={`
                       flex justify-center items-center px-8
-                      py-3 rounded-lg !text-2xl
+                      py-3 rounded-lg !text-xl md:!text-2xl
                       border border-app-blue bg-app-blue text-white
                       hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase`
                     }
@@ -174,15 +176,17 @@ function Footer() {
           </div>
         </>
       ) : null}
-      {state.displayInscriptionButton && (
+      {training && (
         <Link
-          href={'#accueil'}
+          href={`/nos-formations/votre-candidature?formation=${slugify(
+            training.libelle
+          )}-${training.id}`}
           className={classNames(
             'md:hidden flex justify-center items-center bg-app-blue w-full uppercase px-8 py-4 relative'
           )}>
           <span
             className={classNames(
-              'text-app-blue bg-white rounded-lg px-20 py-6 text-lg font-semibold'
+              'text-app-blue bg-white rounded-lg px-20 py-3 text-lg font-semibold'
             )}>
             {capitalize("S'INSCRIRE")}
           </span>
