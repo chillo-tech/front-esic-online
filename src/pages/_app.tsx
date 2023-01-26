@@ -1,5 +1,6 @@
 import ApplicationContextWrapper from 'context/ApplicationContext';
 import 'styles/globals.css'
+import "styles/nav.css"
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query';
 

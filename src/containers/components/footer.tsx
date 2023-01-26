@@ -54,7 +54,12 @@ function Footer() {
                   <AllTrainings
                     link="/contactez-nous"
                     text="Contactez nous"
-                    classes="md:w-1/5 text-sm md:text-md bg-app-blue border-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border hover:border-app-blue md:!text-md sm:!text-xl"
+                    classes={`
+                      flex justify-center items-center px-8
+                      py-3 rounded-lg !text-2xl
+                      border border-app-blue bg-app-blue text-white
+                      hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase`
+                    }
                   />
                 </p>
               </article>

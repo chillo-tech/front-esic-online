@@ -8,7 +8,7 @@ function DropdownMobile({isShowing, parent, categories, pages}: any) {
     return (
         <div
             className={`border-t border-gray-400 pt-4 mt-4 font-normal uppercase text-gray-700 ${isShowing ? 'block' : 'hidden'}`}>
-            {/* {
+            {
                 (categories.length) ? (
                     <ul className="dropdown">
                         {categories.map((categorie: any, index: number) => (
@@ -41,7 +41,7 @@ function DropdownMobile({isShowing, parent, categories, pages}: any) {
                         ))}
                     </ul>
                 ) : null
-            } */}
+            }
         </div>
     )
 }

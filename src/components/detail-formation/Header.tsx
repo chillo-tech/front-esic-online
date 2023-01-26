@@ -13,6 +13,7 @@ function Header({ training, toogleDownloadForm }: any) {
   const [hideSessions, setHideSessions] = useState(true)
   const [isImageLoading, setLoading] = useState(true);
 
+  console.log(training)
   return (
     <>
       {training ? (
@@ -119,7 +120,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   </div>
                 ) : null}
               </div>
-              <div className="flex items-center flex-row gap-2 md:items-end">
+              <div className="grid grid-cols-2 gap-2 md:items-end">
                 <AllTrainings
                   training={training}
                   icon={false}

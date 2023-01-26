@@ -40,7 +40,7 @@ function Header() {
   return (
     <>
       <header className='bg-white w-full top-0 relative z-40 pb-2 pt-3'>
-        <div className="container hidden lg:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
+        <div className="!px-0 container hidden lg:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
             <Link href={"/"} className="">
               <Image
                 src={"/images/logo.png"}

@@ -17,7 +17,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
         <div>
           {
             training.image ? (
-              <div className='relative w-full h-44 md:h-64 !rounded-t-lg overflow-hidden'>
+              <div className='relative w-full h-40 md:h-64 !rounded-t-lg overflow-hidden'>
                 <div className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
                 <Image
                   fill={true}

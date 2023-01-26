@@ -113,8 +113,8 @@ function Training({ id, slug }: { id: string; slug: string }) {
                     </h2>
                     <RenderHtmlContent
                       content={training[item.key]}
-                      classes={`text-gray-600 font-light text-lg py-4 detail-formation ${
-                        item['classes'] ? item['classes'] : ''
+                      classes={`text-gray-600 font-light text-lg py-4 detail-formation descrioption ${
+                        item['classes'] ? item['classes'] : 'programme'
                       }`}
                     />
                   </article>

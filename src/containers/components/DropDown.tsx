@@ -7,9 +7,9 @@ import SubMenuItem from "containers/components/SubMenuItem";
 function DropDown({dropdown, parent, categories, pages}: any) {
   return (
     <div className={`${dropdown ? "rounded-md shadow-2xl absolute z-50 -ml-20 left-1/2 bg-white" : "hidden"}`}>
-      {/* {
+     {
         (categories.length) ? (
-          <ul className="dropdown">
+          <ul className="dropdown relative caret-up-before">
             {categories.map((categorie: any, index: number) => (
                 <SubMenuItem
                     grandparent={parent}
@@ -23,7 +23,7 @@ function DropDown({dropdown, parent, categories, pages}: any) {
       }
       {
         (pages.length) ? (
-          <ul className="dropdown">
+          <ul className="dropdown relative caret-up-before">
             {pages
             .filter((a: any) => { return (a !== null && a.pages_id !== null) } )
             .map((page: any, index: number) => (
@@ -40,7 +40,7 @@ function DropDown({dropdown, parent, categories, pages}: any) {
             ))}
           </ul>
         ): null
-      } */}
+      }
     </div>
   )
 }
