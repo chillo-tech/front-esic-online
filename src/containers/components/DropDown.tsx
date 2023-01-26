@@ -23,8 +23,10 @@ function DropDown({dropdown, parent, categories, pages}: any) {
       }
       {
         (pages.length) ? (
-          <ul className="dropdown">
-            {pages.map((page: any, index: number) => (
+          <ul className="dropdown relative caret-up-before">
+            {pages
+            .filter((a: any) => { return (a !== null && a.pages_id !== null) } )
+            .map((page: any, index: number) => (
               <li key={`menu-page-${index}`} className="menu-items">
                 <Link
                   href={`/${slugify(parent)}/${slugify(
