@@ -78,8 +78,8 @@ function Training({ id, slug }: { id: string; slug: string }) {
   });
 
   useEffect(() => {
-    displayInscriptionButton(true);
-  }, []);
+    displayInscriptionButton(training);
+  }, [training]);
 
   const toogleDownloadForm = () => setDisplayDownloadForm(!displayDownloadForm);
   const onSubmit = (formData: Message) => {
