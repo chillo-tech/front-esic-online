@@ -125,30 +125,13 @@ function Page({ data, sessions, displayTrainings = false }: any) {
     },
   ];
 
-  const onSubmit = (message: Message) => {
-    const mappedSessions = message.sessions.map((sessionId: String) => {
-      if (data && data?.data.data.sessions) {
-        const session = data?.data.data.sessions.find(
-          (item: any) => item.sessions_id.id == sessionId
-        );
-        return session
-          ? `Du ${getDisplayedDate(
-              session.sessions_id.debut
-            )} Au ${getDisplayedDate(session.sessions_id.fin)}`.replaceAll(
-              ',',
-              ''
-            )
-          : sessionId;
-      }
-      return sessionId;
-    });
-    const sessions = mappedSessions.join(', ');
+  const onSubmit = (data: Message) => {
     mutation.mutate({
-      ...message,
-      subject: `${message.subject} - Sessions ${sessions}`,
-      contactChannel: `${contactChannel.join(', ').toLowerCase()}`,
+      ...data,
+      contactChannel: contactChannel.join(', ').toLowerCase(),
     });
   };
+
   const onError = (errors: any, e: any) => console.log({ errors });
 
   const handleError = (error: any) => {
@@ -165,7 +148,6 @@ function Page({ data, sessions, displayTrainings = false }: any) {
     handleSubmit,
     watch,
     formState: { errors },
-    setValue,
   } = useForm<Message>({
     mode: 'onChange',
     resolver: yupResolver(schema),
@@ -175,74 +157,81 @@ function Page({ data, sessions, displayTrainings = false }: any) {
   const profile = watch('profile');
 
   useEffect(() => {
-    if (profile === 'particulier') {
+    if (data?.formulaire === 'candidat') {
       setDisplayCandidatFields(true);
       setDisplayEnterpriseFields(false);
-    } else if (profile === 'entreprise') {
+    } else if (data?.formulaire === 'entreprise') {
       setDisplayEnterpriseFields(true);
       setDisplayCandidatFields(false);
     }
-  }, [profile]);
+  }, []);
 
   return (
     <OpenedLayout>
-      {(data?.formulaire === 'candidat' ||
-        data?.formulaire === 'entreprise') && (
-        <div className='w-full h-full py-4 bg-app-blue bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]'>
-          <aside className="w-full bg-white mx-auto md:w-[70%] border rounded-xl md:rounded-3xl grid grid-cols-6 gap-4 md:p-4 md:pb-16">
-            {mutation.isError ? (
-              <Message
-                type="error"
-                firstMessage="Une erreur est survenue, nous allons la résoudre sous peu"
-                secondMessage="N'hésitez pas à nous passer un coup de fil"
-                action={handleError}
-                actionLabel="Retourner à l'accueil"
-              />
-            ) : null}
-            {mutation.isSuccess ? (
-              <Message
-                type="success"
-                firstMessage="Nous avons reçu votre message."
-                secondMessage="Une réponse personnalisée vous sera apportée dans les meilleurs délais."
-                action={handleError}
-                actionLabel="Retourner à l'accueil"
-              />
-            ) : null}
-            {mutation.isIdle ? (
-              <form
-                onSubmit={handleSubmit(onSubmit, onError)}
-                className=" w-full mt-2 col-span-6 px-3 md:px-6 pb-6">
-                <div className="grid md:grid-cols-2 md:gap-6">
-                  <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
-                    <div className={formStyles.form_control}>
-                      <input
-                        type="text"
-                        id="name"
-                        placeholder="Votre nom"
-                        className={formStyles.form_control__input}
-                        {...register('name')}
-                      />
-                      <p className={formStyles.form_control__error}>
-                        {errors.name?.message}
-                      </p>
+      <section className="bg-white">
+        <PageHeader data={data} />
+        {(data?.formulaire === 'candidat' ||
+          data?.formulaire === 'entreprise') && (
+          <div className='w-full h-full py-4 pb-8 bg-gray-50 bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]'>
+            <div className="container mt-4">
+              <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
+                <span className="px-10 py-3">Nous contactez</span>
+                <span className="border-b-2 border-gray-500 px-10 w-64 mt-2"></span>
+              </h2>
+            </div>
+            <aside className="w-full bg-white mx-auto md:w-[70%] border rounded-xl md:rounded-3xl grid grid-cols-6 gap-4 md:p-4 md:pb-16">
+              {mutation.isError ? (
+                <Message
+                  type="error"
+                  firstMessage="Une erreur est survenue, nous allons la résoudre sous peu"
+                  secondMessage="N'hésitez pas à nous passer un coup de fil"
+                  action={handleError}
+                  actionLabel="Retourner à l'accueil"
+                />
+              ) : null}
+              {mutation.isSuccess ? (
+                <Message
+                  type="success"
+                  firstMessage="Nous avons reçu votre message."
+                  secondMessage="Une réponse personnalisée vous sera apportée dans les meilleurs délais."
+                  action={handleError}
+                  actionLabel="Retourner à l'accueil"
+                />
+              ) : null}
+              {mutation.isIdle ? (
+                <form
+                  onSubmit={handleSubmit(onSubmit, onError)}
+                  className=" w-full mt-2 col-span-6 px-3 md:px-6 pb-6">
+                  <div className="grid md:grid-cols-2 md:gap-6">
+                    <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
+                      <div className={formStyles.form_control}>
+                        <input
+                          type="text"
+                          id="name"
+                          placeholder="Votre nom"
+                          className={formStyles.form_control__input}
+                          {...register('name')}
+                        />
+                        <p className={formStyles.form_control__error}>
+                          {errors.name?.message}
+                        </p>
+                      </div>
+                    </div>
+                    <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
+                      <div className={formStyles.form_control}>
+                        <input
+                          type="text"
+                          id="email"
+                          placeholder="Votre email"
+                          className={formStyles.form_control__input}
+                          {...register('email')}
+                        />
+                        <p className={formStyles.form_control__error}>
+                          {errors.email?.message}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
-                    <div className={formStyles.form_control}>
-                      <input
-                        type="text"
-                        id="email"
-                        placeholder="Votre email"
-                        className={formStyles.form_control__input}
-                        {...register('email')}
-                      />
-                      <p className={formStyles.form_control__error}>
-                        {errors.email?.message}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="grid md:grid-cols-2 md:gap-6">
                   <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                     <div className={formStyles.form_control}>
                       <input
@@ -257,206 +246,189 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                       </p>
                     </div>
                   </div>
-                  <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
+
+                  {displayCandidatFields || displayEnterpriseFields ? (
+                    <>
+                      <div
+                        className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                        <div className={formStyles.form_control}>
+                          <select
+                            {...register('demandeSubject')}
+                            className={formStyles.form_control__input}>
+                            <option disabled selected value="">
+                              Votre demande concerne ?
+                            </option>
+                            {votreDemandeConcerne.map(
+                              (demande: any, index: number) => (
+                                <option
+                                  key={`c-object-demande-${index}`}
+                                  value={demande.value}>
+                                  {demande.label}
+                                </option>
+                              )
+                            )}
+                          </select>
+                          <p className={formStyles.form_control__error}>
+                            {errors.demandeSubject?.message}
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  ) : null}
+
+                  <div className={formStyles.form_control}>
+                    <textarea
+                      placeholder="Votre message"
+                      id="message"
+                      className={formStyles.form_control__input}
+                      {...register('message')}
+                      rows={6}></textarea>
+                    <p className={formStyles.form_control__error}>
+                      {errors.message?.message}
+                    </p>
+                  </div>
+
+                  {displayCandidatFields ? (
+                    <>
+                      <div
+                        className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                        <div className={formStyles.form_control}>
+                          <select
+                            {...register('candidatureStarted')}
+                            className={formStyles.form_control__input}>
+                            <option disabled selected value="">
+                              Avez vous commencez votre parcours de candidature
+                              ?
+                            </option>
+                            <option
+                              key={`c-candidature-started-yes}`}
+                              value={'oui'}>
+                              Oui
+                            </option>
+                            <option
+                              key={`c-candidature-started-no}`}
+                              value={'non'}>
+                              Non
+                            </option>
+                          </select>
+                          <p className={formStyles.form_control__error}>
+                            {errors?.candidatureStarted?.message}
+                          </p>
+                        </div>
+                      </div>
+                      <div
+                        className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                        <div className={formStyles.form_control}>
+                          <label
+                            htmlFor="cv"
+                            className="form-label inline-block mb-2 font-semibold">
+                            Mettre à jour votre CV (optionel)
+                          </label>
+                          <input
+                            {...register('cv')}
+                            className="form-control block w-full px-3 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                            type="file"
+                            id="cv"
+                          />
+                        </div>
+                      </div>
+                    </>
+                  ) : null}
+
+                  {displayEnterpriseFields ? (
+                    <>
+                      <div
+                        className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                        <div className={formStyles.form_control}>
+                          <input
+                            type="text"
+                            id="enterpriseName"
+                            placeholder="Nom de votre entreprise"
+                            className={formStyles.form_control__input}
+                            {...register('enterpriseName')}
+                          />
+                          <p className={formStyles.form_control__error}>
+                            {errors.enterpriseName?.message}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div
+                        className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                        <div className={formStyles.form_control}>
+                          <select
+                            {...register('enterpriseRegion')}
+                            className={formStyles.form_control__input}>
+                            <option disabled selected value="">
+                              Dans quelle région se situe votre entreprise ?
+                            </option>
+                            {regionsEntreprise.map(
+                              (region: any, index: number) => (
+                                <option
+                                  key={`c-region-${index}`}
+                                  value={region.value}>
+                                  {region.label}
+                                </option>
+                              )
+                            )}
+                          </select>
+                          <p className={formStyles.form_control__error}>
+                            {errors?.enterpriseRegion?.message}
+                          </p>
+                        </div>
+                      </div>
+                    </>
+                  ) : null}
+
+                  <div className={`${formStyles.form_control} md:pt-4`}>
                     <div className={formStyles.form_control}>
-                      <select
-                        {...register('profile')}
-                        className={formStyles.form_control__input}>
-                        <option disabled selected value="">
-                          Vous êtes
-                        </option>
-                        {USER_PROFILE.map((profile: any, index: number) => (
-                          <option
-                            key={`c-profile-${index}`}
-                            value={profile.value}>
-                            {profile.label}
-                          </option>
+                      <label
+                        htmlFor="phone"
+                        className={formStyles.form_control__label}>
+                        <span className="text-black">
+                          Comment souhaitez vous être contacté
+                        </span>
+                      </label>
+                      <div className="grid md:grid-cols-2 gap-4 my-2">
+                        {CONTACT_CHANNEL.map((channel: any, index: number) => (
+                          <label
+                            key={`channel-${index}`}
+                            htmlFor={channel.value}
+                            className={`border py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
+                              contactChannel &&
+                              contactChannel.indexOf(channel.value) > -1
+                                ? 'bg-app-blue text-white'
+                                : ''
+                            }`}>
+                            <input
+                              type="checkbox"
+                              id={channel.value}
+                              value={channel.value}
+                              className="hidden"
+                              {...register('contactChannel')}
+                            />{' '}
+                            {channel.label}
+                          </label>
                         ))}
-                      </select>
+                      </div>
                       <p className={formStyles.form_control__error}>
-                        {errors.profile?.message}
+                        {errors.contactChannel?.message}
                       </p>
                     </div>
                   </div>
-                </div>
-                {displayCandidatFields || displayEnterpriseFields ? (
-                  <>
-                    <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
-                      <div className={formStyles.form_control}>
-                        <select
-                          {...register('demandeSubject')}
-                          className={formStyles.form_control__input}>
-                          <option disabled selected value="">
-                            Votre demande concerne ?
-                          </option>
-                          {votreDemandeConcerne.map(
-                            (demande: any, index: number) => (
-                              <option
-                                key={`c-object-demande-${index}`}
-                                value={demande.value}>
-                                {demande.label}
-                              </option>
-                            )
-                          )}
-                        </select>
-                        <p className={formStyles.form_control__error}>
-                          {errors.demandeSubject?.message}
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                ) : null}
 
-                <div className={formStyles.form_control}>
-                  <textarea
-                    placeholder="Votre message"
-                    id="message"
-                    className={formStyles.form_control__input}
-                    {...register('message')}
-                    rows={6}></textarea>
-                  <p className={formStyles.form_control__error}>
-                    {errors.message?.message}
-                  </p>
-                </div>
-
-                {displayCandidatFields ? (
-                  <>
-                    <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
-                      <div className={formStyles.form_control}>
-                        <select
-                          {...register('candidatureStarted')}
-                          className={formStyles.form_control__input}>
-                          <option disabled selected value="">
-                            Avez vous commencez votre parcours de candidature ?
-                          </option>
-                          <option
-                            key={`c-candidature-started-yes}`}
-                            value={'oui'}>
-                            Oui
-                          </option>
-                          <option
-                            key={`c-candidature-started-no}`}
-                            value={'non'}>
-                            Non
-                          </option>
-                        </select>
-                        <p className={formStyles.form_control__error}>
-                          {errors?.candidatureStarted?.message}
-                        </p>
-                      </div>
-                    </div>
-                    <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
-                      <div className={formStyles.form_control}>
-                        <label
-                          htmlFor="cv"
-                          className="form-label inline-block mb-2 font-semibold">
-                          Mettre à jour votre CV (optionel)
-                        </label>
-                        <input
-                          {...register('cv')}
-                          className="form-control block w-full px-3 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                          type="file"
-                          id="cv"
-                        />
-                      </div>
-                    </div>
-                  </>
-                ) : null}
-
-                {displayEnterpriseFields ? (
-                  <>
-                    <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
-                      <div className={formStyles.form_control}>
-                        <input
-                          type="text"
-                          id="enterpriseName"
-                          placeholder="Nom de votre entreprise"
-                          className={formStyles.form_control__input}
-                          {...register('enterpriseName')}
-                        />
-                        <p className={formStyles.form_control__error}>
-                          {errors.enterpriseName?.message}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
-                      <div className={formStyles.form_control}>
-                        <select
-                          {...register('enterpriseRegion')}
-                          className={formStyles.form_control__input}>
-                          <option disabled selected value="">
-                            Dans quelle région se situe votre entreprise ?
-                          </option>
-                          {regionsEntreprise.map(
-                            (region: any, index: number) => (
-                              <option
-                                key={`c-region-${index}`}
-                                value={region.value}>
-                                {region.label}
-                              </option>
-                            )
-                          )}
-                        </select>
-                        <p className={formStyles.form_control__error}>
-                          {errors?.enterpriseRegion?.message}
-                        </p>
-                      </div>
-                    </div>
-                  </>
-                ) : null}
-
-                <div className={`${formStyles.form_control} md:pt-4`}>
-                  <div className={formStyles.form_control}>
-                    <label
-                      htmlFor="phone"
-                      className={formStyles.form_control__label}>
-                      <span className="text-black">
-                        Comment souhaitez vous être contacté
-                      </span>
-                    </label>
-                    <div className="grid md:grid-cols-2 gap-4 my-2">
-                      {CONTACT_CHANNEL.map((channel: any, index: number) => (
-                        <label
-                          key={`channel-${index}`}
-                          htmlFor={channel.value}
-                          className={`border py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
-                            contactChannel &&
-                            contactChannel.indexOf(channel.value) > -1
-                              ? 'bg-app-blue text-white'
-                              : ''
-                          }`}>
-                          <input
-                            type="checkbox"
-                            id={channel.value}
-                            value={channel.value}
-                            className="hidden"
-                            {...register('contactChannel')}
-                          />{' '}
-                          {channel.label}
-                        </label>
-                      ))}
-                    </div>
-                    <p className={formStyles.form_control__error}>
-                      {errors.contactChannel?.message}
-                    </p>
+                  <div className="w-full flex justify-center mt-12">
+                    <button
+                      type="submit"
+                      className="rounded-md bg-app-blue text-white border-yellow-500 px-24 uppercase py-3">
+                      <span>Envoyer</span>
+                    </button>
                   </div>
-                </div>
-
-                <div className="w-full flex justify-center mt-12">
-                  <button
-                    type="submit"
-                    className="rounded-md bg-app-blue text-white border-yellow-500 px-24 uppercase py-3">
-                    <span>Envoyer</span>
-                  </button>
-                </div>
-              </form>
-            ) : null}
-          </aside>
-        </div>
-      )}
-      <section className="bg-white">
-        <PageHeader data={data} />
+                </form>
+              ) : null}
+            </aside>
+          </div>
+        )}
         {data.description ? (
           <div className="container py-10">
             <RenderHtmlContent
