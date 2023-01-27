@@ -54,18 +54,10 @@ const schema = yup
       .email(EMAIL_ERROR_MESSAGE)
       .required(EMAIL_ERROR_MESSAGE)
       .matches(EMAIL_PATTERN, { message: EMAIL_ERROR_MESSAGE }),
-    profile: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
     enterpriseRegion: yup.string().trim(),
     candidatureStarted: yup.string().trim(),
     demandeSubject: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
-    subject: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
     contactChannel: yup
-      .array()
-      .of(yup.string())
-      .min(1)
-      .required(REQUIRED_ERROR_MESSAGE)
-      .nullable(),
-    sessions: yup
       .array()
       .of(yup.string())
       .min(1)
