@@ -54,10 +54,12 @@
 .detail-formation .programme p,
 .detail-formation .programme ul
 {
-  @apply ml-4 text-lg !font-normal ml-10
+  @apply text-lg !font-normal ml-10 mb-5;
+  display: list-item;
 }
 
-.detail-formation .programme ul{
+
+.detail-formation .programme ul,{
   @apply list-disc
 }
 #home-police-2 {
