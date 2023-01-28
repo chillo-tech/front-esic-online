@@ -178,6 +178,46 @@ const TRAINING_KEYS = [
     label: "Nos méthodes d'enseignement"
   }
 ];
+
+const votreDemandeConcerne = [
+  {
+    value: 'nos-formations',
+    label: 'Nos formations',
+  },
+  {
+    value: 'financement-de-nos-formations',
+    label: 'Le financement de nos formations',
+  },
+  {
+    value: 'autres',
+    label: 'Autres',
+  },
+];
+
+const regionsEntreprise = [
+  {
+    value: 'bretagne',
+    label: 'Bretagne',
+  },
+  {
+    value: 'corse',
+    label: 'Corse',
+  },
+  {
+    value: 'ile-france',
+    label: 'Ile-de-France',
+  },
+  {
+    value: 'autres',
+    label: 'Autres',
+  },
+];
+
+const DEMANDE_CANDIDAT = {
+  value: 'votre-candidature',
+  label: 'Votre candidature',
+}
+
 export {
   hero,
   contact,
@@ -200,4 +240,7 @@ export {
   REQUIRED_ERROR_MESSAGE,
   USER_PROFILE,
   TRAINING_KEYS,
+  DEMANDE_CANDIDAT,
+  votreDemandeConcerne,
+  regionsEntreprise,
 };

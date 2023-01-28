@@ -15,6 +15,9 @@ import {
   EMAIL_ERROR_MESSAGE,
   PHONE_ERROR_MESSAGE,
   USER_PROFILE,
+  DEMANDE_CANDIDAT,
+  votreDemandeConcerne,
+  regionsEntreprise,
 } from 'utils/index';
 import formStyles from 'styles/Form.module.css';
 import Message from 'components/shared/Message';
@@ -79,44 +82,6 @@ function Page({ data, sessions, displayTrainings = false }: any) {
 
   const router = useRouter();
 
-  const votreDemandeConcerne = [
-    {
-      value: 'nos-formations',
-      label: 'Nos formations',
-    },
-    {
-      value: 'financement-de-nos-formations',
-      label: 'Le financement de nos formations',
-    },
-    {
-      value: 'votre-candidature',
-      label: 'Votre candidature',
-    },
-    {
-      value: 'autres',
-      label: 'Autres',
-    },
-  ];
-
-  const regionsEntreprise = [
-    {
-      value: 'bretagne',
-      label: 'Bretagne',
-    },
-    {
-      value: 'corse',
-      label: 'Corse',
-    },
-    {
-      value: 'ile-france',
-      label: 'Ile-de-France',
-    },
-    {
-      value: 'autres',
-      label: 'Autres',
-    },
-  ];
-
   const onSubmit = (data: Message) => {
     mutation.mutate({
       ...data,
@@ -146,7 +111,6 @@ function Page({ data, sessions, displayTrainings = false }: any) {
   });
 
   const contactChannel = watch('contactChannel');
-  const profile = watch('profile');
 
   useEffect(() => {
     if (data?.formulaire === 'candidat') {
@@ -324,10 +288,17 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                             <option disabled selected value="">
                               Votre demande concerne ?
                             </option>
+                            {displayCandidatFields ? (
+                              <option
+                                key={`c-object-demande-0`}
+                                value={DEMANDE_CANDIDAT.value}>
+                                {DEMANDE_CANDIDAT.label}
+                              </option>
+                            ) : null}
                             {votreDemandeConcerne.map(
                               (demande: any, index: number) => (
                                 <option
-                                  key={`c-object-demande-${index}`}
+                                  key={`c-object-demande-${index + 1}`}
                                   value={demande.value}>
                                   {demande.label}
                                 </option>
