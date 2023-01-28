@@ -87,6 +87,7 @@ function Page({data,sessions, displayTrainings = false}: any) {
                             </>
                         ): null
                 }
+                {data.formulaire}
             </section>
         </OpenedLayout>
     )
