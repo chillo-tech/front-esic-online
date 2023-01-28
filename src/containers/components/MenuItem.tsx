@@ -6,15 +6,17 @@ import DropDown from './DropDown';
 
 function MenuItem({item}: any) {
     const [dropdown, setDropdown] = useState(false);
+    const [navWidth, setNavWidth] = useState(0);
 
     let ref = useRef<HTMLLIElement>(null)
 
     useEffect(() => {
         const handler = (event: any) => {
-      if (dropdown && ref.current && !ref.current.contains(event.target)) {
-        setDropdown(false);
-      }
+            if (dropdown && ref.current && !ref.current.contains(event.target)) {
+                setDropdown(false);
+            }
         };
+        if (ref.current) setNavWidth(ref.current.offsetWidth)
         document.addEventListener("mousedown", handler);
         document.addEventListener("touchstart", handler);
         return () => {
@@ -35,7 +37,7 @@ function MenuItem({item}: any) {
                     <BiChevronDown className='text-xl'/>
                 </button>
                 <DropDown dropdown={dropdown} parent={slugify(`${item.libelle}`)} pages={item.pages}
-                          categories={item.categories}/>
+                          categories={item.categories} parentWidth={navWidth}/>
             </li>
         )
     }

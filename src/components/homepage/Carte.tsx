@@ -5,9 +5,13 @@ import { useMemo } from 'react';
 const Carte = ({adresses = []}: {adresses: any[]}) => {
   const libraries = useMemo(() => ['places'], []);
   const mapCenter = useMemo(
-    () => ({ lat: 46.71109, lng: 1.7191036}),
+    () => ({ lat: parseFloat(adresses[0].latitude), lng: parseFloat(adresses[0].longitude)}),
     []
   );
+
+    const onLoad = (marker: any) => {
+        console.log("marker: ", marker);
+    };
 
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
@@ -38,17 +42,15 @@ const Carte = ({adresses = []}: {adresses: any[]}) => {
               mapTypeId={google.maps.MapTypeId.ROADMAP}
               mapContainerStyle={{ width: '800px', height: '384px' }}
             >
-              <>
               {
                   adresses.map((adresse: any, index: number) => (
-                      <MarkerF 
-                        key={`adresse-${adresse.id}-${index}`} 
+                      <MarkerF
+                        key={`adresse-${adresse.id}-${index}`}
+                        onLoad={onLoad}
                         position={{ lat: parseFloat(adresse.latitude), lng: parseFloat(adresse.longitude)}}
                       />
                   ))
               }
-              </>
-                
             </GoogleMap>
           </div>
         </div>
