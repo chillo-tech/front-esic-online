@@ -3,7 +3,6 @@ import { useLoadScript, GoogleMap,MarkerF } from '@react-google-maps/api';
 import { useMemo } from 'react';
 
 const Carte = ({adresses = []}: {adresses: any[]}) => {
-    console.log(adresses);
   const libraries = useMemo(() => ['places'], []);
   const mapCenter = useMemo(
     () => ({ lat: parseFloat(adresses[0].latitude), lng: parseFloat(adresses[0].longitude)}),
@@ -46,7 +45,6 @@ const Carte = ({adresses = []}: {adresses: any[]}) => {
               mapTypeId={google.maps.MapTypeId.ROADMAP}
               mapContainerStyle={{ width: '800px', height: '384px' }}
             >
-              {/*<>*/}
               {
                   adresses.map((adresse: any, index: number) => (
                       <MarkerF
@@ -56,8 +54,6 @@ const Carte = ({adresses = []}: {adresses: any[]}) => {
                       />
                   ))
               }
-              {/*</>*/}
-
             </GoogleMap>
           </div>
         </div>
