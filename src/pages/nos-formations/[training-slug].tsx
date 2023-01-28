@@ -170,43 +170,6 @@ function Training({ id, slug }: { id: string; slug: string }) {
                       text="Comment financer la formation ?"
                       classes="bg-none text-app-blue font-bold md:text-xl py-4"
                     />
-                  </article>
-                )
-              )}
-            </div>
-            <div className="w-full col-span-5 mx-auto md:fixed scrollbar-hide md:w-96 md:z-30 md:h-screen md:pb-40 md:top-28 md:right-16 md:overflow-y-scroll md:overflow-scroll scroll-smooth">
-              <div className=" w-full mx-auto bg-white rounded-lg shadow-md">
-                <HomeTrainingItem
-                  training={training}
-                  displayTitle={false}
-                  classes="bg-app-light-green rounded-t-lg"
-                />
-                {training.sessions && training.sessions.length ? (
-                  <div className="hidden md:block bg-app-light-green px-5 ">
-                    <div className="sessions py-2">
-                      <h3 className="mt-2 font-semibold text-2xl mb-2">
-                        Nos prochaines sessions
-                      </h3>
-                      {training?.sessions.map((item: any, index: number) =>
-                        Date.parse(item?.sessions_id.debut) >= Date.now() ? (
-                          <div
-                            className="bg-white py-2 shadow-xs text-slate-600 mb-3 px-2 border-l-8 border-[rgba(1,129,0)]"
-                            key={`session-${id}-${index}`}>
-                            <p className="mb-0">
-                              Du {getDisplayedDate(item.sessions_id.debut)}
-                            </p>
-                            <p className="mb-0">
-                              Au {getDisplayedDate(item.sessions_id.fin)}
-                            </p>
-                          </div>
-                        ) : null
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="bg-app-light-green px-5">
-                    <p className="text-center">{EMPTY_SESSION}</p>
-                    <ContactUsText classes="justify-center" />
                   </div>
                 </div>
               </div>
