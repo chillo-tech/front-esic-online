@@ -20,7 +20,6 @@ import Message from 'components/shared/Message';
 import { BsPhone } from 'react-icons/bs';
 import { useContext } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
-import { GoSearch } from 'react-icons/go';
 
 export type Message = {
   name: string;
@@ -141,6 +140,7 @@ function Candidature({ params }: any) {
   });
   const contactChannel = watch('contactChannel');
   const sessions = watch('sessions');
+  
   return (
     <OpenedLayout>
       <Head>
@@ -255,7 +255,7 @@ function Candidature({ params }: any) {
                     <select
                       {...register('profile')}
                       className={formStyles.form_control__input}>
-                      <option value="">Vous êtes</option>
+                      <option disabled selected value="">Vous êtes</option>
                       {USER_PROFILE.map((profile: any, index: number) => (
                         <option
                           key={`c-profile-${index}`}
