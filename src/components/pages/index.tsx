@@ -241,7 +241,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
           <div className='w-full h-full py-4 pb-8 bg-gray-50 bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]'>
             <div className="container mt-4">
               <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
-                <span className="px-10 py-3">Nous contactez</span>
+                <span className="px-10 py-3">Posez nous votre question</span>
                 <span className="border-b-2 border-gray-500 px-10 w-64 mt-2"></span>
               </h2>
             </div>
