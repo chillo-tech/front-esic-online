@@ -5,7 +5,9 @@
 @import 'nav';
 
 
-
+.html-text a {
+  @apply text-app-blue border-b border-app-blue
+}
 .mapouter{position:relative;text-align:right;height:458px;}
 .gmap_canvas {overflow:hidden;background:none!important;height:458px;}
 
@@ -37,7 +39,14 @@
 .detail-formation .programme > h3,
 .detail-formation .programme > h4,
 .detail-formation .programme > h5,
-.detail-formation .programme > h6
+.detail-formation .programme > h6,
+
+.html-text > h1,
+.html-text > h2,
+.html-text > h3,
+.html-text > h4,
+.html-text > h5,
+.html-text > h6
 {
   @apply my-4 text-xl font-bold
 }
