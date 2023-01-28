@@ -4,13 +4,12 @@ import {slugify} from 'utils/slugify'
 import SubMenuItem from "containers/components/SubMenuItem";
 
 function DropDown({dropdown, parent, categories, pages, parentWidth}: any) {
-  console.log(parentWidth)
   return (
       <div className={`${dropdown ? "rounded-md shadow-2xl absolute z-50 -ml-20 left-1/2 bg-white" : "hidden"}`}>
         {
           (categories.length) ? (
-              <ul className="dropdown relative caret-up-before">
-                <div style={{width: 20, height: 20, background: '#fff', top: -11, left: `${parentWidth-8}px`, position: 'absolute', transform: 'rotate(45deg)', boxShadow: '-1px -1px #e5e7eb'}}/>
+              <ul className="dropdown relative shadow-[-1px_-1px_#e5e7eb] rounded-xl">
+                <div className="shadow-[-1px_-1px_#e5e7eb]"  style={{width: 20, height: 20, background: '#fff', top: -10, left: `${parentWidth-8}px`, position: 'absolute', transform: 'rotate(45deg)'}}/>
                 {categories.map((categorie: any, index: number) => (
                     <SubMenuItem
                         grandparent={parent}
@@ -24,8 +23,8 @@ function DropDown({dropdown, parent, categories, pages, parentWidth}: any) {
       }
       {
         (pages.length) ? (
-            <ul className="dropdown relative caret-up-before">
-              <div style={{width: 20, height: 20, background: '#fff', top: -11, left: `${parentWidth-15}px`, position: 'absolute', transform: 'rotate(45deg)', boxShadow: '-1px -1px #e5e7eb'}}/>
+            <ul className="dropdown relative shadow-[-1px_-1px_#e5e7eb] rounded-xl">
+              <div className="shadow-[-1px_-1px_#e5e7eb]" style={{width: 20, height: 20, background: '#fff', top: -10, left: `${parentWidth-15}px`, position: 'absolute', transform: 'rotate(45deg)'}}/>
               {pages
                   .filter((a: any) => {
                     return (a !== null && a.pages_id !== null)
