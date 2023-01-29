@@ -82,7 +82,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
   }, [training]);
 
   const toogleDownloadForm = () => setDisplayDownloadForm(!displayDownloadForm);
-  
+
   const onSubmit = (formData: Message) => {
     mutation.mutate({
       ...formData,
@@ -96,8 +96,6 @@ function Training({ id, slug }: { id: string; slug: string }) {
     mutation.reset();
     router.push('/contactez-nous');
   };
-
-  console.log(training)
 
   return (
     <OpenedLayout>
