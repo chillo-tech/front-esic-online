@@ -9,7 +9,7 @@ import { AiFillStar } from 'react-icons/ai';
 import { capitalize, cn, getDisplayedDate, loaderProp, slugify } from 'utils';
 
 function Header({ training, toogleDownloadForm }: any) {
-  const [hideSessions, setHideSessions] = useState(true)
+  const [hideSessions, setHideSessions] = useState(true);
   const [isImageLoading, setLoading] = useState(true);
 
   return (
@@ -138,7 +138,7 @@ function Header({ training, toogleDownloadForm }: any) {
                 ) : null}
               </div>
 
-              <CPFLink data={training.cpf} />
+              {training?.cpf?.lien && <CPFLink data={training.cpf} />}
 
               <div className="md:hidden relative text-white mt-4 text-lg font-semibold flex items-center justify-center w-full">
                 <span className="block border-b-2 border-white">
@@ -155,9 +155,11 @@ function Header({ training, toogleDownloadForm }: any) {
               arrowIcon={() => null}
               alwaysOpen={true}
               className="bg-transparent border-none focus:border-none outline-none">
-              <Accordion.Panel isOpen={false} className="bg-transparent px-0 border-none focus:border-none">
+              <Accordion.Panel
+                isOpen={false}
+                className="bg-transparent px-0 border-none focus:border-none">
                 <Accordion.Title
-                onClick={() => setHideSessions(!hideSessions)}
+                  onClick={() => setHideSessions(!hideSessions)}
                   color="white"
                   className="px-0 focus:ring-transparent focus:ring-0 focus:border-none text-center"
                   style={{
@@ -175,7 +177,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   </span>
                 </Accordion.Title>
                 <Accordion.Content
-                hidden={hideSessions}
+                  hidden={hideSessions}
                   style={{
                     borderRadius: 0,
                     border: 'none',
