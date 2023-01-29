@@ -141,6 +141,7 @@ function Footer() {
                   {data?.data.data.liens.map((item: any, index: number) => (
                     <Link
                       href={item.lien}
+                      target="_blank"
                       className={classNames(
                         `inline-block mr-5 items-center py-2 w-14 h-14 relative`
                       )}

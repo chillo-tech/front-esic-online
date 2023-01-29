@@ -11,18 +11,21 @@ import {
   PHONE_ERROR_MESSAGE,
   USER_PROFILE,
   getDisplayedDate,
-} from 'utils/index';
+} from 'utils';
 import { useMutation, useQuery } from 'react-query';
 import { useRouter } from 'next/router';
-import { add, getDetail } from 'services/index';
+import { add, getDetail, fetchData} from 'services/index';
 import formStyles from 'styles/Form.module.css';
 import Message from 'components/shared/Message';
 import { BsPhone } from 'react-icons/bs';
-import { useContext } from 'react';
+import { GoSearch } from 'react-icons/go';
+import { useContext,useRef, useState } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
+import HighlightedText from 'components/shared/HighlightedText';
 
 export type Message = {
   name: string;
+  formation: string,
   message: string;
   email: string;
   phone: string;
@@ -45,6 +48,7 @@ const schema = yup
       .matches(EMAIL_PATTERN, { message: EMAIL_ERROR_MESSAGE }),
     profile: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
     subject: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
+    formation: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
     contactChannel: yup
       .array()
       .of(yup.string())
@@ -66,7 +70,7 @@ const schema = yup
   .required();
 
 function Candidature({ params }: any) {
-  const { state, updateLastTraining } = useContext(ApplicationContext);
+  const { updateLastTraining } = useContext(ApplicationContext);
   const router = useRouter();
 
   const onSubmit = (message: Message) => {
@@ -89,6 +93,7 @@ function Candidature({ params }: any) {
     const sessions = mappedSessions.join(', ');
     mutation.mutate({
       ...message,
+      formation: selectedTraining.libelle,
       subject: `${message.subject} - Sessions ${sessions}`,
       contactChannel: `${contactChannel.join(', ').toLowerCase()}`,
     });
@@ -103,6 +108,10 @@ function Candidature({ params }: any) {
   const mutation = useMutation({
     mutationFn: (message: any) => add('/contacts', message),
   });
+
+  const[query, setQuery] = useState<string>("");
+  const[selectedTraining, setSelectedTraining] = useState<any>({});
+  const[filteredTraining, setFilteredTraining] = useState<any[]>([]);
   const {
     register,
     handleSubmit,
@@ -111,19 +120,28 @@ function Candidature({ params }: any) {
     setValue,
   } = useForm<Message>({
     mode: 'onChange',
+    defaultValues: {profile: 'particulier'},
     resolver: yupResolver(schema),
   });
   const { data } = useQuery<any>({
     queryKey: ['formations', 'detail', params.slug, params.id],
     queryFn: () =>
-      getDetail({
-        id: params.id,
+      fetchData({ 
+        fields: "id,libelle,sessions.id,sessions.sessions_id.*",
+        path: `formations/${params.id}`
       }),
     onSuccess: (data: any) => {
+      setSelectedTraining(data.data.data);
       updateLastTraining(data.data.data);
+      setQuery(data?.data.data.libelle);
       setValue(
         'subject',
         `Candidature pour la formation ${data?.data.data.libelle}`,
+        { shouldValidate: true, shouldDirty: true, shouldTouch: true }
+      );
+      setValue(
+        'formation',
+        `${data?.data.data.libelle}`,
         { shouldValidate: true, shouldDirty: true, shouldTouch: true }
       );
       if (data?.data.data.sessions && data?.data.data.sessions.length === 0) {
@@ -140,7 +158,37 @@ function Candidature({ params }: any) {
   });
   const contactChannel = watch('contactChannel');
   const sessions = watch('sessions');
-  
+
+  const handleTrainingQueryBlur = (event: any) => {
+    setFilteredTraining([]);
+    setSelectedTraining({});
+  }
+
+  const handleSelectedTraining = (item: any) => {
+    setSelectedTraining(item);
+    setQuery(item.libelle);
+    setFilteredTraining([]);
+  }
+
+  const handleTrainingSearch = async(event: any) => {
+    const {target: {value}} = event;
+    setQuery(value);
+    if(value && value.trim().length > 2) {
+      try {
+        const data = await fetchData({ 
+          fields: "id,libelle,sessions.id,sessions.sessions_id.*",
+          path: "formations",
+          search: value,
+          limit: 5
+        })
+        setFilteredTraining(data?.data.data);
+      } catch (e){
+        setFilteredTraining([]);
+        console.log(e)
+      }
+    }
+  }
+
   return (
     <OpenedLayout>
       <Head>
@@ -205,7 +253,7 @@ function Candidature({ params }: any) {
             <form
               onSubmit={handleSubmit(onSubmit, onError)}
               className=" w-full mt-2 col-span-6 px-3 md:px-6 pb-6">
-              <div className="grid md:grid-cols-2 md:gap-6">
+              <div className="grid">
                 <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                   <div className={formStyles.form_control}>
                     <input
@@ -235,7 +283,7 @@ function Candidature({ params }: any) {
                   </div>
                 </div>
               </div>
-              <div className="grid md:grid-cols-2 md:gap-6">
+              <div className="grid">
                 <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                   <div className={formStyles.form_control}>
                     <input
@@ -250,56 +298,44 @@ function Candidature({ params }: any) {
                     </p>
                   </div>
                 </div>
-                <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
-                  <div className={formStyles.form_control}>
-                    <select
-                      {...register('profile')}
-                      className={formStyles.form_control__input}>
-                      <option disabled selected value="">Vous êtes</option>
-                      {USER_PROFILE.map((profile: any, index: number) => (
-                        <option
-                          key={`c-profile-${index}`}
-                          value={profile.value}>
-                          {profile.label}
-                        </option>
-                      ))}
-                    </select>
-                    <p className={formStyles.form_control__error}>
-                      {errors.profile?.message}
-                    </p>
-                  </div>
-                </div>
               </div>
-              {/**
-              <div className='grid md:grid-cols-2 md:gap-6 py-4'>
+              
+              <div className='grid md:gap-6 py-4'>
                 <div  className={`${formStyles.form_control} !mr-0 !mt-0`}>
                 <div className={`${formStyles.form_control} !mr-0 !mt-0 relative`}>
-                    <GoSearch className='absolute right-0 inset-y-2 text-xl text-app-white' />
-
+                    <GoSearch className='absolute right-[5px] inset-y-2 text-xl text-app-white' />
                     <input
                       type="text"
                       id="formation"
                       placeholder="Recherchez une formation"
                       className={formStyles.form_control__input}
-                      {...register('formation')}
+                      value={query}
+                      onChange={handleTrainingSearch}
                     />
+                    <div className="results relative" style={{ height: "1px" }}>
+                      {(filteredTraining && filteredTraining.length )? (
+                        <ul className="absolute left-0 top-0 right-0 z-50 bg-white">
+                          {filteredTraining.map((item: any, index: any) => (
+                            <li key={`search-${index}-${item.id}`}>
+                              <button type="button" 
+                                onClick={()=>handleSelectedTraining(item)}
+                                title={item.libelle}
+                                className="block bg-white py-2 px-2 text-gray-700 text-md text-left"
+                              >
+                                <HighlightedText text={item.libelle} pattern={query} />
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
                     <p className={formStyles.form_control__error}>
                       {errors.formation?.message}
                     </p>
                   </div>
                 </div>
-                <div className="sessions">
-                    <label
-                      htmlFor="formation"
-                      className="text-black font-semibold">
-                      <span className="text-gray-500 font-semibold">
-                        Quelle session pourrait vous convenir
-                      </span>
-                    </label>
-                </div>
               </div>
-               */}
-              {data?.data.data.sessions && data?.data.data.sessions.length ? (
+              {selectedTraining && selectedTraining.sessions && selectedTraining.sessions.length ? (
                 <div className="sessions py-2">
                   <label
                     htmlFor="sessions"
@@ -311,7 +347,7 @@ function Candidature({ params }: any) {
                   <div
                     aria-describedby="sessions"
                     className="grid gap-4 md:grid-cols-2">
-                    {data.data.data.sessions.map(
+                    {selectedTraining.sessions.map(
                       (session: any, index: number) => (
                         <label
                           key={`session-${session.sessions_id.id}-${index}`}
@@ -371,7 +407,7 @@ function Candidature({ params }: any) {
               ) : null}
               <div className={formStyles.form_control}>
                 <textarea
-                  placeholder="Votre message"
+                  placeholder="Dites nous en plus sur vos attentes"
                   id="message"
                   className={formStyles.form_control__input}
                   {...register('message')}

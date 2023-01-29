@@ -19,11 +19,11 @@ function Header({ training, toogleDownloadForm }: any) {
           <div className="md:px-0 container grid md:grid-cols-2">
             <div className="title">
               <div className="w-full mb-4">
-                <h1 className="text-gray-300 text-sm md:text-2xl font-extralight mb-2">
+                <p className="text-gray-300 text-sm md:text-lg font-extralight mb-2">
                   Formations {'>'}{' '}
                   {training?.souscategories &&
                     training?.souscategories[0]?.souscategories_id?.libelle}
-                </h1>
+                </p>
                 <div className="md:hidden w-full">
                   <div>
                     {training.image ? (
@@ -53,7 +53,7 @@ function Header({ training, toogleDownloadForm }: any) {
                 </div>
               </div>
               <h1 className="text-white text-2xl md:text-5xl font-bold mb-0 pb-0">
-                {training?.libelle}
+                {capitalize(training?.libelle)}
               </h1>
               {training?.contenu ? (
                 <RenderHtmlContent

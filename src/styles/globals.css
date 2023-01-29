@@ -57,7 +57,9 @@
   @apply text-lg !font-normal ml-10 mb-5;
   display: list-item;
 }
-
+.corps_contenu, .corps_travaux_pratiques {
+  @apply font-light
+}
 
 .detail-formation .programme ul,{
   @apply list-disc

@@ -1,12 +1,11 @@
 import classNames from "classnames";
-import Debug from "components/Debug";
+import HighlightedText from "components/shared/HighlightedText";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { GoSearch } from "react-icons/go";
 import { useQuery } from "react-query";
 import { fetchData } from "services/index";
-import { capitalize } from "utils/capitalize";
 import { slugify } from "utils/slugify";
 type FormData = {
   text: string;
@@ -17,11 +16,11 @@ interface Params {
   isFocused?: boolean;
 }
 function Search({ classes, isFocused }: Params) {
-  const [value, setValue] = useState("");
+  const [query, setTrainingQuery] = useState("");
   const { data, isSuccess } = useQuery<any>({
     queryKey: [
       "Trainings",
-      (Object.values(value) as string[])
+      (Object.values(query) as string[])
         .map((param: string) => slugify(String(param)))
         .join("-"),
     ],
@@ -29,10 +28,10 @@ function Search({ classes, isFocused }: Params) {
       fetchData({
         fields: "id,libelle",
         path: "formations",
-        search: value,
+        search: query,
         limit: 5,
       }),
-    enabled: value.length > 2,
+    enabled: query.length > 2,
   });
   const { register } = useForm<FormData>();
   const handleInputChange = (event: any) => {
@@ -40,20 +39,16 @@ function Search({ classes, isFocused }: Params) {
     const {
       target: { value },
     } = event;
-    setValue(value);
+    setTrainingQuery(value);
   };
 
-  const { onChange, onBlur, name, ref } = register("text", {
+  const { onChange, onBlur, name } = register("text", {
     onChange: handleInputChange,
   });
   const inputRef = useRef<HTMLInputElement>(null);
 
   if (isFocused) inputRef?.current?.focus();
-  const getHighlightedText = (text: string) =>{
-    // Split text on highlight term, include term itself into parts, ignore case
-    const parts = text.split(new RegExp(`(${value})`, 'gi'));
-    return <span>{parts.map((part:string) => part.toLowerCase() === value.toLowerCase() ? (<span className="font-extrabold" key={slugify(part)}>{part}</span> ): part)}</span>;
-  }
+
   return (
     <div className={classNames('search w-full', {
       'search-empty': !isSuccess || (isSuccess && !data?.data.data.length),
@@ -63,9 +58,9 @@ function Search({ classes, isFocused }: Params) {
         <input 
           placeholder="Rechercher une formation, e.g: Introduction à python"
           className={classNames(
+            classes,
             "!focus:!border-white focus:bg-white focus:shadow-xl focus:text-gray-700",
-            "placeholder:text-white bg-transparent text-xl w-full rounded-t-2xl py-4 border-t-4 border-l-4 border-r-4 text-white border-gray-300 px-5",
-            { [`${classes}`]: true }
+            "placeholder:text-white bg-transparent text-xl w-full rounded-t-2xl py-4 border-t-4 border-l-4 border-r-4 text-white border-gray-300 px-5"
           )}
           onChange={onChange}
           onBlur={onBlur}
@@ -84,7 +79,7 @@ function Search({ classes, isFocused }: Params) {
                   title={item.libelle}
                   className="block bg-white py-2 px-2 text-gray-700 text-md text-left"
                 >
-                  {getHighlightedText(item.libelle)}
+                  <HighlightedText text={item.libelle} pattern={inputRef?.current?.value}/>
                 </Link>
               </li>
             ))}
