@@ -230,6 +230,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
               ) : null}
               {mutation.isIdle ? (
                 <form
+                  encType="multipart/form-data"
                   onSubmit={handleSubmit(onSubmit, onError)}
                   className=" w-full mt-2 col-span-6 px-3 md:px-6 pb-6">
                   <div className="grid md:grid-cols-2 md:gap-6">
