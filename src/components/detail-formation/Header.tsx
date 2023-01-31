@@ -126,6 +126,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     training.libelle
                   )}-${training.id}`}
                   text="Je m'inscris"
+                  containerClasses={!training?.programmepdf ? 'col-span-6' : ''}
                   classes="flex-1 bg-white w-full text-app-blue font-light md:px-20 py-3 border hover:bg-transparent hover:text-white hover:border hover:border-white"
                 />
                 {training.programmepdf ? (
@@ -139,22 +140,14 @@ function Header({ training, toogleDownloadForm }: any) {
               </div>
 
               {training?.cpf?.lien && <CPFLink data={training.cpf} />}
-
-              <div className="md:hidden relative text-white mt-4 text-lg font-semibold flex items-center justify-center w-full">
-                <span className="block border-b-2 border-white">
-                  <Link href={'/contactez-nous'}>
-                    <span>Comment financer la formation ?</span>
-                  </Link>
-                </span>
-              </div>
             </div>
             <span />
           </div>
-          <div className="md:hidden h-full mb-0 w-full mx-auto mt-4">
+          <div className="md:hidden flex h-full mb-0 w-full mx-auto px-2 mt-4 items-start">
             <Accordion
               arrowIcon={() => null}
               alwaysOpen={true}
-              className="bg-transparent border-none focus:border-none outline-none">
+              className="bg-transparent border-none focus:border-none outline-none w-full flex-1">
               <Accordion.Panel
                 isOpen={false}
                 className="bg-transparent px-0 border-none focus:border-none">
@@ -172,7 +165,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     justifyContent: 'center',
                     fontSize: '1rem',
                   }}>
-                  <span className="block border-b-2 border-white mx-0 px-0 h-full w-full justify-center text-white text-lg">
+                  <span className="block border-b-2 border-white mx-0 px-0 h-full w-full justify-center text-white text-xs">
                     Nos prochaines sessions
                   </span>
                 </Accordion.Title>
@@ -182,7 +175,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     borderRadius: 0,
                     border: 'none',
                   }}
-                  className="px-2 h-full focus:ring-transparent focus:ring-0 focus:border-none bg-white">
+                  className="absolute bg-white focus:border-none focus:ring-0 focus:ring-transparent h-fit px-5 py-5 w-full">
                   {training?.sessions?.map((item: any, index: number) =>
                     Date.parse(item?.sessions_id.debut) >= Date.now() ? (
                       <div
@@ -200,6 +193,13 @@ function Header({ training, toogleDownloadForm }: any) {
                 </Accordion.Content>
               </Accordion.Panel>
             </Accordion>
+            <div className="md:hidden relative text-white mt-3 mr-3 text-xs font-semibold flex items-center justify-center">
+              <span className="block border-b-2 border-white">
+                <Link href={'/contactez-nous'}>
+                  <span>Comment financer la formation ?</span>
+                </Link>
+              </span>
+            </div>
           </div>
         </header>
       ) : null}

@@ -11,6 +11,8 @@ import {
   PHONE_ERROR_MESSAGE,
   USER_PROFILE,
   getDisplayedDate,
+  LIEN_POLITIQUE_SECURITE,
+  PREFERED_LOCATION,
 } from 'utils/index';
 import { useMutation, useQuery } from 'react-query';
 import { useRouter } from 'next/router';
@@ -20,6 +22,7 @@ import Message from 'components/shared/Message';
 import { BsPhone } from 'react-icons/bs';
 import { useContext } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
+import Link from 'next/link';
 
 export type Message = {
   name: string;
@@ -30,7 +33,10 @@ export type Message = {
   subject: string;
   contactChannel: string[];
   sessions: string[];
+  preferedLocation: string;
+  acceptForm: boolean;
 };
+
 const schema = yup
   .object({
     name: yup.string().trim().required('name Ce champ est requis'),
@@ -57,6 +63,8 @@ const schema = yup
       .min(1)
       .required(REQUIRED_ERROR_MESSAGE)
       .nullable(),
+    preferedLocation: yup.string().trim().required(),
+    acceptForm: yup.bool().required(),
     message: yup
       .string()
       .trim()
@@ -139,8 +147,10 @@ function Candidature({ params }: any) {
     },
   });
   const contactChannel = watch('contactChannel');
+  const preferedLocation = watch('preferedLocation');
+
   const sessions = watch('sessions');
-  
+
   return (
     <OpenedLayout>
       <Head>
@@ -220,7 +230,7 @@ function Candidature({ params }: any) {
                     </p>
                   </div>
                 </div>
-                <div  className={`${formStyles.form_control} !mr-0 !mt-0`}>
+                <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                   <div className={formStyles.form_control}>
                     <input
                       type="text"
@@ -255,7 +265,9 @@ function Candidature({ params }: any) {
                     <select
                       {...register('profile')}
                       className={formStyles.form_control__input}>
-                      <option disabled selected value="">Vous êtes</option>
+                      <option disabled selected value="">
+                        Vous êtes
+                      </option>
                       {USER_PROFILE.map((profile: any, index: number) => (
                         <option
                           key={`c-profile-${index}`}
@@ -417,7 +429,80 @@ function Candidature({ params }: any) {
                   </p>
                 </div>
               </div>
-
+              <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                <div className={formStyles.form_control}>
+                  <label className="w-full text-black">Préférence :</label>
+                  <div
+                    className={`grid md:grid-cols-2 gap-4 my-2`}>
+                    <div className="flex items-center mr-5">
+                      <input
+                        className="hidden"
+                        type="radio"
+                        value={PREFERED_LOCATION.DISTANCE}
+                        id={PREFERED_LOCATION.DISTANCE}
+                        {...register('preferedLocation')}
+                      />
+                      <label
+                        htmlFor={PREFERED_LOCATION.DISTANCE}
+                        className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
+                          preferedLocation === PREFERED_LOCATION.DISTANCE
+                            ? 'bg-app-blue text-white'
+                            : ''
+                        }`}>
+                        Distance
+                      </label>
+                    </div>
+                    <div className="flex items-center mr-5">
+                      <input
+                        type="radio"
+                        className="hidden"
+                        value={PREFERED_LOCATION.PRESENTIEL}
+                        id={PREFERED_LOCATION.PRESENTIEL}
+                        {...register('preferedLocation')}
+                      />
+                      <label
+                        htmlFor={PREFERED_LOCATION.PRESENTIEL}
+                        className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
+                          preferedLocation === PREFERED_LOCATION.PRESENTIEL
+                            ? 'bg-app-blue text-white'
+                            : ''
+                        }`}>
+                        Présentiel
+                      </label>
+                    </div>
+                  </div>
+                  <p className={formStyles.form_control__error}>
+                    {errors.preferedLocation?.message}
+                  </p>
+                </div>
+              </div>
+              <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                <div className={formStyles.form_control}>
+                  <div
+                    className={`${formStyles.form_control__input} flex-row border-b-0 items-center`}>
+                    <input
+                      type="checkbox"
+                      className="inline-block"
+                      id="acceptForm"
+                      {...register('acceptForm')}
+                    />
+                    <label
+                      className="text-gray-600 w-full pl-4 pr-4"
+                      htmlFor="acceptForm">
+                      En transmettant ce formulaire, vous reconnaissez et
+                      accepté notre {'  '}
+                      <Link
+                        href={LIEN_POLITIQUE_SECURITE}
+                        className="text-app-blue underline">
+                        politique de protection de vos données personnelles.
+                      </Link>
+                    </label>
+                  </div>
+                  <p className={formStyles.form_control__error}>
+                    {errors.acceptForm?.message}
+                  </p>
+                </div>
+              </div>
               <div className="w-full flex justify-center mt-12">
                 <button
                   type="submit"
