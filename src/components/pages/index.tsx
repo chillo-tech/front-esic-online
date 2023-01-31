@@ -18,6 +18,8 @@ import {
   DEMANDE_CANDIDAT,
   votreDemandeConcerne,
   regionsEntreprise,
+  LIEN_POLITIQUE_SECURITE,
+  PREFERED_LOCATION,
 } from 'utils/index';
 import formStyles from 'styles/Form.module.css';
 import Message from 'components/shared/Message';
@@ -27,6 +29,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
 import { ApplicationContext } from 'context/ApplicationContext';
+import Link from 'next/link';
 
 export type Message = {
   name: string;
@@ -42,6 +45,9 @@ export type Message = {
   subject: string;
   contactChannel: string[];
   sessions: string[];
+  preferedLocation: string;
+  job: string;
+  acceptForm: boolean;
 };
 
 const schema = yup
@@ -58,6 +64,9 @@ const schema = yup
       .required(EMAIL_ERROR_MESSAGE)
       .matches(EMAIL_PATTERN, { message: EMAIL_ERROR_MESSAGE }),
     enterpriseRegion: yup.string().trim(),
+    job: yup.string().trim(),
+    preferedLocation: yup.string().trim().required(),
+    acceptForm: yup.bool().required(),
     candidatureStarted: yup.string().trim(),
     demandeSubject: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
     contactChannel: yup
@@ -75,8 +84,6 @@ const schema = yup
   .required();
 
 function Page({ data, sessions, displayTrainings = false }: any) {
-  const { state, updateLastTraining } = useContext(ApplicationContext);
-
   const [displayEnterpriseFields, setDisplayEnterpriseFields] = useState(false);
   const [displayCandidatFields, setDisplayCandidatFields] = useState(false);
 
@@ -381,7 +388,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                           <input
                             type="text"
                             id="enterpriseName"
-                            placeholder="Nom de votre entreprise"
+                            placeholder="Nom de la société"
                             className={formStyles.form_control__input}
                             {...register('enterpriseName')}
                           />
@@ -390,7 +397,21 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                           </p>
                         </div>
                       </div>
-
+                      <div
+                        className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                        <div className={formStyles.form_control}>
+                          <input
+                            type="text"
+                            id="job"
+                            placeholder="Votre poste"
+                            className={formStyles.form_control__input}
+                            {...register('job')}
+                          />
+                          <p className={formStyles.form_control__error}>
+                            {errors.job?.message}
+                          </p>
+                        </div>
+                      </div>
                       <div
                         className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
                         <div className={formStyles.form_control}>
@@ -454,7 +475,70 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                       </p>
                     </div>
                   </div>
-
+                  <div
+                    className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                    <div className={formStyles.form_control}>
+                      <label className="w-full text-black">Préférence :</label>
+                      <div
+                        className={`${formStyles.form_control__input} flex justify-start items-center`}>
+                        <div className="flex items-center mr-5">
+                          <input
+                            className="inline-block mr-3"
+                            type="radio"
+                            value={PREFERED_LOCATION.DISTANCE}
+                            id={PREFERED_LOCATION.DISTANCE}
+                            {...register('preferedLocation')}
+                          />
+                          <label htmlFor={PREFERED_LOCATION.DISTANCE} className="w-full">
+                            Distance
+                          </label>
+                        </div>
+                        <div className="flex items-center mr-5">
+                          <input
+                            type="radio"
+                            className="inline-block mr-3"
+                            value={PREFERED_LOCATION.PRESENTIEL}
+                            id={PREFERED_LOCATION.PRESENTIEL}
+                            {...register('preferedLocation')}
+                          />
+                          <label htmlFor={PREFERED_LOCATION.PRESENTIEL} className="w-full">
+                            Présentiel
+                          </label>
+                        </div>
+                      </div>
+                      <p className={formStyles.form_control__error}>
+                        {errors.preferedLocation?.message}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                    <div className={formStyles.form_control}>
+                      <div
+                        className={`${formStyles.form_control__input} flex-row border-b-0 items-center`}>
+                        <input
+                          type="checkbox"
+                          className="inline-block"
+                          id="acceptForm"
+                          {...register('acceptForm')}
+                        />
+                        <label
+                          className="text-gray-600 w-full pl-4 pr-4"
+                          htmlFor="acceptForm">
+                          En transmettant ce formulaire, vous reconnaissez et
+                          accepté notre {'  '}
+                          <Link
+                            href={LIEN_POLITIQUE_SECURITE}
+                            className="text-app-blue underline">
+                            politique de protection de vos données personnelles.
+                          </Link>
+                        </label>
+                      </div>
+                      <p className={formStyles.form_control__error}>
+                        {errors.acceptForm?.message}
+                      </p>
+                    </div>
+                  </div>
                   <div className="w-full flex justify-center mt-12">
                     <button
                       type="submit"

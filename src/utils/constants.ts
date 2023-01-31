@@ -218,10 +218,19 @@ const DEMANDE_CANDIDAT = {
   label: 'Votre candidature',
 }
 
+const PREFERED_LOCATION = {
+  DISTANCE: "distance",
+  PRESENTIEL: "presentiel"
+}
+
+const LIEN_POLITIQUE_SECURITE = "https://www.m2iformation.fr/mentions-legales/"
+
 export {
   hero,
   contact,
   contacts,
+  LIEN_POLITIQUE_SECURITE,
+  PREFERED_LOCATION,
   top_formations,
   USER_PROFILE_OPTIONS,
   COMPANY_PROFILE_OPTIONS,
