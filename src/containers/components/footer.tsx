@@ -122,12 +122,12 @@ function Footer() {
               <article className="flex flex-col justify-center items-center">
                 {data?.data.data.certifications ? (
                   <>
-                    {data?.data.data.certifications.map((item: any) => (
+                    {data?.data?.data?.certifications.map((item: any) => (
                       <DisplayImage
-                        key={`certifications-${item.id}`}
-                        image={item.directus_files_id}
+                        key={`certifications-${item?.id}`}
+                        image={item?.directus_files_id}
                         imageClasses="object-contain"
-                        libelle={`${item.directus_files_id.title}`}
+                        libelle={`${item?.directus_files_id?.title}`}
                         classes="rounded-2xl !overflow-hidden"
                       />
                     ))}
