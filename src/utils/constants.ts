@@ -141,7 +141,7 @@ const hero = {
 const TRAINING_KEYS = [
   {
     key: 'objectifs',
-    label: 'Objectis de la formation'
+    label: 'Objectifs de la formation'
   },
   {
     key: 'prerequis',
@@ -225,10 +225,16 @@ const PREFERED_LOCATION = {
 
 const LIEN_POLITIQUE_SECURITE = "https://www.m2iformation.fr/mentions-legales/"
 
+const LOCATION_MAPPING = {
+  ONLINE: 'En ligne',
+  ONSITE: 'Dans nous locaux',
+  INTRA: 'Dans vos locaux',
+}
 export {
   hero,
   contact,
   contacts,
+  LOCATION_MAPPING,
   LIEN_POLITIQUE_SECURITE,
   PREFERED_LOCATION,
   top_formations,

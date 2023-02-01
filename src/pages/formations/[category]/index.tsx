@@ -7,6 +7,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { getCategory } from "services/index";
 import { slugify } from "utils/slugify";
+import HomeTrainingItem from "components/shared/HomeTrainingItem";
 
 function Category({
   id,
@@ -40,17 +41,18 @@ function Category({
           <section className="bg-red-50">
             <main className="container mx-auto pt-5 pb-10">
               <section className="grid md:grid-cols-3 gap-6">
-                {category.data.data.souscategories.map(
+                {category.data.data.souscategories
+                .filter((souscategory: any) => souscategory != null && souscategory.souscategories_id != null)
+                .map(
                   (souscategory: any, index: number) => (
-                    <HoverCard
-                      id={souscategory?.souscategories_id.id}
-                      title={souscategory?.souscategories_id.libelle}
-                      image={souscategory.souscategories_id.image ? `${process.env.API_URL}/assets/${souscategory.souscategories_id.image}`: "/images/esic-image-5.jpg"}
-                      key={`sc-${souscategory?.souscategories_id}-${index}`}
+                    <HomeTrainingItem
+                      classes="bg-slate-50 rounded-lg shadow-md pb-5 text-center items-center !justify-center items-center"
+                      training={souscategory?.souscategories_id}
                       link={`/formations/${link}/${slugify(
                         souscategory?.souscategories_id.libelle
                       )}-${souscategory?.souscategories_id.id}`}
-                    />
+                      key={`sc-${souscategory?.souscategories_id}-${index}`}
+                  />
                   )
                 )}
               </section>

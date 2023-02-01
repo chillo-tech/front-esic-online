@@ -2,11 +2,10 @@ import classNames from 'classnames';
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { capitalize, cn, loaderProp  } from 'utils';
+import { capitalize, cn, loaderProp, LOCATION_MAPPING } from 'utils';
 
 function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any) {
   const [isImageLoading, setLoading] = useState(true);
-
   return (
     <>
       <Link
@@ -70,7 +69,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
           null } 
         </div>
           
-        <ul className="items-start grid text-xl text-app-gray opacity-50 px-4 pb-5">
+        <ul className="items-start grid text-xl text-app-gray opacity-50 px-4">
             {
               training.duree_en_jours || training.duree_en_heures  ? 
                 <li className="flex items-center py-2 pr-3">
@@ -95,32 +94,16 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
               }
 
             {
-            (training.distanciel || training.presentiel) ? 
-              <li className="flex items-center py-1 pr-3">
-                {/*<GiPositionMarker className="mr-2 text-red-400 text-xl"/> */}
-                {training.distanciel ? 
-                  <span className="flex items-center">
-                    {capitalize("En ligne")}
-                  </span> 
-                  : 
-                  null
-                }
-                {(training.distanciel && training.presentiel) ? (<span className='px-1'>ou</span>): null }
-                {
-                  training.presentiel ? 
-                  <span className="flex items-center">
-                    {capitalize("dans nos locaux")}
-                  </span> 
-                  : 
-                  null
-                }
+            (training.localisation) ? 
+              <li className="flex items-center pt-2 font-extrabold text-sm">
+                {training.localisation.map((localisation: string) => capitalize(LOCATION_MAPPING[localisation])).join(' | ')}
               </li>
               : 
               null
             }
             {
             (training?.cpf && training?.cpf.length) ? 
-              <li className="flex items-center py-1 pr-3">
+              <li className="flex items-center py-1 text-sm font-extrabold">
                 {capitalize("Eligible au CPF")}
               </li> 
               : 

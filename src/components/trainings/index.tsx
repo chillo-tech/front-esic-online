@@ -2,8 +2,7 @@ import React, { useContext } from 'react'
 import { ApplicationContext } from '../../context/ApplicationContext';
 import { useQuery } from 'react-query';
 import { fetchData } from 'services';
-import { slugify } from '../../utils/slugify';
-import HoverCard from 'components/shared/HoverCard';
+import { slugify } from 'utils';
 import TrainingTable from './TrainingTable';
 import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 
@@ -13,7 +12,7 @@ interface Params {
 }
 function Trainings({title, limit = 10}: Params) {
 
-  const base = 'status,id,libelle,souslibelle,prix,presentiel,distanciel,niveau,cpf,heures,jours,image';
+  const base = 'status,id,libelle,souslibelle,prix,localisation,niveau,cpf,heures,jours,image';
   const images = 'image.*';
   const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut';
   const fields = `${base},${images},${sessions}`;

@@ -30,7 +30,7 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
                 .filter((formation: any) => formation != null && formation.formations_id != null)
                 .map((formation: any, index: number) => (
                   <HomeTrainingItem
-                      classes="bg-slate-50 rounded-lg shadow-md"
+                      classes="bg-slate-50 rounded-lg shadow-md pb-5"
                       training={formation.formations_id}
                       link={`/nos-formations/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
                       key={`${formation.formations_id.id}-${index}`}

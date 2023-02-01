@@ -13,9 +13,8 @@ function Metadata({entry}: any) {
     } else if(entry?.titre) {
       setTitle(entry?.titre);
     }
-
-    if(entry && entry.metadonnees && entry.metadonnees.descriptipn) {
-      setDescription(entry.metadonnees.descriptipn);
+    if(entry && entry.metadonnees && entry.metadonnees.description) {
+      setDescription(entry.metadonnees.description.replace(/(<([^>]+)>)/ig, ''));
     } else if(entry?.description) {
       setDescription(entry?.description);
     }

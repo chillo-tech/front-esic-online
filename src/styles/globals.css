@@ -4,7 +4,9 @@
 @import 'content-styles';
 @import 'nav';
 
-
+body {
+  @apply border-t-4 border-app-blue 
+}
 .html-text a {
   @apply text-app-blue border-b border-app-blue
 }
@@ -51,10 +53,11 @@
   @apply my-4 text-xl font-bold
 }
 
+.html-text ul,
 .detail-formation .programme p,
 .detail-formation .programme ul
 {
-  @apply text-lg !font-normal ml-10 mb-5;
+  @apply text-lg !font-normal ml-10 mb-5 list-disc;
   display: list-item;
 }
 .corps_contenu, .corps_travaux_pratiques {

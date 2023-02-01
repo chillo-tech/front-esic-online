@@ -1,3 +1,4 @@
+import Debug from 'components/Debug';
 import AllTrainings from 'components/shared/AllTrainings';
 import CPFLink from 'components/shared/CPFLink';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
@@ -20,9 +21,11 @@ function Header({ training, toogleDownloadForm }: any) {
             <div className="title">
               <div className="w-full mb-4">
                 <p className="text-gray-300 text-sm md:text-lg font-extralight mb-2">
-                  Formations {'>'}{' '}
-                  {training?.souscategories &&
-                    training?.souscategories[0]?.souscategories_id?.libelle}
+                  Formations {' >' } {
+                      training?.souscategories 
+                      ? training?.souscategories.filter((sousCategorie: any) => sousCategorie.souscategories_id != null)[0]?.souscategories_id?.libelle
+                      : ''
+                    }
                 </p>
                 <div className="md:hidden w-full">
                   <div>

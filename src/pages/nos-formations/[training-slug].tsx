@@ -2,7 +2,7 @@ import OpenedLayout from 'containers/opened';
 import React, { useContext, useEffect, useState } from 'react';
 import { GiCancel } from 'react-icons/gi';
 import { useMutation, useQuery } from 'react-query';
-import { add, getDetail } from 'services/index';
+import { add, getDetail, getSubCategories } from 'services/index';
 import { getDisplayedDate } from 'utils/DateFormat';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,6 +26,7 @@ import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import AllTrainings from 'components/shared/AllTrainings';
 import Trainings from 'components/trainings';
 import { Spinner } from 'flowbite-react';
+import Debug from 'components/Debug';
 var classNames = require('classnames');
 
 export type Message = {
@@ -45,6 +46,7 @@ const schema = yup
   .required();
 
 function Training({ id, slug }: { id: string; slug: string }) {
+  const [relatedTraining, setRelatedTraining] = useState<any>([]);
   const [training, setTraining] = useState<any>(null);
   const { updateLastTraining, displayInscriptionButton } =
     useContext(ApplicationContext);
@@ -71,15 +73,26 @@ function Training({ id, slug }: { id: string; slug: string }) {
     onSuccess: (data: any) => {
       setTraining(data.data.data);
       updateLastTraining(data.data.data);
+      updateCategoryTraining(data.data.data);
     },
     onError: () => {
       router.push('/page-inconnue');
     },
   });
 
+  const trainingId = training?.id;
+  useQuery<any>({
+    enabled: !!trainingId,
+    queryKey: ["SousCategories", training?.souscategories[0]?.souscategories_id?.id],
+    queryFn: () => getSubCategories({id: training?.souscategories[0]?.souscategories_id?.id as string, trainingsLimit: 3}),
+    onSuccess: ({data}: any) => {
+      setRelatedTraining(data?.data?.formations);
+    },
+  });
+
   useEffect(() => {
     displayInscriptionButton(training);
-  }, [training]);
+  }, [training, displayInscriptionButton]);
 
   const toogleDownloadForm = () => setDisplayDownloadForm(!displayDownloadForm);
 
@@ -96,7 +109,10 @@ function Training({ id, slug }: { id: string; slug: string }) {
     mutation.reset();
     router.push('/contactez-nous');
   };
+  const updateCategoryTraining = (trainingInfos: any) => {
 
+    
+  }
   return (
     <OpenedLayout>
       <Metadata entry={training} />
@@ -114,13 +130,13 @@ function Training({ id, slug }: { id: string; slug: string }) {
                     (item) => (
                       <article
                         key={`${id}-${item.key}-${slugify(item.label)}`}
-                        className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-10">
+                        className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-10 detail-formation">
                         <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">
                           {item.label}
                         </h2>
                         <RenderHtmlContent
                           content={training[item.key]}
-                          classes={`text-gray-600 font-light text-lg py-4 detail-formation descrioption ${
+                          classes={`text-gray-600 font-light text-lg py-4 description ${
                             item['classes'] ? item['classes'] : 'programme'
                           }`}
                         />
@@ -175,7 +191,38 @@ function Training({ id, slug }: { id: string; slug: string }) {
                 </div>
               </div>
             </section>
-            <Trainings title="Autres formations" limit={3} />
+            {
+              (relatedTraining && relatedTraining.length)
+              ? (
+                <>
+                <h2 className="container md:px-0 text-2xl md:text-4xl font-extrabold">
+                    Autres formations
+                </h2>
+                <div className="grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container">
+                {
+                  relatedTraining.slice(0, 3).map((training: any, index: number) =>(
+                    <HomeTrainingItem 
+                      classes="bg-slate-50 rounded-lg shadow-md pb-4" 
+                      training={training.formations_id} 
+                      link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}
+                      key={`${training.formations_id.id}-${index}`} 
+                    /> 
+                  ))
+                }
+                </div>
+                <p className="pb-8">
+                  <AllTrainings
+                      classes={`
+                        border border-app-blue text-app-blue 
+                        hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue
+                      `}
+                  />
+                </p>
+                </>
+              ) 
+              : null 
+            }
+            
           </>
         ) : (
           <div className="h-screen text-center flex justify-center items-center">

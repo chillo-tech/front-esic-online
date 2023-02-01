@@ -18,7 +18,7 @@ const getFormations = ({limit}: {limit: number}) => {
 };
 
 const getTopTrainings = ({limit = 3}: {limit?: number}) => {
-  const base = "id,libelle,souslibelle,topformation,prix,cpf,niveau,jours,image";
+  const base = "id,libelle,souslibelle,topformation,prix,cpf,niveau,jours,image,localisation";
   const fields = `${base}`;
   return axiosInstance.get(
     `formations?sort[]=-date_updated&filter[topformation][_eq]=true`, {
@@ -30,7 +30,7 @@ const getTopTrainings = ({limit = 3}: {limit?: number}) => {
   );
 };
 
-const getSubCategories = ({id}: {id: string | string[]; fields?: string}) => {
+const getSubCategories = ({id, trainingsLimit=10}: {id: string | string[]; fields?: string, trainingsLimit?: number}) => {
   const base = "id,libelle,description,image";
   const formations = `
         formations.formations_id.souslibelle,
@@ -44,19 +44,20 @@ const getSubCategories = ({id}: {id: string | string[]; fields?: string}) => {
         formations.formations_id.cpf.*,
         formations.formations_id.id`;
   const fields = `${base},${formations}`;
-  return axiosInstance.get(`souscategories/${id}?fields=${fields}`);
+  return axiosInstance.get(`souscategories/${id}?fields=${fields}&deep[formations][_limit]=${trainingsLimit}`);
 };
 
 const getCategories = ({ fields }: { fields: string }) => {
   return axiosInstance.get(`categories`, {
-    params: { ...(fields ? { fields } : {}) },
+    params: { ...(fields ? { fields } : {}), limit: 3},
   });
 };
 
 const getCategory = ({ id }: { id: string }) => {
   const base = "id,libelle,titre,description";
-  const subcategories =
-    "souscategories.souscategories_id.id,souscategories.souscategories_id.libelle";
+  const subcategories =`
+    souscategories.souscategories_id.id,
+    souscategories.souscategories_id.libelle`;
   //const categories =  'menu_category.categories_id.id,menu_category.categories_id.libelle';
   //const subcategories =  'menu_category.categories_id.souscategories.sousCategories_id.id,menu_category.categories_id.souscategories.sousCategories_id.libelle,menu_category.categories_id.souscategories.sousCategories_id.ordre';
   const fields = `${base},${subcategories}`; //,${categories},${subcategories}`;
