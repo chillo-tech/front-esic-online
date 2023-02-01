@@ -16,5 +16,10 @@ const couverture ="couverture.*";
 const offres ="offres.*";
 const avis ="avis.*,avis.formation.libelle";
 const apropos ="apropos.*";
-const ENTREPRISE_PARAMS = `${base},${offres},${certifications},${liens},${formations},${pages},${apropos},${adresses},${localisations},${avis},${couverture}`
+const fichiers =`
+  fichiers.directus_files_id.filename_disk,
+  fichiers.directus_files_id.id,
+  fichiers.directus_files_id.title
+`;
+const ENTREPRISE_PARAMS = `${base},${offres},${certifications},${liens},${formations},${pages},${apropos},${adresses},${localisations},${avis},${couverture},${fichiers}`
 export {ENTREPRISE_PARAMS};

@@ -13,7 +13,7 @@ function AvisUtilisateurs() {
             <section className="pt-20 pb-20 bg-no-repeat bg-left bg-contain bg-[url('/images/pages/offers-left-arc.svg')]">
             <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
               <span className='px-10 py-3'>
-                Avis de nos étudiants
+                Avis de nos stagiaires
               </span>
               <span className='border-b-2 border-app-blue px-10 w-64 mt-2'/>
             </h2>

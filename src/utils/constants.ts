@@ -225,7 +225,7 @@ const PREFERED_LOCATION = {
 
 const LIEN_POLITIQUE_SECURITE = "https://www.m2iformation.fr/mentions-legales/"
 
-const LOCATION_MAPPING = {
+const LOCATION_MAPPING: any= {
   ONLINE: 'En ligne',
   ONSITE: 'Dans nous locaux',
   INTRA: 'Dans vos locaux',

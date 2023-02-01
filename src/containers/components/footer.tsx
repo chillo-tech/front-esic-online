@@ -67,7 +67,7 @@ function Footer() {
                 </p>
               </article>
             </div>
-            <div className="container my-10 grid md:grid-cols-3 md:!px-4 md:!max-w-full">
+            <div className="container my-10 grid md:grid-cols-4 md:!px-4 md:!max-w-full">
               <article>
                 <h3 className="text-app-white text-left mb-6 text-4xl font-bold">
                   Nous contacter
@@ -75,7 +75,7 @@ function Footer() {
                 {data?.data.data.telephone ? (
                   <Link
                     href={`tel:${data?.data.data.telephone}`}
-                    className="text-app-light-gray flex items-center text-3xl font-light pr-3">
+                    className="text-app-light-gray flex items-center text-3xl font-light pr-3 mb-2">
                     <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
                       <BsPhone className="text-4xl text-app-blue" />
                     </span>
@@ -85,7 +85,7 @@ function Footer() {
                 {data?.data.data.email ? (
                   <Link
                     href={`mailto:${data?.data.data.email}`}
-                    className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
+                    className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3 mb-2">
                     <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
                       <HiOutlineMail className="text-4xl text-app-blue" />
                     </span>
@@ -117,6 +117,17 @@ function Footer() {
                     key={`pages-${item.id}`}
                     className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
                     {item.libelle}
+                  </Link>
+                ))}
+              </article>
+              <article className="flex flex-col justify-center text-left my-10 md:my-0 md:px-10">
+                {data?.data.data.fichiers.map((item: any) => (
+                  <Link
+                    href={`${process.env.API_URL}/assets/${item.directus_files_id.id}?download`}
+                    key={`pages-${item.directus_files_id.id}`}
+                    target="_blank"
+                    className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
+                    {capitalize(item.directus_files_id.title)}
                   </Link>
                 ))}
               </article>

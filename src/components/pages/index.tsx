@@ -192,7 +192,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                     <p className="py-2 items-center justify-center flex">
                       <AllTrainings
                         text={'Je suis intéressé(e)'}
-                        link="/contactez-nous"
+                        link={(data?.formulaire === 'candidat' || data?.formulaire === 'entreprise') ? "#section-formulaire": "/contactez-nous"}
                         icon={false}
                         classes="!text-center !text-xs border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
                       />
@@ -201,7 +201,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                 ))}
                 <AllTrainings
                   text={'Contactez nous'}
-                  link="/contactez-nous"
+                  link={"/contactez-nous"}
                   classes="border border-white text-white hover:bg-transparent hover:bg-white hover:text-app-blue hover:border hover:border-white"
                 />
               </div>
@@ -210,7 +210,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
         ) : null}
         {(data?.formulaire === 'candidat' ||
           data?.formulaire === 'entreprise') && (
-          <div className='w-full h-full py-4 pb-8 bg-gray-50 bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]'>
+          <div id="section-formulaire" className='w-full h-full py-4 pb-8 bg-gray-50 bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]'>
             <div className="container mt-4">
               <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
                 <span className="px-10 py-3">Posez nous votre question</span>

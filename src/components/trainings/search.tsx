@@ -29,7 +29,8 @@ function Search({ classes, isFocused }: Params) {
         fields: "id,libelle",
         path: "formations",
         search: query,
-        limit: 5,
+        sort: "libelle",
+        limit: 10,
       }),
     enabled: query.length > 2,
   });
