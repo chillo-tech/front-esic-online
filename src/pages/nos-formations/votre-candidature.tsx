@@ -479,7 +479,7 @@ function Candidature({ params }: any) {
               <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
                 <div className={formStyles.form_control}>
                   <div
-                    className={`${formStyles.form_control__input} flex-row border-b-0 items-center`}>
+                    className={`${formStyles.form_control__text} flex-row border-b-0 items-center`}>
                     <input
                       type="checkbox"
                       className="inline-block"
@@ -503,7 +503,7 @@ function Candidature({ params }: any) {
                   </p>
                 </div>
               </div>
-              <div className="w-full flex justify-center mt-12">
+              <div className="w-full flex justify-center mt-2">
                 <button
                   type="submit"
                   className="rounded-md bg-app-blue text-white border-yellow-500 px-24 uppercase py-3">
