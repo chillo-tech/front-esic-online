@@ -343,7 +343,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                             {...register('candidatureStarted')}
                             className={formStyles.form_control__input}>
                             <option disabled selected value="">
-                              Avez vous commencez votre parcours de candidature
+                              Avez vous commencé votre parcours de candidature
                               ?
                             </option>
                             <option
@@ -528,7 +528,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                     className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
                     <div className={formStyles.form_control}>
                       <div
-                        className={`${formStyles.form_control__input} flex-row border-b-0 items-center`}>
+                        className={`${formStyles.form_control__text} flex-row border-b-0 items-center`}>
                         <input
                           type="checkbox"
                           className="inline-block"
@@ -552,7 +552,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                       </p>
                     </div>
                   </div>
-                  <div className="w-full flex justify-center mt-12">
+                  <div className="w-full flex justify-center mt-2">
                     <button
                       type="submit"
                       className="rounded-md bg-app-blue text-white border-yellow-500 px-24 uppercase py-3">

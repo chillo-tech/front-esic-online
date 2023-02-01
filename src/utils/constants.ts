@@ -223,7 +223,7 @@ const PREFERED_LOCATION = {
   PRESENTIEL: "presentiel"
 }
 
-const LIEN_POLITIQUE_SECURITE = "https://www.m2iformation.fr/mentions-legales/"
+const LIEN_POLITIQUE_SECURITE = "/mentions-legales-31"
 
 const LOCATION_MAPPING: any= {
   ONLINE: 'En ligne',
