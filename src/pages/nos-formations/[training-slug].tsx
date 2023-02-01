@@ -20,13 +20,12 @@ import ContactUsText from 'components/shared/ContactUsText';
 import Message from 'components/shared/Message';
 import { ApplicationContext } from 'context/ApplicationContext';
 import Header from 'components/detail-formation/Header';
+import Sessions from 'components/detail-formation/Sessions';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import Metadata from 'components/metadata';
 import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import AllTrainings from 'components/shared/AllTrainings';
-import Trainings from 'components/trainings';
 import { Spinner } from 'flowbite-react';
-import Debug from 'components/Debug';
 var classNames = require('classnames');
 
 export type Message = {
@@ -123,6 +122,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
               training={training}
               toogleDownloadForm={toogleDownloadForm}
             />
+            <Sessions  training={training}/>
             <section className="bg-white py-10">
               <div className="md:px-0 container grid md:grid-cols-5 gap-5">
                 <div className="md:col-span-3 col-span-5">
@@ -210,7 +210,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                   ))
                 }
                 </div>
-                <p className="pb-8">
+                <p className="py-8">
                   <AllTrainings
                       classes={`
                         border border-app-blue text-app-blue 

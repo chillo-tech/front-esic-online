@@ -18,6 +18,7 @@ import { BiMapPin } from 'react-icons/bi';
 import AllTrainings from 'components/shared/AllTrainings';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import DisplayImage from 'components/shared/DisplayImage';
+import Debug from 'components/Debug';
 
 function Footer() {
   const { state, updateCompany } = useContext(ApplicationContext);
@@ -124,10 +125,10 @@ function Footer() {
                   <>
                     {data?.data.data.certifications.map((item: any) => (
                       <DisplayImage
-                        key={`certifications-${item.id}`}
-                        image={item.directus_files_id}
+                        key={`certifications-${item.certifications_id.id}`}
+                        image={item.certifications_id.image}
                         imageClasses="object-contain"
-                        libelle={`${item.directus_files_id.title}`}
+                        libelle={`${item.certifications_id.title}`}
                         classes="rounded-2xl !overflow-hidden"
                       />
                     ))}
