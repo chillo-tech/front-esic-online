@@ -339,7 +339,7 @@ export default function Contact() {
                       <label className="w-full text-black">Préférence :</label>
                       <div
                         className={`grid md:grid-cols-2 gap-4 my-2`}>
-                        <div className="flex items-center mr-5">
+                        <div className="flex items-center">
                           <input
                             className="hidden"
                             type="radio"
@@ -357,7 +357,7 @@ export default function Contact() {
                             Distance
                           </label>
                         </div>
-                        <div className="flex items-center mr-5">
+                        <div className="flex items-center">
                           <input
                             type="radio"
                             className="hidden"
