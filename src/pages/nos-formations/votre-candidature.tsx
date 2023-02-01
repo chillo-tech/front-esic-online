@@ -11,6 +11,8 @@ import {
   PHONE_ERROR_MESSAGE,
   USER_PROFILE,
   getDisplayedDate,
+  LIEN_POLITIQUE_SECURITE,
+  PREFERED_LOCATION,
 } from 'utils';
 import { useMutation, useQuery } from 'react-query';
 import { useRouter } from 'next/router';
@@ -22,6 +24,7 @@ import { GoSearch } from 'react-icons/go';
 import { useContext,useRef, useState } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
 import HighlightedText from 'components/shared/HighlightedText';
+import Link from 'next/link';
 
 export type Message = {
   name: string;
@@ -33,7 +36,10 @@ export type Message = {
   subject: string;
   contactChannel: string[];
   sessions: string[];
+  preferedLocation: string;
+  acceptForm: boolean;
 };
+
 const schema = yup
   .object({
     name: yup.string().trim().required('name Ce champ est requis'),
@@ -61,6 +67,8 @@ const schema = yup
       .min(1)
       .required(REQUIRED_ERROR_MESSAGE)
       .nullable(),
+    preferedLocation: yup.string().trim().required(),
+    acceptForm: yup.bool().required(),
     message: yup
       .string()
       .trim()
@@ -126,7 +134,7 @@ function Candidature({ params }: any) {
   const { data } = useQuery<any>({
     queryKey: ['formations', 'detail', params.slug, params.id],
     queryFn: () =>
-      fetchData({ 
+      fetchData({
         fields: "id,libelle,sessions.id,sessions.sessions_id.*",
         path: `formations/${params.id}`
       }),
@@ -157,6 +165,8 @@ function Candidature({ params }: any) {
     },
   });
   const contactChannel = watch('contactChannel');
+  const preferedLocation = watch('preferedLocation');
+
   const sessions = watch('sessions');
 
   const handleTrainingQueryBlur = (event: any) => {
@@ -175,7 +185,7 @@ function Candidature({ params }: any) {
     setQuery(value);
     if(value && value.trim().length > 2) {
       try {
-        const data = await fetchData({ 
+        const data = await fetchData({
           fields: "id,libelle,sessions.id,sessions.sessions_id.*",
           path: "formations",
           search: value,
@@ -268,7 +278,7 @@ function Candidature({ params }: any) {
                     </p>
                   </div>
                 </div>
-                <div  className={`${formStyles.form_control} !mr-0 !mt-0`}>
+                <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                   <div className={formStyles.form_control}>
                     <input
                       type="text"
@@ -298,8 +308,29 @@ function Candidature({ params }: any) {
                     </p>
                   </div>
                 </div>
+                <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
+                  <div className={formStyles.form_control}>
+                    <select
+                      {...register('profile')}
+                      className={formStyles.form_control__input}>
+                      <option disabled selected value="">
+                        Vous êtes
+                      </option>
+                      {USER_PROFILE.map((profile: any, index: number) => (
+                        <option
+                          key={`c-profile-${index}`}
+                          value={profile.value}>
+                          {profile.label}
+                        </option>
+                      ))}
+                    </select>
+                    <p className={formStyles.form_control__error}>
+                      {errors.profile?.message}
+                    </p>
+                  </div>
+                </div>
               </div>
-              
+
               <div className='grid md:gap-6 py-4'>
                 <div  className={`${formStyles.form_control} !mr-0 !mt-0`}>
                 <div className={`${formStyles.form_control} !mr-0 !mt-0 relative`}>
@@ -317,7 +348,7 @@ function Candidature({ params }: any) {
                         <ul className="absolute left-0 top-0 right-0 z-50 bg-white">
                           {filteredTraining.map((item: any, index: any) => (
                             <li key={`search-${index}-${item.id}`}>
-                              <button type="button" 
+                              <button type="button"
                                 onClick={()=>handleSelectedTraining(item)}
                                 title={item.libelle}
                                 className="block bg-white py-2 px-2 text-gray-700 text-md text-left"
@@ -453,7 +484,80 @@ function Candidature({ params }: any) {
                   </p>
                 </div>
               </div>
-
+              <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                <div className={formStyles.form_control}>
+                  <label className="w-full text-black">Préférence :</label>
+                  <div
+                    className={`grid md:grid-cols-2 gap-4 my-2`}>
+                    <div className="flex items-center mr-5">
+                      <input
+                        className="hidden"
+                        type="radio"
+                        value={PREFERED_LOCATION.DISTANCE}
+                        id={PREFERED_LOCATION.DISTANCE}
+                        {...register('preferedLocation')}
+                      />
+                      <label
+                        htmlFor={PREFERED_LOCATION.DISTANCE}
+                        className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
+                          preferedLocation === PREFERED_LOCATION.DISTANCE
+                            ? 'bg-app-blue text-white'
+                            : ''
+                        }`}>
+                        Distance
+                      </label>
+                    </div>
+                    <div className="flex items-center mr-5">
+                      <input
+                        type="radio"
+                        className="hidden"
+                        value={PREFERED_LOCATION.PRESENTIEL}
+                        id={PREFERED_LOCATION.PRESENTIEL}
+                        {...register('preferedLocation')}
+                      />
+                      <label
+                        htmlFor={PREFERED_LOCATION.PRESENTIEL}
+                        className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
+                          preferedLocation === PREFERED_LOCATION.PRESENTIEL
+                            ? 'bg-app-blue text-white'
+                            : ''
+                        }`}>
+                        Présentiel
+                      </label>
+                    </div>
+                  </div>
+                  <p className={formStyles.form_control__error}>
+                    {errors.preferedLocation?.message}
+                  </p>
+                </div>
+              </div>
+              <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                <div className={formStyles.form_control}>
+                  <div
+                    className={`${formStyles.form_control__input} flex-row border-b-0 items-center`}>
+                    <input
+                      type="checkbox"
+                      className="inline-block"
+                      id="acceptForm"
+                      {...register('acceptForm')}
+                    />
+                    <label
+                      className="text-gray-600 w-full pl-4 pr-4"
+                      htmlFor="acceptForm">
+                      En transmettant ce formulaire, vous reconnaissez et
+                      accepté notre {'  '}
+                      <Link
+                        href={LIEN_POLITIQUE_SECURITE}
+                        className="text-app-blue underline">
+                        politique de protection de vos données personnelles.
+                      </Link>
+                    </label>
+                  </div>
+                  <p className={formStyles.form_control__error}>
+                    {errors.acceptForm?.message}
+                  </p>
+                </div>
+              </div>
               <div className="w-full flex justify-center mt-12">
                 <button
                   type="submit"

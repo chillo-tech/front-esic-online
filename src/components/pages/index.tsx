@@ -45,8 +45,8 @@ export type Message = {
   subject: string;
   contactChannel: string[];
   sessions: string[];
-  preferedLocation: string;
   job: string;
+  preferedLocation: string;
   acceptForm: boolean;
 };
 
@@ -118,6 +118,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
   });
 
   const contactChannel = watch('contactChannel');
+  const preferedLocation = watch('preferedLocation');
 
   useEffect(() => {
     if (data?.formulaire === 'candidat') {
@@ -480,28 +481,40 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                     <div className={formStyles.form_control}>
                       <label className="w-full text-black">Préférence :</label>
                       <div
-                        className={`${formStyles.form_control__input} flex justify-start items-center`}>
+                        className={`grid md:grid-cols-2 gap-4 my-2`}>
                         <div className="flex items-center mr-5">
                           <input
-                            className="inline-block mr-3"
+                            className="hidden"
                             type="radio"
                             value={PREFERED_LOCATION.DISTANCE}
                             id={PREFERED_LOCATION.DISTANCE}
                             {...register('preferedLocation')}
                           />
-                          <label htmlFor={PREFERED_LOCATION.DISTANCE} className="w-full">
+                          <label
+                            htmlFor={PREFERED_LOCATION.DISTANCE}
+                            className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
+                              preferedLocation === PREFERED_LOCATION.DISTANCE
+                                ? 'bg-app-blue text-white'
+                                : ''
+                            }`}>
                             Distance
                           </label>
                         </div>
                         <div className="flex items-center mr-5">
                           <input
                             type="radio"
-                            className="inline-block mr-3"
+                            className="hidden"
                             value={PREFERED_LOCATION.PRESENTIEL}
                             id={PREFERED_LOCATION.PRESENTIEL}
                             {...register('preferedLocation')}
                           />
-                          <label htmlFor={PREFERED_LOCATION.PRESENTIEL} className="w-full">
+                          <label
+                            htmlFor={PREFERED_LOCATION.PRESENTIEL}
+                            className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
+                              preferedLocation === PREFERED_LOCATION.PRESENTIEL
+                                ? 'bg-app-blue text-white'
+                                : ''
+                            }`}>
                             Présentiel
                           </label>
                         </div>

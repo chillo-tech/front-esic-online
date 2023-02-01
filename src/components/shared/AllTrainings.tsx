@@ -9,17 +9,19 @@ interface Params {
   icon?: boolean;
   uppercase?: boolean;
   classes?: string;
-  training?: any
+  training?: any;
+  containerClasses?: string;
 }
 function AllTrainings({
   icon = true,
   uppercase = true,
   link = '/nos-formations',
   text = 'Voir toutes nos formations',
-  classes
+  classes,
+  containerClasses,
 }: Params) {
   return (
-    <span className={classNames('flex justify-center items-center')}>
+    <span className={classNames('flex justify-center items-center', containerClasses)}>
       <Link
         href={link}
         className={classNames(
