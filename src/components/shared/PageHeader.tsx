@@ -1,9 +1,12 @@
 import React from 'react'
 import RenderHtmlContent from './RenderHtmlContent';
 import DisplayImage from 'components/shared/DisplayImage';
+import Metadata from 'components/metadata';
 
 function PageHeader({data}: any) {
   return (
+    <>
+    <Metadata entry={data} />
     <header className="grid bg-app-blue items-center text-white">
       <div className="container md:px-0 py-10 md:py-32 relative">
         <div className="grid md:grid-cols-2">
@@ -23,7 +26,7 @@ function PageHeader({data}: any) {
         </div>
         {
           data.image ? (
-            <div className="hidden md:block absolute right-0 bottom-0 image-wrapper retalive rounded-lg w-[420px] h-[320px]">
+            <div className="hidden md:block absolute right-0 bottom-0 image-wrapper retalive rounded-lg w-[300px] h-[300px]">
               <DisplayImage
                   image={data.image}
                   imageClasses="object-cover"
@@ -34,6 +37,7 @@ function PageHeader({data}: any) {
         ): null }
       </div>
     </header>
+    </>
   )
 }
 

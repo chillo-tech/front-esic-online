@@ -81,9 +81,9 @@ function Training({ id, slug }: { id: string; slug: string }) {
 
   const trainingId = training?.id;
   useQuery<any>({
-    enabled: !!trainingId,
+    enabled: !!(trainingId && training?.souscategories.filter((souscategory: any) => souscategory != null && souscategory.souscategories_id != null)[0]?.souscategories_id?.id),
     queryKey: ["SousCategories", training?.souscategories[0]?.souscategories_id?.id],
-    queryFn: () => getSubCategories({id: training?.souscategories[0]?.souscategories_id?.id as string, trainingsLimit: 3}),
+    queryFn: () => getSubCategories({id: training?.souscategories.filter((souscategory: any) => souscategory != null && souscategory.souscategories_id != null)[0]?.souscategories_id?.id as string, trainingsLimit: 3}),
     onSuccess: ({data}: any) => {
       setRelatedTraining(data?.data?.formations);
     },

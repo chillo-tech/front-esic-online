@@ -134,6 +134,13 @@ function Page({ data, sessions, displayTrainings = false }: any) {
     <OpenedLayout>
       <section className="bg-white">
         <PageHeader data={data} />
+        {data.pages && data.pages.length ? (
+          <section className="grid bg-slate-100 ">
+            <div className="container">
+              <Articles data={data.articles} />
+            </div>
+          </section>
+        ) : null}
         {data.description ? (
           <div className="container py-10">
             <RenderHtmlContent
@@ -147,6 +154,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
             />
           </div>
         ) : null}
+        
         {data.articles && data.articles.length ? (
           <section className="grid bg-slate-100 ">
             <div className="container">
@@ -482,7 +490,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                       <label className="w-full text-black">Préférence :</label>
                       <div
                         className={`grid md:grid-cols-2 gap-4 my-2`}>
-                        <div className="flex items-center mr-5">
+                        <div className="flex items-center">
                           <input
                             className="hidden"
                             type="radio"
@@ -500,7 +508,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                             Distance
                           </label>
                         </div>
-                        <div className="flex items-center mr-5">
+                        <div className="flex items-center">
                           <input
                             type="radio"
                             className="hidden"

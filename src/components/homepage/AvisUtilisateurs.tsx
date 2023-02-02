@@ -1,3 +1,4 @@
+import Rating from 'components/shared/Rating';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import { ApplicationContext } from 'context/ApplicationContext'
 import React, { useContext } from 'react'
@@ -28,10 +29,7 @@ function AvisUtilisateurs() {
                         >
                           <RenderHtmlContent content={avis.message} classes="text-lg"/>
                           <div className="flex flex-col mt-3">
-                            <div className='text-left flex'>
-                              {Array.from(Array(1*avis.moyenne).keys()).map((entry: number) => <AiFillStar className='text-2xl text-yellow-400' key={`moyenne-${entry}`} />)}
-                              {Array.from(Array(5 - (1*avis.moyenne)).keys()).map((entry: number) => <AiOutlineStar key={`moyenne-${entry}`} />)}
-                            </div>
+                            <Rating rate={avis.moyenne} />
                             <div className='text-left py-2'>{avis?.formation?.libelle}</div>
                             <div className='text-left font-bold '>{avis?.etudiant}</div>
                           </div> 

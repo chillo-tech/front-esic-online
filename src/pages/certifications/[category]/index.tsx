@@ -17,7 +17,7 @@ function CertificationCategory({
     queryFn: () =>
     fetchData({
       path: `pages/${id}`,
-      fields: "*"
+      fields: "*,*.*"
     })
   });
   
