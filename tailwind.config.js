@@ -30,7 +30,7 @@ module.exports = {
         'white': '#ffffff',
         primary: "#2C7CBB",
         secondary: "#418106",
-        'app-blue': '#207CBB',
+        'app-blue': '#2C7CBB',
         'app-light-blue': '#EEF5FA',
         'app-light-green': '#EAEDEE',
         'app-green': '#008100',

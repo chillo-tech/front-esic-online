@@ -43,12 +43,12 @@ body {
 .detail-formation .programme > h5,
 .detail-formation .programme > h6,
 
-.html-text > h1,
-.html-text > h2,
-.html-text > h3,
-.html-text > h4,
-.html-text > h5,
-.html-text > h6
+.html-text h1,
+.html-text h2,
+.html-text h3,
+.html-text h4,
+.html-text h5,
+.html-text h6
 {
   @apply my-4 text-xl font-bold
 }

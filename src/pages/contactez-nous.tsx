@@ -13,8 +13,6 @@ import {
   PHONE_ERROR_MESSAGE,
   USER_PROFILE,
   USER_PROFILE_OPTIONS,
-  cn,
-  loaderProp,
   LIEN_POLITIQUE_SECURITE,
   PREFERED_LOCATION,
 } from '../utils/index';
@@ -26,7 +24,6 @@ import Message from 'components/shared/Message';
 import { useState, useContext } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
 import { BsPhone } from 'react-icons/bs';
-import Image from 'next/image';
 import classNames from 'classnames';
 import DisplayImage from 'components/shared/DisplayImage';
 import Link from 'next/link';
@@ -75,7 +72,6 @@ const schema = yup
 
 export default function Contact() {
   const { state } = useContext(ApplicationContext);
-  const [isImageLoading, setLoading] = useState(true);
   const mutation = useMutation({
     mutationFn: (message: any) => add('/contacts', message),
   });
@@ -144,7 +140,7 @@ export default function Contact() {
                   </p>
                   <p className="mb-1">
                     Vous pouvez vous désabonner de ces communications à tout
-                    moment.{' '}
+                    moment.
                   </p>
                   <p className="mb-1">
                     Consultez notre Politique de confidentialité pour en savoir
@@ -299,14 +295,12 @@ export default function Contact() {
 
                   <div className={formStyles.form_control}>
                     <div className={formStyles.form_control}>
-                      <label
-                        htmlFor="phone"
-                        className={formStyles.form_control__label}>
-                        <span className="text-left text-black font-semibold">
-                          Comment souhaitez vous être contacté
-                        </span>
-                      </label>
-                      <div className="grid grid-cols-2 gap-4">
+                      <p id="contact" className="w-full text-black">
+                        Comment souhaitez vous être contacté
+                      </p>
+                      <div className="grid md:grid-cols-2 gap-4" 
+                        role="radiogroup"
+                        aria-labelledby='contact'>
                         {CONTACT_CHANNEL.map((channel: any, index: number) => (
                           <label
                             key={`channel-${index}`}
@@ -323,7 +317,7 @@ export default function Contact() {
                               value={channel.value}
                               className="hidden"
                               {...register('contactChannel')}
-                            />{' '}
+                            />
                             {channel.label}
                           </label>
                         ))}
@@ -336,10 +330,11 @@ export default function Contact() {
                   <div
                     className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
                     <div className={formStyles.form_control}>
-                      <label className="w-full text-black">Préférence :</label>
+                      <p id="localisation" className="w-full text-black">Préférence :</p>
                       <div
+                        role="radiogroup"
+                        aria-labelledby='localisation'
                         className={`grid md:grid-cols-2 gap-4 my-2`}>
-                        <div className="flex items-center mr-5">
                           <input
                             className="hidden"
                             type="radio"
@@ -356,8 +351,6 @@ export default function Contact() {
                             }`}>
                             Distance
                           </label>
-                        </div>
-                        <div className="flex items-center mr-5">
                           <input
                             type="radio"
                             className="hidden"
@@ -374,7 +367,6 @@ export default function Contact() {
                             }`}>
                             Présentiel
                           </label>
-                        </div>
                       </div>
                       <p className={formStyles.form_control__error}>
                         {errors.preferedLocation?.message}
@@ -412,7 +404,7 @@ export default function Contact() {
                   <div className="w-full flex justify-center mt-2">
                     <button
                       type="submit"
-                      className="rounded-md bg-app-blue text-white border-yellow-500 px-24 uppercase py-3">
+                      className="w-full md:w-auto rounded-md bg-app-blue text-white border-yellow-500 px-24 uppercase py-3">
                       <span>Envoyer</span>
                     </button>
                   </div>

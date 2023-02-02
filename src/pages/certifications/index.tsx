@@ -8,3 +8,8 @@ export default function AllCertifications() {
     </OpenedLayout>
   );
 }
+export async function getServerSideProps(context: any) {
+  return {
+    notFound: true,
+  };
+}

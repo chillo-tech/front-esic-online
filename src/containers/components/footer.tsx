@@ -9,7 +9,7 @@ import {
   slugify,
   capitalize,
 } from 'utils/index';
-import { BsArrowRightShort, BsArrowUpCircle, BsPhone } from 'react-icons/bs';
+import { BsArrowUpCircle, BsPhone } from 'react-icons/bs';
 import { HiOutlineMail } from 'react-icons/hi';
 import { useState, useContext } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
@@ -18,7 +18,6 @@ import { BiMapPin } from 'react-icons/bi';
 import AllTrainings from 'components/shared/AllTrainings';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import DisplayImage from 'components/shared/DisplayImage';
-import Debug from 'components/Debug';
 
 function Footer() {
   const { state, updateCompany } = useContext(ApplicationContext);
