@@ -1,8 +1,4 @@
 import Page from "components/pages";
-import PageHeader from "components/shared/PageHeader";
-import RenderHtmlContent from "components/shared/RenderHtmlContent";
-import OpenedLayout from "containers/opened";
-import Head from "next/head";
 import React from "react";
 import { useQuery } from "react-query";
 import { fetchData } from "services";
@@ -13,11 +9,15 @@ function CertificationCategory({
   libelle: string;
   link: string;
 }) {
-  const { isSuccess, isLoading, data } = useQuery<any>({
+  const { isSuccess, data } = useQuery<any>({
     queryFn: () =>
     fetchData({
       path: `pages/${id}`,
-      fields: "*,*.*"
+      fields: `
+        *,
+        *.*,
+        certifications.certifications_id.*
+      `
     })
   });
   

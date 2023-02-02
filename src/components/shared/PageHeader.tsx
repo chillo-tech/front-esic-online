@@ -26,7 +26,7 @@ function PageHeader({data}: any) {
         </div>
         {
           data.image ? (
-            <div className="hidden md:block absolute right-0 bottom-0 image-wrapper retalive rounded-lg w-[300px] h-[300px]">
+            <div className="hidden md:block absolute right-0 bottom-0 image-wrapper rounded-lg w-[300px] h-[300px]">
               <DisplayImage
                   image={data.image}
                   imageClasses="object-cover"

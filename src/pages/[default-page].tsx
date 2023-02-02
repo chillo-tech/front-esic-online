@@ -9,7 +9,8 @@ function DefaultPage({id, libelle}: {id: string, libelle:string}) {
     const pages = 'pages.*';
     const articles = 'articles.*';
     const pagesSessions = 'sessions.*';
-    const fields=`${base},${categories},${pages},${pagesSessions},${articles}`
+    const certifications = 'certifications.certifications_id.*';
+    const fields=`${base},${categories},${pages},${pagesSessions},${articles},${certifications}`
     const [sessions, setSessions] = useState([]);
     const {
         isSuccess,
