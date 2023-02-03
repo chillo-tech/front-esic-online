@@ -8,19 +8,24 @@ function PageHeader({data}: any) {
     <>
     <Metadata entry={data} />
     <header className="grid bg-app-blue items-center text-white">
-      <div className="container md:px-0 py-10 md:py-32 relative">
+      <div className={`container md:px-0 py-10 ${data.image ? 'md:py-16': ''} relative`}>
         <div className="grid md:grid-cols-2">
           <div>
             <p className="text-md font-extralight">
               {data.souslibelle}
             </p>
             <h1 className="text-3xl md:text-4xl font-extrabold text-white">
-              {data.libelle}
+              {data?.libelle} {data?.nom}
             </h1>
-            <RenderHtmlContent 
-              classes="my-5 text-xl font-extralight"
-              content={data.abstrait ? data.abstrait: null}
-            />
+            {
+              data.abstrait ? (
+                <RenderHtmlContent 
+                  classes="my-5 text-xl font-extralight"
+                  content={data.abstrait}
+                />
+              ) : null
+            }
+            
           </div>
           <span />
         </div>

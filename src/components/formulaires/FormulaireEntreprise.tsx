@@ -115,7 +115,7 @@ function FormulaireEntreprise({formulaire}: any) {
 	  }, []);
 
 	return (
-		<section className={`bg-app-light-blue bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]`}>
+		<section className={`py-16 bg-app-light-blue bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]`}>
 			<div className="container">
 				<div id="section-formulaire" className='w-full h-full pb-8'>
 					<div className="container">

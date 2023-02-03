@@ -26,22 +26,42 @@ function SubMenuItem({item, grandparent, parent}: any) {
 
   return (
     <li className='relative border-red-10' ref={ref}>
-      {(item.souscategories && item.souscategories.length > 0) ? (
+      {((item.souscategories && item.souscategories.length > 0) || (item.certifications && item.certifications.length > 0)  )? (
           <div className="whitespace-nowrap">
             <button type="button" aria-haspopup="menu"
                     aria-expanded={dropdown ? "true" : "false"}
                     onClick={() => setDropdown((prev) => !prev)}
-                    className={`flex w-56 justify-between whitespace-nowrap items-center uppercase block py-2 px-4 text-sm ${dropdown ? 'text-app-blue': 'text-gray-700'}`}>
+                    className={`flex w-full relative justify-between whitespace-nowrap items-center uppercase block py-2 px-4 text-sm ${dropdown ? 'text-app-blue': 'text-gray-700'}`}>
               <span className='mr-1'>{item.libelle}</span>
-              <BiChevronRight className='text-xl'/>
+              <BiChevronRight className='text-xl abslolute right-0'/>
             </button>
-            <SubDropDown
-                dropdown={dropdown}
-                grandparent={grandparent}
-                parent={parent}
-                souscategories={item.souscategories}
-                cols={item.souscategories.length}
-            />
+            {
+              (item.souscategories && item.souscategories.length > 0)
+              ?(
+                <SubDropDown
+                    dropdown={dropdown}
+                    grandparent={grandparent}
+                    parent={parent}
+                    souscategories={item.souscategories}
+                    cols={item.souscategories.length}
+                />
+              ) 
+              : null
+            }
+            {
+              (item.certifications && item.certifications.length > 0)
+              ?(
+                <SubDropDown
+                    dropdown={dropdown}
+                    grandparent={grandparent}
+                    parent={parent}
+                    certifications={item.certifications}
+                    cols={item.certifications.length}
+                />
+              ) 
+              : null
+            }
+            
           </div>
       ) : (
           <Link href={`/${slugify(item.libelle)}-${item.id}`}

@@ -28,16 +28,31 @@ function DropdownMobile({isShowing, parent, categories, pages}: any) {
                         {pages
                         .filter((a: any) => { return (a !== null && a.pages_id !== null) } )
                         .map((page: any, index: number) => (
-                            <li key={`menu-page-${index}`} className="menu-items">
-                                <Link
-                                    href={`/${slugify(parent)}/${slugify(
-                                        page.pages_id.libelle
-                                    )}-${page.pages_id.id}`}
-                                    className="block mt-4 text-xl font-normal uppercase text-gray-700"
-                                    title={page.libelle}>
-                                    {page.pages_id.libelle}
-                                </Link>
-                            </li>
+                            <>
+                            {
+                                (page.pages_id.certifications && page.pages_id.certifications.length)
+                                    ? (
+                                        <SubAccordionItem
+                                            grandparent={parent}
+                                            parent={`certifications`}
+                                            item={ page.pages_id}
+                                            key={`menu-certifications--${index}`}
+                                        />
+                                    )
+                                    : (
+                                        <li key={`menu-page-${index}`} className="menu-items">
+                                            <Link
+                                                href={`/${slugify(parent)}/${slugify(
+                                                    page.pages_id.libelle
+                                                )}-${page.pages_id.id}`}
+                                                className="block mt-4 text-xl font-normal uppercase text-gray-700"
+                                                title={page.libelle}>
+                                                {page.pages_id.libelle}
+                                            </Link>
+                                        </li>
+                                    )
+                            }
+                            </>
                         ))}
                     </ul>
                 ) : null

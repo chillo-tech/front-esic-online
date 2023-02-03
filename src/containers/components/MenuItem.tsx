@@ -1,3 +1,4 @@
+import Debug from 'components/Debug';
 import Link from 'next/link'
 import React, {useEffect, useRef, useState} from 'react'
 import {BiChevronDown} from 'react-icons/bi';

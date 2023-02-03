@@ -63,7 +63,7 @@ function Header({ training, toogleDownloadForm }: any) {
               <Rating 
                 classes="font-semibold md:text-lg" 
                 rate="4.7" 
-                label="(622 notes) 5 661 participants" 
+                label="(622 notes)"
                 displayRate={true} 
                 displayLabel={true}
                 isDecimal={4.7 % 1 != 0}
@@ -73,7 +73,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   <div className="flex justify-between mb-4 text-xl">
                     {training.niveau ? (
                       <span className="flex bg-app-green mr-3 pr-5 text-white items-center rounded-lg">
-                        <span className="ml-3 mr-3 bg-white w-2 h-2 rounded-full"></span>
+                        <span className="ml-3 mr-3 bg-white w-2 h-2 rounded-full"/>
                         <span>
                           {training.niveau === 'BEGINNER' ? 'Débutant' : null}
                         </span>

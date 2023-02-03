@@ -126,7 +126,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
             <section className="bg-white py-10">
               <div className="md:px-0 container grid md:grid-cols-5 gap-5">
                 <div className="md:col-span-3 col-span-5">
-                  {TRAINING_KEYS.filter((item) => training[item.key]).map(
+                  {TRAINING_KEYS.filter((item: any) => training[item.key]).map(
                     (item) => (
                       <article
                         key={`${id}-${item.key}-${slugify(item.label)}`}
@@ -149,7 +149,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                     <HomeTrainingItem
                       training={training}
                       displayTitle={false}
-                      classes="bg-app-light-green rounded-t-lg"
+                      classes="hidden md:block bg-app-light-green rounded-t-lg"
                     />
                     {training.sessions && training.sessions.length ? (
                       <div className="hidden md:block bg-app-light-green px-5 ">
@@ -185,7 +185,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                       icon={false}
                       link="/contactez-nous"
                       text="Comment financer la formation ?"
-                      classes="bg-none text-app-blue font-bold md:text-xl py-4"
+                      classes="hidden md:block bg-none text-app-blue font-bold md:text-xl py-4"
                     />
                   </div>
                 </div>
@@ -195,7 +195,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
               (relatedTraining && relatedTraining.length)
               ? (
                 <>
-                <h2 className="container md:px-0 text-2xl md:text-4xl font-extrabold">
+                <h2 className="container md:px-0 text-2xl md:text-4xl font-extrabold mb-3">
                     Autres formations
                 </h2>
                 <div className="grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container">

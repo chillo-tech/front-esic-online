@@ -17,23 +17,27 @@ function Page({ data, sessions, displayTrainings = false }: any) {
     <OpenedLayout>
       <section className="bg-white">
         <PageHeader data={data} />
-        <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
+        <h2 className="font-bold text-3xl md:text-5xl text-center flex flex-col justify-center items-center">
               <span className='px-10 pt-10'>
                {data.libelle}
               </span>
           <span className='border-b-2 border-app-blue px-10 w-64 mt-2'/>
         </h2>
         {data.description ? (
-          <div className="container py-5">
+          <div className="container pb-12">
             <RenderHtmlContent
-              classes="text-lg mb-6"
+              classes="text-lg my-3"
               content={data.description}
             />
-            <AllTrainings
-              text={'Contactez nous'}
-              link="/contactez-nous"
-              classes="border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
-            />
+            {
+              data.formulaire ? null : (
+                  <AllTrainings
+                  text={'Contactez nous'}
+                  link="/contactez-nous"
+                  classes="mt-4 border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
+                />
+              )
+            }
           </div>
         ) : null}
         {data.pages && data.pages.length ? (
