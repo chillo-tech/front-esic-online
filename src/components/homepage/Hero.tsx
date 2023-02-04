@@ -69,15 +69,10 @@ function Hero() {
               <div className="py-12 px-2 md:px-0 md:w-4/5 w-full mx-auto">
                 <Search isFocused={searchBarEnabled} />
               </div>
-              <RenderHtmlContent content={state.company.description} classes="mx-auto md:w-3/5 text-xl md:text-2xl text-white hidden md:block" />
+              <RenderHtmlContent content={state.company.description} classes="text-white mx-auto md:w-3/5 text-xl md:text-2xl text-white hidden md:block" />
               <div className="md:w-3/5 my-5 bg-no-repeat bg-[left-top]  bg-[length:110px_8-60px] bg-[url('/images/pages/hero-blue-arc.svg')]">
                 <div className="py-12 bg-[length:110px_8-60px] bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/hero-green-arc.svg')]">
-                  {/* <AllTrainings 
-                      icon= {false}
-                      link='/nos-formations/votre-candidature' 
-                      text="S'INSCRIRE À UNE FORMATION"
-                      classes='bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white'
-                    /> */}
+
                   <button
                     onClick={() => setSearchBarEnabled(true)}
                     className="uppercase px-8 py-3 rounded-lg relative bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white"
@@ -107,30 +102,6 @@ function Hero() {
               </div>
             </div>
           </div>
-
-
-          {/*
-        <header className='relative hero'>
-        <div className="absolute z-20 bg-gray-900 opacity-40 top-0 bottom-0 left-0 right-0" />
-        <div className="absolute top-0 bottom-0 left-0 right-0 z-30">
-        <aside className="container absolute top-0 bottom-0 right-0 left-0 z-40 flex flex-col justify-center">
-            <div className="text-4xl md:text-6xl font-extrabold text-center md:text-left md:w-3/4 flex flex-col">
-              <h1 className="text-green-400 inline">{state.company.libelle}</h1>
-              <h1 className="inline">{state.company.souslibelle}</h1>
-            </div>
-            <div className="py-10 md:w-3/5">
-              <Search />
-            </div>
-            <div className="text-xl md:text-2xl text-white text-center md:text-left md:w-1/2 hidden md:block"
-              dangerouslySetInnerHTML={{__html: state.company.description}}
-            />
-            <p className='text-blue-600'>
-              <ContactUsText text='Une question ? contactez nous' classes='text-green-500 text-2xl'/>
-            </p>
-        </aside>
-        </div>
-        
-        </header>*/}
         </header>
       ) : null}
     </>
