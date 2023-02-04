@@ -13,22 +13,23 @@ import {
   getDisplayedDate,
   LIEN_POLITIQUE_SECURITE,
   PREFERED_LOCATION,
+  ACCEPT_FORM_ERROR_MESSAGE,
 } from 'utils';
 import { useMutation, useQuery } from 'react-query';
 import { useRouter } from 'next/router';
-import { add, getDetail, fetchData} from 'services/index';
+import { add, getDetail, fetchData } from 'services/index';
 import formStyles from 'styles/Form.module.css';
 import Message from 'components/shared/Message';
 import { BsPhone } from 'react-icons/bs';
 import { GoSearch } from 'react-icons/go';
-import { useContext,useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { ApplicationContext } from 'context/ApplicationContext';
 import HighlightedText from 'components/shared/HighlightedText';
 import Link from 'next/link';
 
 export type Message = {
   name: string;
-  formation: string,
+  formation: string;
   message: string;
   email: string;
   phone: string;
@@ -36,7 +37,7 @@ export type Message = {
   subject: string;
   contactChannel: string[];
   sessions: string[];
-  preferedLocation: string;
+  preferedLocation: string[];
   acceptForm: boolean;
 };
 
@@ -61,14 +62,19 @@ const schema = yup
       .min(1)
       .required(REQUIRED_ERROR_MESSAGE)
       .nullable(),
+    preferedLocation: yup
+      .array()
+      .of(yup.string())
+      .min(1)
+      .required(REQUIRED_ERROR_MESSAGE)
+      .nullable(),
     sessions: yup
       .array()
       .of(yup.string())
       .min(1)
       .required(REQUIRED_ERROR_MESSAGE)
       .nullable(),
-    preferedLocation: yup.string().trim().required(),
-    acceptForm: yup.bool().required(),
+    acceptForm: yup.bool().oneOf([true], ACCEPT_FORM_ERROR_MESSAGE).required(),
     message: yup
       .string()
       .trim()
@@ -104,6 +110,7 @@ function Candidature({ params }: any) {
       formation: selectedTraining.libelle,
       subject: `${message.subject} - Sessions ${sessions}`,
       contactChannel: `${contactChannel.join(', ').toLowerCase()}`,
+      preferedLocation: `${preferedLocation.join(', ').toLowerCase()}`,
     });
   };
   const onError = (errors: any, e: any) => console.log({ errors });
@@ -117,9 +124,9 @@ function Candidature({ params }: any) {
     mutationFn: (message: any) => add('/contacts', message),
   });
 
-  const[query, setQuery] = useState<string>("");
-  const[selectedTraining, setSelectedTraining] = useState<any>({});
-  const[filteredTraining, setFilteredTraining] = useState<any[]>([]);
+  const [query, setQuery] = useState<string>('');
+  const [selectedTraining, setSelectedTraining] = useState<any>({});
+  const [filteredTraining, setFilteredTraining] = useState<any[]>([]);
   const {
     register,
     handleSubmit,
@@ -128,15 +135,15 @@ function Candidature({ params }: any) {
     setValue,
   } = useForm<Message>({
     mode: 'onChange',
-    defaultValues: {profile: 'particulier'},
+    defaultValues: { profile: 'particulier' },
     resolver: yupResolver(schema),
   });
   const { data } = useQuery<any>({
     queryKey: ['formations', 'detail', params.slug, params.id],
     queryFn: () =>
       fetchData({
-        fields: "id,libelle,sessions.id,sessions.sessions_id.*",
-        path: `formations/${params.id}`
+        fields: 'id,libelle,sessions.id,sessions.sessions_id.*',
+        path: `formations/${params.id}`,
       }),
     onSuccess: (data: any) => {
       setSelectedTraining(data.data.data);
@@ -147,11 +154,11 @@ function Candidature({ params }: any) {
         `Candidature pour la formation ${data?.data.data.libelle}`,
         { shouldValidate: true, shouldDirty: true, shouldTouch: true }
       );
-      setValue(
-        'formation',
-        `${data?.data.data.libelle}`,
-        { shouldValidate: true, shouldDirty: true, shouldTouch: true }
-      );
+      setValue('formation', `${data?.data.data.libelle}`, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true,
+      });
       if (data?.data.data.sessions && data?.data.data.sessions.length === 0) {
         setValue('sessions', ["Aucune n'est programmée"], {
           shouldValidate: true,
@@ -164,6 +171,7 @@ function Candidature({ params }: any) {
       router.push('/page-inconnue');
     },
   });
+
   const contactChannel = watch('contactChannel');
   const preferedLocation = watch('preferedLocation');
 
@@ -172,32 +180,34 @@ function Candidature({ params }: any) {
   const handleTrainingQueryBlur = (event: any) => {
     setFilteredTraining([]);
     setSelectedTraining({});
-  }
+  };
 
   const handleSelectedTraining = (item: any) => {
     setSelectedTraining(item);
     setQuery(item.libelle);
     setFilteredTraining([]);
-  }
+  };
 
-  const handleTrainingSearch = async(event: any) => {
-    const {target: {value}} = event;
+  const handleTrainingSearch = async (event: any) => {
+    const {
+      target: { value },
+    } = event;
     setQuery(value);
-    if(value && value.trim().length > 2) {
+    if (value && value.trim().length > 2) {
       try {
         const data = await fetchData({
-          fields: "id,libelle,sessions.id,sessions.sessions_id.*",
-          path: "formations",
+          fields: 'id,libelle,sessions.id,sessions.sessions_id.*',
+          path: 'formations',
           search: value,
-          limit: 5
-        })
+          limit: 5,
+        });
         setFilteredTraining(data?.data.data);
-      } catch (e){
+      } catch (e) {
         setFilteredTraining([]);
-        console.log(e)
+        console.log(e);
       }
     }
-  }
+  };
 
   return (
     <OpenedLayout>
@@ -331,10 +341,11 @@ function Candidature({ params }: any) {
                 </div>
               </div>
 
-              <div className='grid md:gap-6 py-4'>
-                <div  className={`${formStyles.form_control} !mr-0 !mt-0`}>
-                <div className={`${formStyles.form_control} !mr-0 !mt-0 relative`}>
-                    <GoSearch className='absolute right-[5px] inset-y-2 text-xl text-app-white' />
+              <div className="grid md:gap-6 py-4">
+                <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
+                  <div
+                    className={`${formStyles.form_control} !mr-0 !mt-0 relative`}>
+                    <GoSearch className="absolute right-[5px] inset-y-2 text-xl text-app-white" />
                     <input
                       type="text"
                       id="formation"
@@ -343,17 +354,20 @@ function Candidature({ params }: any) {
                       value={query}
                       onChange={handleTrainingSearch}
                     />
-                    <div className="results relative" style={{ height: "1px" }}>
-                      {(filteredTraining && filteredTraining.length )? (
+                    <div className="results relative" style={{ height: '1px' }}>
+                      {filteredTraining && filteredTraining.length ? (
                         <ul className="absolute left-0 top-0 right-0 z-50 bg-white">
                           {filteredTraining.map((item: any, index: any) => (
                             <li key={`search-${index}-${item.id}`}>
-                              <button type="button"
-                                onClick={()=>handleSelectedTraining(item)}
+                              <button
+                                type="button"
+                                onClick={() => handleSelectedTraining(item)}
                                 title={item.libelle}
-                                className="block bg-white py-2 px-2 text-gray-700 text-md text-left"
-                              >
-                                <HighlightedText text={item.libelle} pattern={query} />
+                                className="block bg-white py-2 px-2 text-gray-700 text-md text-left">
+                                <HighlightedText
+                                  text={item.libelle}
+                                  pattern={query}
+                                />
                               </button>
                             </li>
                           ))}
@@ -366,7 +380,9 @@ function Candidature({ params }: any) {
                   </div>
                 </div>
               </div>
-              {selectedTraining && selectedTraining.sessions && selectedTraining.sessions.length ? (
+              {selectedTraining &&
+              selectedTraining.sessions &&
+              selectedTraining.sessions.length ? (
                 <div className="sessions py-2">
                   <label
                     htmlFor="sessions"
@@ -486,13 +502,14 @@ function Candidature({ params }: any) {
               </div>
               <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
                 <div className={formStyles.form_control}>
-                  <label className="w-full text-black">Préférence :</label>
-                  <div
-                    className={`grid md:grid-cols-2 gap-4 my-2`}>
+                  <label className="w-full text-black">
+                    Que préférez vous pour votre formation ?
+                  </label>
+                  <div className={`grid md:grid-cols-2 gap-4 my-2`}>
                     <div className="flex items-center">
                       <input
                         className="hidden"
-                        type="radio"
+                        type="checkbox"
                         value={PREFERED_LOCATION.DISTANCE}
                         id={PREFERED_LOCATION.DISTANCE}
                         {...register('preferedLocation')}
@@ -500,16 +517,18 @@ function Candidature({ params }: any) {
                       <label
                         htmlFor={PREFERED_LOCATION.DISTANCE}
                         className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
-                          preferedLocation === PREFERED_LOCATION.DISTANCE
+                          preferedLocation &&
+                          preferedLocation.indexOf(PREFERED_LOCATION.DISTANCE) >
+                            -1
                             ? 'bg-app-blue text-white'
                             : ''
                         }`}>
-                        Distance
+                        En ligne
                       </label>
                     </div>
                     <div className="flex items-center">
                       <input
-                        type="radio"
+                        type="checkbox"
                         className="hidden"
                         value={PREFERED_LOCATION.PRESENTIEL}
                         id={PREFERED_LOCATION.PRESENTIEL}
@@ -518,11 +537,14 @@ function Candidature({ params }: any) {
                       <label
                         htmlFor={PREFERED_LOCATION.PRESENTIEL}
                         className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
-                          preferedLocation === PREFERED_LOCATION.PRESENTIEL
+                          preferedLocation &&
+                          preferedLocation.indexOf(
+                            PREFERED_LOCATION.PRESENTIEL
+                          ) > -1
                             ? 'bg-app-blue text-white'
                             : ''
                         }`}>
-                        Présentiel
+                        En présentiel
                       </label>
                     </div>
                   </div>

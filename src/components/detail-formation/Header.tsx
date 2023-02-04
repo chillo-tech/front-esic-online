@@ -117,7 +117,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   </div>
                 ) : null}
               </div>
-              <div className="grid md:grid-cols-2 gap-2">
+              <div className={`grid ${training?.programmepdf ? 'grid-cols-2' : ''} md:grid-cols-2 gap-2`}>
                 <AllTrainings
                   training={training}
                   icon={false}

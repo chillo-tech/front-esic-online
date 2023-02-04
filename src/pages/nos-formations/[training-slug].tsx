@@ -26,6 +26,7 @@ import Metadata from 'components/metadata';
 import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import AllTrainings from 'components/shared/AllTrainings';
 import { Spinner } from 'flowbite-react';
+import HomeTrainingItemMobile from 'components/shared/HomeTrainingItemMobile';
 var classNames = require('classnames');
 
 export type Message = {
@@ -123,7 +124,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
               toogleDownloadForm={toogleDownloadForm}
             />
             <Sessions  training={training}/>
-            <section className="bg-white py-10">
+            <section className="bg-white py-2 pt-10 md:py-10">
               <div className="md:px-0 container grid md:grid-cols-5 gap-5">
                 <div className="md:col-span-3 col-span-5">
                   {TRAINING_KEYS.filter((item) => training[item.key]).map(
@@ -145,7 +146,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                   )}
                 </div>
                 <div className="w-full col-span-5 mx-auto md:fixed scrollbar-hide md:w-96 md:z-30 md:h-screen md:pb-40 md:top-28 md:right-24 md:overflow-y-scroll md:overflow-scroll scroll-smooth">
-                  <div className=" w-full mx-auto bg-white rounded-lg shadow-md">
+                  <div className=" w-full mx-auto bg-white hidden md:block rounded-lg shadow-md">
                     <HomeTrainingItem
                       training={training}
                       displayTitle={false}
@@ -198,10 +199,22 @@ function Training({ id, slug }: { id: string; slug: string }) {
                 <h2 className="container md:px-0 text-2xl md:text-4xl font-extrabold">
                     Autres formations
                 </h2>
-                <div className="grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container">
+                <div className="hidden md:grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container">
                 {
                   relatedTraining.slice(0, 3).map((training: any, index: number) =>(
                     <HomeTrainingItem 
+                      classes="bg-slate-50 rounded-lg shadow-md pb-4" 
+                      training={training.formations_id} 
+                      link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}
+                      key={`${training.formations_id.id}-${index}`} 
+                    /> 
+                  ))
+                }
+                </div>
+                <div className="md:hidden grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container">
+                {
+                  relatedTraining.slice(0, 3).map((training: any, index: number) =>(
+                    <HomeTrainingItemMobile 
                       classes="bg-slate-50 rounded-lg shadow-md pb-4" 
                       training={training.formations_id} 
                       link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}

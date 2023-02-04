@@ -17,6 +17,7 @@ import {
   loaderProp,
   LIEN_POLITIQUE_SECURITE,
   PREFERED_LOCATION,
+  ACCEPT_FORM_ERROR_MESSAGE,
 } from '../utils/index';
 import { useMutation } from 'react-query';
 import { useRouter } from 'next/router';
@@ -39,7 +40,7 @@ export type Message = {
   profile: string;
   subject: string;
   contactChannel: string[];
-  preferedLocation: string;
+  preferedLocation: string[];
   acceptForm: boolean;
 };
 
@@ -63,8 +64,13 @@ const schema = yup
       .min(1)
       .required(REQUIRED_ERROR_MESSAGE)
       .nullable(),
-    preferedLocation: yup.string().trim().required(),
-    acceptForm: yup.bool().required(),
+    preferedLocation: yup
+      .array()
+      .of(yup.string())
+      .min(1)
+      .required(REQUIRED_ERROR_MESSAGE)
+      .nullable(),
+    acceptForm: yup.bool().oneOf([true], ACCEPT_FORM_ERROR_MESSAGE).required(),
     message: yup
       .string()
       .trim()
@@ -97,6 +103,7 @@ export default function Contact() {
     mutation.mutate({
       ...data,
       contactChannel: contactChannel.join(', ').toLowerCase(),
+      preferedLocation: preferedLocation.join(', ').toLowerCase(),
     });
   };
 
@@ -336,13 +343,14 @@ export default function Contact() {
                   <div
                     className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
                     <div className={formStyles.form_control}>
-                      <label className="w-full text-black">Préférence :</label>
-                      <div
-                        className={`grid md:grid-cols-2 gap-4 my-2`}>
+                      <label className="w-full text-black">
+                        Que préférez vous pour votre formation ?
+                      </label>
+                      <div className={`grid md:grid-cols-2 gap-4 my-2`}>
                         <div className="flex items-center">
                           <input
                             className="hidden"
-                            type="radio"
+                            type="checkbox"
                             value={PREFERED_LOCATION.DISTANCE}
                             id={PREFERED_LOCATION.DISTANCE}
                             {...register('preferedLocation')}
@@ -350,16 +358,19 @@ export default function Contact() {
                           <label
                             htmlFor={PREFERED_LOCATION.DISTANCE}
                             className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
-                              preferedLocation === PREFERED_LOCATION.DISTANCE
+                              preferedLocation &&
+                              preferedLocation.indexOf(
+                                PREFERED_LOCATION.DISTANCE
+                              ) > -1
                                 ? 'bg-app-blue text-white'
                                 : ''
                             }`}>
-                            Distance
+                            En ligne
                           </label>
                         </div>
                         <div className="flex items-center">
                           <input
-                            type="radio"
+                            type="checkbox"
                             className="hidden"
                             value={PREFERED_LOCATION.PRESENTIEL}
                             id={PREFERED_LOCATION.PRESENTIEL}
@@ -368,11 +379,14 @@ export default function Contact() {
                           <label
                             htmlFor={PREFERED_LOCATION.PRESENTIEL}
                             className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
-                              preferedLocation === PREFERED_LOCATION.PRESENTIEL
+                              preferedLocation &&
+                              preferedLocation.indexOf(
+                                PREFERED_LOCATION.PRESENTIEL
+                              ) > -1
                                 ? 'bg-app-blue text-white'
                                 : ''
                             }`}>
-                            Présentiel
+                            En présentiel
                           </label>
                         </div>
                       </div>

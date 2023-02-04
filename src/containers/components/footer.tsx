@@ -39,7 +39,7 @@ function Footer() {
   });
   return (
     <>
-      <footer className="text-center relative shadow-xl pb-20 w-full bg-gradient-to-b via-app-stone from-app-light-gray to-app-stone text-white font-sans font-extralight">
+      <footer className="text-left md:text-center relative shadow-xl w-full bg-gradient-to-b via-app-stone from-app-light-gray to-app-stone text-white font-sans font-extralight">
         {isSuccess ? (
           <>
             <div className="container md:px-0 relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">

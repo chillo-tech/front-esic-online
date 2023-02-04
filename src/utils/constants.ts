@@ -5,6 +5,7 @@ const STRING_WITH_NUMBERS_REGEXP: any = /^\D*(\d\D*){10,}$/;
 const PHONE_ERROR_MESSAGE: string = 'Votre numéro de téléphone est invalide';
 const EMAIL_ERROR_MESSAGE: string = 'Votre mail est invalide';
 const REQUIRED_ERROR_MESSAGE: string = 'Ce champ est requis';
+const ACCEPT_FORM_ERROR_MESSAGE: string = 'Veuillez accepter les termes de notre politique';
 const EMPTY_SESSION: string = "Aucune session n'est programée à ce jour";
 const INITIAL_STATE = { trainingsParams: { path: 'formations' } };
 const UPDATE_SEARCH_TRAINING_PARAMS = 'UPDATE_SEARCH_TRAINING_PARAMS';
@@ -219,7 +220,7 @@ const DEMANDE_CANDIDAT = {
 }
 
 const PREFERED_LOCATION = {
-  DISTANCE: "distance",
+  DISTANCE: "online",
   PRESENTIEL: "presentiel"
 }
 
@@ -246,6 +247,7 @@ export {
   UPDATE_LAST_TRAINING,
   DISPLAY_INSCRIPTION_BUTTON,
   UPDATE_SEARCH_TRAINING_PARAMS,
+  ACCEPT_FORM_ERROR_MESSAGE,
   EMPTY_SESSION,
   PHONE_PATTERN,
   EMAIL_PATTERN,

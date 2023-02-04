@@ -20,6 +20,7 @@ import {
   regionsEntreprise,
   LIEN_POLITIQUE_SECURITE,
   PREFERED_LOCATION,
+  ACCEPT_FORM_ERROR_MESSAGE,
 } from 'utils/index';
 import formStyles from 'styles/Form.module.css';
 import Message from 'components/shared/Message';
@@ -46,7 +47,7 @@ export type Message = {
   contactChannel: string[];
   sessions: string[];
   job: string;
-  preferedLocation: string;
+  preferedLocation: string[];
   acceptForm: boolean;
 };
 
@@ -65,11 +66,16 @@ const schema = yup
       .matches(EMAIL_PATTERN, { message: EMAIL_ERROR_MESSAGE }),
     enterpriseRegion: yup.string().trim(),
     job: yup.string().trim(),
-    preferedLocation: yup.string().trim().required(),
-    acceptForm: yup.bool().required(),
+    acceptForm: yup.bool().oneOf([true], ACCEPT_FORM_ERROR_MESSAGE).required(),
     candidatureStarted: yup.string().trim(),
     demandeSubject: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
     contactChannel: yup
+      .array()
+      .of(yup.string())
+      .min(1)
+      .required(REQUIRED_ERROR_MESSAGE)
+      .nullable(),
+    preferedLocation: yup
       .array()
       .of(yup.string())
       .min(1)
@@ -93,6 +99,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
     mutation.mutate({
       ...data,
       contactChannel: contactChannel.join(', ').toLowerCase(),
+      preferedLocation: preferedLocation.join(', ').toLowerCase(),
     });
   };
 
@@ -192,7 +199,12 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                     <p className="py-2 items-center justify-center flex">
                       <AllTrainings
                         text={'Je suis intéressé(e)'}
-                        link={(data?.formulaire === 'candidat' || data?.formulaire === 'entreprise') ? "#section-formulaire": "/contactez-nous"}
+                        link={
+                          data?.formulaire === 'candidat' ||
+                          data?.formulaire === 'entreprise'
+                            ? '#section-formulaire'
+                            : '/contactez-nous'
+                        }
                         icon={false}
                         classes="!text-center !text-xs border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
                       />
@@ -201,7 +213,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                 ))}
                 <AllTrainings
                   text={'Contactez nous'}
-                  link={"/contactez-nous"}
+                  link={'/contactez-nous'}
                   classes="border border-white text-white hover:bg-transparent hover:bg-white hover:text-app-blue hover:border hover:border-white"
                 />
               </div>
@@ -210,7 +222,9 @@ function Page({ data, sessions, displayTrainings = false }: any) {
         ) : null}
         {(data?.formulaire === 'candidat' ||
           data?.formulaire === 'entreprise') && (
-          <div id="section-formulaire" className='w-full h-full py-4 pb-8 bg-gray-50 bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]'>
+          <div
+            id="section-formulaire"
+            className='w-full h-full py-4 pb-8 bg-gray-50 bg-no-repeat bg-left bg-contain bg-[url("/images/pages/offers-left-arc.svg")]'>
             <div className="container mt-4">
               <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
                 <span className="px-10 py-3">Posez nous votre question</span>
@@ -293,6 +307,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                         <div className={formStyles.form_control}>
                           <select
                             {...register('demandeSubject')}
+                            required
                             className={formStyles.form_control__input}>
                             <option disabled selected value="">
                               Votre demande concerne ?
@@ -341,10 +356,10 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                         <div className={formStyles.form_control}>
                           <select
                             {...register('candidatureStarted')}
+                            required
                             className={formStyles.form_control__input}>
                             <option disabled selected value="">
-                              Avez vous commencé votre parcours de candidature
-                              ?
+                              Avez vous commencé votre parcours de candidature ?
                             </option>
                             <option
                               key={`c-candidature-started-yes}`}
@@ -390,6 +405,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                             type="text"
                             id="enterpriseName"
                             placeholder="Nom de la société"
+                            required
                             className={formStyles.form_control__input}
                             {...register('enterpriseName')}
                           />
@@ -405,6 +421,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                             type="text"
                             id="job"
                             placeholder="Votre poste"
+                            required
                             className={formStyles.form_control__input}
                             {...register('job')}
                           />
@@ -418,6 +435,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                         <div className={formStyles.form_control}>
                           <select
                             {...register('enterpriseRegion')}
+                            required
                             className={formStyles.form_control__input}>
                             <option disabled selected value="">
                               Dans quelle région se situe votre entreprise ?
@@ -479,13 +497,14 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                   <div
                     className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
                     <div className={formStyles.form_control}>
-                      <label className="w-full text-black">Préférence :</label>
-                      <div
-                        className={`grid md:grid-cols-2 gap-4 my-2`}>
+                      <label className="w-full text-black">
+                        Que préférez vous pour votre formation ?
+                      </label>
+                      <div className={`grid md:grid-cols-2 gap-4 my-2`}>
                         <div className="flex items-center">
                           <input
                             className="hidden"
-                            type="radio"
+                            type="checkbox"
                             value={PREFERED_LOCATION.DISTANCE}
                             id={PREFERED_LOCATION.DISTANCE}
                             {...register('preferedLocation')}
@@ -493,16 +512,19 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                           <label
                             htmlFor={PREFERED_LOCATION.DISTANCE}
                             className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
-                              preferedLocation === PREFERED_LOCATION.DISTANCE
+                              preferedLocation &&
+                              preferedLocation.indexOf(
+                                PREFERED_LOCATION.DISTANCE
+                              ) > -1
                                 ? 'bg-app-blue text-white'
                                 : ''
                             }`}>
-                            Distance
+                            En ligne
                           </label>
                         </div>
                         <div className="flex items-center">
                           <input
-                            type="radio"
+                            type="checkbox"
                             className="hidden"
                             value={PREFERED_LOCATION.PRESENTIEL}
                             id={PREFERED_LOCATION.PRESENTIEL}
@@ -511,11 +533,14 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                           <label
                             htmlFor={PREFERED_LOCATION.PRESENTIEL}
                             className={`border w-full py-3 border-app-blue text-center rounded-md font-extralight cursor-pointer ${
-                              preferedLocation === PREFERED_LOCATION.PRESENTIEL
+                              preferedLocation &&
+                              preferedLocation.indexOf(
+                                PREFERED_LOCATION.PRESENTIEL
+                              ) > -1
                                 ? 'bg-app-blue text-white'
                                 : ''
                             }`}>
-                            Présentiel
+                            En présentiel
                           </label>
                         </div>
                       </div>

@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import { getDisplayedDate } from 'utils';
-import Debug from 'components/Debug';
 
 function Sessions({training}: any) {
   const [displaySessions, setDisplaySessions] = useState(false);
   return (
     <article className="md:hidden">
-      <h3 className="bg-app-blue text-xs grid grid-cols-12 container items-center justify-center">
+      <h3 className="bg-app-blue text-xs grid grid-cols-12 md:container items-center justify-center">
         <button type="button" className='py-3 text-white text-center col-span-5'
           onClick={() => setDisplaySessions((current) => !current)}
         >
