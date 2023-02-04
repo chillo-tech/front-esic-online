@@ -36,10 +36,10 @@ body {
 }
 
 .blue-button {
-  @apply flex px-6 py-2 rounded-lg !text-lg md:!text-lg border border-app-blue bg-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase
+  @apply flex px-6 py-1 rounded-lg border border-app-blue bg-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase
 }
 .outline-blue-button {
-  @apply flex px-6 py-2 rounded-lg !text-lg md:!text-lg border border-app-blue hover:bg-app-blue hover:text-white bg-transparent text-app-blue border-app-blue uppercase
+  @apply flex px-6 py-1 rounded-lg border border-app-blue hover:bg-app-blue hover:text-white bg-transparent text-app-blue border-app-blue uppercase
 }
 /*==== FIN Testing des polices ===*/
 
@@ -64,7 +64,7 @@ body {
 .detail-formation .programme p,
 .detail-formation .programme ul
 {
-  @apply text-lg ml-10 mb-5 list-disc;
+  @apply ml-10 mb-5 list-disc;
   display: list-item;
 }
 .corps_contenu, .corps_travaux_pratiques {

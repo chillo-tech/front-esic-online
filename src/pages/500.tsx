@@ -1,10 +1,16 @@
 import OpenedLayout from "../containers/opened";
 import Link from "next/link";
 import React from "react";
+import Head from 'next/head';
 
 function PageNotFound() {
   return (
     <OpenedLayout>
+      <Head>
+        <title>ESIC| La page que vous recherchez n&apos;existe pas</title>
+        <meta name="titre" content="ESIC| La page que vous recherchez n'existe pas" />
+        <meta name="description" content="ESIC| La page que vous recherchez n'existe pas" />
+      </Head>
       <section className="w-full text-lg">
         <main className="container mx-auto flex flex-col justify-center py-40 px-2">
           <h1 className="text-2xl md:text-4xl font-extrabold text-gray-500 flex items-center justify-between w-full py-2 focus:ring-4 focus:ring-gray-200">

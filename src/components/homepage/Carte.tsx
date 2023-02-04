@@ -5,17 +5,15 @@ import { useMemo } from 'react';
 const Carte = ({adresses = []}: {adresses: any[]}) => {
   const libraries = useMemo(() => ['places'], []);
   const mapCenter = useMemo(
-    () => ({ lat: parseFloat(adresses[0].latitude), lng: parseFloat(adresses[0].longitude)}),
+    () => ({ lat:47.081012, lng: 2.398782}),
     []
   );
 
-    const onLoad = (marker: any) => {
-        console.log("marker: ", marker);
-    };
+    const onLoad = () => null;
 
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
-      zoom: 6
+      zoom: 5
     }),
     []
   );
@@ -36,8 +34,7 @@ const Carte = ({adresses = []}: {adresses: any[]}) => {
         <div className='flex justify-center items-center relative'>
           <div className="h-96 rounded-xl overflow-hidden">
             <GoogleMap
-              options={mapOptions}
-              zoom={14}
+              zoom={6}
               center={mapCenter}
               mapTypeId={google.maps.MapTypeId.ROADMAP}
               mapContainerStyle={{ width: '800px', height: '384px' }}
@@ -47,6 +44,7 @@ const Carte = ({adresses = []}: {adresses: any[]}) => {
                       <MarkerF
                         key={`adresse-${adresse.id}-${index}`}
                         onLoad={onLoad}
+
                         position={{ lat: parseFloat(adresse.latitude), lng: parseFloat(adresse.longitude)}}
                       />
                   ))

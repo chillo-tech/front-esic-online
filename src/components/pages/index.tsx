@@ -34,7 +34,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                   <AllTrainings
                   text={'Contactez nous'}
                   link="/contactez-nous"
-                  classes="mt-4 border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
+                  classes="outline-blue-button"
                 />
               )
             }

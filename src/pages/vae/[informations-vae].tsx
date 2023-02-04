@@ -3,13 +3,10 @@ import { ApplicationContext } from 'context/ApplicationContext';
 import React, { useContext } from 'react'
 import { useQuery } from 'react-query';
 import { fetchData } from 'services/index';
+import {PAGE_PARAMS} from 'utils';
 
 function InformationsVae({id}: {id: string}) {
   const {updateSearchPrams} = useContext(ApplicationContext);
-  const base = 'id,libelle,souslibelle,ordre,image,description,abstrait';
-  const articles = 'articles.id,articles.libelle,articles.description';
-  const pages = 'pages.pages_id.id,pages.pages_id.libelle,pages.pages_id.image,pages.pages_id.description,pages.pages_id.abstrait';
-  const fields=`${base},${articles},${pages}`
   const {
     isSuccess,
     data,
@@ -18,7 +15,7 @@ function InformationsVae({id}: {id: string}) {
     queryFn: () =>
     fetchData({
         path: `pages/${id}`,
-        fields
+        fields: PAGE_PARAMS
       }),
       onSuccess: () => updateSearchPrams({path: 'formations', title: "Formations éligibles au CPF"})
   });

@@ -31,33 +31,16 @@ function DropDown({dropdown, parent, categories, pages, certifications, parentWi
                     return (a !== null && a.pages_id !== null)
                   })
                   .map((page: any, index: number) => (
-                     <>
-                       {
-                         (page.pages_id.certifications && page.pages_id.certifications.length)
-                         ? (
-                          <>
-                           <SubMenuItem
-                                grandparent={parent}
-                                parent={slugify(`${page.pages_id.libelle}-${page.pages_id.id}`)}
-                                item={page.pages_id}
-                                key={`menu-categorie-${index}-${page.pages_id.id}`}
-                            />
-                          </>
-                         )
-                         : (
-                            <li key={`menu-page-${index}`} className="menu-items ">
-                                    <Link
-                                        href={`/${slugify(parent)}/${slugify(
-                                            page.pages_id.libelle
-                                        )}-${page.pages_id.id}`}
-                                        className="py-2 block text-sm px-4 whitespace-nowrap"
-                                        title={page.libelle}>
-                                {page.pages_id.libelle}
-                            </Link>
-                          </li>
-                         )
-                       }
-                     </>
+                      <li key={`menu-page-${index}`} className="menu-items ">
+                        <Link
+                            href={`/${slugify(parent)}/${slugify(
+                                page.pages_id.libelle
+                            )}-${page.pages_id.id}`}
+                            className="py-2 block text-sm px-4 whitespace-nowrap"
+                            title={page.libelle}>
+                          {page.pages_id.libelle}
+                        </Link>
+                      </li>
             ))}
           </ul>
         ): null
