@@ -17,7 +17,7 @@ function HomeTrainingItemMobile({
         href={link}
         className={classNames('flex flex-col justify-between', classes)}
         key={training.id}>
-        <div className="grid mt-4 grid-flow-col">
+        <div className="grid mt-4 pl-1 grid-flow-col">
           {training.image ? (
             <div className="!rounded-t-lg h-24 md:h-64 overflow-hidden relative w-24">
               <div className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />

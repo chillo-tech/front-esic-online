@@ -196,7 +196,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
               (relatedTraining && relatedTraining.length)
               ? (
                 <>
-                <h2 className="container md:px-0 text-2xl md:text-4xl font-extrabold">
+                <h2 className="container md:px-0 mb-4 text-2xl md:text-4xl font-extrabold">
                     Autres formations
                 </h2>
                 <div className="hidden md:grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container">
