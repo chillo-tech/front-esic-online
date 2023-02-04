@@ -101,9 +101,9 @@ function Certification({
               (data?.certifications && data?.certifications.length ) ? (
                   <section className="bg-white py-5">
                     <div
-                        className="mx-auto py-6"
+                        className="mx-auto pb-6 md:pt-6"
                     >
-                        <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
+                        <h2 className="font-bold text-3xl md:text-5xl md:mb-12 text-center flex flex-col justify-center items-center">
                         <span className='px-10 py-3'>
                           Nos certifications
                         </span>
@@ -111,7 +111,7 @@ function Certification({
                       </h2>
                     </div>
                     <div className="md:px-0 container">
-                      <ul className="grid md:grid-cols-4 gap-4">
+                      <ul className="grid md:grid-cols-3 gap-4">
                         {
                           data?.certifications.map(({certifications_id: certification}: any) => (
                               <li key={certification.id} className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] rounded-lg">
@@ -132,7 +132,7 @@ function Certification({
                                   <div className={classNames(
                                       {"px-6": !certification.image},
                                       {"col-span-6": certification.image},
-                                      'flex flex-col justify-between w-full px-2 py-4'
+                                      'flex flex-col justify-between w-full pl-6 pr-6 py-4'
                                   )}>
                                       <div className="">
                                         <h2 className="title font-extrabold text-2xl text-app-light-gray">
