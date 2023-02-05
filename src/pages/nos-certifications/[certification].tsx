@@ -131,15 +131,13 @@ export default CertificationCategory;
 
 
 export async function getServerSideProps(context: any) {
-	const { query } = context;
+	const { query, params:pr } = context;
 	let params: any = {};
 	if (!query) {
 		return {
 			notFound: true,
 		}
 	}
-
-
 
 	if (query['certification']) {
 		const id = query['certification'].substring(query['certification'].lastIndexOf('-') + 1);
