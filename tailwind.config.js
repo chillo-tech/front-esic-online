@@ -22,6 +22,8 @@ module.exports = {
       gridTemplateRows: {
         // Simple 8 row grid
         '8': 'repeat(8, minmax(0, 1fr))',
+        '9': 'repeat(9, minmax(0, 1fr))',
+        '10': 'repeat(10, minmax(0, 1fr))',
 
         // Complex site-specific row configuration
         'layout': '200px minmax(900px, 1fr) 100px',
@@ -30,7 +32,7 @@ module.exports = {
         'white': '#ffffff',
         primary: "#2C7CBB",
         secondary: "#418106",
-        'app-blue': '#207CBB',
+        'app-blue': '#2C7CBB',
         'app-light-blue': '#EEF5FA',
         'app-light-green': '#EAEDEE',
         'app-green': '#008100',
@@ -44,5 +46,6 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('tailwind-scrollbar-hide'),
     require('flowbite/plugin'),
+    require('@tailwindcss/line-clamp')
   ],
 };

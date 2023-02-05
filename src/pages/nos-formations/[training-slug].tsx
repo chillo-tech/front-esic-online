@@ -82,9 +82,9 @@ function Training({ id, slug }: { id: string; slug: string }) {
 
   const trainingId = training?.id;
   useQuery<any>({
-    enabled: !!trainingId,
+    enabled: !!(trainingId && training?.souscategories.filter((souscategory: any) => souscategory != null && souscategory.souscategories_id != null)[0]?.souscategories_id?.id),
     queryKey: ["SousCategories", training?.souscategories[0]?.souscategories_id?.id],
-    queryFn: () => getSubCategories({id: training?.souscategories[0]?.souscategories_id?.id as string, trainingsLimit: 3}),
+    queryFn: () => getSubCategories({id: training?.souscategories.filter((souscategory: any) => souscategory != null && souscategory.souscategories_id != null)[0]?.souscategories_id?.id as string, trainingsLimit: 3}),
     onSuccess: ({data}: any) => {
       setRelatedTraining(data?.data?.formations);
     },
@@ -127,7 +127,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
             <section className="bg-white py-2 pt-10 md:py-10">
               <div className="md:px-0 container grid md:grid-cols-5 gap-5">
                 <div className="md:col-span-3 col-span-5">
-                  {TRAINING_KEYS.filter((item) => training[item.key]).map(
+                  {TRAINING_KEYS.filter((item: any) => training[item.key]).map(
                     (item) => (
                       <article
                         key={`${id}-${item.key}-${slugify(item.label)}`}
@@ -150,7 +150,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                     <HomeTrainingItem
                       training={training}
                       displayTitle={false}
-                      classes="bg-app-light-green rounded-t-lg"
+                      classes="hidden md:block bg-app-light-green rounded-t-lg"
                     />
                     {training.sessions && training.sessions.length ? (
                       <div className="hidden md:block bg-app-light-green px-5 ">
@@ -186,7 +186,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                       icon={false}
                       link="/contactez-nous"
                       text="Comment financer la formation ?"
-                      classes="bg-none text-app-blue font-bold md:text-xl py-4"
+                      classes="hidden md:block bg-none text-app-blue font-bold md:text-xl py-4"
                     />
                   </div>
                 </div>
@@ -196,7 +196,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
               (relatedTraining && relatedTraining.length)
               ? (
                 <>
-                <h2 className="container md:px-0 mb-4 text-2xl md:text-4xl font-extrabold">
+                <h2 className="container md:px-0 text-2xl md:text-4xl font-extrabold mb-3">
                     Autres formations
                 </h2>
                 <div className="hidden md:grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container">
@@ -207,19 +207,19 @@ function Training({ id, slug }: { id: string; slug: string }) {
                       training={training.formations_id} 
                       link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}
                       key={`${training.formations_id.id}-${index}`} 
-                    /> 
+                    />
                   ))
                 }
                 </div>
                 <div className="md:hidden grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container">
                 {
                   relatedTraining.slice(0, 3).map((training: any, index: number) =>(
-                    <HomeTrainingItemMobile 
-                      classes="bg-slate-50 rounded-lg shadow-md pb-4" 
-                      training={training.formations_id} 
+                    <HomeTrainingItemMobile
+                      classes="bg-slate-50 rounded-lg shadow-md pb-4"
+                      training={training.formations_id}
                       link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}
-                      key={`${training.formations_id.id}-${index}`} 
-                    /> 
+                      key={`${training.formations_id.id}-${index}`}
+                    />
                   ))
                 }
                 </div>

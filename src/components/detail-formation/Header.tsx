@@ -1,14 +1,14 @@
 import AllTrainings from 'components/shared/AllTrainings';
 import CPFLink from 'components/shared/CPFLink';
+import Rating from 'components/shared/Rating';
+import Certification from 'components/shared/Certification';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { AiFillStar } from 'react-icons/ai';
 import { capitalize, cn, loaderProp, slugify } from 'utils';
 
 function Header({ training, toogleDownloadForm }: any) {
   const [isImageLoading, setLoading] = useState(true);
-
   return (
     <>
       {training ? (
@@ -60,42 +60,20 @@ function Header({ training, toogleDownloadForm }: any) {
                   classes="text-white font-light text-lg py-8"
                 />
               ) : null}
-              <div className="flex mb-4 items-center">
-                <span className="font-semibold mr-2 text-xs md:text-lg">
-                  4.7
-                </span>
-                <div className="flex items-center">
-                  <AiFillStar
-                    className="text-2xl text-yellow-400"
-                    key={`moyenne-1`}
-                  />
-                  <AiFillStar
-                    className="text-2xl text-yellow-400"
-                    key={`moyenne-2`}
-                  />
-                  <AiFillStar
-                    className="text-2xl text-yellow-400"
-                    key={`moyenne-3`}
-                  />
-                  <AiFillStar
-                    className="text-2xl text-yellow-400"
-                    key={`moyenne-4`}
-                  />
-                  <AiFillStar
-                    className="text-2xl text-yellow-400"
-                    key={`moyenne-5`}
-                  />
-                </div>
-                <span className="font-semibold ml-2 text-xs md:text-lg">
-                  (622 notes) 5 661 participants
-                </span>
-              </div>
+              <Rating
+                classes="font-semibold md:text-lg"
+                rate="4.7"
+                label="(622 notes)"
+                displayRate={true}
+                displayLabel={true}
+                isDecimal={4.7 % 1 != 0}
+              />
               <div>
                 {training.niveau || training.prix ? (
                   <div className="flex justify-between mb-4 text-xl">
                     {training.niveau ? (
                       <span className="flex bg-app-green mr-3 pr-5 text-white items-center rounded-lg">
-                        <span className="ml-3 mr-3 bg-white w-2 h-2 rounded-full"></span>
+                        <span className="ml-3 mr-3 bg-white w-2 h-2 rounded-full"/>
                         <span>
                           {training.niveau === 'BEGINNER' ? 'Débutant' : null}
                         </span>
@@ -117,6 +95,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   </div>
                 ) : null}
               </div>
+              <Certification certifications={training?.certifs}/>
               <div className={`grid ${training?.programmepdf ? 'grid-cols-2' : ''} md:grid-cols-2 gap-2`}>
                 <AllTrainings
                   training={training}

@@ -1,3 +1,5 @@
+import {FILE_PARAMS} from './fichiers';
+
 const base = "libelle,email,telephone,souslibelle,abstrait,description";
 const liens ="liens.*, liens.image.*";
 const certifications =`
@@ -8,6 +10,8 @@ const certifications =`
   certifications.certifications_id.image.filename_disk,
   certifications.certifications_id.image.title
   `;
+
+const metadonnees = 'metadonnees.*';
 const pages ="pages.*";
 const formations ="formations.*";
 const adresses ="adresses.*";
@@ -16,10 +20,19 @@ const couverture ="couverture.*";
 const offres ="offres.*";
 const avis ="avis.*,avis.formation.libelle";
 const apropos ="apropos.*";
-const fichiers =`
-  fichiers.directus_files_id.filename_disk,
-  fichiers.directus_files_id.id,
-  fichiers.directus_files_id.title
+const ENTREPRISE_PARAMS = `
+  ${base},
+  ${offres},
+  ${certifications},
+  ${liens},
+  ${formations},
+  ${pages},
+  ${apropos},
+  ${adresses},
+  ${localisations},
+  ${avis},
+  ${couverture},
+  ${FILE_PARAMS},
+  ${metadonnees}
 `;
-const ENTREPRISE_PARAMS = `${base},${offres},${certifications},${liens},${formations},${pages},${apropos},${adresses},${localisations},${avis},${couverture},${fichiers}`
 export {ENTREPRISE_PARAMS};

@@ -42,7 +42,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
               {
                 training.niveau ? 
                   <span style={{backgroundColor: 'rgba(0, 129, 0, 0.15)'}} className="flex py-1 mr-3 pl-3 pr-5 items-center rounded-lg">
-                    <span className='mr-3 bg-app-green w-4 h-4 rounded-full'></span>
+                    <span className='mr-3 bg-app-green w-4 h-4 rounded-full'/>
                     <span>{training.niveau === "BEGINNER" ? 'Débutant': null}</span>
                     <span>{training.niveau === "INTERMEDIARY" ? 'Intermediaire': null}</span>
                     <span>{training.niveau === "ADVANCED" ? 'Avancé': null}</span>

@@ -4,5 +4,7 @@ export * from './DateFormat';
 export * from './image-loader';
 export * from './parameters/entreprise';
 export * from './parameters/menu';
+export * from './parameters/fichiers';
+export * from './parameters/page';
 export * from './query-parameters';
 export * from './slugify';

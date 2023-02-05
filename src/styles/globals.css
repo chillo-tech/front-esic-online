@@ -34,6 +34,13 @@ body {
 
  
 }
+
+.blue-button {
+  @apply flex px-6 py-1 rounded-lg border border-app-blue bg-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase
+}
+.outline-blue-button {
+  @apply flex px-6 py-1 rounded-lg border border-app-blue hover:bg-app-blue hover:text-white bg-transparent text-app-blue border-app-blue uppercase
+}
 /*==== FIN Testing des polices ===*/
 
 .detail-formation .programme > h1,
@@ -43,12 +50,12 @@ body {
 .detail-formation .programme > h5,
 .detail-formation .programme > h6,
 
-.html-text > h1,
-.html-text > h2,
-.html-text > h3,
-.html-text > h4,
-.html-text > h5,
-.html-text > h6
+.html-text h1,
+.html-text h2,
+.html-text h3,
+.html-text h4,
+.html-text h5,
+.html-text h6
 {
   @apply my-4 text-xl font-bold
 }
@@ -57,7 +64,7 @@ body {
 .detail-formation .programme p,
 .detail-formation .programme ul
 {
-  @apply text-lg !font-normal ml-10 mb-5 list-disc;
+  @apply ml-10 mb-5 list-disc;
   display: list-item;
 }
 .corps_contenu, .corps_travaux_pratiques {

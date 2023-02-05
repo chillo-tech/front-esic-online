@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { slugify } from 'utils/slugify'
 
-function SubDropDownMobile({isShowing, parent, grandparent, souscategories, cols}: any) {
+function SubDropDownMobile({isShowing, parent, grandparent, souscategories, certifications, cols}: any) {
 
   return (
       <div
@@ -29,6 +29,28 @@ function SubDropDownMobile({isShowing, parent, grandparent, souscategories, cols
               </ul>
           ): null
         }
+          {
+              (certifications && certifications.length > 0) ? (
+                  <ul className={`dropdown`}>
+                      {certifications
+                          .filter((a: any) => { return (a !== null && a.certifications_id !== null) } )
+                          .sort((a: any, b: any) => { return a.certifications_id.nom.toLowerCase().localeCompare(b.certifications_id.nom.toLowerCase()) })
+                          .map((souscategorie: any, index: number) => (
+                              <li key={`menu-categorie-${index}`} className="menu-items">
+                                  <Link
+                                      href={`/certifications/${slugify(
+                                          souscategorie?.certifications_id?.nom
+                                      )}-${souscategorie.certifications_id?.id}`}
+                                      className="py-2 block text-md whitespace-nowrap px-4"
+                                      title={souscategorie?.certifications_id?.nom}>
+                                      {souscategorie?.certifications_id?.nom}
+                                  </Link>
+                              </li>
+                          ))}
+                  </ul>
+              ): null
+          }
+
       </div>
   )
 }

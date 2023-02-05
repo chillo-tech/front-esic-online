@@ -4,6 +4,7 @@ import {BiChevronDown, BiChevronRight, BiChevronUp} from 'react-icons/bi';
 import {slugify} from 'utils/slugify'
 import SubDropDown from "containers/components/SubDropDown";
 import SubDropDownMobile from "containers/components/SubDropDownMobile";
+import Debug from 'components/Debug';
 
 function SubAccordionItem({item, grandparent, parent}: any) {
   const [isShowing, setIsShowing] = useState(false);
@@ -27,7 +28,9 @@ function SubAccordionItem({item, grandparent, parent}: any) {
 
   return (
     <li className='relative text-left w-full pt-4' ref={ref}>
-      {(item.souscategories && item.souscategories.length > 0) ? (
+      {
+        ((item.souscategories && item.souscategories.length > 0) || (item.certifications && item.certifications.length > 0))
+            ? (
           <div className="whitespace-nowrap">
             <button type="button" aria-haspopup="menu"
                     aria-expanded={isShowing ? "true" : "false"}
@@ -38,13 +41,30 @@ function SubAccordionItem({item, grandparent, parent}: any) {
                 isShowing ? <BiChevronUp className='text-2xl'/> : <BiChevronDown className='text-2xl'/>
               }
             </button>
-            <SubDropDownMobile
-                isShowing={isShowing}
-                grandparent={grandparent}
-                parent={parent}
-                souscategories={item.souscategories}
-                cols={item.souscategories.length}
-            />
+            {
+              (item.certifications && item.certifications.length > 0)
+                ? (
+                    <SubDropDownMobile
+                        isShowing={isShowing}
+                        grandparent={grandparent}
+                        parent={parent}
+                        certifications={item.certifications}
+                        cols={item.certifications.length}
+                    />
+                  ): null
+            }
+            {
+              (item.souscategories && item.souscategories.length > 0)
+                  ? (
+                      <SubDropDownMobile
+                          isShowing={isShowing}
+                          grandparent={grandparent}
+                          parent={parent}
+                          souscategories={item.souscategories}
+                          cols={item.souscategories.length}
+                      />
+                  ): null
+            }
           </div>
       ) : (
           <Link href={`/${slugify(item.libelle)}-${item.id}`}

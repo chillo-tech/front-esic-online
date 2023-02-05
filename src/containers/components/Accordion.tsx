@@ -28,7 +28,10 @@ function Accordion({item}: any) {
         };
     }, [isShowing]);
 
-    if ((item.categories.length && item.categories.length > 1) || (item.pages.length && item.pages.length > 1)) {
+    if (
+        (item.categories.length && item.categories.length > 1)
+        || (item.pages.length && item.pages.length > 1)
+    ) {
         return (
             <div className="w-full pt-4" ref={ref}>
                 <button
@@ -41,8 +44,12 @@ function Accordion({item}: any) {
                         isShowing ? <BiChevronUp className='text-4xl'/> : <BiChevronDown className='text-4xl'/>
                     }
                 </button>
-                <DropdownMobile isShowing={isShowing} parent={slugify(`${item.libelle}`)} pages={item.pages}
-                                categories={item.categories}/>
+                <DropdownMobile
+                    isShowing={isShowing}
+                    parent={slugify(`${item.libelle}`)}
+                    pages={item.pages}
+                    categories={item.categories}
+                />
                 {/*<div*/}
                 {/*    className={`border-t border-gray-400 pt-4 mt-4 text-2xl font-normal uppercase text-gray-700 ${isShowing ? 'block' : 'hidden'}`}*/}
                 {/*    dangerouslySetInnerHTML={{*/}

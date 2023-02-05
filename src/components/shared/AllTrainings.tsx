@@ -7,6 +7,7 @@ interface Params {
   text?: string;
   link?: string;
   icon?: boolean;
+  blank?: boolean;
   uppercase?: boolean;
   classes?: string;
   training?: any;
@@ -17,12 +18,14 @@ function AllTrainings({
   uppercase = true,
   link = '/nos-formations',
   text = 'Voir toutes nos formations',
+  blank = false,
   classes,
   containerClasses,
 }: Params) {
   return (
     <span className={classNames('flex justify-center items-center', containerClasses)}>
       <Link
+       target={blank ?'_blank' : ''}
         href={link}
         className={classNames(
           'flex justify-center items-center text-xs md:text-sm px-3 py-3 rounded-lg relative',

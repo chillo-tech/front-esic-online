@@ -1,51 +1,81 @@
-import classNames from 'classnames';
-import Image from 'next/image';
-import React, { useState } from 'react'
-import { cn, loaderProp } from 'utils/image-loader';
+import React from 'react'
 import RenderHtmlContent from './RenderHtmlContent';
+import DisplayImage from 'components/shared/DisplayImage';
+import Metadata from 'components/metadata';
+import CPFLink from 'components/shared/CPFLink';
+import Debug from 'components/Debug';
+import Link from 'next/link';
+import { capitalize } from 'utils/index';
+import {AiOutlineFilePdf} from 'react-icons/ai';
 
 function PageHeader({data}: any) {
-  const [isImageLoading, setLoading] = useState(true);
   return (
-    <header className="grid bg-slate-100 md:grid-cols-2 items-center text-gray-700">
-      <article className={ classNames(`px-5 md:px-24 py-10`, {
-        'md:py-10': !data.image,
-        'md:py-0': data.image
-      })}>
-          <div className="flex text-md font-extralight">
-            {data.souslibelle}
+    <>
+    <Metadata entry={data} />
+    <header className="grid bg-app-blue items-center text-white">
+      <div className={`container md:px-0 py-10 ${data.image ? 'md:py-16': ''} relative`}>
+        <div className="grid md:grid-cols-2">
+          <div>
+            <p className="text-md font-extralight">
+              {data.souslibelle}
+            </p>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-white">
+              {data?.libelle} {data?.nom}
+            </h1>
+            {
+              data.abstrait ? (
+                <RenderHtmlContent 
+                  classes="my-5 text-xl font-extralight"
+                  content={data.abstrait}
+                />
+              ) : null
+            }
+            {data.niveau || data.prix ? (
+                <div className="flex justify-between mb-4 text-xl md:w-8/12">
+                  {data.duree ? (
+                      <span className="flex items-center text-2xl py-1 pr-3 text-white font-bold">
+                        <span>{data.duree}</span>
+                      </span>
+                  ) : null}
+                  {data.prix ? (
+                      <span className="flex items-center text-2xl py-1 pr-3 text-white font-bold">
+                        <span>{data.prix}</span>
+                      </span>
+                  ) : null}
+                </div>
+            ) : null}
+            {data?.cpf?.[0]?.lien &&(
+               <p className={`md:flex`}><CPFLink data={data.cpf} classes="md:w-8/12"/></p>
+            )}
+            <article className="flex flex-col text-left my-10 md:my-0 md:w-3/5 text-center">
+              {data?.fichiers.map((item: any) => (
+                  <Link
+                      href={`${process.env.API_URL}/assets/${item.directus_files_id.id}?download`}
+                      key={`pages-${item.directus_files_id.id}`}
+                      target="_blank"
+                      className=" flex text-white w-full mr-2 md:mr-0 md:mt-0 md:px-4 text-xs md:text-sm justify-center items-center uppercase py-3 rounded-lg relative border border-app-white hover:bg-white hover:text-app-blue">
+                    <AiOutlineFilePdf className="mr-1 text-2xl" />
+                    {capitalize(item.directus_files_id.title)}
+                  </Link>
+              ))}
+            </article>
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold">
-            {data.libelle}
-          </h2>
-          <RenderHtmlContent 
-            classes="my-5 text-xl font-extralight"
-            content={data.abstrait ? data.abstrait: null}
-          />
-      </article>
-      {
-        data.image ? (
-          <div className="relative hidden md:block" style={{minHeight: '350px'}}>
-          <div className="bg-black opacity-30 w-full absolute left-0 top-0 bottom-0 right-0 z-20" />
-              <Image
-                fill={true}
-                src={`${process.env.API_URL}/assets/${data.image}?w=300&h=200fill=true`}
-                alt={data.libelle}
-                loader={loaderProp}
-                unoptimized
-                priority={true}
-                className={cn(
-                  'relative object-cover duration-700 ease-in-out group-hover:opacity-75',
-                  isImageLoading
-                    ? 'scale-110 blur-2xl grayscale'
-                    : 'scale-100 blur-0 grayscale-0'
-                )}
-                onLoadingComplete={() => setLoading(false)}
+          <span />
+        </div>
+        {
+          data.image ? (
+            <div className="hidden md:block absolute right-0 bottom-0 image-wrapper rounded-lg w-[300px] h-[300px]">
+              <DisplayImage
+                  image={data.image}
+                  imageClasses="object-cover"
+                  libelle={`${data.libelle}`}
+                  classes="rounded-2xl !overflow-hidden"
               />
-          </div>
-        ) : null
-      }
-  </header>
+            </div>
+        ): null }
+      </div>
+    </header>
+    </>
   )
 }
 

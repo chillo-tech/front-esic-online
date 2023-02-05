@@ -12,6 +12,8 @@ function Metadata({entry}: any) {
       setTitle(entry?.libelle);
     } else if(entry?.titre) {
       setTitle(entry?.titre);
+    }else if(entry?.nom) {
+      setTitle(entry?.nom);
     }
     if(entry && entry.metadonnees && entry.metadonnees.description) {
       setDescription(entry.metadonnees.description.replace(/(<([^>]+)>)/ig, ''));

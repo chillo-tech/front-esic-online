@@ -180,6 +180,21 @@ const TRAINING_KEYS = [
   }
 ];
 
+const CERTICATION_KEYS = [
+  {
+    key: 'consignes',
+    label: 'Consignes pour la certification'
+  },
+  {
+    key: 'competences',
+    label: 'Compétences acquises au terme de la certification'
+  },
+  {
+    key: 'debouches',
+    label: 'Débouchées de cette certification'
+  }
+];
+
 const votreDemandeConcerne = [
   {
     value: 'nos-formations',
@@ -258,6 +273,7 @@ export {
   USER_PROFILE,
   TRAINING_KEYS,
   DEMANDE_CANDIDAT,
+  CERTICATION_KEYS,
   votreDemandeConcerne,
   regionsEntreprise,
 };
