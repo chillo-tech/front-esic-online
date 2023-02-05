@@ -43,7 +43,7 @@ function Footer() {
           <>
             <div className="container md:px-0 relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
               <div className="container md:!px-0">
-                <article className="py-5 md:col-span-2 text-3xl">
+                <article className="py-5 md:col-span-2 text-2xl">
                   <Link href={'/'} className="font-extrabold text-6xl mb-2">
                     {data.data.data.libelle}
                   </Link>
@@ -53,7 +53,7 @@ function Footer() {
                           classes="py-3 leading-10"
                       />
                   ) : null}
-                  <p className="py-12 flex items-center justify-center relative">
+                  <p className="py-4 flex items-center justify-center relative">
                     <AllTrainings
                         link="/contactez-nous"
                         text="Contactez nous"
@@ -67,17 +67,17 @@ function Footer() {
                   </p>
                 </article>
               </div>
-              <div className="container my-10 grid md:grid-cols-4 md:!px-4 md:!max-w-full">
+              <div className="container mb-10 grid md:grid-cols-4 md:!px-4 md:!max-w-full">
                 <article>
-                  <h3 className="text-app-white text-left mb-6 text-4xl font-bold">
+                  <h3 className="text-app-white text-left mb-6 text-2xl font-bold">
                     Nous contacter
                   </h3>
                   {data?.data.data.telephone ? (
                       <Link
                           href={`tel:${data?.data.data.telephone}`}
-                          className="text-app-light-gray flex items-center text-3xl font-light pr-3 mb-2">
+                          className="text-app-light-gray flex items-center text-2xl font-light pr-3 mb-2">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
-                          <BsPhone className="text-4xl text-app-blue" />
+                          <BsPhone className="text-2xl text-app-blue" />
                         </span>
                         {data?.data.data.telephone}
                       </Link>
@@ -85,9 +85,9 @@ function Footer() {
                   {data?.data.data.email ? (
                       <Link
                           href={`mailto:${data?.data.data.email}`}
-                          className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3 mb-2">
+                          className="text-app-light-gray flex items-center text-2xl font-light py-2 pr-3 mb-2">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
-                          <HiOutlineMail className="text-4xl text-app-blue" />
+                          <HiOutlineMail className="text-2xl text-app-blue" />
                         </span>
                         {data?.data.data.email}
                       </Link>
@@ -95,9 +95,9 @@ function Footer() {
                   {data?.data.data.adresses ? (
                       <article className="flex text-app-light-gray font-light">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
-                          <BiMapPin className="text-4xl text-app-blue" />
+                          <BiMapPin className="text-2xl text-app-blue" />
                         </span>
-                        <p className="flex flex-col text-left text-3xl">
+                        <p className="flex flex-col text-left text-2xl">
                           {data?.data.data.adresses[0].rue}
                           <span className="uppercase ml-1">
                             {data?.data.data.adresses[0].codepostal}{' '}
@@ -107,26 +107,26 @@ function Footer() {
                       </article>
                   ) : null}
                 </article>
-                <article className="flex flex-col text-left my-10 md:my-0 md:px-10">
-                  <h3 className="text-app-white text-left mb-6 text-4xl font-bold">
+                <article className="flex flex-col text-left my-10 md:my-0 md:px-5">
+                  <h3 className="text-app-white text-left mb-6 text-2xl font-bold">
                     Nous connaitre
                   </h3>
                   {data?.data.data.pages.map((item: any) => (
                       <Link
                           href={`/${slugify(item.libelle)}-${item.id}`}
                           key={`pages-${item.id}`}
-                          className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
+                          className="text-app-light-gray flex items-center text-2xl font-light py-2 pr-3">
                         {item.libelle}
                       </Link>
                   ))}
                 </article>
-                <article className="flex flex-col justify-center text-left my-10 md:my-0 md:px-10">
+                <article className="flex flex-col justify-center text-left my-10 md:my-0 md:px-5">
                   {data?.data.data.fichiers.map((item: any) => (
                       <Link
                           href={`${process.env.API_URL}/assets/${item.directus_files_id.id}?download`}
                           key={`pages-${item.directus_files_id.id}`}
                           target="_blank"
-                          className="text-app-light-gray flex items-center text-3xl font-light py-2 pr-3">
+                          className="text-app-light-gray flex items-center text-2xl font-light py-2 pr-3">
                         {capitalize(item.directus_files_id.title)}
                       </Link>
                   ))}
