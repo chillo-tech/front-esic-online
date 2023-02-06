@@ -59,7 +59,7 @@ function Footer() {
                         text="Contactez nous"
                         classes={`
                         flex justify-center items-center px-8
-                        py-3 rounded-lg !text-xl md:!text-2xl
+                        py-3 rounded-lg !text-xl
                         border border-app-blue bg-app-blue text-white
                         hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase`
                         }
