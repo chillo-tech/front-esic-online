@@ -334,8 +334,7 @@ export default function Contact() {
                       </p>
                     </div>
                   </div>
-                  <div
-                    className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                  <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
                     <div className={formStyles.form_control}>
                       <label className="w-full text-black">
                         Que préférez vous pour votre formation ?
@@ -384,6 +383,7 @@ export default function Contact() {
                       <p className={formStyles.form_control__error}>
                         {errors.preferedLocation?.message}
                       </p>
+                    </div>
                     </div>
                   </div>
                   <div
