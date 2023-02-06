@@ -19,7 +19,7 @@ const onResponseError = async (error: AxiosError): Promise<AxiosError> => {
 }
 
 export function setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
-    axiosInstance.interceptors.request.use(onRequest, onRequestError);
+    axiosInstance.interceptors.request.use(onRequest as any, onRequestError);
     axiosInstance.interceptors.response.use(onResponse, onResponseError);
     return axiosInstance;
 }
