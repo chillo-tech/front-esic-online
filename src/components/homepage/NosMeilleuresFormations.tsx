@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { getTopTrainings } from 'services/index';
 import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import { slugify } from 'utils/slugify';
+import SectionTitle from 'components/shared/SectionTitle';
 
 function NosMeilleuresFormations() {
   const {
@@ -17,17 +18,8 @@ function NosMeilleuresFormations() {
     <>
     {isSuccess ? (
       <section className='pt-20 pb-20 bg-white' id='formations'>
+        <SectionTitle text=" Nos meilleures formations" />
         <div className="container mx-auto px-2">
-          <div
-              className="mx-auto py-12 bg-no-repeat bg-[right_center] bg-[url('/images/pages/trainings-light.svg')]"
-          >
-            <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
-              <span className='px-10 py-3'>
-                Nos meilleures formations
-              </span>
-              <span className='border-b-2 border-app-blue px-10 w-64 mt-2'/>
-            </h2>
-          </div>
           <div className="grid gap-8 pb-10 md:grid-cols-3">
             {data?.data.data
             .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)

@@ -28,7 +28,7 @@ function Search({ classes, isFocused }: Params) {
       fetchData({
         fields: "id,libelle",
         path: "formations",
-        search: query,
+        filter: { "libelle": { "_contains": query }},
         sort: "libelle",
         limit: 10,
       }),

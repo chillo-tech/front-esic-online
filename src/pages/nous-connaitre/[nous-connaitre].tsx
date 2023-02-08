@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useQuery } from 'react-query';
 import { fetchData } from 'services/index';
 
-function POE({id}: {id: string}) {
+function POE({id, link}: {id: string, link: string}) {
   const base = 'id,libelle,souslibelle,ordre,image,description,abstrait,*';
   const categories = 'categories.*';
   const pages = 'pages.*';
@@ -15,7 +15,7 @@ function POE({id}: {id: string}) {
     isSuccess,
     data,
   } = useQuery<any>({
-    queryKey: ["POE==", id],
+    queryKey: ["nous-connaitre",link, id],
     queryFn: () => fetchData({path: `pages/${id}`, fields}), 
     onSuccess: ({data}: any) => {
       const pages = data?.data;
@@ -42,10 +42,10 @@ export default POE
 export async function getServerSideProps(context: any) {
   const { params } = context;
   
-  const id = params['page-poe'].substring(params['page-poe'].lastIndexOf("-") + 1);
-  const libelle = params['page-poe'].substring(
+  const id = params['nous-connaitre'].substring(params['nous-connaitre'].lastIndexOf("-") + 1);
+  const libelle = params['nous-connaitre'].substring(
     0,
-    params['page-poe'].lastIndexOf("-")
+    params['nous-connaitre'].lastIndexOf("-")
   );
-  return { props: { ...params, id, libelle, link: params['page-poe'] } };
+  return { props: { ...params, id, libelle, link: params['nous-connaitre'] } };
 }

@@ -43,14 +43,12 @@ function Footer() {
           <>
             <div className="container md:px-0 relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
               <div className="container md:!px-0">
-                <article className="py-5 md:col-span-2 text-2xl">
-                  <Link href={'/'} className="font-extrabold text-6xl mb-2">
-                    {data.data.data.libelle}
-                  </Link>
+                <article className="md:col-span-2 text-2xl">
+                 
                   {data?.data.data.description ? (
                       <RenderHtmlContent
                           content={data.data.data.description}
-                          classes="py-3 leading-10"
+                          classes="py-3 leading-10 w-2/3 mx-auto"
                       />
                   ) : null}
                   <p className="py-4 flex items-center justify-center relative">

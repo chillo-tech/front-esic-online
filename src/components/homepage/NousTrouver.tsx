@@ -3,6 +3,7 @@ import React, { useContext } from 'react'
 import Carte from "components/homepage/Carte";
 import AllTrainings from "components/shared/AllTrainings";
 import { BsFillRecordFill } from 'react-icons/bs';
+import SectionTitle from 'components/shared/SectionTitle';
 
 function NousTrouver() {
   const {state} = useContext(ApplicationContext);
@@ -10,16 +11,7 @@ function NousTrouver() {
     <>
     {(state?.company?.adresses)? (
       <section className="bg-white overflow-hidden md:py-20 relative">
-          <div className="container">
-              <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
-                <span className='px-10 py-3'>
-                  Où nous trouver ?
-                </span>
-                <span className='border-b-2 border-app-blue px-10 w-64 mt-2'>
-                  
-                </span>
-              </h2>
-          </div>
+          <SectionTitle text="Où nous trouver ?" />
           <div className="lg:container">
               <div className="flex justify-center grid gap-2 lg:grid-cols-2 relative">
                   <Carte adresses={state?.company?.adresses}/>

@@ -21,10 +21,10 @@ export default function Home() {
       <NosMeilleuresFormations />
       <AproposDeNous />
       <NosOffres />
+      <AvisUtilisateurs />
       <Statistiques />
       <NousTrouver />
       <NosClients />
-      <AvisUtilisateurs />
     </OpenedLayout>
   );
 }

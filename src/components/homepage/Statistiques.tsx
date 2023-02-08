@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {BsFillSquareFill} from 'react-icons/bs';
 import {useQuery} from 'react-query';
 import {fetchData} from 'services/index';
+import SectionTitle from 'components/shared/SectionTitle';
 
 function Statistiques() {
   const [isImageLoading, setLoading] = useState(true);
@@ -20,15 +21,8 @@ function Statistiques() {
     <>
         {(isSuccess && data?.data.data.articles)? (
           <section className='py-16 bg-app-light-green'>
+            <SectionTitle text= {data?.data.data.libelle} />
             <div className="container">
-              <h2 className="font-bold text-3xl md:text-5xl mb-12 text-center flex flex-col justify-center items-center">
-                <span className='px-10 py-3'>
-                  {data?.data.data.libelle}
-                </span>
-                <span className='border-b-2 border-app-blue px-10 w-64 mt-2'>
-                  
-                </span>
-              </h2>
               <div className="flex justify-center">
                 <div className={`grid gap-8 md:grid-cols-3 items-center`}>
                   {data?.data.data.articles

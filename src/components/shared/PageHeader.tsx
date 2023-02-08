@@ -3,7 +3,6 @@ import RenderHtmlContent from './RenderHtmlContent';
 import DisplayImage from 'components/shared/DisplayImage';
 import Metadata from 'components/metadata';
 import CPFLink from 'components/shared/CPFLink';
-import Debug from 'components/Debug';
 import Link from 'next/link';
 import { capitalize } from 'utils/index';
 import {AiOutlineFilePdf} from 'react-icons/ai';
@@ -13,7 +12,7 @@ function PageHeader({data}: any) {
     <>
     <Metadata entry={data} />
     <header className="grid bg-app-blue items-center text-white">
-      <div className={`container md:px-0 py-10 ${data.image ? 'md:py-16': ''} relative`}>
+      <div className={`container md:px-0 py-10 ${data.image ? 'md:py-20': ''} relative`}>
         <div className="grid md:grid-cols-2">
           <div>
             <p className="text-md font-extralight">
@@ -67,7 +66,7 @@ function PageHeader({data}: any) {
         </div>
         {
           data.image ? (
-            <div className="hidden md:block absolute right-0 bottom-0 image-wrapper rounded-lg w-[300px] h-[300px]">
+            <div className="hidden md:block absolute right-0 bottom-0 image-wrapper rounded-lg w-[300px] h-[200px]">
               <DisplayImage
                   image={data.image}
                   imageClasses="object-cover"
