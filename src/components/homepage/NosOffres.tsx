@@ -50,7 +50,7 @@ export default function NosOffres() {
                     </article>
                   ))}
             </div> 
-            <AllTrainings classes='border border-app-white text-app-white hover:bg-white hover:text-app-blue'/>
+            <AllTrainings classes='outline-white-button'/>
           </div>
         </section>
       </section>

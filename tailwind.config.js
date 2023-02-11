@@ -8,15 +8,31 @@ module.exports = {
     'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
+    screens: {
+      'sm': '640px',
+      // => @media (min-width: 640px) { ... }
+
+      'md': '768px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg': '1000px',
+      // => @media (min-width: 1024px) { ... }
+
+      'xl': '1280px',
+      // => @media (min-width: 1280px) { ... }
+
+      '2xl': '1280px',
+      // => @media (min-width: 1536px) { ... }
+    },
     extend: {
       container: {
         center: true,
         padding: {
           DEFAULT: '1rem',
           sm: '2rem',
-          lg: '2rem',
-          xl: '2rem',
-          '2xl': '2rem',
+          lg: '0rem',
+          xl: '0rem',
+          '2xl': '0rem',
         },
       },
       gridTemplateRows: {
@@ -29,6 +45,7 @@ module.exports = {
         'layout': '200px minmax(900px, 1fr) 100px',
       },
       colors: {      
+        'gray-white': '#F6F6F6',
         'white': '#ffffff',
         primary: "#2C7CBB",
         secondary: "#418106",

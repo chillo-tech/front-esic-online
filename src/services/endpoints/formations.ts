@@ -1,4 +1,5 @@
 import { axiosInstance } from "../axios-instance";
+import {IMAGE_PARAMS} from 'utils/parameters/images';
 
 const getFormations = ({limit}: {limit: number}) => {
   const base = "id,libelle,titre,description";
@@ -18,7 +19,7 @@ const getFormations = ({limit}: {limit: number}) => {
 };
 
 const getTopTrainings = ({limit = 3}: {limit?: number}) => {
-  const base = "id,libelle,souslibelle,topformation,prix,cpf,niveau,jours,image,localisation";
+  const base = "id,libelle,souslibelle,topformation,prix,cpf,niveau,jours,heures,image,localisation";
   const fields = `${base}`;
   return axiosInstance.get(
     `formations?sort[]=-date_updated&filter[topformation][_eq]=true`, {
@@ -31,19 +32,16 @@ const getTopTrainings = ({limit = 3}: {limit?: number}) => {
 };
 
 const getSubCategories = ({id, trainingsLimit=10}: {id: string | string[]; fields?: string, trainingsLimit?: number}) => {
-  const base = "id,libelle,description,image";
+  const base = `id,libelle,description,${IMAGE_PARAMS}`;
   const formations = `
         formations.formations_id.souslibelle,
         formations.formations_id.libelle,
-        formations.formations_id.description,
-        formations.formations_id.image,
+        ${IMAGE_PARAMS.split(',').map((entry: string) => `formations.formations_id.${entry}`)},
         formations.formations_id.prix,
         formations.formations_id.niveau,
-        formations.formations_id.presentiel,
-        formations.formations_id.distanciel,
         formations.formations_id.cpf.*,
         formations.formations_id.id`;
-  const fields = `${base},${formations}`;
+  const fields: string = `${base},${formations}`;
   return axiosInstance.get(`souscategories/${id}?fields=${fields}&deep[formations][_limit]=${trainingsLimit}`);
 };
 

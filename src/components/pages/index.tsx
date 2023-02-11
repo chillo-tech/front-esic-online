@@ -59,7 +59,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
           <section className="bg-white">
             <Trainings title="Formations éligibles au CPF" />
             <div className="container pb-5">
-              <AllTrainings classes="border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue" />
+              <AllTrainings classes="outline-blue-button" />
             </div>
           </section>
         ) : null}
@@ -100,7 +100,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                             : '/contactez-nous'
                         }
                         icon={false}
-                        classes="!text-center !text-xs border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
+                        classes="!text-center !text-xs outline-blue-button"
                       />
                     </p>
                   </article>

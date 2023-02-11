@@ -21,24 +21,29 @@ function SousCategories({id: subcategoryid, link}: {id:string, link: string}) {
         <PageHeader data={data?.data.data}/>
       ) : null}
         {isSuccess && data.data.data ? (
-          <section className={classNames(' bg-red-50', {
-            'pt-10 pb-10 px-2': data.data.data.formations && data.data.data.formations.length
+          <section className={classNames('bg-app-white', {
+            'pt-10 pb-10': data.data.data.formations && data.data.data.formations.length
           })}>
-            <main className="container mx-auto ">
-              <section className="grid md:grid-cols-3 gap-6">
-                {data.data.data.formations
-                .filter((formation: any) => formation != null && formation.formations_id != null)
-                .map((formation: any, index: number) => (
-                  <HomeTrainingItem
-                      classes="bg-slate-50 rounded-lg shadow-md pb-5"
-                      training={formation.formations_id}
-                      link={`/nos-formations/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
-                      key={`${formation.formations_id.id}-${index}`}
-                  />
-                ))}
-              </section>
-            </main>
-          </section>
+            {
+              data?.data?.data?.formations ?
+                  (
+                      <main className="container mx-auto ">
+                        <section className="grid md:grid-cols-3 gap-6">
+                          {data?.data?.data?.formations
+                              .filter((formation: any) => formation != null && formation.formations_id != null)
+                              .map((formation: any, index: number) => (
+                                  <HomeTrainingItem
+                                      classes="rounded-lg shadow-md pb-2"
+                                      training={formation.formations_id}
+                                      link={`/nos-formations/${slugify(formation.formations_id.libelle)}-${formation.formations_id.id}`}
+                                      key={`${formation.formations_id.id}-${index}`}
+                                  />
+                              ))}
+                        </section>
+                      </main>
+                  )
+                : null}
+           </section>
         ) : null}
 
     </OpenedLayout>

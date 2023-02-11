@@ -57,18 +57,34 @@ function Header({ training, toogleDownloadForm }: any) {
               {training?.contenu ? (
                 <RenderHtmlContent
                   content={training?.contenu}
-                  classes="text-white font-light text-lg py-8"
+                  classes="text-white font-light text-lg py-2"
                 />
               ) : null}
-              <Rating
-                classes="font-semibold md:text-lg"
-                rate="4.7"
-                label="(622 notes)"
-                displayRate={true}
-                displayLabel={true}
-                isDecimal={4.7 % 1 != 0}
-              />
-              <div>
+              <p className='flex md:items-center md:flex-row justify-between text-white flex-col py-2 font-semibold md:text-lg'>
+              {
+                training.jours || training.heures  ? 
+                  <>
+                    {
+                      training.jours ? 
+                        <span>{training.jours} Jours({training.jours * 7} Heures)</span>
+                      : 
+                      null
+                    }
+                  </>
+                  : 
+                  null
+                }
+                <Rating
+                  classes="font-semibold md:text-lg"
+                  rate="4.7"
+                  label="(622 notes)"
+                  displayRate={true}
+                  displayLabel={true}
+                  isDecimal={4.7 % 1 != 0}
+                />
+              </p>
+             
+              <div className="md:hidden">
                 {training.niveau || training.prix ? (
                   <div className="flex justify-between mb-4 text-xl">
                     {training.niveau ? (
@@ -104,7 +120,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     training.libelle
                   )}-${training.id}`}
                   text="Je m'inscris"
-                  classes="flex-1 bg-white w-full text-app-blue font-light md:px-20 py-3 border hover:bg-transparent hover:text-white hover:border hover:border-white"
+                  classes="outline-blue-button"
                 />
                 {training.programmepdf ? (
                   <button

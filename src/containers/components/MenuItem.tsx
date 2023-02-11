@@ -33,7 +33,7 @@ function MenuItem({item}: any) {
                 <button type="button" aria-haspopup="menu"
                         aria-expanded={dropdown ? "true" : "false"}
                         onClick={() => setDropdown((prev) => !prev)}
-                        className={`flex justify-between items-center uppercase block py-6 px-2 text-sm text-center ${dropdown ? 'text-app-blue' : 'text-gray-700'}`}>
+                        className={`font-normal flex justify-between items-center uppercase block py-6 px-1 text-sm text-center ${dropdown ? 'text-app-blue' : 'text-gray-700'}`}>
                     <span className='mr-1'>{item.libelle}</span>
                     <BiChevronDown className='text-xl'/>
                 </button>

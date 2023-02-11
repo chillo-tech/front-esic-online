@@ -3,20 +3,34 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { capitalize, cn, loaderProp, LOCATION_MAPPING } from 'utils';
+import CPFLink from 'components/shared/CPFLink';
+import DisplayImage from 'components/shared/DisplayImage';
 
-function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any) {
+function HomeTrainingItem({training, classes, link = "#",displayTitle=true, displayInfos=true}: any) {
   const [isImageLoading, setLoading] = useState(true);
   return (
     <>
       <Link
         href={link}
-        className={classNames('flex flex-col justify-between', classes)}
+        className={classNames('bg-gray-white flex flex-col justify-between', classes)}
         key={training.id}
       >
         <div>
           {
             training.image ? (
-              <div className='relative w-full h-40 md:h-64 !rounded-t-lg overflow-hidden'>
+              <div className='relative w-full h-48 !rounded-t-lg overflow-hidden'>
+                  {
+                      (training?.cpf && training?.cpf.length) ?
+                          <p className="absolute right-0 bottom-0 z-40 w-14 h-14">
+                              <Image
+                                  fill={true}
+                                  src={`/images/logo-cpf.png`}
+                                  alt={training.libelle}
+                              />
+                          </p>
+                          :
+                          null
+                  }
                 <div className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
                 <Image
                   fill={true}
@@ -62,28 +76,29 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
           ): null }
           </>
           {displayTitle ? (
-            <h2 className="my-6 px-4 title font-extrabold text-2xl text-app-light-gray">
-              {capitalize(training.libelle)}
-            </h2>) 
+            <h2 className="my-1 px-4 py 1 title font-bold text-xl text-app-light-gray">
+              {capitalize(training.libelle)}            
+            </h2>
+            )
             : 
           null } 
         </div>
-          
-        <ul className="items-start grid text-xl text-app-gray opacity-50 px-4">
+        <ul className={classNames("items-start text-app-gray opacity-50 px-4 py-2", {'hidden': !displayInfos})}>
             {
-              training.duree_en_jours || training.duree_en_heures  ? 
-                <li className="flex items-center py-2 pr-3">
+              (training?.cpf && training?.cpf.length) ? 
+                <li className="flex items-center text-sm font-light">
+                  {capitalize("Eligible au CPF")}
+                </li> 
+              : 
+              null
+            }
+            {
+              training.jours || training.heures  ? 
+                <li className="flex items-center font-light text-sm">
                   {
-                    training.duree_en_jours ? 
+                    training.jours ? 
                     <span className="flex items-center pr-3">
-                      <span>{training.duree_en_jours} Jours</span>
-                    </span>
-                    : 
-                    null
-                  }{
-                    training.duree_en_heures ? 
-                    <span className="flex items-center pr-3">
-                      <span>{training.duree_en_heures} Heures</span>
+                      <span>{training.jours} Jours({training.jours * 7} Heures)</span>
                     </span>
                     : 
                     null
@@ -92,23 +107,6 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true}: any
                 : 
                 null
               }
-
-            {
-            (training.localisation) ? 
-              <li className="flex items-center pt-2 font-extrabold text-sm">
-                {training.localisation.map((localisation: string) => capitalize(LOCATION_MAPPING[localisation])).join(' | ')}
-              </li>
-              : 
-              null
-            }
-            {
-            (training?.cpf && training?.cpf.length) ? 
-              <li className="flex items-center py-1 text-sm font-extrabold">
-                {capitalize("Eligible au CPF")}
-              </li> 
-              : 
-              null
-            }
         </ul>
       </Link>
     </>

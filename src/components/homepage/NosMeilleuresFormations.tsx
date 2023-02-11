@@ -20,13 +20,13 @@ function NosMeilleuresFormations() {
       <section className='pt-20 pb-20 bg-white' id='formations'>
         <SectionTitle text=" Nos meilleures formations" />
         <div className="container mx-auto px-2">
-          <div className="grid gap-8 pb-10 md:grid-cols-3">
+          <div className="grid gap-10 pb-10 md:grid-cols-3">
             {data?.data.data
             .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
             .slice(0,3)
             .map((training:any)=> (
               <HomeTrainingItem 
-                classes="bg-slate-50 rounded-lg shadow-md pb-5" 
+                classes="rounded-lg shadow-md pb-2" 
                 training={training}
                 link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
                 key={training.id}
@@ -35,7 +35,7 @@ function NosMeilleuresFormations() {
           <AllTrainings
               text={"Contactez nous"}
               link="/contactez-nous"
-              classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
+              classes='outline-blue-button'
           />
         </div>
       </section>

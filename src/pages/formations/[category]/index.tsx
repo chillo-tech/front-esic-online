@@ -38,7 +38,7 @@ function Category({
           <PageHeader
             data={category.data.data}
           />
-          <section className="bg-red-50">
+          <section className="bg-app-white">
             <main className="container mx-auto pt-5 pb-10">
               <section className="grid md:grid-cols-3 gap-6">
                 {category.data.data.souscategories
@@ -46,7 +46,7 @@ function Category({
                 .map(
                   (souscategory: any, index: number) => (
                     <HomeTrainingItem
-                      classes="bg-slate-50 rounded-lg shadow-md pb-5 text-center items-center !justify-center items-center"
+                      classes="rounded-lg shadow-md pb-2 text-center items-center !justify-center items-center"
                       training={souscategory?.souscategories_id}
                       link={`/formations/${link}/${slugify(
                         souscategory?.souscategories_id.libelle

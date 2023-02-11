@@ -150,7 +150,8 @@ function Training({ id, slug }: { id: string; slug: string }) {
                     <HomeTrainingItem
                       training={training}
                       displayTitle={false}
-                      classes="hidden md:block bg-app-light-green rounded-t-lg"
+                      displayInfos={false}
+                      classes="hidden md:block bg-app-light-green rounded-t-lg pb-"
                     />
                     {training.sessions && training.sessions.length ? (
                       <div className="hidden md:block bg-app-light-green px-5 ">
@@ -203,8 +204,9 @@ function Training({ id, slug }: { id: string; slug: string }) {
                 {
                   relatedTraining.slice(0, 3).map((training: any, index: number) =>(
                     <HomeTrainingItem 
-                      classes="bg-slate-50 rounded-lg shadow-md pb-4" 
+                      classes="rounded-lg shadow-md pb-2" 
                       training={training.formations_id} 
+                      displayInfos={false}
                       link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}
                       key={`${training.formations_id.id}-${index}`} 
                     />
@@ -215,7 +217,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                 {
                   relatedTraining.slice(0, 3).map((training: any, index: number) =>(
                     <HomeTrainingItemMobile
-                      classes="bg-slate-50 rounded-lg shadow-md pb-4"
+                      classes="rounded-lg shadow-md pb-2"
                       training={training.formations_id}
                       link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}
                       key={`${training.formations_id.id}-${index}`}

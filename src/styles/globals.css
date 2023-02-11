@@ -41,6 +41,9 @@ body {
 .outline-blue-button {
   @apply flex px-6 py-1 rounded-lg border border-app-blue hover:bg-app-blue hover:text-white bg-transparent text-app-blue border-app-blue uppercase
 }
+.outline-white-button {
+  @apply flex px-6 py-1 rounded-lg border border-white hover:bg-white hover:text-app-blue bg-transparent text-white uppercase
+}
 /*==== FIN Testing des polices ===*/
 
 .detail-formation .programme > h1,

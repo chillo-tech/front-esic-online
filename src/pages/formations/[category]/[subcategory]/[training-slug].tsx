@@ -275,7 +275,7 @@ function Training({ id }: { id: string }) {
                             Nos prochaines
                           </h3>
                           {data?.data.data.sessions.map((item: any, index: number) => (
-                            <div key={`session-${id}-${index}`} className="bg-slate-50 text-slate-600 mb-3 rounded-md p-2">
+                            <div key={`session-${id}-${index}`} className="text-slate-600 mb-3 rounded-md p-2">
                               <p className="mb-0">Du {getDisplayedDate(item.sessions_id.debut)}</p>
                               <p className="mb-0">Au {getDisplayedDate(item.sessions_id.fin)}</p> 
                             </div>

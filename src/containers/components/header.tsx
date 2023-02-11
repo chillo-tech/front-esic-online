@@ -39,7 +39,7 @@ function Header() {
    });
   return (
     <>
-      <header className='bg-white w-full top-0 relative z-40 pb-2 pt-3'>
+      <header className='bg-white w-full top-0 relative z-40 pb-2 pt-3 font-normal'>
         <div className="!px-0 container hidden lg:flex items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-10 px-2">
             <Link href={"/"} className="">
               <Image
@@ -53,7 +53,7 @@ function Header() {
             <div className='flex items-center'>
               {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
               <Link
-                className="px-8 py-2 rounded-lg border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue"
+                className="px-8 py-2 rounded-lg outline-blue-button"
                 href='/contactez-nous'
               >
                 Contactez nous
@@ -101,7 +101,7 @@ function Header() {
                  <AllTrainings
                      text={"Contactez nous"}
                      link="/contactez-nous"
-                     classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
+                     classes='outline-blue-button'
                  />
              </p>
          </div>
