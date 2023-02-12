@@ -120,7 +120,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     training.libelle
                   )}-${training.id}`}
                   text="Je m'inscris"
-                  classes="outline-blue-button"
+                  classes="flex-1 bg-white w-full text-app-blue font-light md:px-20 py-3 border hover:bg-transparent hover:text-white hover:border hover:border-white"
                 />
                 {training.programmepdf ? (
                   <button

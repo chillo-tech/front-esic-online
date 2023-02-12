@@ -12,7 +12,7 @@ function PageHeader({data}: any) {
     <>
     <Metadata entry={data} />
     <header className="grid bg-app-blue items-center text-white">
-      <div className={`container md:px-0 py-10 ${data.image ? 'md:py-32': ''} relative`}>
+      <div className={`container md:px-0 py-10 ${(data.image && !data.abstrait)? 'md:py-32': ''} relative`}>
         <div className="grid md:grid-cols-2">
           <div>
             <p className="text-md font-extralight">

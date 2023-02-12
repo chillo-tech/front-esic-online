@@ -53,7 +53,7 @@ function Header() {
             <div className='flex items-center'>
               {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
               <Link
-                className="px-8 py-2 rounded-lg outline-blue-button"
+                className="font-extralight px-8 py-2 rounded-lg outline-blue-button"
                 href='/contactez-nous'
               >
                 Contactez nous
@@ -101,7 +101,7 @@ function Header() {
                  <AllTrainings
                      text={"Contactez nous"}
                      link="/contactez-nous"
-                     classes='outline-blue-button'
+                     classes='border border-app-blue text-app-blue hover:bg-transparent hover:bg-app-blue hover:text-white hover:border hover:border-app-blue'
                  />
              </p>
          </div>
