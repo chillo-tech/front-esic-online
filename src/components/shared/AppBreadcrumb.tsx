@@ -17,7 +17,6 @@ function AppBreadcrumb() {
 
 		return [{ href: "/", text: "Home" }, ...crumblist];
 	}, [router.asPath]);
-	[router.asPath])
 	return (
 		<div></div>
 	);

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import classNames from 'classnames';
 import Link from 'next/link';
-import Debug from 'components/Debug';
 
 function Certifications({data, chunkSize = 6}: any) {
 	const [state, setState] = useState(chunkSize);
