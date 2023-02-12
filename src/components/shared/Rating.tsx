@@ -7,9 +7,9 @@ function Rating({rate, label, classes, displayRate = false, displayLabel = false
     <>
     { 
       (rate || label) ? (
-        <div className={classNames("flex py-1 items-center text-white", classes)}>
+        <span className={classNames("flex py-1 items-center text-white", classes)}>
           {displayRate ? (<span className="mr-2">{rate}</span>): null}
-          <div className='text-left flex mr-2'>
+          <span className='text-left flex mr-2'>
               {
                 Array.from(Array(Math.floor(rate)).keys())
                     .map((entry: number) => 
@@ -24,9 +24,9 @@ function Rating({rate, label, classes, displayRate = false, displayLabel = false
                   .map((entry: number) => <BsStar className='text-xl' key={`moyenne-${entry}`} />
                 )
               }
-            </div>
+            </span>
           {displayLabel ? (<span className="mr-2">{label}</span>): null}
-        </div>)
+        </span>)
         : null
       }
     </>

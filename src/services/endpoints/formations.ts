@@ -74,12 +74,12 @@ const getDetail = ({
   fields?: string;
 }) => {
   const base = '*';
-  const cpf = 'cpf.*';
+  const cpf = 'cpf.cpf_id.*';
   const metadonnees = 'metadonnees.*';
   const programmepdf = 'programmepdf.*';
   const souscategories = 'souscategories.souscategories_id.*';
   const certifications = 'certifs.certifications_id.*';
-  const images = 'image.*';
+  const images = IMAGE_PARAMS;
   const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut,sessions.sessions_id.id,sessions.sessions_id.libelle';
   const fields = `
     ${base},

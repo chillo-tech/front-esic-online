@@ -6,13 +6,19 @@ import CPFLink from 'components/shared/CPFLink';
 import Link from 'next/link';
 import { capitalize } from 'utils/index';
 import {AiOutlineFilePdf} from 'react-icons/ai';
+import AppBreadcrumb from 'components/shared/AppBreadcrumb';
+import classNames from 'classnames';
 
 function PageHeader({data}: any) {
   return (
     <>
     <Metadata entry={data} />
     <header className="grid bg-app-blue items-center text-white">
-      <div className={`container md:px-0 py-10 ${(data.image && !data.abstrait)? 'md:py-32': ''} relative`}>
+      <div className={classNames(
+          `container md:px-0 py-10 relative`,
+          {'md:min-h-[300px]': !data.abstrait && data.image},
+          {'md:py-32': data.image && !data.abstrait}
+      )}>
         <div className="grid md:grid-cols-2">
           <div>
             <p className="text-md font-extralight">
@@ -69,7 +75,7 @@ function PageHeader({data}: any) {
             <div className="hidden md:block absolute right-0 bottom-0 image-wrapper rounded-lg w-[400px] h-[260px]">
               <DisplayImage
                   image={data.image}
-                  imageClasses="object-cover"
+                  imageClasses="object-contain"
                   libelle={`${data.libelle}`}
                   classes="rounded-2xl !overflow-hidden"
               />

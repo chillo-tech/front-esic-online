@@ -6,17 +6,21 @@ import { BsArrowRightCircle } from 'react-icons/bs';
 import classNames from 'classnames';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import React, { useState } from 'react';
+import {router} from 'next/client';
+import {useRouter} from 'next/router';
 
-function Pages({data}: any) {
+function Pages({data, baseUrl}: any) {
+  const router = useRouter();
   const [isLoading, setLoading] = useState(true);
   return (
     <>
     {data && data.length ? (
       <div className="grid gap-2">
         {data.map((page: any, index: number) => (
-            <Link key={`page-${index}-${page.id}`} className="md:items-center grid md:grid-cols-2 hover:bg-pink-800/5 bg-white relative p-5" href={`financements-cpf/${slugify(page.pages_id.libelle)}-${page.pages_id.id}`}>
+            <Link key={`page-${index}-${page.id}`} className="md:items-center grid md:grid-cols-2 hover:bg-pink-800/5 bg-white relative p-5"
+                  href={`${baseUrl}/${slugify(page.pages_id.libelle)}-${page.pages_id.id}`}>
               <div className="relative w-hull h-72">
-                <Image 
+                <Image
                   fill={true}
                   src={`${process.env.API_URL}/assets/${page.pages_id.image}`}
                   alt={`${page.pages_id.description}`}
@@ -36,12 +40,12 @@ function Pages({data}: any) {
                   <RenderHtmlContent classes='text-md py-2' content={page.pages_id.abstrait}/>
 
                   <p className={classNames("flex pt-5 text-blue-800")}>
-                    <Link href="/contactez-nous" className='flex items-center'> 
-                      <BsArrowRightCircle className='mr-2' /> 
+                    <button type="button" onClick={() => router.push("/contactez-nous")} className='flex items-center'>
+                      <BsArrowRightCircle className='mr-2' />
                       En savoir plus
-                    </Link>
-                  </p> 
-                </div>   
+                    </button>
+                  </p>
+                </div>
             </Link>
           ))}
       </div>

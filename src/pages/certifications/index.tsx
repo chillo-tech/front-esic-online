@@ -1,15 +1,10 @@
-import OpenedLayout from "containers/opened";
+import MenuIndex from 'components/pages/MenuIndex';
 
-export default function AllCertifications() {
+function Certifications() {
   return (
-    <OpenedLayout>
-      
-      
-    </OpenedLayout>
-  );
+      <MenuIndex />
+  )
 }
-export async function getServerSideProps(context: any) {
-  return {
-    notFound: true,
-  };
-}
+
+export default Certifications;
+

@@ -108,7 +108,7 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                 <AllTrainings
                   text={'Contactez nous'}
                   link={'/contactez-nous'}
-                  classes="border border-white text-white hover:bg-transparent hover:bg-white hover:text-app-blue hover:border hover:border-white"
+                  classes="outline-white-button"
                 />
               </div>
             </section>

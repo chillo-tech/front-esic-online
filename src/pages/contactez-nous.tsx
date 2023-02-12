@@ -340,7 +340,6 @@ export default function Contact() {
                         Que préférez vous pour votre formation ?
                       </label>
                       <div className={`grid md:grid-cols-2 gap-4 my-2`}>
-                        <div className="flex items-center">
                           <input
                             className="hidden"
                             type="checkbox"
@@ -379,11 +378,10 @@ export default function Contact() {
                             }`}>
                             En présentiel
                           </label>
-                      </div>
+                    </div>
                       <p className={formStyles.form_control__error}>
                         {errors.preferedLocation?.message}
                       </p>
-                    </div>
                     </div>
                   </div>
                   <div

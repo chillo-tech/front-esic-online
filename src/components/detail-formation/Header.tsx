@@ -130,7 +130,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     Je télécharge le programme
                   </button>
                 ) : null}
-                {training?.cpf[0]?.lien && <CPFLink data={training.cpf} />}
+                {(training?.cpf && training?.cpf.length) ? <CPFLink data={training.cpf} /> : null}
               </div>
             </div>
           </div>

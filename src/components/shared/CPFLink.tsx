@@ -8,7 +8,7 @@ function CPFLink({data, classes}: any) {
    <>
      {(data && data.length) ? (
       <Link 
-          href={data[0].lien} target="_blank"
+          href={data[0].cpf_id.lien} target="_blank"
           className={classNames(
               classes,
               "hover:bg-white hover:text-app-blue text-white pl-2 py-1 -pr-3",
