@@ -4,7 +4,7 @@ const pages = 'pages.pages_id.id,pages.pages_id.libelle,pages.pages_id.image,pag
 const base = 'id,libelle,souslibelle,ordre,image,description,abstrait,*';
 const categories = 'categories.*';
 const articles = 'articles.id,articles.libelle,articles.description';
-const cpf = 'cpf.*';
+const cpf = 'cpf.cpf_id.*';
 const pagesSessions = 'sessions.*';
 const certifications = `
   certifications.certifications_id.id,

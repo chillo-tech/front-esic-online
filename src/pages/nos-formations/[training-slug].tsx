@@ -144,6 +144,21 @@ function Training({ id, slug }: { id: string; slug: string }) {
                       </article>
                     )
                   )}
+                  {training.articles.filter((article: any) => article.articles_id !=null).map(
+                      (article: any) => (
+                          <article
+                              key={`${id}-${article.articles_id.id}}`}
+                              className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-10 detail-formation">
+                            <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">
+                              {article?.articles_id?.libelle}
+                            </h2>
+                            <RenderHtmlContent
+                                content={article?.articles_id?.description}
+                                classes={`text-gray-600 font-light text-lg py-4 description`}
+                            />
+                          </article>
+                      )
+                  )}
                 </div>
                 <div className="w-full col-span-5 mx-auto md:fixed scrollbar-hide md:w-96 md:z-30 md:h-screen md:pb-40 md:top-28 md:right-24 md:overflow-y-scroll md:overflow-scroll scroll-smooth">
                   <div className=" w-full mx-auto bg-white hidden md:block rounded-lg shadow-md">

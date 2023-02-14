@@ -28,7 +28,7 @@ class AppDocument extends Document {
               }}
             />
             </Head>
-          <body className='font-sans font-extralight bg-slate-100' id="accueil">
+          <body className='font-sans font-extralight bg-white' id="accueil">
             <Main />
             <NextScript />
           </body>

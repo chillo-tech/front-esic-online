@@ -49,9 +49,8 @@ function PageHeader({data}: any) {
                   ) : null}
                 </div>
             ) : null}
-            {data?.cpf?.[0]?.lien &&(
-               <p className={`md:flex`}><CPFLink data={data.cpf} classes="md:w-8/12"/></p>
-            )}
+            {(data?.cpf && data?.cpf.length) ? <CPFLink data={data.cpf} /> : null}
+
             {data?.fichiers && data?.fichiers.length ? (
               <article className="flex flex-col text-left my-10 md:my-0 md:w-3/5 text-center">
                 {data?.fichiers.map((item: any) => (

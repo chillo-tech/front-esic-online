@@ -147,17 +147,17 @@ const TRAINING_KEYS = [
   {
     key: 'prerequis',
     label: 'Pré requis pour cette formation'
-
   },
   {
     key: 'programme',
     label: 'Programme de la formation',
     classes: 'programme'
   },
+    /*
   {
     key: 'ressources',
     label: 'Ressources pour cette formation'
-  },
+  },*/
   {
     key: 'certifications',
     label: 'Certifications pour cette formation'
@@ -166,10 +166,12 @@ const TRAINING_KEYS = [
     key: 'public',
     label: 'Votre profil pour cette formation'
   },
+    /*
   {
     key: 'modalites',
     label: "Modalités d'accès à cette formation"
   },
+
   {
     key: 'accessibilite',
     label: "Pour les personnes à mobilité reduite"
@@ -178,6 +180,8 @@ const TRAINING_KEYS = [
     key: 'methodes',
     label: "Nos méthodes d'enseignement"
   }
+
+     */
 ];
 
 const CERTICATION_KEYS = [

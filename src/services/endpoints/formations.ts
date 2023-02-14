@@ -75,6 +75,7 @@ const getDetail = ({
 }) => {
   const base = '*';
   const cpf = 'cpf.cpf_id.*';
+  const articles = 'articles.articles_id.*';
   const metadonnees = 'metadonnees.*';
   const programmepdf = 'programmepdf.*';
   const souscategories = 'souscategories.souscategories_id.*';
@@ -88,6 +89,7 @@ const getDetail = ({
     ${sessions},
     ${sessions},
     ${cpf},
+    ${articles},
     ${metadonnees},
     ${souscategories},
     ${certifications}
