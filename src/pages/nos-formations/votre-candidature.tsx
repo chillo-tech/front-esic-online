@@ -113,7 +113,7 @@ function Candidature({ params }: any) {
       preferedLocation: `${preferedLocation.join(', ').toLowerCase()}`,
     });
   };
-  const onError = (errors: any, e: any) => console.log({ errors });
+  const onError = (errors: any, e: any) => null;
 
   const handleError = (error: any) => {
     error.preventDefault();
@@ -204,7 +204,6 @@ function Candidature({ params }: any) {
         setFilteredTraining(data?.data.data);
       } catch (e) {
         setFilteredTraining([]);
-        console.log(e);
       }
     }
   };

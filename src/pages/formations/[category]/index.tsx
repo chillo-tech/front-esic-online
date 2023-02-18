@@ -46,7 +46,7 @@ function Category({
                 .map(
                   (souscategory: any, index: number) => (
                     <HomeTrainingItem
-                      classes="rounded-lg shadow-md pb-2 text-center items-center !justify-center items-center"
+                      classes="rounded-lg shadow-md pb-2 text-center items-center !justify-center"
                       training={souscategory?.souscategories_id}
                       link={`/formations/${link}/${slugify(
                         souscategory?.souscategories_id.libelle

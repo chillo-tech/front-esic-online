@@ -7,6 +7,15 @@ const nextConfig = {
     ACCES_TOKEN: process.env.ACCES_TOKEN,
     API_URL: process.env.API_URL,
   },
+  async redirects() {
+    return [
+      {
+        source: '/formations',
+        destination: '/nos-formations',
+        permanent: true,
+      },
+    ]
+  },
   async rewrites() {
     return [
       {

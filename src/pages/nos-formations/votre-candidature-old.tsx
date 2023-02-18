@@ -104,7 +104,7 @@ function Candidature({ params }: any) {
       contactChannel: `${contactChannel.join(', ').toLowerCase()}`,
     });
   };
-  const onError = (errors: any, e: any) => console.log({ errors });
+  const onError = (errors: any, e: any) =>null;
 
   const handleError = (error: any) => {
     error.preventDefault();

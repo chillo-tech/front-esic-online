@@ -6,6 +6,7 @@ import RenderHtmlContent from 'components/shared/RenderHtmlContent';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { capitalize, cn, loaderProp, slugify } from 'utils';
+import AppBreadcrumb from 'components/shared/AppBreadcrumb';
 
 function Header({ training, toogleDownloadForm }: any) {
   const [isImageLoading, setLoading] = useState(true);
@@ -16,13 +17,7 @@ function Header({ training, toogleDownloadForm }: any) {
           <div className="md:px-0 container grid md:grid-cols-2">
             <div className="title">
               <div className="w-full mb-4">
-                <p className="text-gray-300 text-sm md:text-lg font-extralight mb-2">
-                  Formations {' >' } {
-                      training?.souscategories 
-                      ? training?.souscategories.filter((sousCategorie: any) => sousCategorie.souscategories_id != null)[0]?.souscategories_id?.libelle
-                      : ''
-                    }
-                </p>
+                <AppBreadcrumb />
                 <div className="md:hidden w-full">
                   <div>
                     {training.image ? (

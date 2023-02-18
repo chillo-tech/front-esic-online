@@ -38,44 +38,39 @@ function Footer() {
   });
   return (
     <>
-      <footer className="text-left md:text-center relative shadow-xl w-full bg-gradient-to-b via-app-stone from-app-light-gray to-app-stone text-white font-sans font-extralight">
+      <footer className="text-app-light-gray text-left md:text-center relative shadow-xl w-full bg-gradient-to-b via-app-stone from-app-light-gray to-app-stone text-white font-sans font-extralight">
         {isSuccess ? (
           <>
             <div className="container md:px-0 relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
               <div className="container md:!px-0">
-                <article className="md:col-span-2 text-2xl">
+                <article className="md:col-span-2 text-xl">
                  
                   {data?.data.data.description ? (
                       <RenderHtmlContent
                           content={data.data.data.description}
-                          classes="py-3 leading-10 w-2/3 mx-auto"
+                          classes="py-3 leading-10 w-2/3 mx-auto text-white"
                       />
                   ) : null}
                   <p className="py-4 flex items-center justify-center relative">
                     <AllTrainings
                         link="/contactez-nous"
                         text="Contactez nous"
-                        classes={`
-                        flex justify-center items-center px-8
-                        py-3 rounded-lg !text-xl
-                        border border-app-blue bg-app-blue text-white
-                        hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase`
-                        }
+                        classes='blue-button'
                     />
                   </p>
                 </article>
               </div>
               <div className="container mb-10 grid md:grid-cols-4 md:!px-4 md:!max-w-full">
                 <article>
-                  <h3 className="text-app-white text-left mb-6 text-2xl font-bold">
+                  <h3 className="text-app-white text-left mb-6 text-xl font-bold  text-white">
                     Nous contacter
                   </h3>
                   {data?.data.data.telephone ? (
                       <Link
                           href={`tel:${data?.data.data.telephone}`}
-                          className="text-app-light-gray flex items-center text-2xl font-light pr-3 mb-2">
+                          className="text-app-light-gray flex items-center text-xl font-light pr-3 mb-2">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
-                          <BsPhone className="text-2xl text-app-blue" />
+                          <BsPhone className="text-xl text-app-blue" />
                         </span>
                         {data?.data.data.telephone}
                       </Link>
@@ -83,9 +78,9 @@ function Footer() {
                   {data?.data.data.email ? (
                       <Link
                           href={`mailto:${data?.data.data.email}`}
-                          className="text-app-light-gray flex items-center text-2xl font-light py-2 pr-3 mb-2">
+                          className="text-app-light-gray flex items-center text-xl font-light py-2 pr-3 mb-2">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
-                          <HiOutlineMail className="text-2xl text-app-blue" />
+                          <HiOutlineMail className="text-xl text-app-blue" />
                         </span>
                         {data?.data.data.email}
                       </Link>
@@ -93,9 +88,9 @@ function Footer() {
                   {data?.data.data.adresses ? (
                       <article className="flex text-app-light-gray font-light">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
-                          <BiMapPin className="text-2xl text-app-blue" />
+                          <BiMapPin className="text-xl text-app-blue" />
                         </span>
-                        <p className="flex flex-col text-left text-2xl">
+                        <p className="flex flex-col text-left text-xl">
                           {data?.data.data.adresses[0].rue}
                           <span className="uppercase ml-1">
                             {data?.data.data.adresses[0].codepostal}{' '}
@@ -105,15 +100,15 @@ function Footer() {
                       </article>
                   ) : null}
                 </article>
-                <article className="flex flex-col text-left my-10 md:my-0 md:px-5">
-                  <h3 className="text-app-white text-left mb-6 text-2xl font-bold">
+                <article className="flex flex-col text-left my-10 md:my-0 md:px-5 text-white">
+                  <h3 className="text-app-white text-left mb-6 text-xl font-bold">
                     Nous connaitre
                   </h3>
                   {data?.data.data.pages.map((item: any) => (
                       <Link
                           href={`/${slugify(item.libelle)}-${item.id}`}
                           key={`pages-${item.id}`}
-                          className="text-app-light-gray flex items-center text-2xl font-light py-2 pr-3">
+                          className="text-app-light-gray flex items-center text-xl font-light py-2 pr-3">
                         {item.libelle}
                       </Link>
                   ))}
@@ -124,7 +119,7 @@ function Footer() {
                           href={`${process.env.API_URL}/assets/${item.directus_files_id.id}?download`}
                           key={`pages-${item.directus_files_id.id}`}
                           target="_blank"
-                          className="text-app-light-gray flex items-center text-2xl font-light py-2 pr-3">
+                          className="text-app-light-gray flex items-center text-xl font-light py-2 pr-3">
                         {capitalize(item.directus_files_id.title)}
                       </Link>
                   ))}
@@ -145,6 +140,10 @@ function Footer() {
                   ) : null}
                 </article>
               </div>
+              <div className="container text-center">
+                <p>En aucun cas, les données recueillies sur le site esic-online.com ne seront cédées ou vendues à des tiers.</p>
+                <p>Aucune adresse email ne sera transmise à des tiers sauf avec l’accord express des intéressés.</p>
+              </div>
               <div className="container flex flex-col md:flex-row items-center md:px-0">
                 {data?.data.data.liens ? (
                     <p className="flex py-4 items-center justify-center md:justify-start">
@@ -153,7 +152,7 @@ function Footer() {
                               href={item.lien}
                               target="_blank"
                               className={classNames(
-                                  `inline-block mr-5 items-center py-2 w-14 h-14 relative`
+                                  `inline-block mr-5 items-center py-2 w-8 h-8 relative`
                               )}
                               key={`liens-${index}-${data?.data.data.libelle}`}>
                             <Image

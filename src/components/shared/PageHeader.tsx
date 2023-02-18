@@ -17,8 +17,9 @@ function PageHeader({data}: any) {
       <div className={classNames(
           `container md:px-0 py-10 relative`,
           {'md:min-h-[300px]': !data.abstrait && data.image},
-          {'md:py-32': data.image && !data.abstrait}
-      )}>
+          {'md:py-10': data.image && !data.abstrait}
+      )}>          
+        <AppBreadcrumb />
         <div className="grid md:grid-cols-2">
           <div>
             <p className="text-md font-extralight">

@@ -2,9 +2,7 @@ import classNames from 'classnames';
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { capitalize, cn, loaderProp, LOCATION_MAPPING } from 'utils';
-import CPFLink from 'components/shared/CPFLink';
-import DisplayImage from 'components/shared/DisplayImage';
+import { capitalize, cn, loaderProp } from 'utils';
 
 function HomeTrainingItem({training, classes, link = "#",displayTitle=true, displayInfos=true}: any) {
   const [isImageLoading, setLoading] = useState(true);
@@ -12,7 +10,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true, disp
     <>
       <Link
         href={link}
-        className={classNames('bg-gray-white flex flex-col justify-between', classes)}
+        className={classNames('flex flex-col justify-between', classes)}
         key={training.id}
       >
         <div>
@@ -55,7 +53,7 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true, disp
             <div className='flex justify-between text-xl text-app-light-gray pt-4 px-4'>
               {
                 training.niveau ? 
-                  <span style={{backgroundColor: 'rgba(0, 129, 0, 0.15)'}} className="flex py-1 mr-3 pl-3 pr-5 items-center rounded-lg">
+                  <span style={{backgroundColor: 'rgba(0, 129, 0, 0.15)'}} className="flex py-1 mr-3 pl-3 pr-5 items-center rounded-lg text-sm">
                     <span className='mr-3 bg-app-green w-4 h-4 rounded-full'/>
                     <span>{training.niveau === "BEGINNER" ? 'Débutant': null}</span>
                     <span>{training.niveau === "INTERMEDIARY" ? 'Intermediaire': null}</span>
@@ -83,31 +81,36 @@ function HomeTrainingItem({training, classes, link = "#",displayTitle=true, disp
             : 
           null } 
         </div>
-        <ul className={classNames("items-start text-app-gray opacity-50 px-4 py-2", {'hidden': !displayInfos})}>
-            {
-              (training?.cpf && training?.cpf.length) ? 
-                <li className="flex items-center text-sm font-light">
-                  {capitalize("Eligible au CPF")}
-                </li> 
-              : 
-              null
-            }
-            {
-              training.jours || training.heures  ? 
-                <li className="flex items-center font-light text-sm">
-                  {
-                    training.jours ? 
-                    <span className="flex items-center pr-3">
-                      <span>{training.jours} Jours({training.jours * 7} Heures)</span>
-                    </span>
-                    : 
+        {
+          (training?.cpf || training?.jours || training?.heures)
+          ? (
+            <ul className={classNames("items-start text-app-gray opacity-50 px-4 py-2", {'hidden': !displayInfos})}>
+                {
+                  (training?.cpf && training?.cpf.length) ?
+                    <li className="flex items-center text-sm font-light">
+                      {capitalize("Eligible au CPF")}
+                    </li>
+                  :
+                  null
+                }
+                {
+                  training.jours || training.heures  ?
+                    <li className="flex items-center font-light text-sm">
+                      {
+                        training.jours ?
+                        <span className="flex items-center pr-3">
+                          <span>{training.jours} Jours({training.jours * 7} Heures)</span>
+                        </span>
+                        :
+                        null
+                      }
+                    </li>
+                    :
                     null
                   }
-                </li>
-                : 
-                null
-              }
-        </ul>
+            </ul>)
+          : null
+        }
       </Link>
     </>
   )
