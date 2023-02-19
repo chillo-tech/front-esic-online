@@ -1,5 +1,5 @@
 .form_control {
-  @apply block mb-2 my-4 mr-2;
+  @apply block my-2;
 }
 
 .form_control__input {

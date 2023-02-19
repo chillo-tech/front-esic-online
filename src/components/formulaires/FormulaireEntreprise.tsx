@@ -59,9 +59,7 @@ const schema = yup
       .nullable(),
     message: yup
       .string()
-      .trim()
-      .required(REQUIRED_ERROR_MESSAGE)
-      .min(30, "Dites nous en un peu plus s'il vous plait(min. 30)"),
+      .trim(),
 	  condition:  yup.boolean().oneOf([true],REQUIRED_ERROR_MESSAGE)
 
   })

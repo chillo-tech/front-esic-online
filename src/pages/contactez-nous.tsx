@@ -70,9 +70,7 @@ const schema = yup
     acceptForm: yup.bool().oneOf([true], ACCEPT_FORM_ERROR_MESSAGE).required(),
     message: yup
       .string()
-      .trim()
-      .required(REQUIRED_ERROR_MESSAGE)
-      .min(30, "Dites nous en un peu plus s'il vous plait(min. 30)"),
+      .trim(),
   })
   .required();
 
@@ -127,7 +125,7 @@ export default function Contact() {
           className={classNames(
             `${formStyles.bg_slices} relative flex flex-col justify-center items-center w-full text-gray-500`
           )}>
-          <section className="z-30 bg-left-top bg-origin-padding bg-no-repeat bg-[length:100%_55%] border-gray-400 p-4 pt-24 pb-20 mx-auto flex flex-wrap font-sans">
+          <section className="z-30 bg-left-top bg-origin-padding bg-no-repeat bg-[length:100%_55%] border-gray-400 p-4 py-8 mx-auto flex flex-wrap font-sans">
             <div className="w-full text-white text-center mb-5">
               <div className="md:px-20">
                 <BsPhone color="white" className=" w-12 h-12 mb-4 mx-auto" />
@@ -140,7 +138,7 @@ export default function Contact() {
                   color="white"
                   className="w-12 h-12 mb-4 mx-auto absolute bottom-[-15%] left-[16%]"
                 />
-                <div className=" mb-2 w-[80%] my-12 mx-auto md:px-20 text-center text-md">
+                <div className=" mb-2 w-[80%] my-4 mx-auto md:px-20 text-center text-md">
                   <p className="mb-1">
                     Esic a besoin de vos informations personnelles pour vous
                     contacter au sujet de ses produits et services.
@@ -334,7 +332,7 @@ export default function Contact() {
                       </p>
                     </div>
                   </div>
-                  <div className={`${formStyles.form_control} !mr-0 !mt-0 pt-4`}>
+                  <div className={`${formStyles.form_control} !mr-0 !mt-0`}>
                     <div className={formStyles.form_control}>
                       <label className="w-full text-black">
                         Que préférez vous pour votre formation ?
