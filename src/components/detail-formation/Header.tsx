@@ -7,131 +7,107 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { capitalize, cn, loaderProp, slugify } from 'utils';
 import AppBreadcrumb from 'components/shared/AppBreadcrumb';
+import DisplayImage from 'components/shared/DisplayImage';
+import Debug from 'components/Debug';
+import TrainingLevel from 'components/shared/TrainingLevel';
+import TrainingPrice from 'components/shared/TrainingPrice';
+import classNames from 'classnames';
+import {BsArrowRightShort} from 'react-icons/bs';
+import Link from 'next/link';
+import TrainingLocalisation from 'components/shared/TrainingLocalisation';
 
 function Header({ training, toogleDownloadForm }: any) {
-  const [isImageLoading, setLoading] = useState(true);
   return (
-    <>
-      {training ? (
-        <header className="bg-app-blue py-4 md:py-12">
-          <div className="md:px-0 container grid md:grid-cols-2">
-            <div className="title">
-              <div className="w-full mb-4">
-                <AppBreadcrumb />
-                <div className="md:hidden w-full">
-                  <div>
-                    {training.image ? (
-                      <div className="relative w-full h-44 !rounded-t-lg overflow-hidden">
-                        <div className="rounded-lg w-full h-44" />
-                        <Image
-                          fill={true}
-                          src={`${process.env.API_URL}/assets/${
-                            training.image && training?.image.filename_disk
-                              ? training?.image.filename_disk
-                              : training?.image
-                          }?w=300&h=200fill=true`}
-                          alt={training.libelle}
-                          loader={loaderProp}
-                          unoptimized
-                          className={cn(
-                            'rounded-lg absolute object-fill duration-700 ease-in-out !rounded-t-sm',
-                            isImageLoading
-                              ? 'scale-110 blur-2xl grayscale'
-                              : 'scale-100 blur-0 grayscale-0'
-                          )}
-                          onLoadingComplete={() => setLoading(false)}
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-              <h1 className="text-white text-2xl md:text-5xl font-bold mb-0 pb-0">
-                {capitalize(training?.libelle)}
-              </h1>
-              {training?.contenu ? (
-                <RenderHtmlContent
-                  content={training?.contenu}
-                  classes="text-white font-light text-lg py-2"
-                />
-              ) : null}
-              <p className='flex md:items-center md:flex-row justify-between text-white flex-col py-2 font-semibold md:text-lg'>
-              {
-                training.jours || training.heures  ? 
-                  <>
-                    {
-                      training.jours ? 
-                        <span>{training.jours} Jours({training.jours * 7} Heures)</span>
-                      : 
-                      null
-                    }
-                  </>
-                  : 
-                  null
-                }
+    <header className="bg-app-blue py-4 md:py-8 text-white text-sm !md:text-lg">
+      <AppBreadcrumb />
+      <div className="container grid md:grid-cols-3">
+          <div className="md:col-span-2">
+            <DisplayImage
+                image={training.image}
+                libelle={training.libelle}
+                wrapperClasses='h-52 mt-2 rounded-lg md:hidden'
+                imageClasses = 'object-contain'
+            />
+            <h1 className="text-2xl md:text-5xl mb-0 pb-0 font-normal leading-7 mt-2">
+              {capitalize(training?.libelle)}
+            </h1>
+            <RenderHtmlContent
+                content={training?.contenu}
+                classes="leading-6 py-2 md:text-lg"
+            />
+              <p className='text-xs md:text-lg grid grid-cols-5 items-center font-semibold'>
+                  {
+                      training.jours?
+                          <span className="col-span-2">{training.jours} Jours({training.jours * 7} Heures)</span>
+                          :
+                          null
+                  }
                 <Rating
-                  classes="font-semibold md:text-lg"
-                  rate="4.7"
-                  label="(622 notes)"
-                  displayRate={true}
-                  displayLabel={true}
-                  isDecimal={4.7 % 1 != 0}
+                    classes="col-span-3 items-end justify-end text-right"
+                    rate="4.7"
+                    label="(622 notes)"
+                    displayRate={true}
+                    displayLabel={true}
+                    isDecimal={4.7 % 1 != 0}
                 />
               </p>
-             
-              <div className="md:hidden">
-                {training.niveau || training.prix ? (
-                  <div className="flex justify-between mb-4 text-xl">
-                    {training.niveau ? (
-                      <span className="flex bg-app-green mr-3 pr-5 text-white items-center rounded-lg">
-                        <span className="ml-3 mr-3 bg-white w-2 h-2 rounded-full"/>
-                        <span>
-                          {training.niveau === 'BEGINNER' ? 'Débutant' : null}
-                        </span>
-                        <span>
-                          {training.niveau === 'INTERMEDIARY'
-                            ? 'Intermediaire'
-                            : null}
-                        </span>
-                        <span>
-                          {training.niveau === 'ADVANCED' ? 'Avancé' : null}
-                        </span>
-                      </span>
-                    ) : null}
-                    {training.prix ? (
-                      <span className="flex items-center text-2xl py-1 pr-3 text-white font-bold">
-                        <span>{training.prix}</span>
-                      </span>
-                    ) : null}
-                  </div>
-                ) : null}
-              </div>
-              <Certification certifications={training?.certifs}/>
-              <div className={`grid ${training?.programmepdf ? 'grid-cols-2' : ''} md:grid-cols-2 gap-2`}>
-                <AllTrainings
-                  training={training}
+            <div className="flex justify-between my-2">
+              <TrainingLevel level={training.niveau}/>
+              <TrainingPrice price={training.prix}/>
+            </div>
+            <CPFLink data={training.cpf} classes="bg-app-green"/>
+            <div className={
+                classNames(
+                    'grid my-4 items-center',
+                    { 'grid-cols-2 gap-2' : training.programmepdf}
+                )
+            }>
+              <AllTrainings
+                  text="Je m'inscris"
+                  classes="white-button !px-0 text-center h-9"
                   icon={false}
                   link={`/nos-formations/votre-candidature?formation=${slugify(
-                    training.libelle
+                      training.libelle
                   )}-${training.id}`}
-                  text="Je m'inscris"
-                  classes="flex-1 bg-white w-full text-app-blue font-light md:px-20 py-3 border hover:bg-transparent hover:text-white hover:border hover:border-white"
-                />
-                {training.programmepdf ? (
+                  containerClasses={
+                    classNames(
+                        '!px-0 block',
+                        { 'w-full' : training.programmepdf}
+                    )
+                  }
+
+              />
+              { training.programmepdf ? (
                   <button
-                    type="button"
-                    onClick={toogleDownloadForm}
-                    className="text-white w-full mr-2 md:mr-0 md:mt-0 md:px-4 text-xs md:text-sm justify-center items-center uppercase py-3 rounded-lg relative border border-app-white hover:bg-white hover:text-app-blue">
+                      type="button"
+                      onClick={toogleDownloadForm}
+                      className="outline-white-button text-[10px] !px-0 h-full items-center justify-center text-center text-lg">
                     Je télécharge le programme
                   </button>
-                ) : null}
-                {(training?.cpf && training?.cpf.length) ? <CPFLink data={training.cpf} /> : null}
-              </div>
+              ) : null}
+
+            </div>
+            <div className="grid grid-cols-2 gap-2 items-center justify-center">
+              <button
+                  type="button"
+                  className={classNames(
+                      'block flex justify-center items-center text-xs md:text-lg py-2'
+                  )}>
+                <span className="underline">Nos prochaines sessions</span>
+              </button>
+              <Link
+                  href="/financements"
+                  type="button"
+                  className={classNames(
+                      'block flex justify-center items-center text-xs md:text-lg py-2'
+                  )}>
+                <span className="underline">Comment financer cette formation ? </span>
+              </Link>
+            </div>
+              <TrainingLocalisation localisations={training.localisation} />
             </div>
           </div>
-        </header>
-      ) : null}
-    </>
+      </header>
   );
 }
 

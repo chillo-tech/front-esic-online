@@ -7,6 +7,7 @@ function DisplayImage({
   image,
   libelle,
   classes,
+  wrapperClasses = 'h-56 rounded-t-lg ',
   imageClasses = 'object-cover',
   positionRelative = true,
 }: any) {
@@ -16,16 +17,16 @@ function DisplayImage({
       {image ? (
         <div
           className={classNames(
-            positionRelative ? 'relative' : '',
-            'w-full h-full min-h-72 !rounded-t-lg overflow-hidden',
-            classes
+              wrapperClasses,
+              'w-full overflow-hidden',
+              {'relative': positionRelative},
+              classes
           )}>
-          <div className="rounded-lg w-full h-full absolute left-0 top-0 bottom-0 right-0 z-20 !rounded-t-sm" />
           <Image
             fill={true}
             src={`${process.env.API_URL}/assets/${
               image && image.filename_disk ? image.filename_disk : image
-            }?w=300&h=200fill=true`}
+            }?w=500&h=400fill=true`}
             alt={libelle}
             loader={loaderProp}
             unoptimized

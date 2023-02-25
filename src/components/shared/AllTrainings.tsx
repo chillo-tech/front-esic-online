@@ -20,22 +20,19 @@ function AllTrainings({
   text = 'Voir toutes nos formations',
   blank = false,
   classes,
-  containerClasses,
 }: Params) {
   return (
-    <span className={classNames('flex justify-center items-center', containerClasses)}>
       <Link
        target={blank ?'_blank' : ''}
         href={link}
         className={classNames(
-          'flex justify-center items-center text-xs md:text-sm px-3 py-3 rounded-lg relative',
+          'block flex justify-center items-center text-xs md:text-sm rounded-lg relative',
           classes,
           { uppercase: uppercase }
         )}>
         <span>{capitalize(text)}</span>
         {icon && <BsArrowRightShort className="text-4xl ml-5" />}
       </Link>
-    </span>
   );
 }
 

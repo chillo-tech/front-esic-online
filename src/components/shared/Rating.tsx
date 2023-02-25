@@ -13,10 +13,10 @@ function Rating({rate, label, classes, displayRate = false, displayLabel = false
               {
                 Array.from(Array(Math.floor(rate)).keys())
                     .map((entry: number) => 
-                    <BsStarFill className='text-xl text-yellow-400' key={`moyenne-${entry}`} />
+                    <BsStarFill className='text-xs text-yellow-400' key={`moyenne-${entry}`} />
                 )
               }
-              {isDecimal ? (<BsStarHalf className='text-xl text-yellow-400' />): null}
+              {isDecimal ? (<BsStarHalf className='text-xs text-yellow-400' />): null}
               
               {
                 Array
@@ -25,7 +25,7 @@ function Rating({rate, label, classes, displayRate = false, displayLabel = false
                 )
               }
             </span>
-          {displayLabel ? (<span className="mr-2">{label}</span>): null}
+          {displayLabel ? (<span>{label}</span>): null}
         </span>)
         : null
       }

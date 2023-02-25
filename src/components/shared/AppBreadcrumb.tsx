@@ -22,28 +22,30 @@ function AppBreadcrumb() {
 		return [{ href: "/", text: "Accueil" }, ...crumblist];
 	}, [router.asPath]);
 	return (
-		<ul className="text-gray-300 text-sm font-extralight mb-2 flex">
-      {breadcrumbs
-        .map((item: any, key: number) => 
-          <li key={`item-${item.text}-${key}`}>
-             {key < breadcrumbs.length -1 ?
-              (
-                <Link href={`${item.href}`}
-                  className="text-white">
-                  {capitalize(labelFromText(item.text))}
-                </Link>
-              ) : 
-               (
-                <span
-                  className="app-light-gray">
-                  {capitalize(labelFromText(item.text))}
-                </span>
-               ) 
-              }
-              {key < breadcrumbs.length -1 ? <span className="mx-1">&gt;</span> : null }
-          </li>
-        )}
-    </ul>
+		<div className="text-ellipsis truncate text-xs md:text-sm text-ellipsis container overflow-hidden">
+			<ul className="text-gray-300 font-extralight inline-flex">
+		  {breadcrumbs
+			.map((item: any, key: number) =>
+			  <li key={`item-${item.text}-${key}`}>
+				 {key < breadcrumbs.length -1 ?
+				  (
+					<Link href={`${item.href}`}
+					  className="text-white">
+					  {capitalize(labelFromText(item.text))}
+					</Link>
+				  ) :
+				   (
+					<span
+					  className="app-light-gray">
+					  {capitalize(labelFromText(item.text))}
+					</span>
+				   )
+				  }
+				  {key < breadcrumbs.length -1 ? <span className="mx-1">&gt;</span> : null }
+			  </li>
+			)}
+		</ul>
+		</div>
 	);
 }
 

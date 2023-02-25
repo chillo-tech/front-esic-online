@@ -51,7 +51,7 @@ module.exports = {
         secondary: "#418106",
         'app-blue': '#2C7CBB',
         'app-light-blue': '#EEF5FA',
-        'app-light-green': '#EAEDEE',
+        'app-light-green': '#00810026',
         'app-green': '#008100',
         'app-gray': '#333333',
         'app-light-gray': '#545F76',

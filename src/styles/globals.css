@@ -35,6 +35,9 @@ body {
  
 }
 
+.white-button {
+  @apply flex px-6 py-1 rounded-lg border border-white bg-white text-app-blue hover:bg-transparent hover:text-white hover:border-white uppercase
+}
 .blue-button {
   @apply flex px-6 py-1 rounded-lg border border-app-blue bg-app-blue text-white hover:bg-transparent hover:text-app-blue hover:border-app-blue uppercase
 }
@@ -60,14 +63,14 @@ body {
 .html-text h5,
 .html-text h6
 {
-  @apply my-4 text-xl font-bold
+  @apply my-1 text-lg font-bold
 }
 
 .html-text ul,
 .detail-formation .programme p,
 .detail-formation .programme ul
 {
-  @apply ml-10 mb-5 list-disc;
+  @apply ml-7 md:ml-10 mb-5 list-disc;
   display: list-item;
 }
 .corps_contenu, .corps_travaux_pratiques {

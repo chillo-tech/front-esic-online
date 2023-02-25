@@ -1,5 +1,6 @@
 import { axiosInstance } from "../axios-instance";
 import {IMAGE_PARAMS} from 'utils/parameters/images';
+import {METADATA_PARAMS} from 'utils/parameters/metadatas';
 
 const getFormations = ({limit}: {limit: number}) => {
   const base = "id,libelle,titre,description";
@@ -76,9 +77,8 @@ const getDetail = ({
   const base = '*';
   const cpf = 'cpf.cpf_id.*';
   const articles = 'articles.articles_id.*';
-  const metadonnees = 'metadonnees.*';
-  const programmepdf = 'programmepdf.*';
-  const souscategories = 'souscategories.souscategories_id.*';
+  const programmepdf = 'programmepdf.id,programmepdf.storage,programmepdf.filename_disk,programmepdf.filename_download,programmepdf.title,programmepdf.type,programmepdf.folder,programmepdf.filesize';
+  const souscategories = 'souscategories.souscategories_id.libelle,souscategories.souscategories_id.id';
   const certifications = 'certifs.certifications_id.*';
   const images = IMAGE_PARAMS;
   const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut,sessions.sessions_id.id,sessions.sessions_id.libelle';
@@ -90,7 +90,7 @@ const getDetail = ({
     ${sessions},
     ${cpf},
     ${articles},
-    ${metadonnees},
+    ${METADATA_PARAMS},
     ${souscategories},
     ${certifications}
   `;
