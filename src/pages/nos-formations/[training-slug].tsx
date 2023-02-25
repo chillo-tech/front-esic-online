@@ -174,7 +174,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                           <h3 className="mt-2 font-semibold text-2xl mb-2">
                             Nos prochaines sessions
                           </h3>
-                          {training?.sessions.map((item: any, index: number) =>
+                          {training?.sessions.filter((session: any) => session.sessions_id !=null).map((item: any, index: number) =>
                             Date.parse(item?.sessions_id.debut) >=
                             Date.now() ? (
                               <div
