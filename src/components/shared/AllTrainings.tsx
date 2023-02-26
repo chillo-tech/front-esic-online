@@ -20,19 +20,22 @@ function AllTrainings({
   text = 'Voir toutes nos formations',
   blank = false,
   classes,
+  containerClasses
 }: Params) {
   return (
-      <Link
-       target={blank ?'_blank' : ''}
-        href={link}
-        className={classNames(
-          'block flex justify-center items-center text-xs md:text-sm rounded-lg relative',
-          classes,
-          { uppercase: uppercase }
-        )}>
-        <span>{capitalize(text)}</span>
-        {icon && <BsArrowRightShort className="text-4xl ml-5" />}
-      </Link>
+      <span className={classNames("link-wrapper", containerClasses)}>
+        <Link
+         target={blank ?'_blank' : ''}
+          href={link}
+          className={classNames(
+            'block flex justify-center items-center text-xs md:text-sm rounded-lg relative',
+            classes,
+            { uppercase: uppercase }
+          )}>
+          <span>{capitalize(text)}</span>
+          {icon && <BsArrowRightShort className="text-4xl ml-5" />}
+        </Link>
+     </span>
   );
 }
 

@@ -1,27 +1,23 @@
 import AllTrainings from 'components/shared/AllTrainings';
 import CPFLink from 'components/shared/CPFLink';
 import Rating from 'components/shared/Rating';
-import Certification from 'components/shared/Certification';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
-import Image from 'next/image';
-import React, { useState } from 'react';
-import { capitalize, cn, loaderProp, slugify } from 'utils';
+import React from 'react';
+import { capitalize, slugify } from 'utils';
 import AppBreadcrumb from 'components/shared/AppBreadcrumb';
 import DisplayImage from 'components/shared/DisplayImage';
-import Debug from 'components/Debug';
 import TrainingLevel from 'components/shared/TrainingLevel';
 import TrainingPrice from 'components/shared/TrainingPrice';
 import classNames from 'classnames';
-import {BsArrowRightShort} from 'react-icons/bs';
 import Link from 'next/link';
 import TrainingLocalisation from 'components/shared/TrainingLocalisation';
 
 function Header({ training, toogleDownloadForm }: any) {
   return (
-    <header className="bg-app-blue py-4 md:py-8 text-white text-sm !md:text-lg">
+    <header className="bg-app-blue py-4 md:py-2 text-white text-sm !md:text-lg">
       <AppBreadcrumb />
-      <div className="container grid md:grid-cols-3">
-          <div className="md:col-span-2">
+      <div className="container grid md:grid-cols-7">
+          <div className="md:col-span-4">
             <DisplayImage
                 image={training.image}
                 libelle={training.libelle}
@@ -51,20 +47,20 @@ function Header({ training, toogleDownloadForm }: any) {
                     isDecimal={4.7 % 1 != 0}
                 />
               </p>
-            <div className="flex justify-between my-2">
+            <div className="flex justify-between my-2 md:hidden">
               <TrainingLevel level={training.niveau}/>
               <TrainingPrice price={training.prix}/>
             </div>
             <CPFLink data={training.cpf} classes="bg-app-green"/>
             <div className={
                 classNames(
-                    'grid my-4 items-center',
-                    { 'grid-cols-2 gap-2' : training.programmepdf}
+                    'grid grid-cols-2 my-4 items-center',
+                    { 'gap-2' : training.programmepdf}
                 )
             }>
               <AllTrainings
                   text="Je m'inscris"
-                  classes="white-button !px-0 text-center h-9"
+                  classes="white-button !px-0 text-center h-9 md:py-2 md:h-auto"
                   icon={false}
                   link={`/nos-formations/votre-candidature?formation=${slugify(
                       training.libelle
@@ -81,7 +77,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   <button
                       type="button"
                       onClick={toogleDownloadForm}
-                      className="outline-white-button text-[10px] !px-0 h-full items-center justify-center text-center text-lg">
+                      className="outline-white-button text-[10px] !px-0 h-9 md:py-2 h-full items-center justify-center text-center text-lg">
                     Je télécharge le programme
                   </button>
               ) : null}
@@ -91,7 +87,7 @@ function Header({ training, toogleDownloadForm }: any) {
               <button
                   type="button"
                   className={classNames(
-                      'block flex justify-center items-center text-xs md:text-lg py-2'
+                      'block flex justify-center items-center text-xs md:text-lg py-2 md:py-0'
                   )}>
                 <span className="underline">Nos prochaines sessions</span>
               </button>
@@ -99,7 +95,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   href="/financements"
                   type="button"
                   className={classNames(
-                      'block flex justify-center items-center text-xs md:text-lg py-2'
+                      'block flex justify-center items-center text-xs md:text-lg py-2 md:py-0'
                   )}>
                 <span className="underline">Comment financer cette formation ? </span>
               </Link>

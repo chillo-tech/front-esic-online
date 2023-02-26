@@ -3,9 +3,12 @@ import React, {useState} from 'react'
 import {useQuery} from 'react-query';
 import {fetchData} from 'services/index';
 import {PAGE_PARAMS} from 'utils';
+import { useRouter } from 'next/router';
+import { Spinner } from 'flowbite-react';
 
 function DefaultPage({id, libelle}: {id: string, libelle:string}) {
     const [sessions, setSessions] = useState([]);
+    const router = useRouter();
     const {
         isSuccess,
         data,
@@ -19,6 +22,9 @@ function DefaultPage({id, libelle}: {id: string, libelle:string}) {
                     setSessions(pages.sessions);
                 }
             }
+        },
+        onError: () => {
+          router.push('/nos-formations')
         }
     });
     return (
@@ -26,7 +32,13 @@ function DefaultPage({id, libelle}: {id: string, libelle:string}) {
             {
                 isSuccess ? (
                     <Page data={data?.data.data} sessions={sessions}/>
-                ) : null
+                ) : (
+                  <div className="h-screen text-center flex justify-center items-center">
+                    <div>
+                      <Spinner color="info" aria-label="Loading..." size="xl" />
+                    </div>
+                  </div>
+                )
             }
         </>
     )
@@ -38,17 +50,23 @@ export async function getServerSideProps(context: any) {
     const { query } = context;
     let params: any = {};
     if (!query) {
-        return {
-            notFound: true,
-        }
+      return {
+        redirect: {
+          permanent: false,
+          destination: '/nos-formations',
+        },
+      };
     }
 
     if (query['default-page']) {
         const id = query['default-page'].substring(query['default-page'].lastIndexOf('-') + 1);
         if (isNaN(id)) {
-            return {
-                notFound: true,
-            }
+          return {
+            redirect: {
+              permanent: false,
+              destination: '/nos-formations',
+            },
+          };
         }
         params = {
             id,
