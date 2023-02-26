@@ -8,6 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
+        retry:false,
         refetchOnWindowFocus: false,
         staleTime: 3600000, //1jour
         cacheTime: 3600000, //1jour

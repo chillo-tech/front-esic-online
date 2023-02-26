@@ -9,15 +9,11 @@ import { fetchData } from 'services/index';
 import Pages from 'components/shared/Pages';
 import Link from 'next/link';
 import {capitalize, MENU, slugify} from 'utils/index';
-import Debug from 'components/Debug';
 
 function MenuIndex() {
   const [menu, setMenu] = useState<any>();
   const base = 'id,libelle,souslibelle,ordre,image,description,abstrait';
-  const categories = 'categories.categories_id.id,categories.categories_id.libelle';
-  const pages = 'pages.pages_id.id,pages.pages_id.libelle,pages.pages_id.image,pages.pages_id.description,pages.pages_id.abstrait';
-  const fields=`${base},${categories},${pages}`;
-  const router = useRouter();
+ const router = useRouter();
   useQuery<any>({
     queryKey: ["menus", router.pathname],
     queryFn: () =>

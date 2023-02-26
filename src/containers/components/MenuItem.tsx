@@ -29,11 +29,11 @@ function MenuItem({item}: any) {
 
     if ((item.categories.length && item.categories.length > 1) || (item.pages.length && item.pages.length > 1)) {
         return (
-            <li className='relative border-red-10' ref={ref}>
+            <li className='relative' ref={ref}>
                 <button type="button" aria-haspopup="menu"
                         aria-expanded={dropdown ? "true" : "false"}
                         onClick={() => setDropdown((prev) => !prev)}
-                        className={`font-normal flex justify-between items-center uppercase block py-6 px-1 text-sm text-center ${dropdown ? 'text-app-blue' : 'text-gray-700'}`}>
+                        className={`flex justify-between items-center uppercase block font-bold py-6 px-1 text-sm text-center ${dropdown ? 'text-app-blue' : 'text-gray-700'}`}>
                     <span className='mr-1'>{item.libelle}</span>
                     <BiChevronDown className='text-xl'/>
                 </button>
@@ -46,19 +46,19 @@ function MenuItem({item}: any) {
         return (
             <>
                 {item.pages.length === 1 ?
-                    (<li className='relative border-red-10' ref={ref}>
+                    (<li className='relative' ref={ref}>
                         <Link href={`/${slugify(item.pages[0].pages_id.libelle)}-${item.pages[0].pages_id.id}`}
                               title={item.pages[0].pages_id.libelle}
-                              className="block py-6 px-4 text-gray-700 text-sm text-center">
+                              className="block font-bold py-6 px-4 text-gray-700 text-sm text-center">
                             {item.libelle}
                         </Link>
                     </li>) : null}
                 {item.categories.length === 1 ?
-                    (<li className='relative border-red-10' ref={ref}>
+                    (<li className='relative' ref={ref}>
                         <Link
                             href={`/${slugify(item.categories[0].categories_id.libelle)}-${item.categories[0].categories_id.id}`}
                             title={item.categories[0].categories_id.libelle}
-                            className="block py-6 px-4 text-gray-700 text-sm text-center">
+                            className="block font-bold py-6 px-4 text-gray-700 text-sm text-center">
                             {item.libelle}
                         </Link>
                     </li>) : null}
@@ -66,10 +66,10 @@ function MenuItem({item}: any) {
         )
     }
     return (
-        <li className='relative border-red-10' ref={ref}>
+        <li className='relative' ref={ref}>
             <Link href={`/${slugify(item.libelle)}-${item.id}`}
                   title={item.libelle}
-                  className="block py-6 px-4 text-gray-700 text-sm text-center">
+                  className="block font-bold py-6 px-4 text-gray-700 text-sm text-center">
                 {item.libelle}
             </Link>
         </li>

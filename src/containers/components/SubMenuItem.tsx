@@ -25,7 +25,7 @@ function SubMenuItem({item, grandparent, parent}: any) {
   }, [dropdown]);
 
   return (
-    <li className='relative border-red-10' ref={ref}>
+    <li className='font-bold relative border-red-10' ref={ref}>
       {((item.souscategories && item.souscategories.length > 0) || (item.certifications && item.certifications.length > 0)  )? (
           <div className="whitespace-nowrap">
             <button type="button" aria-haspopup="menu"
@@ -67,7 +67,7 @@ function SubMenuItem({item, grandparent, parent}: any) {
           <Link href={`/${slugify(item.libelle)}-${item.id}`}
                 title={item.libelle}
                 className="block py-6 px-4 text-gray-700 text-sm text-center">
-            {item.libelle}
+            {item.libelle} ddd
           </Link>
       )}
     </li>
