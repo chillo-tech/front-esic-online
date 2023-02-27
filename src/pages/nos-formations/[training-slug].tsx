@@ -27,6 +27,7 @@ import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import AllTrainings from 'components/shared/AllTrainings';
 import { Spinner } from 'flowbite-react';
 import HomeTrainingItemMobile from 'components/shared/HomeTrainingItemMobile';
+import CPFLink from 'components/shared/CPFLink';
 var classNames = require('classnames');
 
 export type Message = {
@@ -131,7 +132,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                     (item) => (
                       <article
                         key={`${id}-${item.key}-${slugify(item.label)}`}
-                        className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-10 detail-formation">
+                        className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-3 detail-formation">
                         <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">
                           {item.label}
                         </h2>
@@ -148,7 +149,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                       (article: any) => (
                           <article
                               key={`${id}-${article.articles_id.id}}`}
-                              className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-10 detail-formation">
+                              className="bg-white shadow-[0_5px_45px_-20px_rgba(0,0,0,0.3)] p-4 md:p-10 rounded-lg mb-3 detail-formation">
                             <h2 className="text-xl md:text-3xl font-bold mb-0 pb-0'">
                               {article?.articles_id?.libelle}
                             </h2>
@@ -159,6 +160,18 @@ function Training({ id, slug }: { id: string; slug: string }) {
                           </article>
                       )
                   )}
+                  <div className={`bg-app-blue py-2 px-3 grid ${training?.programmepdf ? 'grid-cols-2' : ''} md:grid-cols-2 gap-2`}>
+                    <AllTrainings
+                      training={training}
+                      icon={false}
+                      link={`/nos-formations/votre-candidature?formation=${slugify(
+                        training.libelle
+                      )}-${training.id}`}
+                      text="Je m'inscris"
+                      classes="flex-1 bg-white w-full text-app-blue font-light md:px-20 py-3 border hover:bg-transparent hover:text-white hover:border hover:border-white"
+                    />
+                    {(training?.cpf && training?.cpf.length) ? <CPFLink data={training.cpf} /> : null}
+                  </div>
                 </div>
                 <div className="w-full col-span-5 mx-auto md:fixed scrollbar-hide md:w-96 md:z-30 md:h-screen md:pb-40 md:top-28 md:right-24 md:overflow-y-scroll md:overflow-scroll scroll-smooth">
                   <div className=" w-full mx-auto bg-white hidden md:block rounded-lg shadow-md">
@@ -171,7 +184,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
                     {training.sessions && training.sessions.length ? (
                       <div className="hidden md:block bg-app-light-green px-5 ">
                         <div className="sessions py-2">
-                          <h3 className="mt-2 font-semibold text-2xl mb-2">
+                          <h3 className="mt-2 font-semibold text-2xl mb-3">
                             Nos prochaines sessions
                           </h3>
                           {training?.sessions.filter((session: any) => session.sessions_id !=null).map((item: any, index: number) =>

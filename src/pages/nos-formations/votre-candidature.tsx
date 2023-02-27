@@ -391,7 +391,9 @@ function Candidature({ params }: any) {
                   <div
                     aria-describedby="sessions"
                     className="grid gap-4 md:grid-cols-2">
-                    {selectedTraining.sessions.map(
+                    {selectedTraining.sessions
+                    .filter((session: any) => session.sessions_id !=null)
+                    .map(
                       (session: any, index: number) => (
                         <label
                           key={`session-${session.sessions_id.id}-${index}`}
