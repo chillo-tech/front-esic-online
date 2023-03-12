@@ -110,8 +110,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
     mutation.reset();
     router.push('/contactez-nous');
   };
-  const updateCategoryTraining = (trainingInfos: any) => {
-  }
+  const updateCategoryTraining = (trainingInfos: any) => {}
   return (
     <OpenedLayout>
       <Metadata entry={training} />
