@@ -111,8 +111,6 @@ function Training({ id, slug }: { id: string; slug: string }) {
     router.push('/contactez-nous');
   };
   const updateCategoryTraining = (trainingInfos: any) => {
-
-    
   }
   return (
     <OpenedLayout>
