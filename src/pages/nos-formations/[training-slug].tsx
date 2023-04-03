@@ -17,8 +17,12 @@ import classNames from 'classnames';
 import ContactUsText from 'components/shared/ContactUsText';
 import { useInView } from 'react-intersection-observer';
 import Reference from 'yup/lib/Reference';
+import Link from 'next/link';
+import HomeTrainingItem from 'components/shared/HomeTrainingItem';
+import TrainingLocalisation from 'components/shared/TrainingLocalisation';
 
 function Training({ id, slug }: { id: string; slug: string }) {
+  const [relatedTraining, setRelatedTraining] = useState<any>([]);
 	const [training, setTraining] = useState<any>(null);
 	const { updateLastTraining, displayInscriptionButton } = useContext(ApplicationContext);
 	const router = useRouter();
@@ -26,29 +30,38 @@ function Training({ id, slug }: { id: string; slug: string }) {
 
 	const [displayDownloadForm, setDisplayDownloadForm] = useState(false);
 	const toogleDownloadForm = () => setDisplayDownloadForm(!displayDownloadForm);
-	  const { data } = useQuery<any>({
-		queryKey: ['formations', 'detail', slug, id],
-		queryFn: () =>
-		  getDetail({
-			id,
-		  }),
-		onSuccess: (data: any) => {
-		  setTraining(data.data.data);
-		  updateLastTraining(data.data.data);
-		},
-		onError: () => {
-		  router.push('/page-inconnue');
-		},
+	  useQuery<any>({
+		  queryKey: ['formations', 'detail', slug, id],
+      queryFn: () =>
+        getDetail({
+        id,
+      }),
+      onSuccess: (data: any) => {
+        setTraining(data.data.data);
+        updateLastTraining(data.data.data);
+      },
+      onError: () => {
+        router.push('/page-inconnue');
+      }
 	  });
 
+    const trainingId = training?.id;
+    useQuery<any>({
+      enabled: !!(trainingId && training?.souscategories.filter((souscategory: any) => souscategory != null && souscategory.souscategories_id != null)[0]?.souscategories_id?.id),
+      queryKey: ["SousCategories", training?.souscategories[0]?.souscategories_id?.id],
+      queryFn: () => getSubCategories({id: training?.souscategories.filter((souscategory: any) => souscategory != null && souscategory.souscategories_id != null)[0]?.souscategories_id?.id as string, trainingsLimit: 3}),
+      onSuccess: ({data}: any) => {
+        setRelatedTraining(data?.data?.formations);
+      },
+    });
 
 	return (
 		<OpenedLayout>
 			<Metadata entry={training} />
 			{
 				training ? (
-					<>
-						<div className="column-wrapper h-1 border border-red-300 container bg-green-900">
+					<div className='relative'>
+						<div className="column-wrapper h-1 container">
 							<div className={classNames(
                 "column container grid grid-cols-7 gap-24",
                 {'fixed mt-10': !inView},
@@ -64,13 +77,15 @@ function Training({ id, slug }: { id: string; slug: string }) {
 												imageClasses = 'object-cover'
 											/>
 											<div className="px-4">
-												<div className="flex justify-between my-4">
+												<div className="flex justify-between mt-4">
 													<TrainingLevel level={training.niveau}/>
 													<TrainingPrice price={training.prix}/>
 												</div>
 											</div>
 											{training.sessions && training.sessions.length ? (
 												<div className="hidden md:block px-5 ">
+
+                          <TrainingLocalisation localisations={training.localisation} classes="text-center md:text-center py-4" />
 													<div className="sessions">
 														<h3 className="font-semibold text-2xl mb-2">
 															Nos prochaines sessions
@@ -105,11 +120,23 @@ function Training({ id, slug }: { id: string; slug: string }) {
 										</div>
 										<AllTrainings
 											text="Comment financer cette formation ?"
-											classes="white-button !px-0 text-center h-9 md:py-2 md:h-auto font-bold"
+											classes="white-button !px-0 text-center h-9 md:py-4 md:h-auto font-bold"
 											icon={false}
 											link={`/financements`}
 											containerClasses="!px-0 block shadow-md mt-3 rounded-b-lg"
 										/>
+                    <Link
+                      href={`/nos-formations/votre-candidature?formation=${slugify(training.libelle)}-${training.id}`}
+                      className={classNames(
+                        'flex bg-app-blue w-full uppercase px-4 py-4 relative'
+                      )}>
+                      <span
+                        className={classNames(
+                          'text-app-blue bg-white block w-full text-center rounded-lg px-20 py-3 text-lg font-semibold'
+                        )}>
+                        S&apos;inscrire
+                      </span>
+                    </Link>
 									</div>
 								</div>
 							</div>
@@ -141,7 +168,8 @@ function Training({ id, slug }: { id: string; slug: string }) {
 								)}
 							</div>
 						</div>
-					</>
+           
+					</div>
 				) :  (
 				<div className="h-screen text-center flex justify-center items-center">
 					<div>
@@ -151,6 +179,19 @@ function Training({ id, slug }: { id: string; slug: string }) {
 				)
 			}
       <p ref={ref}/>
+      <div className="hidden md:grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container relative bg-white">
+        {
+          relatedTraining.slice(0, 3).map((training: any, index: number) =>(
+            <HomeTrainingItem 
+              classes="rounded-lg shadow-md pb-2" 
+              training={training.formations_id} 
+              displayInfos={false}
+              link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}
+              key={`${training.formations_id.id}-${index}`} 
+            />
+          ))
+        }
+      </div>
 	 	</OpenedLayout>
  	)
 }

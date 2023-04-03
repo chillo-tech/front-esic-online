@@ -50,7 +50,7 @@ export default function NosOffres() {
                     </article>
                   ))}
             </div> 
-            <AllTrainings classes='outline-white-button'/>
+            <AllTrainings classes='outline-white-button' containerClasses="md:flex md:justify-center md:items-center"/>
           </div>
         </section>
       </section>

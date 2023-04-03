@@ -36,6 +36,7 @@ function NosMeilleuresFormations() {
               text={"Contactez nous"}
               link="/contactez-nous"
               classes='outline-blue-button'
+               containerClasses="md:flex md:justify-center md:items-center"
           />
         </div>
       </section>

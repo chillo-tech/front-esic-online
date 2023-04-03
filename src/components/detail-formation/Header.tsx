@@ -100,7 +100,7 @@ function Header({ training, toogleDownloadForm }: any) {
                 <span className="underline">Comment financer cette formation ? </span>
               </Link>
             </div>
-              <TrainingLocalisation localisations={training.localisation} />
+              <TrainingLocalisation localisations={training.localisation} classes="md:hidden"/>
             </div>
           </div>
       </header>

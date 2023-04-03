@@ -1,6 +1,7 @@
+import classNames from 'classnames';
 import React from 'react';
 
-const TrainingLocalisation = ({localisations}: any) => {
+const TrainingLocalisation = ({localisations, classes= 'text-sm'}: any) => {
 	const mapping: any = {
 		ONLINE: 'En ligne',
 		ONSITE: 'Dans nos locaux',
@@ -10,7 +11,7 @@ const TrainingLocalisation = ({localisations}: any) => {
 		<>
 			{
 				localisations && localisations.length ? (
-					<p className="text-center md:text-left text-sm font-semibold py-2">
+					<p className={classNames("text-center md:text-left font-semibold py-2", classes)}>
 						{localisations.map((localisation: string) => mapping[localisation]).join(' ou ')}
                    </p>
 				): null
