@@ -11,7 +11,7 @@ function AvisUtilisateurs() {
       {
         state?.company?.avis ?(
           <section className="bg-white px-5">
-            <section className="pt-20 pb-20 bg-no-repeat bg-left bg-contain bg-[url('/images/pages/offers-left-arc.svg')]">
+            <section className="py-4 md:pt-20 md:pb-20 bg-no-repeat bg-left bg-contain bg-[url('/images/pages/offers-left-arc.svg')]">
               <SectionTitle text="Ils ont dit ..." />
               <div className="grid md:grid-cols-4 gap-6">
                 {

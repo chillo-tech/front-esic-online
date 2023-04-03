@@ -234,7 +234,7 @@ function FormulaireEntreprise({formulaire}: any) {
 												<select
 													{...register('subject')}
 													className={formStyles.form_control__input}>
-													<option disabled selected value="">
+													<option disabled defaultValue="">
 														Votre demande concerne ?
 													</option>
 													{displayCandidatFields ? (

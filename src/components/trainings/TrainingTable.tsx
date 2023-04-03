@@ -7,7 +7,7 @@ import Link from 'next/link';
 function TrainingTable({data, link}: any) {
   return (
     <Link href={`${link}`} title={data.libelle}>
-      <article className="items-center my-2 bg-gray-200 px-6 py-5 grid md:grid-cols-7 rounded-lg text-gray-700">
+      <article className="items-center my-2 bg-gray-white px-6 py-2 grid md:grid-cols-7 rounded-lg text-gray-700">
         <div className='md:col-span-4 md:py-2 flex flex-col'>
           <h2 className="text-2xl font-extrabold pb-2 md:pr-10">{data.libelle}</h2>
           <p className="flex justify-between md:justify-start">
@@ -54,7 +54,7 @@ function TrainingTable({data, link}: any) {
             <p className='mr-3 md:mr-0'>{data.presentiel ? 'Présentiel': null}</p>
             <p>{data.distanciel ? 'Classe à distance': null}</p>
           </div>
-          {data.prix ?(<p className='font-extrabold md:mt-5 text-center'> {data.prix} </p>): null}
+          {data.prix ?(<p className='font-extrabold text-center'> {data.prix} </p>): null}
         </div>
       </article>
     </Link>

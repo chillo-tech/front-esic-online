@@ -15,11 +15,14 @@ import TrainingPrice from 'components/shared/TrainingPrice';
 import AllTrainings from 'components/shared/AllTrainings';
 import classNames from 'classnames';
 import ContactUsText from 'components/shared/ContactUsText';
+import { useInView } from 'react-intersection-observer';
+import Reference from 'yup/lib/Reference';
 
 function Training({ id, slug }: { id: string; slug: string }) {
 	const [training, setTraining] = useState<any>(null);
 	const { updateLastTraining, displayInscriptionButton } = useContext(ApplicationContext);
 	const router = useRouter();
+  const { ref, inView, entry } = useInView({threshold: 0});
 
 	const [displayDownloadForm, setDisplayDownloadForm] = useState(false);
 	const toogleDownloadForm = () => setDisplayDownloadForm(!displayDownloadForm);
@@ -45,15 +48,19 @@ function Training({ id, slug }: { id: string; slug: string }) {
 			{
 				training ? (
 					<>
-						<div className="column-wrapper relative h-1 border border-red-300 container bg-green-900 relative">
-							<div className="column absolute container top-10 grid grid-cols-7 gap-24">
+						<div className="column-wrapper h-1 border border-red-300 container bg-green-900">
+							<div className={classNames(
+                "column container grid grid-cols-7 gap-24",
+                {'fixed mt-10': !inView},
+                {'absolute bottom-10': inView}
+              )}>
 								<div className="col-start-5 col-span-3">
 									<div className="col-content-wrapper">
 										<div className="bg-gray-white rounded-t-lg rounded-b-lg">
 											<DisplayImage
 												image={training.image}
 												libelle={training.libelle}
-												wrapperClasses='h-80 rounded-lg'
+												wrapperClasses='h-60 rounded-lg'
 												imageClasses = 'object-cover'
 											/>
 											<div className="px-4">
@@ -68,7 +75,11 @@ function Training({ id, slug }: { id: string; slug: string }) {
 														<h3 className="font-semibold text-2xl mb-2">
 															Nos prochaines sessions
 														</h3>
-														{training?.sessions.filter((session: any) => session.sessions_id !=null).map((item: any, index: number) =>
+														{training?.sessions
+                            .filter((session: any) => session.sessions_id !=null)
+                            .slice(0,6)
+                            .sort((a: any, b: any) => new Date(a.sessions_id.debut).getTime() - new Date(b.sessions_id.debut).getTime())
+                            .map((item: any, index: number) =>
 															Date.parse(item?.sessions_id.debut) >=
 															Date.now() ? (
 																<div
@@ -97,7 +108,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
 											classes="white-button !px-0 text-center h-9 md:py-2 md:h-auto font-bold"
 											icon={false}
 											link={`/financements`}
-											containerClasses="!px-0 block shadow-md mt-3"
+											containerClasses="!px-0 block shadow-md mt-3 rounded-b-lg"
 										/>
 									</div>
 								</div>
@@ -139,7 +150,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
 				</div>
 				)
 			}
-
+      <p ref={ref}/>
 	 	</OpenedLayout>
  	)
 }

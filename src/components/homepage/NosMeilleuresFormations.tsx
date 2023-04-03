@@ -17,16 +17,16 @@ function NosMeilleuresFormations() {
   return (
     <>
     {isSuccess ? (
-      <section className='pt-20 pb-20 bg-white' id='formations'>
+      <section className='py-4 md:pt-20 md:pb-20 bg-white' id='formations'>
         <SectionTitle text=" Nos meilleures formations" />
         <div className="container mx-auto px-2">
-          <div className="grid gap-10 pb-10 md:grid-cols-3">
+          <div className="grid gap-4 pb-10 md:grid-cols-3">
             {data?.data.data
             .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
             .slice(0,3)
             .map((training:any)=> (
               <HomeTrainingItem 
-                classes="rounded-lg shadow-md pb-2" 
+                classes="rounded-lg pb-2"
                 training={training}
                 link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
                 key={training.id}

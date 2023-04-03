@@ -27,11 +27,11 @@ function Metadata({entry}: any) {
         <title>{title}</title>
         <meta name="titre" content={title} />
         <meta name="description" content={description} />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Cache-control" content="no-cache" />
-        <meta http-equiv="Expires" content="-1" />
-        <meta http-equiv="cache-Control" content="no-caxhe" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Cache-control" content="no-cache" />
+        <meta httpEquiv="Expires" content="-1" />
+        <meta httpEquiv="cache-Control" content="no-caxhe" />
         <meta name="Keywords" content={`${entry && entry.keywords ? entry?.keywords : `ESIC centre de formation ${keywords}`}`} />
         <meta name="Author" content="esic-online" />
         <meta name="Identifier-URL" content="https://www.esic-online.com" />

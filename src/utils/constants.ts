@@ -145,6 +145,10 @@ const TRAINING_KEYS = [
     label: 'Objectifs de la formation'
   },
   {
+    key: 'formateur',
+    label: 'Equipe pédagogique'
+  },
+  {
     key: 'prerequis',
     label: 'Pré requis pour cette formation'
   },
@@ -166,16 +170,28 @@ const TRAINING_KEYS = [
     key: 'public',
     label: 'Votre profil pour cette formation'
   },
+  {
+    key: 'delai',
+    label: "Modalités et délais d'accès"
+  },
+  {
+    key: 'ressources',
+    label: "Ressources pédagogiques"
+  },
+  {
+    key: 'evaluations',
+    label: "Moyens d'évaluation"
+  },
+  {
+    key: 'accessibilite',
+    label: "Pour les personnes à mobilité reduite"
+  },
     /*
   {
     key: 'modalites',
     label: "Modalités d'accès à cette formation"
   },
 
-  {
-    key: 'accessibilite',
-    label: "Pour les personnes à mobilité reduite"
-  },
   {
     key: 'methodes',
     label: "Nos méthodes d'enseignement"
