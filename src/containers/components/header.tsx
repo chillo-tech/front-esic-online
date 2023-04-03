@@ -13,6 +13,8 @@ import { MENU } from 'utils';
 import NavigationMobile from "containers/components/NavigationMobile";
 import AllTrainings from "components/shared/AllTrainings";
 
+import { GoSearch } from "react-icons/go";
+
 function Header() {
   const router = useRouter();
   const [showMenu, setshowMenu] = useState(false);
@@ -53,11 +55,19 @@ function Header() {
             <div className='flex items-center'>
               {isSuccess && data?.data?.data ? <Navigation items={data.data.data}/>: null}
               <Link
-                className="font-extralight px-8 py-2 rounded-lg outline-blue-button"
+                className="text-sm ont-extralight px-3 py-1 rounded-lg border border-app-blue hover:bg-app-blue hover:text-white bg-transparent text-app-blue border-app-blue uppercase"
                 href='/contactez-nous'
               >
                 Contactez nous
               </Link>
+            <Link
+                title="Rechercher des formations"
+                className="font-extrabold px-3 rounded-lg text-app-blue"
+                href='/nos-formations'
+              >
+                <GoSearch className={"text-2xl"}/>
+              </Link>
+
             </div>
         </div>
         <div className="md:container items-center justify-between w-full md:w-auto py-4 md:py-0 md:px-0 px-2 lg:hidden">

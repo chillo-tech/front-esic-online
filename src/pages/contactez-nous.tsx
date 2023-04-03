@@ -34,6 +34,8 @@ export type Message = {
   message: string;
   email: string;
   phone: string;
+  company: string;
+  job: string;
   profile: string;
   subject: string;
   contactChannel: string[];
@@ -44,6 +46,8 @@ export type Message = {
 const schema = yup
   .object({
     name: yup.string().trim().required('Ce champ est requis'),
+    company: yup.string(),
+    job: yup.string(),
     phone: yup
       .string()
       .required(PHONE_ERROR_MESSAGE)
@@ -250,6 +254,37 @@ export default function Contact() {
                       </div>
                     </div>
                   </div>
+                  {
+                    profile === 'entreprise'
+                    ? 
+                    (
+                      <div className="grid md:grid-cols-2 md:gap-6">
+                      <div className={formStyles.form_control}>
+                        <div className={formStyles.form_control}>
+                          <input
+                            type="text"
+                            id="company"
+                            placeholder="Nom de votre société"
+                            className={formStyles.form_control__input}
+                            {...register('company')}
+                          />
+                        </div>
+                      </div>
+                      <div className={formStyles.form_control}>
+                        <div className={formStyles.form_control}>
+                          <input
+                            type="text"
+                            id="job"
+                            placeholder="Votre fonction"
+                            className={formStyles.form_control__input}
+                            {...register('job')}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    )
+                    : null
+                  }
                   {profile ? (
                     <div className={formStyles.form_control}>
                       <div className={formStyles.form_control}>

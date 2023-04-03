@@ -10,7 +10,7 @@ function Navigation({items}: Params) {
     <>
     {
       items.length ? (
-        <nav className='navigation uppercase md:mr-2 relative z-50'>
+        <nav className='navigation uppercase md:mr-1 relative z-50'>
           <ul className='md:flex'>
              {items
               .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)

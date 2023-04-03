@@ -20,7 +20,7 @@ function Statistiques() {
   return (
     <>
         {(isSuccess && data?.data.data.articles)? (
-          <section className='py-16 bg-app-light-green'>
+          <section className='py-4 md:py-16 bg-app-light-green'>
             <SectionTitle text= {data?.data.data.libelle} />
             <div className="container">
               <div className="flex justify-center">

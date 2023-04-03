@@ -20,7 +20,10 @@ function PageHeader({data}: any) {
           {'md:py-10': data.image && !data.abstrait}
       )}>          
         <AppBreadcrumb />
-        <div className="grid md:grid-cols-2">
+        <div className={classNames(
+          `grid`,
+          {'md:grid-cols-2': data.image}
+      )}>
           <div>
             <p className="text-md font-extralight">
               {data.souslibelle}
@@ -37,7 +40,7 @@ function PageHeader({data}: any) {
               ) : null
             }
             {data.niveau || data.prix ? (
-                <div className="flex justify-between mb-4 text-xl md:w-8/12">
+                <div className="flex justify-between mb-4 text-xl">
                   {data.duree ? (
                       <span className="flex items-center text-2xl py-1 pr-3 text-white font-bold">
                         <span>{data.duree}</span>

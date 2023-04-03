@@ -18,17 +18,17 @@ function NosClients() {
   return (
     <>
         {(isSuccess && data?.data.data[0].clients)? (
-          <section className=' pt-20 pb-32 bg-app-light-green'>
+          <section className='md:pt-20 md:pb-32 bg-app-light-green'>
             <SectionTitle text={data?.data.data[0].Libelle} underline={false} />
             <div className="flex justify-center">
-              <div className={`grid gap-6 md:grid-cols-4`}>
+              <div className={`grid md:gap-6 md:grid-cols-4`}>
                 {data?.data.data[0].clients
                 .sort((a: any, b:any) => a.ordre > b.ordre ? 1 : -1)
                 .map((training:any)=> (
                     <article className='w-80 md:w-48 lg:w-80 flex items-center justify-center' key={training.id}>
                       {
                         training.image ? (
-                          <div className='border border-red-600 relative w-[236px] h-[172px] border border-app-light-green !rounded-2xl overflow-hidden'>
+                          <div className='border border-red-600 relative md:mb-0 mb-5 w-[236px] h-[100px] md:h-[172px] border border-app-light-green !rounded-2xl overflow-hidden'>
                             <Image
                               fill={true}
                               src={`${process.env.API_URL}/assets/${training.image}?w=200&h=100fill=true`}

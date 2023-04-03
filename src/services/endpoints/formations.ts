@@ -39,7 +39,9 @@ const getSubCategories = ({id, trainingsLimit=10}: {id: string | string[]; field
         ${IMAGE_PARAMS.split(',').map((entry: string) => `formations.formations_id.${entry}`)},
         formations.formations_id.prix,
         formations.formations_id.niveau,
+        formations.formations_id.localisation,
         formations.formations_id.cpf.*,
+        formations.formations_id.image.*,
         formations.formations_id.id`;
   const fields: string = `${base},${formations}`;
   return axiosInstance.get(`souscategories/${id}?fields=${fields}&deep[formations][_limit]=${trainingsLimit}`);

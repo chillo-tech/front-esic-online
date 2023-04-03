@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { capitalize, cn, loaderProp } from 'utils';
+import Localisation from './Localisation';
 
 function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, displayInfos = true }: any) {
   const [isImageLoading, setLoading] = useState(true);
@@ -10,13 +11,13 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
     <>
       <Link
         href={link}
-        className={classNames('flex flex-col justify-between', classes)}
+        className={classNames('flex flex-col justify-between bg-gray-white', classes)}
         key={training.id}
       >
         <div>
           {
             training.image ? (
-              <div className='relative w-full h-40 md:h-48 !rounded-t-lg overflow-hidden'>
+              <div className='relative w-full h-40 md:h-60 !rounded-t-lg overflow-hidden'>
                 {
                   (training?.cpf && training?.cpf.length) ?
                     <p className="absolute right-0 bottom-0 z-40 w-14 h-14">
@@ -111,6 +112,7 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
               </ul>)
             : null
         }
+        <Localisation localisation={training.localisation} classes="pl-3 pb-2 text-sm text-app-gray"/>
       </Link>
     </>
   )

@@ -7,8 +7,10 @@ import { ApplicationContext } from 'context/ApplicationContext'
 import { cn, loaderProp } from 'utils/image-loader';
 import RenderHtmlContent from "components/shared/RenderHtmlContent";
 import DisplayImage from "components/shared/DisplayImage";
+import {useRouter} from 'next/router';
 
 function Hero() {
+  const router = useRouter();
   const [isImageLoading, setLoading] = useState(true);
   const [searchBarEnabled, setSearchBarEnabled] = useState(false);
 
@@ -74,7 +76,7 @@ function Hero() {
                 <div className="py-12 bg-[length:110px_8-60px] bg-no-repeat bg-[right_bottom] bg-[url('/images/pages/hero-green-arc.svg')]">
 
                   <button
-                    onClick={() => setSearchBarEnabled(true)}
+                    onClick={() => router.push("/nos-formations")}
                     className="uppercase px-8 py-3 rounded-lg relative bg-white text-app-blue font-semibold px-10 py-4 hover:bg-transparent hover:text-white hover:border hover:border-white"
                   >
                     S&apos;INSCRIRE À UNE FORMATION

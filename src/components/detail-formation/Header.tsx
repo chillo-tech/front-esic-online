@@ -7,6 +7,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import { capitalize, cn, loaderProp, slugify } from 'utils';
 import AppBreadcrumb from 'components/shared/AppBreadcrumb';
+import Localisation from 'components/shared/Localisation';
 
 function Header({ training, toogleDownloadForm }: any) {
   const [isImageLoading, setLoading] = useState(true);
@@ -61,7 +62,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   <>
                     {
                       training.jours ? 
-                        <span>{training.jours} Jours({training.jours * 7} Heures)</span>
+                        <span>{training.jours} Jours ({training.jours * 7} Heures)</span>
                       : 
                       null
                     }
@@ -78,7 +79,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   isDecimal={4.7 % 1 != 0}
                 />
               </p>
-             
+              <Localisation localisation={training.localisation} />
               <div className="md:hidden">
                 {training.niveau || training.prix ? (
                   <div className="flex justify-between mb-4 text-xl">

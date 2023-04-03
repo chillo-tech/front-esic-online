@@ -41,14 +41,14 @@ function Footer() {
       <footer className="text-app-light-gray text-left md:text-center relative shadow-xl w-full bg-gradient-to-b via-app-stone from-app-light-gray to-app-stone text-white font-sans font-extralight">
         {isSuccess ? (
           <>
-            <div className="container md:px-0 relative py-10 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
+            <div className="container md:px-0 relative md:pt-10 md:pb-10 pb-20 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
               <div className="container md:!px-0">
                 <article className="md:col-span-2 text-xl">
                  
                   {data?.data.data.description ? (
                       <RenderHtmlContent
                           content={data.data.data.description}
-                          classes="py-3 leading-10 w-2/3 mx-auto text-white"
+                          classes="py-3 leading-10 md:w-2/3 mx-auto text-white"
                       />
                   ) : null}
                   <p className="py-4 flex items-center justify-center relative">
@@ -60,7 +60,7 @@ function Footer() {
                   </p>
                 </article>
               </div>
-              <div className="container mb-10 grid md:grid-cols-4 md:!px-4 md:!max-w-full">
+              <div className="container md:mb-10 grid md:grid-cols-4 md:!px-4 md:!max-w-full">
                 <article>
                   <h3 className="text-app-white text-left mb-6 text-xl font-bold  text-white">
                     Nous contacter
@@ -100,8 +100,8 @@ function Footer() {
                       </article>
                   ) : null}
                 </article>
-                <article className="flex flex-col text-left my-10 md:my-0 md:px-5 text-white">
-                  <h3 className="text-app-white text-left mb-6 text-xl font-bold">
+                <article className="flex flex-col text-left my-2 md:my-0 md:px-5 text-white">
+                  <h3 className="text-app-white text-left md:mb-6 text-xl font-bold">
                     Nous connaitre
                   </h3>
                   {data?.data.data.pages.map((item: any) => (
@@ -113,7 +113,7 @@ function Footer() {
                       </Link>
                   ))}
                 </article>
-                <article className="flex flex-col justify-center text-left my-10 md:my-0 md:px-5">
+                <article className="flex flex-col justify-center text-left my-2 md:my-0 md:px-5">
                   {data?.data.data.fichiers.map((item: any) => (
                       <Link
                           href={`${process.env.API_URL}/assets/${item.directus_files_id.id}?download`}
