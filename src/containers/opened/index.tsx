@@ -6,7 +6,7 @@ function OpenedLayoutBack({ children }: { children: any }) {
   return (
     <section className="w-full relative">
       <Header />
-      <main className="relative">{children}</main>
+      <main>{children}</main>
       <Footer />
     </section>
   );

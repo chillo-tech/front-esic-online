@@ -22,12 +22,11 @@ import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import TrainingLocalisation from 'components/shared/TrainingLocalisation';
 
 function Training({ id, slug }: { id: string; slug: string }) {
-  console.log({ id, slug });
   const [relatedTraining, setRelatedTraining] = useState<any>([]);
 	const [training, setTraining] = useState<any>(null);
 	const { updateLastTraining, displayInscriptionButton } = useContext(ApplicationContext);
 	const router = useRouter();
-  const { ref, inView, entry } = useInView({threshold: 0});
+  const { ref, inView } = useInView({threshold: 0});
 
 	const [displayDownloadForm, setDisplayDownloadForm] = useState(false);
 	const toogleDownloadForm = () => setDisplayDownloadForm(!displayDownloadForm);
@@ -58,7 +57,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
 			<Metadata entry={training} />
 			{
 				training ? (
-					<div className='relative'>
+					<div className='md:relative'>
 						<div className="column-wrapper h-1 container">
 							<div className={classNames(
                 "column container hidden md:grid md:grid-cols-7 md:gap-24",
@@ -146,13 +145,31 @@ function Training({ id, slug }: { id: string; slug: string }) {
 						<div className="container py-4 grid md:grid-cols-7">
 							<div className="md:col-span-4">
 								{TRAINING_KEYS.filter((item: any) => training[item.key]).map(
-									(item) => (
-									  <Card
-										key={`${id}-${item.key}-${slugify(item.label)}`}
-										label={item.label}
-										body={training[item.key]}
-										classes={item['classes'] ? item['classes'] : 'programme'}
-										/>
+									(item: any, index: number) => (
+                    <React.Fragment key={`${id}-${item.key}-${slugify(item.label)}`}>
+                      {index === 0 ?  (
+                        <Link
+                        href={`/nos-formations/votre-candidature?formation=${slugify(training.libelle)}-${training.id}`}
+                        className={classNames(
+                          'bg-app-blue w-full uppercase px-4 py-4 md:hidden',
+                          'fixed bottom-0 left-0 z-50'
+                        )}>
+                        <span
+                          className={classNames(
+                            'text-app-blue bg-white block w-full text-center rounded-lg px-20 py-3 text-lg font-semibold'
+                          )}>
+                          S&apos;inscrire
+                        </span>
+                      </Link>
+                      ): null}
+                      <Card
+                          label={item.label}
+                          body={training[item.key]}
+                          classes={item['classes'] ? item['classes'] : 'programme'}
+                      />
+
+                    </React.Fragment>
+									  
 									)
 								)}
 								{training.articles.filter((article: any) => article.articles_id !=null).map(
@@ -177,11 +194,11 @@ function Training({ id, slug }: { id: string; slug: string }) {
 				)
 			}
       <p ref={ref}/>
-      <div className="grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container relative bg-white mb-4">
+      <div className="grid gap-4 md:py-8 md:grid-cols-3 md:px-0 container relative bg-white">
         {
           relatedTraining.slice(0, 3).map((training: any, index: number) =>(
             <HomeTrainingItem 
-              classes="rounded-lg shadow-md pb-2" 
+              classes="rounded-lg shadow-md !pb-4" 
               training={training.formations_id} 
               displayInfos={false}
               link={`/nos-formations/${slugify(training.formations_id.libelle)}-${training.formations_id.id}`}
