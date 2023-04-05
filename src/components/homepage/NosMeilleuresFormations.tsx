@@ -3,7 +3,6 @@ import React from 'react'
 import { useQuery } from 'react-query';
 import { getTopTrainings } from 'services/index';
 import HomeTrainingItem from 'components/shared/HomeTrainingItem';
-import { slugify } from 'utils/slugify';
 import SectionTitle from 'components/shared/SectionTitle';
 
 function NosMeilleuresFormations() {
@@ -26,9 +25,9 @@ function NosMeilleuresFormations() {
             .slice(0,3)
             .map((training:any)=> (
               <HomeTrainingItem 
-                classes="rounded-lg pb-2"
+                classes="rounded-lg pb-2 shadow-md md"
                 training={training}
-                link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
+                link={`/nos-formations/${training.slug}`}
                 key={training.id}
               /> ))}
           </div>

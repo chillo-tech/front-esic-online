@@ -38,7 +38,7 @@ function Footer() {
   });
   return (
     <>
-      <footer className="text-app-light-gray text-left md:text-center relative shadow-xl w-full bg-gradient-to-b via-app-stone from-app-light-gray to-app-stone text-white font-sans font-extralight">
+      <footer className="text-left md:text-center relative shadow-xl w-full bg-gradient-to-b via-app-stone from-app-light-gray to-app-stone text-white font-sans font-extralight">
         {isSuccess ? (
           <>
             <div className="container md:px-0 relative md:pt-10 md:pb-10 pb-20 z-20 bg-no-repeat bg-top bg-contain bg-[url('/images/pages/footer-arc.svg')]">
@@ -68,7 +68,7 @@ function Footer() {
                   {data?.data.data.telephone ? (
                       <Link
                           href={`tel:${data?.data.data.telephone}`}
-                          className="text-app-light-gray flex items-center text-xl font-light pr-3 mb-2">
+                          className="text-app-white flex items-center text-xl font-light pr-3 mb-2">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
                           <BsPhone className="text-xl text-app-blue" />
                         </span>
@@ -78,7 +78,7 @@ function Footer() {
                   {data?.data.data.email ? (
                       <Link
                           href={`mailto:${data?.data.data.email}`}
-                          className="text-app-light-gray flex items-center text-xl font-light py-2 pr-3 mb-2">
+                          className="text-app-white flex items-center text-xl font-light py-2 pr-3 mb-2">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
                           <HiOutlineMail className="text-xl text-app-blue" />
                         </span>
@@ -86,7 +86,7 @@ function Footer() {
                       </Link>
                   ) : null}
                   {data?.data.data.adresses ? (
-                      <article className="flex text-app-light-gray font-light">
+                      <article className="flex text-app-white font-light">
                         <span className="border-2 border-app-blue rounded-full grid items-center justify-center mr-5 w-16 h-16">
                           <BiMapPin className="text-xl text-app-blue" />
                         </span>
@@ -108,7 +108,7 @@ function Footer() {
                       <Link
                           href={`/${slugify(item.libelle)}-${item.id}`}
                           key={`pages-${item.id}`}
-                          className="text-app-light-gray flex items-center text-xl font-light py-2 pr-3">
+                          className="text-app-white flex items-center text-xl font-light py-2 pr-3">
                         {item.libelle}
                       </Link>
                   ))}
@@ -119,7 +119,7 @@ function Footer() {
                           href={`${process.env.API_URL}/assets/${item.directus_files_id.id}?download`}
                           key={`pages-${item.directus_files_id.id}`}
                           target="_blank"
-                          className="text-app-light-gray flex items-center text-xl font-light py-2 pr-3">
+                          className="text-app-white flex items-center text-xl font-light py-2 pr-3">
                         {capitalize(item.directus_files_id.title)}
                       </Link>
                   ))}
@@ -140,7 +140,7 @@ function Footer() {
                   ) : null}
                 </article>
               </div>
-              <div className="container text-center">
+              <div className="container text-center text-app-light-gray">
                 <p>En aucun cas, les données recueillies sur le site esic-online.com ne seront cédées ou vendues à des tiers.</p>
                 <p>Aucune adresse email ne sera transmise à des tiers sauf avec l’accord express des intéressés.</p>
               </div>
@@ -173,7 +173,7 @@ function Footer() {
                       ))}
                     </p>
                 ) : null}
-                <div className="container">
+                <div className="container text-app-light-gray">
                   Copyright &copy; {new Date().getFullYear()} ESIC. Tous droits
                   reservés.
                 </div>

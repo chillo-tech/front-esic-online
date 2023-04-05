@@ -20,7 +20,7 @@ const getFormations = ({limit}: {limit: number}) => {
 };
 
 const getTopTrainings = ({limit = 3}: {limit?: number}) => {
-  const base = "id,libelle,souslibelle,topformation,prix,cpf,niveau,jours,heures,image,localisation";
+  const base = "id,slug,libelle,souslibelle,topformation,prix,cpf,niveau,jours,heures,image,localisation";
   const fields = `${base}`;
   return axiosInstance.get(
     `formations?sort[]=-date_updated&filter[topformation][_eq]=true`, {

@@ -26,7 +26,7 @@ function Search({ classes, isFocused }: Params) {
     ],
     queryFn: () =>
       fetchData({
-        fields: "id,libelle",
+        fields: "id,libelle,slug",
         path: "formations",
         filter: { "libelle": { "_icontains": query }},
         sort: "libelle",
@@ -76,7 +76,7 @@ function Search({ classes, isFocused }: Params) {
             {data?.data.data.map((item: any, index: any) => (
               <li key={`search-${index}-${item.id}`}>
                 <Link
-                  href={`/nos-formations/${slugify(item.libelle)}-${item.id}`}
+                  href={`/nos-formations/${item.slug}`}
                   title={item.libelle}
                   className="block bg-white py-2 px-2 text-gray-700 text-md text-left"
                 >

@@ -11,13 +11,12 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
     <>
       <Link
         href={link}
-        className={classNames('flex flex-col justify-between bg-gray-white', classes)}
+        className={classNames('md:block flex items-center md:items-stretch md:flex-col md:bg-gray-white p-1.5 md:p-0', classes)}
         key={training.id}
       >
-        <div>
           {
             training.image ? (
-              <div className='relative w-full h-40 md:h-60 !rounded-t-lg overflow-hidden'>
+              <div className='relative md:w-full basis-24 md:basis-full grow-0 shrink-0	h-24 md:h-60 !rounded-t-lg overflow-hidden'>
                 {
                   (training?.cpf && training?.cpf.length) ?
                     <p className="absolute right-0 bottom-0 z-40 w-14 h-14">
@@ -49,12 +48,12 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
             ) :
               null
           }
-          <>
+          <div className='description md:px-4 ml-2 md:ml-0'>
             {(training.niveau || training.prix) ? (
-              <div className='flex justify-between text-xl text-app-light-gray pt-4 px-4'>
+              <div className='flex items-center justify-between text-sm	md:text-xl text-app-light-gray mt-2 md:pt-4'>
                 {
                   training.niveau ?
-                    <span style={{ backgroundColor: 'rgba(0, 129, 0, 0.15)' }} className="flex py-1 mr-3 pl-3 pr-5 items-center rounded-lg text-sm">
+                    <span style={{ backgroundColor: 'rgba(0, 129, 0, 0.15)' }} className="flex py-1 md:py-2 mr-3 pl-3 pr-5 items-center rounded-lg text-sm">
                       <span className='mr-3 bg-app-green w-4 h-4 rounded-full' />
                       <span>{training.niveau === "BEGINNER" ? 'Débutant' : null}</span>
                       <span>{training.niveau === "INTERMEDIARY" ? 'Intermediaire' : null}</span>
@@ -65,7 +64,8 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
                 }
                 {
                   training.prix ?
-                    <span className="flex items-center py-1 pr-3 text-app-blue font-bold">
+                    <span className="flex flex-col items-end justify-center py-1 pr-3 text-app-blue font-bold">
+                      <span className="text-xs">A partir de</span>
                       <span>{training.prix}</span>
                     </span>
                     :
@@ -73,46 +73,46 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
                 }
               </div>
             ) : null}
-          </>
-          {displayTitle ? (
-            <h2 className="my-1 px-4 py 1 title font-bold text-xl text-app-light-gray">
-              {capitalize(training.libelle)}
-            </h2>
-          )
+            {displayTitle ? (
+                <h2 className="my-1 py 1 title font-bold  text-md md:text-xl text-app-light-gray">
+                  {capitalize(training.libelle)}
+                </h2>
+              )
             :
             null}
-        </div>
-        {
-          (training?.cpf || training?.jours || training?.heures)
-            ? (
-              <ul className={classNames("items-start text-app-gray opacity-50 px-4 py-2", { 'hidden': !displayInfos })}>
-                {
-                  (training?.cpf && training?.cpf.length) ?
-                    <li className="flex items-center text-sm font-light">
-                      {capitalize("Eligible au CPF")}
-                    </li>
-                    :
-                    null
-                }
-                {
-                  training.jours || training.heures ?
-                    <li className="flex items-center font-light text-sm">
+            
+              <Localisation localisation={training.localisation} classes="hidden md:block text-sm text-app-gray"/>
+              {
+                (training?.cpf || training?.jours || training?.heures)
+                  ? (
+                    <ul className={classNames("items-start text-app-gray opacity-50 py-2", { 'hidden': !displayInfos })}>
                       {
-                        training.jours ?
-                          <span className="flex items-center pr-3">
-                            <span>{training.jours} Jours({training.jours * 7} Heures)</span>
-                          </span>
+                        training.jours || training.heures ?
+                          <li className="flex items-center font-light text-sm">
+                            {
+                              training.jours ?
+                                <span className="flex items-center pr-3">
+                                  <span>{training.jours} Jours({training.jours * 7} Heures)</span>
+                                </span>
+                                :
+                                null
+                            }
+                          </li>
                           :
                           null
                       }
-                    </li>
-                    :
-                    null
-                }
-              </ul>)
-            : null
-        }
-        <Localisation localisation={training.localisation} classes="pl-3 pb-2 text-sm text-app-gray"/>
+                      {
+                        (training?.cpf && training?.cpf.length) ?
+                          <li className="flex items-center text-sm font-light">
+                            {capitalize("Eligible au CPF")}
+                          </li>
+                          :
+                          null
+                      }
+                    </ul>)
+                  : null
+              }
+          </div>
       </Link>
     </>
   )

@@ -5,9 +5,10 @@ const TrainingPrice = ({price}: any) => {
 		<>
 			{
 				price ? (
-					<span className="h-7 flex items-center text-xl font-bold">
-                    	{price}
-                    </span>
+          <span className="flex text-xl font-bold flex-col items-end justify-center py-1 font-bold">
+            <span className="text-xs">A partir de</span>
+            <span>{price}</span>
+          </span>
 				): null
 			}
 

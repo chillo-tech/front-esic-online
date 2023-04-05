@@ -46,6 +46,7 @@ const schema = yup
   .required();
 
 function Training({ id, slug }: { id: string; slug: string }) {
+  
   const [relatedTraining, setRelatedTraining] = useState<any>([]);
   const [training, setTraining] = useState<any>(null);
   const { updateLastTraining, displayInscriptionButton } =

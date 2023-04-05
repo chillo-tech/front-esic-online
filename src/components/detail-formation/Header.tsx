@@ -2,8 +2,8 @@ import AllTrainings from 'components/shared/AllTrainings';
 import CPFLink from 'components/shared/CPFLink';
 import Rating from 'components/shared/Rating';
 import RenderHtmlContent from 'components/shared/RenderHtmlContent';
-import React from 'react';
-import { capitalize, slugify } from 'utils';
+import React, { useState } from 'react';
+import { capitalize, EMPTY_SESSION, getDisplayedDate, slugify } from 'utils';
 import AppBreadcrumb from 'components/shared/AppBreadcrumb';
 import DisplayImage from 'components/shared/DisplayImage';
 import TrainingLevel from 'components/shared/TrainingLevel';
@@ -11,9 +11,12 @@ import TrainingPrice from 'components/shared/TrainingPrice';
 import classNames from 'classnames';
 import Link from 'next/link';
 import TrainingLocalisation from 'components/shared/TrainingLocalisation';
+import ContactUsText from 'components/shared/ContactUsText';
 
 function Header({ training, toogleDownloadForm }: any) {
+  const [displaySessions, setDisplaySessions] = useState(false)
   return (
+    <>
     <header className="bg-app-blue py-4 md:py-2 text-white text-sm !md:text-lg">
       <AppBreadcrumb />
       <div className="container grid md:grid-cols-7">
@@ -47,7 +50,7 @@ function Header({ training, toogleDownloadForm }: any) {
                     isDecimal={4.7 % 1 != 0}
                 />
               </p>
-            <div className="flex justify-between my-2 md:hidden">
+            <div className="flex justify-between items-center my-2 md:hidden">
               <TrainingLevel level={training.niveau}/>
               <TrainingPrice price={training.prix}/>
             </div>
@@ -83,8 +86,9 @@ function Header({ training, toogleDownloadForm }: any) {
               ) : null}
 
             </div>
-            <div className="grid grid-cols-2 gap-2 items-center justify-center">
+            <div className="grid grid-cols-2 gap-2 items-center justify-center md:hidden">
               <button
+                onClick={() => setDisplaySessions(!displaySessions)}
                   type="button"
                   className={classNames(
                       'block flex justify-center items-center text-xs md:text-lg py-2 md:py-0'
@@ -95,15 +99,51 @@ function Header({ training, toogleDownloadForm }: any) {
                   href="/financements"
                   type="button"
                   className={classNames(
-                      'block flex justify-center items-center text-xs md:text-lg py-2 md:py-0'
+                      'flex justify-center items-center text-xs md:text-lg py-2 md:py-0'
                   )}>
-                <span className="underline">Comment financer cette formation ? </span>
+                <span className="underline text-center">Comment financer cette formation ? </span>
               </Link>
             </div>
               <TrainingLocalisation localisations={training.localisation} classes="md:hidden"/>
             </div>
           </div>
       </header>
+       { displaySessions ? (
+        <>
+          { training.sessions && training.sessions.length ? (
+            <div className="md:hidden px-5 pt-5">
+              <div className="sessions">
+                {training?.sessions
+                .filter((session: any) => session.sessions_id !=null)
+                .slice(0,6)
+                .sort((a: any, b: any) => new Date(a.sessions_id.debut).getTime() - new Date(b.sessions_id.debut).getTime())
+                .map((item: any, index: number) =>
+                  Date.parse(item?.sessions_id.debut) >=
+                  Date.now() ? (
+                    <div
+                      className="shadow-md bg-white mb-2 py-2 shadow-xs text-slate-600 mb-3 px-2 border-l-8 border-app-green"
+                      key={`mobile-session-${training.slug}-${index}`}>
+                      <p className="mb-0">
+                        Du {getDisplayedDate(item.sessions_id.debut)}
+                      </p>
+                      <p className="mb-0">
+                        Au {getDisplayedDate(item.sessions_id.fin)}
+                      </p>
+                    </div>
+                  ) : null
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="bg-app-light-green px-5">
+              <p className="text-center">{EMPTY_SESSION}</p>
+              <ContactUsText classes="justify-center" />
+            </div>
+          )}
+        </>
+       ) : null }
+      
+      </>
   );
 }
 

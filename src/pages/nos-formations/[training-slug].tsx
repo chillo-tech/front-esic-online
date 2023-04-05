@@ -22,6 +22,7 @@ import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import TrainingLocalisation from 'components/shared/TrainingLocalisation';
 
 function Training({ id, slug }: { id: string; slug: string }) {
+  console.log({ id, slug });
   const [relatedTraining, setRelatedTraining] = useState<any>([]);
 	const [training, setTraining] = useState<any>(null);
 	const { updateLastTraining, displayInscriptionButton } = useContext(ApplicationContext);
@@ -31,11 +32,8 @@ function Training({ id, slug }: { id: string; slug: string }) {
 	const [displayDownloadForm, setDisplayDownloadForm] = useState(false);
 	const toogleDownloadForm = () => setDisplayDownloadForm(!displayDownloadForm);
 	  useQuery<any>({
-		  queryKey: ['formations', 'detail', slug, id],
-      queryFn: () =>
-        getDetail({
-        id,
-      }),
+		  queryKey: ['formationsss', 'detail', slug, id],
+      queryFn: () => getDetail({id}),
       onSuccess: (data: any) => {
         setTraining(data.data.data);
         updateLastTraining(data.data.data);
@@ -63,9 +61,9 @@ function Training({ id, slug }: { id: string; slug: string }) {
 					<div className='relative'>
 						<div className="column-wrapper h-1 container">
 							<div className={classNames(
-                "column container grid grid-cols-7 gap-24",
-                {'fixed mt-10': !inView},
-                {'absolute bottom-10': inView}
+                "column container hidden md:grid md:grid-cols-7 md:gap-24",
+                {'md:fixed md:mt-10': !inView},
+                {'md:absolute bottom-10': inView}
               )}>
 								<div className="col-start-5 col-span-3">
 									<div className="col-content-wrapper">
@@ -77,7 +75,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
 												imageClasses = 'object-cover'
 											/>
 											<div className="px-4">
-												<div className="flex justify-between mt-4">
+												<div className="flex items-center justify-between mt-4">
 													<TrainingLevel level={training.niveau}/>
 													<TrainingPrice price={training.prix}/>
 												</div>
@@ -85,14 +83,14 @@ function Training({ id, slug }: { id: string; slug: string }) {
 											{training.sessions && training.sessions.length ? (
 												<div className="hidden md:block px-5 ">
 
-                          <TrainingLocalisation localisations={training.localisation} classes="text-center md:text-center py-4" />
+                          <TrainingLocalisation localisations={training.localisation} classes="text-center md:text-center py-2" />
 													<div className="sessions">
 														<h3 className="font-semibold text-2xl mb-2">
 															Nos prochaines sessions
 														</h3>
 														{training?.sessions
                             .filter((session: any) => session.sessions_id !=null)
-                            .slice(0,6)
+                            .slice(0,4)
                             .sort((a: any, b: any) => new Date(a.sessions_id.debut).getTime() - new Date(b.sessions_id.debut).getTime())
                             .map((item: any, index: number) =>
 															Date.parse(item?.sessions_id.debut) >=
@@ -179,7 +177,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
 				)
 			}
       <p ref={ref}/>
-      <div className="hidden md:grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container relative bg-white">
+      <div className="grid gap-4 md:py-6 md:grid-cols-3 md:px-0 container relative bg-white mb-4">
         {
           relatedTraining.slice(0, 3).map((training: any, index: number) =>(
             <HomeTrainingItem 

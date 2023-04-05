@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ApplicationContext } from '../../context/ApplicationContext';
+import { ApplicationContext } from 'context/ApplicationContext';
 import { useQuery } from 'react-query';
 import { fetchData } from 'services';
 import { slugify } from 'utils';
@@ -12,7 +12,7 @@ interface Params {
 }
 function Trainings({title, limit = 10}: Params) {
 
-  const base = 'status,id,libelle,souslibelle,prix,localisation,niveau,cpf,heures,jours,image';
+  const base = 'status,id,slug,libelle,souslibelle,prix,localisation,niveau,cpf,heures,jours,image';
   const images = 'image.*';
   const sessions = 'sessions.sessions_id.fin,sessions.sessions_id.debut';
   const fields = `${base},${images},${sessions}`;
@@ -21,7 +21,7 @@ function Trainings({title, limit = 10}: Params) {
     isSuccess,
     data,
   } = useQuery<any>({
-    queryKey: ["Trainings", (Object.values(trainingsParams) as string[]).map((param: string) => slugify(String(param))).join('-')],
+    queryKey: ["Trainingss", (Object.values(trainingsParams) as string[]).map((param: string) => slugify(String(param))).join('-')],
     queryFn: () =>
     fetchData({
         fields: base,
@@ -45,7 +45,7 @@ function Trainings({title, limit = 10}: Params) {
                   <HomeTrainingItem 
                     classes="rounded-lg pb-2"
                     training={training} 
-                    link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
+                    link={`/nos-formations/${training.slug}`}
                     key={training.id} 
                   />
                 ))
@@ -57,7 +57,7 @@ function Trainings({title, limit = 10}: Params) {
                     key={`${training.id}`}
                     id={training.id}
                     data={training}
-                    link={`/nos-formations/${slugify(training.libelle)}-${training.id}`}
+                    link={`/nos-formations/${training.slug}`}
                   />
                 ))
               }
