@@ -16,10 +16,10 @@ import AllTrainings from 'components/shared/AllTrainings';
 import classNames from 'classnames';
 import ContactUsText from 'components/shared/ContactUsText';
 import { useInView } from 'react-intersection-observer';
-import Reference from 'yup/lib/Reference';
 import Link from 'next/link';
 import HomeTrainingItem from 'components/shared/HomeTrainingItem';
 import TrainingLocalisation from 'components/shared/TrainingLocalisation';
+import DownloadFIle from 'components/shared/DownloadFIle';
 
 function Training({ id, slug }: { id: string; slug: string }) {
   const [relatedTraining, setRelatedTraining] = useState<any>([]);
@@ -207,6 +207,11 @@ function Training({ id, slug }: { id: string; slug: string }) {
           ))
         }
       </div>
+      <DownloadFIle 
+        displayDownloadForm={displayDownloadForm} 
+        setDisplayDownloadForm={setDisplayDownloadForm} 
+        training={training} 
+      />
 	 	</OpenedLayout>
  	)
 }

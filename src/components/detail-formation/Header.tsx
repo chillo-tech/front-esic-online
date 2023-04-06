@@ -14,13 +14,14 @@ import TrainingLocalisation from 'components/shared/TrainingLocalisation';
 import ContactUsText from 'components/shared/ContactUsText';
 
 function Header({ training, toogleDownloadForm }: any) {
-  const [displaySessions, setDisplaySessions] = useState(false)
+  const [displaySessions, setDisplaySessions] = useState(false);
+  
   return (
     <>
     <header className="bg-app-blue py-4 md:py-2 text-white text-sm !md:text-lg">
       <AppBreadcrumb />
       <div className="container grid md:grid-cols-7">
-          <div className="md:col-span-4">
+          <div className="md:col-span-4 relative z-50">
             <DisplayImage
                 image={training.image}
                 libelle={training.libelle}
@@ -80,7 +81,7 @@ function Header({ training, toogleDownloadForm }: any) {
                   <button
                       type="button"
                       onClick={toogleDownloadForm}
-                      className="outline-white-button text-[10px] !px-0 h-9 md:py-2 h-full items-center justify-center text-center text-lg">
+                      className="outline-white-button text-xs !px-0 h-9 md:py-2 justify-center">
                     Je télécharge le programme
                   </button>
               ) : null}
