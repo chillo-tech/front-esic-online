@@ -20,4 +20,3 @@ services:
 networks:
   applications-network:
     external: true
-    name: applications-network
