@@ -16,10 +16,10 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
       >
           {
             training.image ? (
-              <div className='relative md:w-full basis-24 md:basis-full grow-0 shrink-0	h-24 md:h-60 !rounded-t-lg overflow-hidden'>
+              <div className='relative w-1/3 md:w-full md:basis-full grow-0 shrink-0	h-24 md:h-60 !rounded-t-lg overflow-hidden'>
                 {
                   (training?.cpf && training?.cpf.length) ?
-                    <p className="absolute right-0 bottom-0 z-40 w-14 h-14">
+                    <p className="absolute right-0 bottom-0 z-40 md:w-14 md:h-14 w-8 h-8">
                       <Image
                         fill={true}
                         src={`/images/logo-cpf.png`}
@@ -48,13 +48,13 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
             ) :
               null
           }
-          <div className='description md:px-4 ml-2 md:ml-0'>
+          <div className='w-2/3 md:w-full description md:px-4 ml-2 md:ml-0 pl-2'>
             {(training.niveau || training.prix) ? (
-              <div className='flex items-center justify-between text-sm	md:text-xl text-app-light-gray mt-2 md:pt-4'>
+              <div className='flex items-center justify-between text-xs	md:text-xl text-app-light-gray mt-2 md:pt-0'>
                 {
                   training.niveau ?
-                    <span style={{ backgroundColor: 'rgba(0, 129, 0, 0.15)' }} className="flex py-1 md:py-2 mr-3 pl-3 pr-5 items-center rounded-lg text-sm">
-                      <span className='mr-3 bg-app-green w-4 h-4 rounded-full' />
+                    <span style={{ backgroundColor: 'rgba(0, 129, 0, 0.15)' }} className="flex py-1 md:py-2 mr-3 pl-3 pr-3 md:pr-5 items-center rounded-lg text-sm">
+                      <span className='mr-2 bg-app-green w-4 h-4 rounded-full' />
                       <span>{training.niveau === "BEGINNER" ? 'Débutant' : null}</span>
                       <span>{training.niveau === "INTERMEDIARY" ? 'Intermediaire' : null}</span>
                       <span>{training.niveau === "ADVANCED" ? 'Avancé' : null}</span>
