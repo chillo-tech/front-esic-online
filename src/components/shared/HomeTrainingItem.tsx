@@ -16,7 +16,7 @@ function HomeTrainingItem({ training, classes, link = "#", displayTitle = true, 
       >
           {
             training.image ? (
-              <div className='relative w-1/3 md:w-full md:basis-full grow-0 shrink-0	h-24 md:h-60 !rounded-t-lg overflow-hidden'>
+              <div className='relative w-1/3 md:w-full md:basis-full grow-0 shrink-0 h-28 md:h-60 !rounded-t-lg overflow-hidden'>
                 {
                   (training?.cpf && training?.cpf.length) ?
                     <p className="absolute right-0 bottom-0 z-40 md:w-14 md:h-14 w-8 h-8">
