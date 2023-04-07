@@ -18,10 +18,10 @@ function Header({ training, toogleDownloadForm }: any) {
   
   return (
     <>
-    <header className="bg-app-blue py-4 md:py-2 text-white text-sm !md:text-lg">
+    <header className="bg-app-blue pb-4 pt-6 text-white text-sm !md:text-lg">
       <AppBreadcrumb />
       <div className="container grid md:grid-cols-7">
-          <div className="md:col-span-4 relative z-50">
+          <div className="md:col-span-4 relative z-10">
             <DisplayImage
                 image={training.image}
                 libelle={training.libelle}
@@ -42,14 +42,19 @@ function Header({ training, toogleDownloadForm }: any) {
                           :
                           null
                   }
-                <Rating
-                    classes="col-span-3 items-end justify-end text-right"
-                    rate="4.7"
-                    label="(622 notes)"
-                    displayRate={true}
-                    displayLabel={true}
-                    isDecimal={4.7 % 1 != 0}
-                />
+                  {
+                    training.Note ? (
+                      <Rating
+                          classes="col-span-3 items-end justify-end text-right"
+                          rate={training.Note}
+                          label={`(${training.nombre_note} Avis)`}
+                          displayRate={true}
+                          displayLabel={true}
+                          isDecimal={training?.Note?.replace(/,/g, '.') % 1 != 0}
+                      />
+                    ): null
+                  }
+               
               </p>
             <div className="flex justify-between items-center my-2 md:hidden">
               <TrainingLevel level={training.niveau}/>

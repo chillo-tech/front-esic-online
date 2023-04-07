@@ -207,6 +207,9 @@ function Training({ id, slug }: { id: string; slug: string }) {
           ))
         }
       </div>
+        <p className='relative z-50 flex justify-center items-center pb-4 bg-white'>
+          <AllTrainings classes='outline-blue-button' containerClasses="md:flex md:justify-center md:items-center"/>
+        </p>
       <DownloadFIle 
         displayDownloadForm={displayDownloadForm} 
         setDisplayDownloadForm={setDisplayDownloadForm} 

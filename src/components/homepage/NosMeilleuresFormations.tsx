@@ -31,12 +31,7 @@ function NosMeilleuresFormations() {
                 key={training.id}
               /> ))}
           </div>
-          <AllTrainings
-              text={"Contactez nous"}
-              link="/contactez-nous"
-              classes='outline-blue-button'
-               containerClasses="md:flex md:justify-center md:items-center"
-          />
+          <AllTrainings classes='outline-blue-button' containerClasses="md:flex md:justify-center md:items-center"/>
         </div>
       </section>
     ): null }

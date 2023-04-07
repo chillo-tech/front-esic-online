@@ -270,7 +270,7 @@ function Training({ id }: { id: string }) {
                   {
                     data?.data.data.sessions ? 
                       (
-                        <div className="sessions py-2">
+                        <div className="sessions pt-2 pb-5">
                           <h3 className="mt-2 font-semibold text-2xl mb-2">
                             Nos prochaines
                           </h3>

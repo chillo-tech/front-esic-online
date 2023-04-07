@@ -6,12 +6,12 @@ function Rating({rate, label, classes, displayRate = false, displayLabel = false
   return (
     <>
     { 
-      (rate || label) ? (
+      (rate) ? (
         <span className={classNames("flex py-1 items-center text-white", classes)}>
-          {displayRate ? (<span className="mr-2">{rate}</span>): null}
+          {displayRate ? (<span className="mr-2">{rate.slice(0, 3)}</span>): null}
           <span className='text-left flex mr-2'>
               {
-                Array.from(Array(Math.floor(rate)).keys())
+                Array.from(Array(Math.floor(rate.replace(/,/g, '.'))).keys())
                     .map((entry: number) => 
                     <BsStarFill className='text-xs text-yellow-400' key={`moyenne-${entry}`} />
                 )
@@ -20,7 +20,7 @@ function Rating({rate, label, classes, displayRate = false, displayLabel = false
               
               {
                 Array
-                  .from(Array((isDecimal ? 4: 5) - Math.floor(rate)).keys())
+                  .from(Array((isDecimal ? 4: 5) - Math.floor(rate.replace(/,/g, '.'))).keys())
                   .map((entry: number) => <BsStar className='text-xl' key={`moyenne-${entry}`} />
                 )
               }

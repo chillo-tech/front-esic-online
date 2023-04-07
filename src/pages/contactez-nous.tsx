@@ -119,11 +119,6 @@ export default function Contact() {
         className={classNames(
           `${formStyles.bg_slices_container} relative w-full !px-0`
         )}>
-        <DisplayImage
-          positionRelative={false}
-          image={state?.company?.couverture}
-          libelle={state?.company?.couverture?.libelle}
-        />
         <div
           style={{ backgroundColor: 'rgba(30, 58, 138, 0.8)' }}
           className={classNames(
@@ -166,7 +161,7 @@ export default function Contact() {
                 />
               </div>
             </div>
-            <aside className="w-full bg-white sm:p-6 mx-auto md:w-[85%] border border-gray-200 shadow-lg rounded-3xl grid grid-cols-6 gap-4 md:p-4 md:pb-16">
+            <aside className="container bg-white sm:p-6 mx-auto border border-gray-200 shadow-lg rounded-3xl grid grid-cols-6 gap-4 md:p-4 md:pb-16">
               {mutation.isError ? (
                 <Message
                   type="error"
