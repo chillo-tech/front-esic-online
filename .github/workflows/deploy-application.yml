@@ -79,7 +79,7 @@ jobs:
         username: ${{ secrets.PROD_APPLICATIONS_USERNAME }}
         key: ${{ secrets.PROD_APPLICATIONS_SSH_PRIVATE_KEY }}
         script: |
-          docker-compose -f /opt/applications/esic/front-esic-online/docker-compose.yml stop
-          docker-compose -f /opt/applications/esic/front-esic-online/docker-compose.yml rm -f
-          docker rmi simachille/front-esic-online:latest
+          docker-compose -f /opt/applications/esic/front-esic-online/docker-compose.yml stop || true
+          docker-compose -f /opt/applications/esic/front-esic-online/docker-compose.yml rm -f || true
+          docker rmi simachille/front-esic-online:latest || true
           sudo docker-compose -f /opt/applications/esic/front-esic-online/docker-compose.yml up -d

@@ -1,4 +1,4 @@
-
+version: '3'
 services:
   front-esic-online:
     container_name: front-esic-online
@@ -7,13 +7,13 @@ services:
     restart: always
     ports:
       # The HTTP port
-      - "85:3000"
+      - '85:3000'
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.front-esic-online.rule=Headers(`X-Host`, `esic-online.chillo.fr`)"
-      - "traefik.docker.network=applications-network"
-      - "traefik.http.middlewares.serviceheaders.headers.accesscontrolalloworiginlist=*" 
-      - "traefik.http.routers.service.middlewares=serviceheaders"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.front-esic-online.rule=Headers(`X-Host`, `esic-online.chillo.fr`)'
+      - 'traefik.docker.network=applications-network'
+      - 'traefik.http.middlewares.serviceheaders.headers.accesscontrolalloworiginlist=*'
+      - 'traefik.http.routers.service.middlewares=serviceheaders'
 
     networks:
       - applications-network
