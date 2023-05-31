@@ -37,8 +37,7 @@ class AppDocument extends Document {
           })(window,document,'script','dataLayer','GTM-WQKP99D');
         `}
       </Script>
-
-            </Head>
+      </Head>
           <body className='font-sans font-extralight bg-white' id="accueil">
             <Main />
             <NextScript />
