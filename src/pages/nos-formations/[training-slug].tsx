@@ -196,7 +196,9 @@ function Training({ id, slug }: { id: string; slug: string }) {
       <p ref={ref}/>
       <div className="grid gap-4 md:py-8 md:grid-cols-3 md:px-0 container relative bg-white">
         {
-          relatedTraining.slice(0, 3).map((training: any, index: number) =>(
+          relatedTraining.slice(0, 3)
+          .filter(({formations_id}: {formations_id: string}) => formations_id != null)
+          .map((training: any, index: number) =>(
             <HomeTrainingItem 
               classes="rounded-lg shadow-md !pb-4" 
               training={training.formations_id} 
