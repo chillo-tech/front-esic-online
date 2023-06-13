@@ -89,6 +89,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
 														</h3>
 														{training?.sessions
                             .filter((session: any) => session.sessions_id !=null)
+                            .filter((session: any) => new Date(session.sessions_id.debut).getTime()  >= new Date().getTime())
                             .slice(0,4)
                             .sort((a: any, b: any) => new Date(a.sessions_id.debut).getTime() - new Date(b.sessions_id.debut).getTime())
                             .map((item: any, index: number) =>

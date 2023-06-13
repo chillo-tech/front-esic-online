@@ -32,7 +32,7 @@ const getTopTrainings = ({limit = 3}: {limit?: number}) => {
   );
 };
 
-const getSubCategories = ({id, trainingsLimit=10}: {id: string | string[]; fields?: string, trainingsLimit?: number}) => {
+const getSubCategories = ({id, trainingsLimit=10, offset=10}: {id: string | string[]; fields?: string, trainingsLimit?: number, offset?: number}) => {
   const base = `id,libelle,description,${IMAGE_PARAMS}`;
   const formations = `
         formations.formations_id.souslibelle,
@@ -45,7 +45,7 @@ const getSubCategories = ({id, trainingsLimit=10}: {id: string | string[]; field
         formations.formations_id.image.*,
         formations.formations_id.id`;
   const fields: string = `${base},${formations}`;
-  return axiosInstance.get(`souscategories/${id}?fields=${fields}&deep[formations][_limit]=${trainingsLimit}`);
+  return axiosInstance.get(`souscategories/${id}?fields=${fields}&deep[formations][_limit]=${trainingsLimit}&deep[formations][_offset]=${offset}`);
 };
 
 const getCategories = ({ fields }: { fields: string }) => {

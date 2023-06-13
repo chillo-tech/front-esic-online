@@ -7,7 +7,7 @@ import { BsBarChart } from "react-icons/bs";
 import { BiCoinStack } from "react-icons/bi";
 import { GiPositionMarker,GiCancel } from "react-icons/gi";
 import { useMutation, useQuery } from "react-query";
-import { add, getDetail } from "services/index";
+import { add, fetchData, getDetail } from "services/index";
 import Image from "next/image";
 import { cn, loaderProp } from "utils/image-loader";
 import { getDisplayedDate } from "utils/DateFormat";
@@ -48,11 +48,8 @@ function Training({ id }: { id: string }) {
     queryKey: ["formations", "detail", id],
     queryFn: () =>
       getDetail({
-        id,
-      }),
-    refetchOnWindowFocus: false,
-    staleTime: 3600000, //1jour
-    cacheTime: 3600000, //1jour
+        id
+      })
   });
   const onSubmit = (formData: Message) => {
     mutation.mutate({...formData, libelle_formation: data?.data.data.libelle, formation: data?.data.data.id, fichier: data?.data.data.programmepdf  });
