@@ -57,19 +57,15 @@ const schema = yup
       .email(EMAIL_ERROR_MESSAGE)
       .required(EMAIL_ERROR_MESSAGE)
       .matches(EMAIL_PATTERN, { message: EMAIL_ERROR_MESSAGE }),
-    profile: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
-    subject: yup.string().trim().required(REQUIRED_ERROR_MESSAGE),
+    profile: yup.string().trim(),
+    subject: yup.string().trim(),
     contactChannel: yup
       .array()
       .of(yup.string())
-      .min(1)
-      .required(REQUIRED_ERROR_MESSAGE)
       .nullable(),
     preferedLocation: yup
       .array()
       .of(yup.string())
-      .min(1)
-      .required(REQUIRED_ERROR_MESSAGE)
       .nullable(),
     acceptForm: yup.bool().oneOf([true], ACCEPT_FORM_ERROR_MESSAGE).required(),
     message: yup
@@ -100,8 +96,8 @@ export default function Contact() {
   const onSubmit = (data: Message) => {
     mutation.mutate({
       ...data,
-      contactChannel: contactChannel.join(', ').toLowerCase(),
-      preferedLocation: preferedLocation.join(', ').toLowerCase(),
+      contactChannel: (contactChannel && contactChannel.length) ? contactChannel.join(', ').toLowerCase(): '',
+      preferedLocation: (preferedLocation && preferedLocation.length) ? preferedLocation.join(', ').toLowerCase(): '',
     });
   };
 

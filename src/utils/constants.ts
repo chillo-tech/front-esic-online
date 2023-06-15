@@ -1,6 +1,6 @@
 const PHONE_PATTERN: any = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,5}$/;
 //const EMAIL_PATTERN: any = /^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})$/;
-const EMAIL_PATTERN: any = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+const EMAIL_PATTERN: any = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,20})+$/;
 const STRING_WITH_NUMBERS_REGEXP: any = /^\D*(\d\D*){10,}$/;
 const PHONE_ERROR_MESSAGE: string = 'Votre numéro de téléphone est invalide';
 const EMAIL_ERROR_MESSAGE: string = 'Votre mail est invalide';
