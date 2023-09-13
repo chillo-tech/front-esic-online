@@ -138,7 +138,14 @@ function Footer() {
                         ))}
                       </>
                   ) : null}
+                   <a href="\documents\certificat.pdf" className='certificat ' target="_blank" rel="noopener noreferrer">
+       <span className='underline'>Consulter notre certificat qualité </span> 
+       
+      </a>
                 </article>
+                
+     
+  
               </div>
               <div className="container text-center text-app-light-gray">
                 <p>En aucun cas, les données recueillies sur le site esic-online.com ne seront cédées ou vendues à des tiers.</p>
