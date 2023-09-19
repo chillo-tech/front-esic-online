@@ -144,6 +144,7 @@ function Training({ id, slug }: { id: string; slug: string }) {
 							toogleDownloadForm={toogleDownloadForm}
 						/>
 						<div className="container py-4 grid md:grid-cols-7">
+              
 							<div className="md:col-span-4">
 								{TRAINING_KEYS.filter((item: any) => training[item.key]).map(
 									(item: any, index: number) => (

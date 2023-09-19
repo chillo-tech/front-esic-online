@@ -8,7 +8,8 @@ const certifications =`
   certifications.certifications_id.image.id,
   certifications.certifications_id.image.nom,
   certifications.certifications_id.image.filename_disk,
-  certifications.certifications_id.image.title
+  certifications.certifications_id.image.title,
+  certifications.certifications_id.fichier.*
   `;
 
 const metadonnees = 'metadonnees.*';

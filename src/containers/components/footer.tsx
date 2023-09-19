@@ -26,7 +26,7 @@ function Footer() {
   const training = state?.displayInscriptionButton;
 
   const { isSuccess, data } = useQuery<any>({
-    queryKey: ['Entreprise-data-ddd'],
+    queryKey: ['Entreprise-data'],
     queryFn: () =>
       fetchData({
         path: 'Entreprise',
@@ -128,13 +128,17 @@ function Footer() {
                   {data?.data.data.certifications ? (
                       <>
                         {data?.data.data.certifications.map((item: any) => (
+                           <Link
+                           className='h-56 rounded-t-lg  w-full overflow-hidden relative rounded-2xl !overflow-hidden'
+                           key={`certifications-${item.certifications_id.id}`}
+                           href={`${process.env.API_URL}/assets/${item.certifications_id.fichier.id}?download`}>
                             <DisplayImage
-                                key={`certifications-${item.certifications_id.id}`}
                                 image={item.certifications_id.image}
                                 imageClasses="object-contain"
                                 libelle={`${item.certifications_id.title}`}
                                 classes="rounded-2xl !overflow-hidden"
                             />
+                            </Link>
                         ))}
                       </>
                   ) : null}
