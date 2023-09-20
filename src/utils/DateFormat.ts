@@ -46,6 +46,6 @@ export const getDisplayedDate = (entry: string = "") => {
 
   const [dayOfDate, month, year] = getFormattedDate(new Date(entry)).split('/');
   const [dayOfWeekLabel, monthLabel] = getDayAndMonthLabel(new Date(entry));
-  return `${dayOfWeekLabel}, ${dayOfDate} ${monthLabel}`;
+  return `${dayOfWeekLabel}, ${dayOfDate} ${monthLabel} ${year}`;
 	
 };

@@ -98,9 +98,14 @@ function Header({ training, toogleDownloadForm }: any) {
                 <span className="underline text-center">Comment financer cette formation ? </span>
               </Link>
             </div>
-            {training.date_updated ? (<p className="text-right">Dernière mise à jour: {getDisplayedDate(training.date_updated)}</p>) : null}
           </div>
+          
           <TrainingLocalisation localisations={training.localisation} classes="md:hidden" />
+        </div>
+        <div className="container grid md:grid-cols-7">
+          <div className="md:col-span-4 relative z-10">
+            {training.date_updated ? (<p className="text-center md:text-left">Dernière mise à jour: {getDisplayedDate(training.date_updated)}</p>) : null}
+          </div>
         </div>
       </header>
       {displaySessions ? (

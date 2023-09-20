@@ -4,7 +4,7 @@ import DisplayImage from 'components/shared/DisplayImage';
 import Metadata from 'components/metadata';
 import CPFLink from 'components/shared/CPFLink';
 import Link from 'next/link';
-import { capitalize } from 'utils/index';
+import { capitalize, getDisplayedDate } from 'utils/index';
 import {AiOutlineFilePdf} from 'react-icons/ai';
 import AppBreadcrumb from 'components/shared/AppBreadcrumb';
 import classNames from 'classnames';
@@ -84,6 +84,8 @@ function PageHeader({data}: any) {
               />
             </div>
         ): null }
+        {data.date_updated ? (<div className="md:col-span-4 relative z-10">
+          <p className="text-center md:text-left">Dernière mise à jour: {getDisplayedDate(data.date_updated)}</p></div>) : null}
       </div>
     </header>
     </>
