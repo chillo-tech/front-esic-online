@@ -117,6 +117,8 @@ function Page({ data, sessions, displayTrainings = false }: any) {
       {data?.indicateurs ? (
         <div className="container">
           <div className="w-full px-2 py-16">
+            <iframe height="1000" className="w-full" src="https://lookerstudio.google.com/embed/reporting/09a8786a-da62-47c1-aaba-27294a4efd0a/page/b94eD" frameBorder="0"></iframe>
+            {/*
             <Tab.Group>
               <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
                 <Tab
@@ -165,7 +167,8 @@ function Page({ data, sessions, displayTrainings = false }: any) {
                 </Tab.Panel>
               </Tab.Panels>
             </Tab.Group>
-          </div>
+                  */}         
+            </div>
         </div>
       ) : null}
     </OpenedLayout>
