@@ -40,11 +40,10 @@ function Training({ id, slug }: { id: string; slug: string }) {
   const toogleDownloadForm = () => {
     if (training.programmepdf) {
       const programmepdf = training.programmepdf;
-      let downloadLink = process.env.API_URL || "";
+      let downloadLink = process.env.API_URL + "/assets/";
       if (programmepdf.folder) downloadLink += programmepdf.folder + "/";
       if (programmepdf.filename_disk) {
         downloadLink += programmepdf.filename_disk;
-        console.log("download link", downloadLink);
         const fileName = programmepdf.filename_download;
         handleDownload(downloadLink, fileName);
       }
