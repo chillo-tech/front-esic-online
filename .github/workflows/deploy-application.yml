@@ -1,9 +1,9 @@
 on:
-  workflow_run:
-env:
-  NODE_VERSION: '14.x'
+  workflow_dispatch:
 permissions:
   contents: read
+env:
+  NODE_VERSION: '14.x'
 
 jobs:
   create-folder:
