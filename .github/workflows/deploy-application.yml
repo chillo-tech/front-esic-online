@@ -1,5 +1,4 @@
-on:
-  workflow_dispatch:
+on: workflow_dispatch
 env:
   NODE_VERSION: '14.x'
 permissions:
