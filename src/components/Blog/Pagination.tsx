@@ -26,6 +26,7 @@ const Pagination = () => {
       payload: state.actualPageIndex - 1,
     });
   };
+
   return (
     <div className="flex items-center justify-between">
       {state.actualPageIndex > 1 ? (
@@ -41,11 +42,50 @@ const Pagination = () => {
         </button>
       )}
       <div className="flex gap-4 items-center justify-center">
-        {Array(paginationBoxCount)
-          .fill(0)
-          .map((el, index) => {
-            return <PaginationBox index={index + 1} key={index} />;
-          })}
+        {state.actualPageIndex > 1 && (
+          <span className="text-slate-900">...</span>
+        )}
+
+        {paginationBoxCount >= 3 && [
+          Array(paginationBoxCount - state.actualPageIndex <= 5 ? 5 : 3)
+            .fill(0)
+            .map((el, index) => {
+              if (index + state.actualPageIndex > paginationBoxCount)
+                return (
+                  <PaginationBox
+                    index={paginationBoxCount - index}
+                    key={index + paginationBoxCount}
+                  />
+                );
+              return null;
+            }).reverse(),
+          Array(paginationBoxCount - state.actualPageIndex <= 5 ? 5 : 3)
+            .fill(0)
+            .map((el, index) => {
+              if (index + state.actualPageIndex > paginationBoxCount)
+                return null;
+              return (
+                <PaginationBox
+                  index={index + state.actualPageIndex}
+                  key={index}
+                />
+              );
+            }),
+        ]}
+        {paginationBoxCount - state.actualPageIndex > 5 &&
+          paginationBoxCount > 6 && <span className="text-slate-900">...</span>}
+        {paginationBoxCount - state.actualPageIndex > 5 &&
+          paginationBoxCount >= 4 &&
+          Array(paginationBoxCount < 6 ? paginationBoxCount - 3 : 3)
+            .fill(0)
+            .map((el, index) => {
+              console.log("index", index);
+              console.log("paginationBoxCount", paginationBoxCount);
+              return (
+                <PaginationBox index={paginationBoxCount - index} key={index} />
+              );
+            })
+            .reverse()}
       </div>
       {state.actualPageIndex < paginationBoxCount ? (
         <button

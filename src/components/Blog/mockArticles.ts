@@ -32,7 +32,7 @@ const article = {
     `,
 };
 
-const articles: TArticle[] = Array(20)
+const articles: TArticle[] = Array(138)
   .fill(article)
   .map((el, idx) => ({
     ...el,
