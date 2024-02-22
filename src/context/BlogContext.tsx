@@ -1,8 +1,8 @@
 "use client";
-import { articles } from "components/Blog/mockArticles";
 import React, { ReactNode, createContext, useReducer } from "react";
 import { BlogReducer } from "./BlogReducer";
 import { TBlogActions, TBlogState } from "types";
+import { articles } from "mock-data/Blog/mockArticles";
 
 const initailPageLength = 6;
 

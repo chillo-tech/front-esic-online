@@ -65,7 +65,7 @@ export const getMonthLabel = (entry: Date) => {
 };
 
 export const getSmallMonthLabel = (entry: Date) => {
-  return months[entry.getMonth()].slice(0, 3);
+  return months[entry.getMonth()]?.slice(0, 3);
 };
 
 export const getDisplayedDate = (entry: string = "") => {

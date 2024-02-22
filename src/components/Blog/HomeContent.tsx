@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import Pagination from "./Pagination";
-import ArticleCard from "./ArticleCard";
-import SectionTitle from "./SectionTitle";
 import { BlogContext } from "context/BlogContext";
 import Image from "next/image";
-import { articles } from "./mockArticles";
+import { useContext } from "react";
+import ArticleCard from "./ArticleCard";
+import Pagination from "./Pagination";
+import SectionTitle from "./SectionTitle";
 
 const HomeContent = () => {
   const { state } = useContext(BlogContext);

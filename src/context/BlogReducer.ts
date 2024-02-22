@@ -3,7 +3,7 @@ import { blogReducersName } from "utils";
 
 const BlogReducer = (state: TBlogState, action: TBlogActions) => {
   const { type, payload } = action;
-  console.log("condition", blogReducersName.SET_ACTUAL_PAGE_INDEX === type);
+
   switch (type) {
     case blogReducersName.SET_ARTICLES:
       return {
@@ -26,8 +26,6 @@ const BlogReducer = (state: TBlogState, action: TBlogActions) => {
         actualArticle: payload,
       };
     case blogReducersName.SET_ACTUAL_PAGE_INDEX:
-      console.log("prev page", state.actualPageIndex);
-      console.log("next page", payload);
       return {
         ...state,
         actualArticles: state.articles.slice(

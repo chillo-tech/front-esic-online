@@ -44,9 +44,9 @@ const ArticleCard = ({
                   <p className="my-2 text-md text-gray-600 font-medium">
                     {article.description}
                   </p>
-                  <span className="bg-rose-300 hover:bg-rose-500 font-medium text-rose-900 rounded-2xl p-1 px-3 w-fit">
+                  <button className="bg-rose-300 cursor-pointer hover:bg-rose-500 font-medium text-rose-900 rounded-2xl p-1 px-3 w-fit">
                     Savoir Plus
-                  </span>
+                  </button>
                 </div>
               </div>
             );

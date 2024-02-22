@@ -7,7 +7,14 @@ type TArticle = {
   title: string;
   description: string;
   shortDescription: string;
-  body: string;
+  sections: TSection[];
+  linkedArticles ? : number[]
+};
+
+type TSection = {
+  index: string;
+  title: string;
+  content: string;
 };
 
 type TCardSizes = "small" | "medium" | "large";
@@ -35,4 +42,4 @@ type TBlogActions =
       payload: number;
     };
 
-export type { TArticle, TCardSizes, TBlogState, TBlogActions };
+export type { TArticle, TCardSizes, TBlogState, TBlogActions, TSection };

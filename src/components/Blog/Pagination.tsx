@@ -7,8 +7,8 @@ const Pagination = () => {
   const { state, dispatch } = useContext(BlogContext);
 
   const paginationBoxCount = useMemo(
-    () => Math.ceil(state.articles.length / state.pageArticleLength),
-    [state.articles.length, state.pageArticleLength]
+    () => Math.ceil(state.articles?.length / state.pageArticleLength),
+    [state.articles?.length, state.pageArticleLength]
   );
 
   const handleForward = () => {
@@ -58,7 +58,8 @@ const Pagination = () => {
                   />
                 );
               return null;
-            }).reverse(),
+            })
+            .reverse(),
           Array(paginationBoxCount - state.actualPageIndex <= 5 ? 5 : 3)
             .fill(0)
             .map((el, index) => {
@@ -79,8 +80,6 @@ const Pagination = () => {
           Array(paginationBoxCount < 6 ? paginationBoxCount - 3 : 3)
             .fill(0)
             .map((el, index) => {
-              console.log("index", index);
-              console.log("paginationBoxCount", paginationBoxCount);
               return (
                 <PaginationBox index={paginationBoxCount - index} key={index} />
               );
