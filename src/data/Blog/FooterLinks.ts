@@ -1,18 +1,18 @@
 const Links = [
   {
-    path: "/",
+    path: "#",
     text: "twitter",
   },
   {
-    path: "/",
+    path: "#",
     text: "linkedin",
   },
   {
-    path: "/",
+    path: "#",
     text: "RSS feed",
   },
   {
-    path: "/",
+    path: "#",
     text: "add to feedly",
   },
 ];

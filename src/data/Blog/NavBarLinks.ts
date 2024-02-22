@@ -1,26 +1,26 @@
 const Links = [
   {
-    path: "/",
+    path: "/formations",
     text: "formations",
   },
   {
-    path: "/",
+    path: "/certifications",
     text: "certifications",
   },
   {
-    path: "/",
+    path: "/financements",
     text: "financements",
   },
   {
-    path: "/",
+    path: "/poe",
     text: "poe",
   },
   {
-    path: "/",
+    path: "https://esic.fr/bilan-de-competence",
     text: "bilan de compétences",
   },
   {
-    path: "/",
+    path: "/blog",
     text: "blog",
   },
 ];

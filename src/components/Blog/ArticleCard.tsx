@@ -3,6 +3,7 @@ import React from "react";
 import { TArticle, TCardSizes } from "types";
 import { getSmallDisplayDate } from "utils/DateFormat";
 import { MdArrowOutward } from "react-icons/md";
+import { useRouter } from "next/router";
 
 const ArticleCard = ({
   article,
@@ -11,6 +12,7 @@ const ArticleCard = ({
   article: TArticle;
   size: TCardSizes;
 }) => {
+  const router = useRouter();
   return (
     <div>
       {(() => {
@@ -44,7 +46,10 @@ const ArticleCard = ({
                   <p className="my-2 text-md text-gray-600 font-medium">
                     {article.description}
                   </p>
-                  <button className="bg-rose-300 cursor-pointer hover:bg-rose-500 font-medium text-rose-900 rounded-2xl p-1 px-3 w-fit">
+                  <button
+                    onClick={() => router.push(`/blog/${article.id}`)}
+                    className="bg-rose-300 cursor-pointer hover:bg-rose-500 font-medium text-rose-900 rounded-2xl p-1 px-3 w-fit"
+                  >
                     Savoir Plus
                   </button>
                 </div>
@@ -53,7 +58,10 @@ const ArticleCard = ({
           case "medium":
             return (
               <div className="flex max-w-[95vw] sm:max-w-[48vw] mx-auto md:max-w-[33.333vw] items-center flex-col justify-center gap-4 h-[442px]">
-                <div className="h-1/2 w-full overflow-hidden ">
+                <div
+                  className="h-1/2 w-full overflow-hidden "
+                  onClick={() => router.push(`/blog/${article.id}`)}
+                >
                   <Image
                     src={article.image}
                     alt={article.title}
@@ -67,11 +75,14 @@ const ArticleCard = ({
                     <span className="bg-[#0A7928] h-2 w-2 rounded-[50%]"></span>
                     {getSmallDisplayDate(article.date)}
                   </p>
-                  <h3 className="text-xl flex items-center justify-between text-slate-900 font-bold">
-                    <span>{article.title}</span>
+                  <h3
+                    className="text-xl flex items-center justify-between text-slate-900 font-bold"
+                    onClick={() => router.push(`/blog/${article.id}`)}
+                  >
+                    <span className="cursor-pointer">{article.title}</span>
                     <button
                       type="button"
-                      className="text-slate-900 border-none flex items-center justify-center bg-transparent"
+                      className="cursor-pointer text-slate-900 border-none flex items-center justify-center bg-transparent"
                     >
                       <MdArrowOutward />
                     </button>
