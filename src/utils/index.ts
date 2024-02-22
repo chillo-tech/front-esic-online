@@ -9,3 +9,4 @@ export * from "./parameters/page";
 export * from "./query-parameters";
 export * from "./slugify";
 export * from "./downloadFile";
+export * from "./blogReducersName";

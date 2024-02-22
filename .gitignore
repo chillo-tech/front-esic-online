@@ -40,3 +40,4 @@ next-env.d.ts
 todos.md
 /src/pages/api/generate
 demon.js
+.env
